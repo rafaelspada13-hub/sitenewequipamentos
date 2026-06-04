@@ -208,6 +208,15 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   background:
     radial-gradient(ellipse 600px 500px at 75% 40%, rgba(26,92,42,.25) 0%, transparent 70%),
     url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: 1;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: .13;
+  z-index: 0;
 }
 .hero-content {
   position: relative;
@@ -316,6 +325,19 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   flex-direction: column;
   gap: 16px;
 }
+.sobre-foto {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+}
+.sobre-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.sobre-foto:hover img { transform: scale(1.03); }
 .sobre-card {
   background: var(--gray-50);
   border: 1px solid var(--gray-200);
@@ -504,6 +526,17 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   font-size: .82rem;
   color: var(--gray-400);
   font-style: italic;
+}
+.servico-foto {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+.servico-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .servico-lista {
   display: flex;
@@ -745,6 +778,64 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
 
 
 /* ============================================
+   GALERIA
+   ============================================ */
+.galeria {
+  padding: 96px 0;
+  background: var(--gray-800);
+}
+.galeria .section-label { color: #5ec87a; }
+.galeria .section-header h2 { color: var(--white); }
+.galeria .section-sub { color: rgba(255,255,255,.5); }
+.galeria-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 16px;
+}
+.galeria-item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--gray);
+}
+.galeria-grande {
+  grid-row: span 1;
+  aspect-ratio: 16/9;
+}
+.galeria-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease, filter .4s ease;
+  filter: brightness(.9);
+}
+.galeria-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+.galeria-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 28px 16px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);
+  color: var(--white);
+  font-size: .8rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.galeria-item:hover .galeria-label { opacity: 1; }
+
+/* placeholder enquanto foto não existe */
+.galeria-item img[src="img/hero.jpg"],
+.galeria-item img[src="img/galeria-borboleta.jpg"],
+.galeria-item img[src="img/galeria-mix.jpg"] {
+  background: var(--gray);
+}
+
+
+/* ============================================
    ANIMATIONS
    ============================================ */
 .anim-fade {
@@ -789,6 +880,8 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   .nav-links.open a { font-size: 1.3rem; color: var(--white); }
 
   .sobre-grid { grid-template-columns: 1fr; }
+  .galeria-grid { grid-template-columns: 1fr; }
+  .galeria-grande { aspect-ratio: 4/3; }
   .produtos-grid { grid-template-columns: 1fr; }
   .acess-grid { grid-template-columns: repeat(2, 1fr); }
   .servicos-grid { grid-template-columns: 1fr; }
