@@ -701,6 +701,50 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
 
 
 /* ============================================
+   SEGMENTOS
+   ============================================ */
+.segmentos {
+  padding: 36px 0;
+  background: var(--green);
+}
+.segmentos .container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.seg-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  white-space: nowrap;
+  margin: 0;
+}
+.seg-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.seg-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  color: var(--white);
+  font-size: .83rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.seg-item span { font-size: 1rem; }
+
+
+/* ============================================
    ANIMATIONS
    ============================================ */
 .anim-fade {
