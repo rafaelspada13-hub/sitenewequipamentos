@@ -124,17 +124,22 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  max-height: 50px;
 }
 .logo-img {
-  height: 52px;
-  width: auto;
+  height: 44px !important;
+  width: auto !important;
+  max-width: 180px !important;
   object-fit: contain;
+  display: block;
   filter: brightness(0) invert(1);
   transition: filter var(--transition);
 }
 .navbar.scrolled .logo-img { filter: none; }
 .logo-img-footer {
-  height: 44px;
+  height: 40px !important;
+  width: auto !important;
+  max-width: 160px !important;
   filter: brightness(0) invert(1);
   opacity: .85;
 }
