@@ -790,6 +790,7 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
 .galeria-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 16px;
 }
 .galeria-item {
@@ -800,8 +801,8 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   background: var(--gray);
 }
 .galeria-grande {
-  grid-row: span 1;
-  aspect-ratio: 16/9;
+  grid-row: span 2;
+  aspect-ratio: unset;
 }
 .galeria-item img {
   width: 100%;
