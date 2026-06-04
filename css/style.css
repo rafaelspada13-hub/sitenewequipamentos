@@ -421,7 +421,19 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.produto-icon { font-size: 1.8rem; margin-bottom: 14px; }
+.produto-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--green-muted);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+.produto-icon svg { width: 28px; height: 28px; }
 .produto-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
 .produto-card > p { color: var(--gray-600); font-size: .86rem; margin-bottom: 14px; }
 .produto-card ul {
@@ -819,6 +831,35 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   transition: opacity .3s ease;
 }
 .galeria-item:hover .galeria-label { opacity: 1; }
+
+/* ============================================
+   WHATSAPP FLOAT
+   ============================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  z-index: 999;
+  width: 58px; height: 58px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4);
+  transition: transform .25s ease, box-shadow .25s ease;
+  color: #fff;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,.55);
+}
+.whatsapp-float svg { width: 30px; height: 30px; }
+
+@media (max-width: 768px) {
+  .whatsapp-float { bottom: 20px; right: 20px; width: 52px; height: 52px; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+}
+
 
 /* placeholder enquanto foto não existe */
 .galeria-item img[src="img/hero.jpg"],

@@ -52,11 +52,26 @@ document.querySelectorAll('.produto-card, .sobre-card, .contato-item').forEach(e
   animObserver.observe(el);
 });
 
-// Contact form
+// Pre-select product in contact form when clicking card CTA
+document.querySelectorAll('.produto-card .btn-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const h3 = link.closest('.produto-card')?.querySelector('h3')?.textContent?.trim();
+    const select = document.getElementById('produto');
+    if (!h3 || !select) return;
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text.includes(h3)) {
+        select.selectedIndex = i;
+        return;
+      }
+    }
+  });
+});
+
+// Contact form — real submission via Formsubmit AJAX with validation
 const form = document.getElementById('contatoForm');
 const formSuccess = document.getElementById('formSuccess');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   let valid = true;
 
@@ -70,18 +85,32 @@ form.addEventListener('submit', (e) => {
 
   if (!valid) return;
 
-  // Simulate sending (replace with real backend/emailjs/formspree)
   const btn = form.querySelector('button[type="submit"]');
   btn.disabled = true;
   btn.textContent = 'Enviando...';
 
-  setTimeout(() => {
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Enviar Mensagem';
-    formSuccess.classList.add('show');
-    setTimeout(() => formSuccess.classList.remove('show'), 5000);
-  }, 1200);
+  const data = {};
+  new FormData(form).forEach((v, k) => { if (!k.startsWith('_') && k !== '_honey') data[k] = v; });
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/comercial@newequipamentos.ind.br', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      form.reset();
+      formSuccess.classList.add('show');
+      setTimeout(() => formSuccess.classList.remove('show'), 6000);
+    } else {
+      form.submit();
+    }
+  } catch (_) {
+    form.submit();
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Enviar Mensagem';
 });
 
 // Remove error class on input
