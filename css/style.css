@@ -572,62 +572,6 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
 
 
 /* ============================================
-   PARCERIA
-   ============================================ */
-.parceria {
-  padding: 80px 0;
-  background: var(--gray-dark);
-  color: var(--white);
-  text-align: center;
-}
-.parceria-inner {
-  max-width: 720px;
-}
-.parceria-badge {
-  display: inline-block;
-  background: rgba(26,92,42,.4);
-  border: 1px solid rgba(26,92,42,.6);
-  color: #7dcc8f;
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 6px 18px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-}
-.parceria h2 { color: var(--white); margin-bottom: 20px; }
-.parceria p { color: rgba(255,255,255,.68); margin-bottom: 16px; font-size: .96rem; }
-.parceria strong { color: rgba(255,255,255,.9); }
-.wb-series {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 36px 0;
-}
-.wb-item {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: var(--radius);
-  padding: 16px 24px;
-  min-width: 130px;
-  text-align: center;
-}
-.wb-item strong {
-  display: block;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: #5ec87a;
-  margin-bottom: 4px;
-}
-.wb-item span {
-  font-size: .78rem;
-  color: rgba(255,255,255,.5);
-}
-
-
-/* ============================================
    CONTATO
    ============================================ */
 .contato {
