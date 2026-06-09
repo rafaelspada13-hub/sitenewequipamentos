@@ -494,6 +494,15 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+.servico-destaque {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px var(--green), var(--shadow);
+  grid-column: span 1;
+}
+@media (min-width: 1025px) {
+  .servicos-grid { grid-template-columns: repeat(4, 1fr); }
+  .servico-destaque { grid-column: span 1; }
+}
 .servico-card {
   border: 1px solid var(--gray-200);
   border-radius: var(--radius);
