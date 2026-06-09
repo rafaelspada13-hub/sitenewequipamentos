@@ -1,5 +1,19 @@
 /* New Equipamentos — main.js */
 
+// LGPD banner
+const lgpdBanner = document.getElementById('lgpdBanner');
+const lgpdAccept = document.getElementById('lgpdAccept');
+if (lgpdBanner && !localStorage.getItem('lgpd_ok')) {
+  lgpdBanner.classList.remove('hide');
+} else if (lgpdBanner) {
+  lgpdBanner.style.display = 'none';
+}
+lgpdAccept?.addEventListener('click', () => {
+  localStorage.setItem('lgpd_ok', '1');
+  lgpdBanner.classList.add('hide');
+  setTimeout(() => lgpdBanner.style.display = 'none', 500);
+});
+
 // Navbar: scroll effect + mobile menu
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');

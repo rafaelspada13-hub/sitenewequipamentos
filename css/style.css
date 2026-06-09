@@ -787,6 +787,61 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
 .galeria-item:hover .galeria-label { opacity: 1; }
 
 /* ============================================
+   LGPD BANNER
+   ============================================ */
+.lgpd-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 998;
+  background: var(--gray-800);
+  border-top: 2px solid var(--green);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  transform: translateY(0);
+  transition: transform .4s ease;
+}
+.lgpd-banner.hide { transform: translateY(110%); }
+.lgpd-banner p { color: rgba(255,255,255,.75); font-size: .82rem; margin: 0; max-width: 700px; }
+.lgpd-banner strong { color: var(--white); }
+.lgpd-btn {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 24px;
+  font-size: .85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.lgpd-btn:hover { background: var(--green-dark); }
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-lgpd {
+  font-size: .75rem;
+  color: rgba(255,255,255,.35);
+  text-align: right;
+}
+.footer-lgpd strong { color: rgba(255,255,255,.5); font-weight: 600; }
+@media (max-width: 768px) {
+  .footer-bottom-inner { flex-direction: column; text-align: center; }
+  .footer-lgpd { text-align: center; }
+  .lgpd-banner { gap: 12px; padding: 14px 16px; }
+}
+
+
+/* ============================================
    WHATSAPP FLOAT
    ============================================ */
 .whatsapp-float {
