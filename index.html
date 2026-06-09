@@ -39,6 +39,7 @@
         <a href="#sobre">Sobre</a>
         <a href="#produtos">Produtos</a>
         <a href="#servicos">Serviços</a>
+        <a href="#ferramentas">Ferramentas</a>
         <a href="#galeria">Galeria</a>
         <a href="#contato">Contato</a>
       </nav>
@@ -356,6 +357,112 @@
           <a href="#contato" class="btn btn-primary" style="margin-top:20px;font-size:.88rem;padding:11px 22px;">Falar com um engenheiro →</a>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- SELETOR TÉCNICO -->
+  <section class="ferramentas" id="ferramentas">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Ferramenta técnica</p>
+        <h2>Encontre a Válvula Ideal</h2>
+        <p class="section-sub">Informe as condições de processo e receba uma recomendação técnica instantânea com material de sede.</p>
+      </div>
+      <div class="seletor-wrapper">
+
+        <div class="seletor-form-area">
+          <div class="sel-group" data-group="fluido">
+            <p class="sel-group-label"><span>1</span>Tipo de fluido</p>
+            <div class="sel-btns">
+              <button class="sel-btn" data-value="agua">💧 Água / Neutro</button>
+              <button class="sel-btn" data-value="vapor">♨️ Vapor</button>
+              <button class="sel-btn" data-value="oleo">🛢️ Óleo / Hidro.</button>
+              <button class="sel-btn" data-value="gas">💨 Gás / Ar</button>
+              <button class="sel-btn" data-value="quimico">⚗️ Ácidos / Químicos</button>
+              <button class="sel-btn" data-value="polpa">🌿 Polpa / Pasta</button>
+            </div>
+          </div>
+          <div class="sel-group" data-group="pressao">
+            <p class="sel-group-label"><span>2</span>Pressão de operação</p>
+            <div class="sel-btns">
+              <button class="sel-btn" data-value="baixa">Baixa<span>até 10 bar</span></button>
+              <button class="sel-btn" data-value="media">Média<span>10 – 40 bar</span></button>
+              <button class="sel-btn" data-value="alta">Alta<span>acima de 40 bar</span></button>
+            </div>
+          </div>
+          <div class="sel-group" data-group="temp">
+            <p class="sel-group-label"><span>3</span>Temperatura</p>
+            <div class="sel-btns">
+              <button class="sel-btn" data-value="amb">Ambiente<span>até 80°C</span></button>
+              <button class="sel-btn" data-value="media">Moderada<span>80 – 200°C</span></button>
+              <button class="sel-btn" data-value="alta">Alta<span>acima de 200°C</span></button>
+            </div>
+          </div>
+          <div class="sel-group" data-group="funcao">
+            <p class="sel-group-label"><span>4</span>Função principal</p>
+            <div class="sel-btns">
+              <button class="sel-btn" data-value="isolamento">Isolamento</button>
+              <button class="sel-btn" data-value="controle">Controle de fluxo</button>
+              <button class="sel-btn" data-value="retencao">Anti-retorno</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="seletor-result" id="selResult">
+          <div class="result-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="20"/><line x1="24" y1="4" x2="24" y2="44"/><path d="M12 17c4 4 8 7 12 7s8-3 12-7"/><path d="M12 31c4-4 8-7 12-7s8 3 12 7"/><circle cx="24" cy="24" r="3.5" fill="currentColor" stroke="none"/></svg>
+            <p>Selecione as condições<br/>de processo ao lado</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TABELA DN -->
+  <section class="conversao" id="conversao">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Referência técnica</p>
+        <h2>Tabela DN / Polegadas / mm</h2>
+        <p class="section-sub">Consulta rápida de bitolas para especificação de válvulas e tubulações. Norma ASME B36.10.</p>
+      </div>
+      <div class="conv-wrapper">
+        <div class="conv-search">
+          <svg class="conv-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          <input type="text" id="convSearch" placeholder="Buscar por DN, polegadas ou mm..." autocomplete="off" />
+        </div>
+        <div class="conv-table-wrap">
+          <table class="conv-table">
+            <thead>
+              <tr><th>DN</th><th>Polegadas</th><th>mm (OD)</th><th>Aplicação típica</th></tr>
+            </thead>
+            <tbody>
+              <tr class="conv-row"><td>DN 15</td><td>1/2"</td><td>21,3 mm</td><td>Instrumentação, utilidades</td></tr>
+              <tr class="conv-row"><td>DN 20</td><td>3/4"</td><td>26,9 mm</td><td>Instrumentação, utilidades</td></tr>
+              <tr class="conv-row"><td>DN 25</td><td>1"</td><td>33,7 mm</td><td>Processos auxiliares</td></tr>
+              <tr class="conv-row"><td>DN 32</td><td>1.1/4"</td><td>42,4 mm</td><td>Processos auxiliares</td></tr>
+              <tr class="conv-row"><td>DN 40</td><td>1.1/2"</td><td>48,3 mm</td><td>Processos auxiliares</td></tr>
+              <tr class="conv-row"><td>DN 50</td><td>2"</td><td>60,3 mm</td><td>Processo principal, bombas</td></tr>
+              <tr class="conv-row"><td>DN 65</td><td>2.1/2"</td><td>73,0 mm</td><td>Processo principal</td></tr>
+              <tr class="conv-row"><td>DN 80</td><td>3"</td><td>88,9 mm</td><td>Recalque, processo principal</td></tr>
+              <tr class="conv-row"><td>DN 100</td><td>4"</td><td>114,3 mm</td><td>Processo principal, headers</td></tr>
+              <tr class="conv-row"><td>DN 125</td><td>5"</td><td>139,7 mm</td><td>Processo principal, headers</td></tr>
+              <tr class="conv-row"><td>DN 150</td><td>6"</td><td>168,3 mm</td><td>Grandes processos, cooling</td></tr>
+              <tr class="conv-row"><td>DN 200</td><td>8"</td><td>219,1 mm</td><td>Grandes processos, ETA/ETE</td></tr>
+              <tr class="conv-row"><td>DN 250</td><td>10"</td><td>273,0 mm</td><td>Grandes processos, ETA/ETE</td></tr>
+              <tr class="conv-row"><td>DN 300</td><td>12"</td><td>323,9 mm</td><td>Adutoras, transferência</td></tr>
+              <tr class="conv-row"><td>DN 350</td><td>14"</td><td>355,6 mm</td><td>Grandes plantas, adutoras</td></tr>
+              <tr class="conv-row"><td>DN 400</td><td>16"</td><td>406,4 mm</td><td>Grandes plantas, adutoras</td></tr>
+              <tr class="conv-row"><td>DN 450</td><td>18"</td><td>457,2 mm</td><td>Grandes adutoras</td></tr>
+              <tr class="conv-row"><td>DN 500</td><td>20"</td><td>508,0 mm</td><td>Grandes adutoras</td></tr>
+              <tr class="conv-row"><td>DN 600</td><td>24"</td><td>609,6 mm</td><td>Adutoras, usinas</td></tr>
+            </tbody>
+          </table>
+          <div class="conv-no-results" id="convNoResults" style="display:none">Nenhum resultado encontrado.</div>
+        </div>
+        <p class="conv-nota">* Diâmetros externos (OD) conforme ASME B36.10. Para aplicações especiais, consulte nossa equipe técnica.</p>
       </div>
     </div>
   </section>
