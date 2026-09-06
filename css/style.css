@@ -166,8 +166,10 @@ h2 { font-size: 2rem; font-weight: 800; line-height: 1.2; }
   transition: var(--transition);
 }
 .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.1); }
+.nav-links a.active { color: var(--white); background: rgba(255,255,255,.15); }
 .navbar.scrolled .nav-links a { color: var(--gray-600); }
 .navbar.scrolled .nav-links a:hover { color: var(--green); background: var(--green-muted); }
+.navbar.scrolled .nav-links a.active { color: var(--green); background: var(--green-muted); }
 
 .nav-cta { padding: 9px 18px; font-size: .86rem; }
 
