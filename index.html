@@ -21,10 +21,14 @@
   <meta name="twitter:description" content="Fornecimento, manutenção e automação de válvulas industriais em Sertãozinho/SP. Atendemos todo o território nacional." />
   <meta name="twitter:image" content="img/hero.jpg" />
 
-  <link rel="stylesheet" href="css/style.css" />
+  <!-- Bootstrap 5 (hospedado localmente, sem depender de CDN externo) -->
+  <link href="css/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/vendor/bootstrap-icons.css" rel="stylesheet" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 
   <!-- Structured data (SEO local business) -->
   <script type="application/ld+json">
@@ -48,252 +52,279 @@
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="#inicio" class="logo">
-        <div class="logo-icon">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+    <div class="container">
+      <a href="#inicio" class="navbar-brand d-flex align-items-center gap-2">
+        <div class="navbar-logo-icon">
           <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="24,2 46,44 2,44" fill="none" stroke="#1a5c2a" stroke-width="4" stroke-linejoin="round"/>
-            <polygon points="24,10 38,38 10,38" fill="none" stroke="#1a5c2a" stroke-width="1.5" stroke-linejoin="round" opacity="0.4"/>
+            <polygon points="24,2 46,44 2,44" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+            <polygon points="24,10 38,38 10,38" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round" opacity="0.4"/>
           </svg>
         </div>
-        <div class="logo-text">
-          <span class="logo-new">NEW</span>
-          <span class="logo-sub">Válvulas e Equip. Industriais</span>
-        </div>
+        <span class="navbar-brand-text">
+          <span class="brand-new">NEW</span>
+          <span class="brand-sub">Válvulas e Equip. Industriais</span>
+        </span>
       </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#parceria">Parceria</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span><span></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Menu">
+        <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#produtos">Produtos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+          <li class="nav-item"><a class="nav-link" href="#parceria">Parceria</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0"><a href="#contato" class="btn btn-brand btn-sm px-3">Fale Conosco</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-img" style="background-image:url('img/hero.jpg')"></div>
+    <div class="container">
+      <div class="row justify-content-center justify-content-xl-start">
+        <div class="col-xl-8">
+          <span class="badge bg-brand-soft text-brand rounded-pill px-3 py-2 mb-4 eyebrow">Válvulas e Equipamentos Industriais</span>
+          <h1 class="text-white mb-3">Soluções industriais<br /><span class="text-brand" style="color:#5ec87a !important;">de alta performance</span></h1>
+          <p class="lead mb-5">
+            Fornecimento, automação e manutenção de válvulas industriais com
+            engenharia especializada — atendemos todo o território nacional.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <a href="#produtos" class="btn btn-brand btn-lg px-4">Ver Produtos</a>
+            <a href="#contato" class="btn btn-outline-brand btn-lg px-4">Solicitar Orçamento</a>
+          </div>
+          <div class="d-flex flex-wrap align-items-center gap-4">
+            <div class="hero-stat"><strong>Nacional</strong><span>Atendimento em todo Brasil</span></div>
+            <div class="hero-stat-divider d-none d-sm-block"></div>
+            <div class="hero-stat"><strong>5+</strong><span>Segmentos industriais</span></div>
+            <div class="hero-stat-divider d-none d-sm-block"></div>
+            <div class="hero-stat"><strong>W.Burger</strong><span>Revenda oficial</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="hero-bg"></div>
-    <div class="hero-img" style="background-image:url('img/hero.jpg')"></div>
-    <div class="container hero-content">
-      <p class="hero-tag">Válvulas e Equipamentos Industriais</p>
-      <h1>Soluções industriais<br /><span class="highlight">de alta performance</span></h1>
-      <p class="hero-sub">
-        Fornecimento, automação e manutenção de válvulas industriais com
-        engenharia especializada — atendemos todo o território nacional.
-      </p>
-      <div class="hero-actions">
-        <a href="#produtos" class="btn btn-primary">Ver Produtos</a>
-        <a href="#contato" class="btn btn-outline">Solicitar Orçamento</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <strong>Nacional</strong>
-          <span>Atendimento em todo Brasil</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <strong>5+</strong>
-          <span>Segmentos industriais</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <strong>W.Burger</strong>
-          <span>Revenda oficial</span>
-        </div>
-      </div>
-    </div>
-    <div class="hero-scroll"><span></span></div>
-  </section>
-
   <!-- SOBRE -->
-  <section class="sobre" id="sobre">
-    <div class="container sobre-grid">
-      <div class="sobre-visual">
-        <div class="sobre-foto">
-          <img src="img/sobre-galpao.jpg" alt="Galpão New Equipamentos" loading="lazy" />
-        </div>
-        <div class="sobre-card card-accent">
-          <span class="card-icon">⚙️</span>
-          <div>
-            <strong>Alta Performance</strong>
-            <p>Válvulas projetadas para as condições mais críticas de pressão e temperatura.</p>
+  <section class="py-5 py-lg-6 bg-white" id="sobre" style="padding-top:96px; padding-bottom:96px;">
+    <div class="container">
+      <div class="row gx-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="sobre-foto mb-3 anim-fade">
+            <img src="img/sobre-galpao.jpg" alt="Galpão New Equipamentos" loading="lazy" />
+          </div>
+          <div class="d-flex flex-column gap-3">
+            <div class="card-info card-accent p-4 d-flex flex-row align-items-start gap-3 anim-fade">
+              <span class="icon-box"><i class="bi bi-gear-fill"></i></span>
+              <div>
+                <strong class="d-block mb-1">Alta Performance</strong>
+                <p class="mb-0 small">Válvulas projetadas para as condições mais críticas de pressão e temperatura.</p>
+              </div>
+            </div>
+            <div class="card-info p-4 d-flex flex-row align-items-start gap-3 anim-fade">
+              <span class="icon-box-outline"><i class="bi bi-tools"></i></span>
+              <div>
+                <strong class="d-block mb-1">Manutenção em Campo</strong>
+                <p class="mb-0 small text-body-secondary">Processo completo: recebimento, diagnóstico e reparo no barracão ou in loco.</p>
+              </div>
+            </div>
+            <div class="card-info p-4 d-flex flex-row align-items-start gap-3 anim-fade">
+              <span class="icon-box-outline"><i class="bi bi-award-fill"></i></span>
+              <div>
+                <strong class="d-block mb-1">Revenda Autorizada</strong>
+                <p class="mb-0 small text-body-secondary">Revendedores oficiais das válvulas W.Burger — referência nacional há 80 anos.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="sobre-card">
-          <span class="card-icon">🔧</span>
-          <div>
-            <strong>Manutenção em Campo</strong>
-            <p>Processo completo: recebimento, diagnóstico e reparo no barracão ou in loco.</p>
-          </div>
+        <div class="col-lg-6">
+          <p class="eyebrow mb-2">Sobre nós</p>
+          <h2 class="fw-bolder mb-3">Especialistas em válvulas e automação industrial</h2>
+          <p class="text-body-secondary">
+            A <strong>NEW Válvulas e Equipamentos Industriais</strong>, sediada em Sertãozinho/SP,
+            atua no fornecimento, automação e manutenção de válvulas industriais,
+            atendendo todo o território nacional.
+          </p>
+          <p class="text-body-secondary mb-4">
+            Com equipe técnica especializada, entregamos soluções sob medida para
+            os segmentos mais exigentes da indústria brasileira.
+          </p>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-4">
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Usinas de açúcar e álcool</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Estações de tratamento de água (ETAs/ETEs)</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Mineradoras</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Papel e celulose</li>
+            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Petrolíferas e petroquímica</li>
+          </ul>
+          <a href="#contato" class="btn btn-brand">Entre em contato</a>
         </div>
-        <div class="sobre-card">
-          <span class="card-icon">🤝</span>
-          <div>
-            <strong>Revenda Autorizada</strong>
-            <p>Revendedores oficiais das válvulas W.Burger — referência nacional há 80 anos.</p>
-          </div>
-        </div>
-      </div>
-      <div class="sobre-texto">
-        <p class="section-label">Sobre nós</p>
-        <h2>Especialistas em válvulas e automação industrial</h2>
-        <p>
-          A <strong>NEW Válvulas e Equipamentos Industriais</strong>, sediada em Sertãozinho/SP,
-          atua no fornecimento, automação e manutenção de válvulas industriais,
-          atendendo todo o território nacional.
-        </p>
-        <p>
-          Com equipe técnica especializada, entregamos soluções sob medida para
-          os segmentos mais exigentes da indústria brasileira.
-        </p>
-        <ul class="sobre-lista">
-          <li>Usinas de açúcar e álcool</li>
-          <li>Estações de tratamento de água (ETAs/ETEs)</li>
-          <li>Mineradoras</li>
-          <li>Papel e celulose</li>
-          <li>Petrolíferas e petroquímica</li>
-        </ul>
-        <a href="#contato" class="btn btn-primary">Entre em contato</a>
       </div>
     </div>
   </section>
 
   <!-- SEGMENTOS -->
-  <section class="segmentos">
-    <div class="container">
-      <p class="seg-label">Segmentos atendidos</p>
-      <div class="seg-list">
-        <div class="seg-item"><span>🏭</span>Usinas de Açúcar e Álcool</div>
-        <div class="seg-item"><span>💧</span>Estações de Tratamento de Água</div>
-        <div class="seg-item"><span>⛏️</span>Mineradoras</div>
-        <div class="seg-item"><span>📄</span>Papel e Celulose</div>
-        <div class="seg-item"><span>🛢️</span>Petrolíferas e Petroquímica</div>
+  <section class="segmentos-strip bg-brand">
+    <div class="container d-flex align-items-center flex-wrap gap-4">
+      <p class="mb-0 text-white-50 text-uppercase fw-bold small" style="letter-spacing:.12em; white-space:nowrap;">Segmentos atendidos</p>
+      <div class="d-flex flex-wrap gap-2 flex-grow-1">
+        <span class="seg-pill"><i class="bi bi-building"></i> Usinas de Açúcar e Álcool</span>
+        <span class="seg-pill"><i class="bi bi-droplet-fill"></i> Estações de Tratamento de Água</span>
+        <span class="seg-pill"><i class="bi bi-gem"></i> Mineradoras</span>
+        <span class="seg-pill"><i class="bi bi-file-earmark-text-fill"></i> Papel e Celulose</span>
+        <span class="seg-pill"><i class="bi bi-fuel-pump-fill"></i> Petrolíferas e Petroquímica</span>
       </div>
     </div>
   </section>
 
   <!-- PRODUTOS -->
-  <section class="produtos" id="produtos">
+  <section class="py-5 bg-surface" id="produtos" style="padding-top:96px; padding-bottom:96px;">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label">Catálogo</p>
-        <h2>Nossos Produtos</h2>
-        <p class="section-sub">Válvulas industriais de alta performance e acessórios para automação, atendendo às mais exigentes especificações técnicas.</p>
+      <div class="text-center mx-auto mb-5" style="max-width:560px;">
+        <p class="eyebrow mb-2">Catálogo</p>
+        <h2 class="fw-bolder mb-2">Nossos Produtos</h2>
+        <p class="text-body-secondary">Válvulas industriais de alta performance e acessórios para automação, atendendo às mais exigentes especificações técnicas.</p>
       </div>
 
-      <h3 class="sub-titulo">Válvulas</h3>
-      <div class="produtos-grid">
+      <h3 class="h5 fw-bold text-body-secondary text-uppercase pb-2 mb-4 border-bottom">Válvulas</h3>
+      <div class="row g-4 mb-5">
 
-        <div class="produto-card destaque">
-          <span class="badge">Alta Performance</span>
-          <div class="produto-icon">🔵</div>
-          <h3>Válvula Bi-excêntrica</h3>
-          <p>Válvula borboleta de alta performance com duplo offset para serviços críticos de alta pressão e temperatura.</p>
-          <ul>
-            <li>Bitolas: 2" a 48"</li>
-            <li>ASME Classe 150</li>
-            <li>-120°C a 280°C</li>
-            <li>Classe VI (ANSI FCI 70-2 / IEC 60534-4)</li>
-            <li>Corpo: Aço-Carbono | Inox | Níquel</li>
-            <li>Sede: RPTFE</li>
-          </ul>
-          <span class="prod-tags"><span>Alta Pressão</span><span>Alta Temp.</span><span>Serviço Crítico</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-info produto-card destaque bg-white p-4 h-100">
+            <span class="produto-badge">Alta Performance</span>
+            <div class="icon-box mb-3"><i class="bi bi-disc-fill"></i></div>
+            <h3 class="h5 fw-bold mb-2">Válvula Bi-excêntrica</h3>
+            <p class="text-body-secondary small">Válvula borboleta de alta performance com duplo offset para serviços críticos de alta pressão e temperatura.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 48"</li>
+              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
+              <li><i class="bi bi-check-lg"></i> -120°C a 280°C</li>
+              <li><i class="bi bi-check-lg"></i> Classe VI (ANSI FCI 70-2 / IEC 60534-4)</li>
+              <li><i class="bi bi-check-lg"></i> Corpo: Aço-Carbono | Inox | Níquel</li>
+              <li><i class="bi bi-check-lg"></i> Sede: RPTFE</li>
+            </ul>
+            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
+              <span class="badge badge-brand rounded-pill">Alta Pressão</span>
+              <span class="badge badge-brand rounded-pill">Alta Temp.</span>
+              <span class="badge badge-brand rounded-pill">Serviço Crítico</span>
+            </div>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
-        <div class="produto-card">
-          <div class="produto-icon">🟢</div>
-          <h3>Válvula Borboleta</h3>
-          <p>Válvula borboleta wafer/lug para controle e isolamento em sistemas industriais diversos.</p>
-          <ul>
-            <li>Bitolas: 2" a 40"</li>
-            <li>ASME Classe 150</li>
-            <li>20°C a 260°C</li>
-            <li>Corpo: Aço-Carbono | Inox | Níquel</li>
-            <li>Sede: EPDM / Teflon / Buna / Viton</li>
-          </ul>
-          <span class="prod-tags"><span>Alta Temp.</span><span>Baixa Temp.</span><span>Serviço Crítico</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-circle-half"></i></div>
+            <h3 class="h5 fw-bold mb-2">Válvula Borboleta</h3>
+            <p class="text-body-secondary small">Válvula borboleta wafer/lug para controle e isolamento em sistemas industriais diversos.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 40"</li>
+              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
+              <li><i class="bi bi-check-lg"></i> 20°C a 260°C</li>
+              <li><i class="bi bi-check-lg"></i> Corpo: Aço-Carbono | Inox | Níquel</li>
+              <li><i class="bi bi-check-lg"></i> Sede: EPDM / Teflon / Buna / Viton</li>
+            </ul>
+            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
+              <span class="badge badge-brand rounded-pill">Alta Temp.</span>
+              <span class="badge badge-brand rounded-pill">Baixa Temp.</span>
+              <span class="badge badge-brand rounded-pill">Serviço Crítico</span>
+            </div>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
-        <div class="produto-card">
-          <div class="produto-icon">🔴</div>
-          <h3>Válvula de Retenção</h3>
-          <p>Válvula de retenção wafer para prevenção de refluxo em sistemas de bombeamento e processos industriais.</p>
-          <ul>
-            <li>Bitolas: 2" a 40"</li>
-            <li>ASME Classe 150</li>
-            <li>10°C a 400°C</li>
-            <li>Corpo: Ferro Fundido / Aço-C. / Inox</li>
-            <li>Sede: EPDM / Buna / Viton / Metal</li>
-          </ul>
-          <span class="prod-tags"><span>Químicos</span><span>Vapor</span><span>Óleo</span><span>Água</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-arrow-return-left"></i></div>
+            <h3 class="h5 fw-bold mb-2">Válvula de Retenção</h3>
+            <p class="text-body-secondary small">Válvula de retenção wafer para prevenção de refluxo em sistemas de bombeamento e processos industriais.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 40"</li>
+              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
+              <li><i class="bi bi-check-lg"></i> 10°C a 400°C</li>
+              <li><i class="bi bi-check-lg"></i> Corpo: Ferro Fundido / Aço-C. / Inox</li>
+              <li><i class="bi bi-check-lg"></i> Sede: EPDM / Buna / Viton / Metal</li>
+            </ul>
+            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
+              <span class="badge badge-brand rounded-pill">Químicos</span>
+              <span class="badge badge-brand rounded-pill">Vapor</span>
+              <span class="badge badge-brand rounded-pill">Óleo</span>
+              <span class="badge badge-brand rounded-pill">Água</span>
+            </div>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
       </div>
 
-      <h3 class="sub-titulo" style="margin-top:56px;">Acessórios para Automação</h3>
-      <div class="produtos-grid acess-grid">
+      <h3 class="h5 fw-bold text-body-secondary text-uppercase pb-2 mb-4 border-bottom">Acessórios para Automação</h3>
+      <div class="row g-4">
 
-        <div class="produto-card">
-          <div class="produto-icon">📡</div>
-          <h3>Posicionador Pneumático</h3>
-          <p>Posicionador 4–20 mA para atuadores de ação simples e dupla, com carcaça robusta para ambientes hostis.</p>
-          <ul>
-            <li>Sinal: 4 a 20 mA</li>
-            <li>Ação simples e dupla</li>
-            <li>Carcaça alumínio fundido</li>
-            <li>Indicador de posição de alta visibilidade</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-broadcast"></i></div>
+            <h3 class="h6 fw-bold mb-2">Posicionador Pneumático</h3>
+            <p class="text-body-secondary small">Posicionador 4–20 mA para atuadores de ação simples e dupla, com carcaça robusta para ambientes hostis.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Sinal: 4 a 20 mA</li>
+              <li><i class="bi bi-check-lg"></i> Ação simples e dupla</li>
+              <li><i class="bi bi-check-lg"></i> Carcaça alumínio fundido</li>
+              <li><i class="bi bi-check-lg"></i> Indicador de posição de alta visibilidade</li>
+            </ul>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
-        <div class="produto-card">
-          <div class="produto-icon">💨</div>
-          <h3>Atuador Pneumático</h3>
-          <p>Atuador de dupla ou simples ação para automação de válvulas, conforme padrão ISO 5211 / NAMUR.</p>
-          <ul>
-            <li>Torque: até 12.992 Nm</li>
-            <li>Pressão: 3,0 a 8,0 bar</li>
-            <li>-20°C a +80°C</li>
-            <li>Corpo: alumínio anodizado / epóxi</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-wind"></i></div>
+            <h3 class="h6 fw-bold mb-2">Atuador Pneumático</h3>
+            <p class="text-body-secondary small">Atuador de dupla ou simples ação para automação de válvulas, conforme padrão ISO 5211 / NAMUR.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Torque: até 12.992 Nm</li>
+              <li><i class="bi bi-check-lg"></i> Pressão: 3,0 a 8,0 bar</li>
+              <li><i class="bi bi-check-lg"></i> -20°C a +80°C</li>
+              <li><i class="bi bi-check-lg"></i> Corpo: alumínio anodizado / epóxi</li>
+            </ul>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
-        <div class="produto-card">
-          <div class="produto-icon">⚡</div>
-          <h3>Válvula Solenóide NAMUR</h3>
-          <p>Válvula solenóide direcional 5/2 vias para controle de atuadores pneumáticos de dupla ação.</p>
-          <ul>
-            <li>24 VCC</li>
-            <li>Montagem NAMUR direta</li>
-            <li>IP65 — conector DIN 43650</li>
-            <li>Corpo em alumínio</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-lightning-fill"></i></div>
+            <h3 class="h6 fw-bold mb-2">Válvula Solenóide NAMUR</h3>
+            <p class="text-body-secondary small">Válvula solenóide direcional 5/2 vias para controle de atuadores pneumáticos de dupla ação.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> 24 VCC</li>
+              <li><i class="bi bi-check-lg"></i> Montagem NAMUR direta</li>
+              <li><i class="bi bi-check-lg"></i> IP65 — conector DIN 43650</li>
+              <li><i class="bi bi-check-lg"></i> Corpo em alumínio</li>
+            </ul>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
-        <div class="produto-card">
-          <div class="produto-icon">⚙️</div>
-          <h3>Caixa Redutora</h3>
-          <p>Redutor de engrenagens para acionamento manual de válvulas de grande porte com flange ISO 5211.</p>
-          <ul>
-            <li>Torque: até 8.000 Nm</li>
-            <li>Flange: ISO 5211</li>
-            <li>IP65 — corpo ferro fundido</li>
-            <li>Volante em aço ou alumínio</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-info produto-card bg-white p-4 h-100">
+            <div class="icon-box-outline mb-3"><i class="bi bi-gear-fill"></i></div>
+            <h3 class="h6 fw-bold mb-2">Caixa Redutora</h3>
+            <p class="text-body-secondary small">Redutor de engrenagens para acionamento manual de válvulas de grande porte com flange ISO 5211.</p>
+            <ul class="list-check">
+              <li><i class="bi bi-check-lg"></i> Torque: até 8.000 Nm</li>
+              <li><i class="bi bi-check-lg"></i> Flange: ISO 5211</li>
+              <li><i class="bi bi-check-lg"></i> IP65 — corpo ferro fundido</li>
+              <li><i class="bi bi-check-lg"></i> Volante em aço ou alumínio</li>
+            </ul>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
 
       </div>
@@ -301,59 +332,74 @@
   </section>
 
   <!-- SERVIÇOS -->
-  <section class="servicos" id="servicos">
+  <section class="py-5 bg-white" id="servicos" style="padding-top:96px; padding-bottom:96px;">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label">O que fazemos</p>
-        <h2>Serviços</h2>
-        <p class="section-sub">Soluções completas do recebimento até a entrega em campo, com rigoroso controle técnico e rastreabilidade.</p>
+      <div class="text-center mx-auto mb-5" style="max-width:560px;">
+        <p class="eyebrow mb-2">O que fazemos</p>
+        <h2 class="fw-bolder mb-2">Serviços</h2>
+        <p class="text-body-secondary">Soluções completas do recebimento até a entrega em campo, com rigoroso controle técnico e rastreabilidade.</p>
       </div>
-      <div class="servicos-grid">
+      <div class="row g-4">
 
-        <div class="servico-card">
-          <div class="servico-num">01</div>
-          <h3>Processo de Manutenção</h3>
-          <p>Fluxo técnico rigoroso com rastreabilidade em cada etapa:</p>
-          <div class="steps">
-            <div class="step"><span>Recebimento</span><p>Conferência e listagem completa dos equipamentos na chegada.</p></div>
-            <div class="step"><span>Diagnóstico</span><p>Avaliação detalhada com relatório técnico e laudo fotográfico.</p></div>
-            <div class="step"><span>Reparo</span><p>Industrialização conforme especificações técnicas originais.</p></div>
-          </div>
-          <p class="servico-obs">Atendimento no barracão ou diretamente em campo.</p>
-          <div class="servico-foto">
-            <img src="img/servicos.jpg" alt="Manutenção de válvulas" loading="lazy" />
+        <div class="col-lg-4">
+          <div class="card-info p-4 h-100">
+            <div class="servico-num mb-3">01</div>
+            <h3 class="h5 fw-bold mb-2">Processo de Manutenção</h3>
+            <p class="text-body-secondary small mb-3">Fluxo técnico rigoroso com rastreabilidade em cada etapa:</p>
+            <div class="d-flex flex-column gap-3 mb-3">
+              <div>
+                <span class="step-label">Recebimento</span>
+                <p class="small text-body-secondary mb-0">Conferência e listagem completa dos equipamentos na chegada.</p>
+              </div>
+              <div>
+                <span class="step-label">Diagnóstico</span>
+                <p class="small text-body-secondary mb-0">Avaliação detalhada com relatório técnico e laudo fotográfico.</p>
+              </div>
+              <div>
+                <span class="step-label">Reparo</span>
+                <p class="small text-body-secondary mb-0">Industrialização conforme especificações técnicas originais.</p>
+              </div>
+            </div>
+            <p class="small fst-italic text-body-secondary mb-3">Atendimento no barracão ou diretamente em campo.</p>
+            <div class="servico-foto">
+              <img src="img/servicos.jpg" alt="Manutenção de válvulas" loading="lazy" />
+            </div>
           </div>
         </div>
 
-        <div class="servico-card">
-          <div class="servico-num">02</div>
-          <h3>Montagens Industriais</h3>
-          <p>
-            Executamos montagens industriais completas com alto padrão de qualidade.
-            Atuamos desde a preparação até a instalação final de equipamentos,
-            tubulações e sistemas industriais.
-          </p>
-          <ul class="servico-lista">
-            <li>Instalação de válvulas e atuadores</li>
-            <li>Montagem de tubulações industriais</li>
-            <li>Comissionamento de sistemas</li>
-            <li>Equipe técnica qualificada em campo</li>
-          </ul>
+        <div class="col-lg-4">
+          <div class="card-info p-4 h-100">
+            <div class="servico-num mb-3">02</div>
+            <h3 class="h5 fw-bold mb-2">Montagens Industriais</h3>
+            <p class="text-body-secondary small mb-3">
+              Executamos montagens industriais completas com alto padrão de qualidade.
+              Atuamos desde a preparação até a instalação final de equipamentos,
+              tubulações e sistemas industriais.
+            </p>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Instalação de válvulas e atuadores</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Montagem de tubulações industriais</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Comissionamento de sistemas</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Equipe técnica qualificada em campo</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="servico-card">
-          <div class="servico-num">03</div>
-          <h3>Fabricação de Componentes</h3>
-          <p>
-            Fabricamos componentes industriais sob medida com processos modernos
-            de industrialização e rigoroso controle de qualidade.
-          </p>
-          <ul class="servico-lista">
-            <li>Suportes e flanges</li>
-            <li>Peças usinadas sob encomenda</li>
-            <li>Subconjuntos e estruturas personalizadas</li>
-            <li>Foco em eficiência e resistência</li>
-          </ul>
+        <div class="col-lg-4">
+          <div class="card-info p-4 h-100">
+            <div class="servico-num mb-3">03</div>
+            <h3 class="h5 fw-bold mb-2">Fabricação de Componentes</h3>
+            <p class="text-body-secondary small mb-3">
+              Fabricamos componentes industriais sob medida com processos modernos
+              de industrialização e rigoroso controle de qualidade.
+            </p>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Suportes e flanges</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Peças usinadas sob encomenda</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Subconjuntos e estruturas personalizadas</li>
+              <li class="d-flex align-items-start gap-2 small text-body-secondary"><i class="bi bi-arrow-right text-brand mt-1"></i> Foco em eficiência e resistência</li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -361,190 +407,213 @@
   </section>
 
   <!-- GALERIA -->
-  <section class="galeria" id="galeria">
+  <section class="py-5 bg-dark-surface" id="galeria" style="padding-top:96px; padding-bottom:96px;">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label">Estrutura</p>
-        <h2>Nosso Estoque e Barracão</h2>
-        <p class="section-sub">Amplo estoque de válvulas industriais prontas para entrega, com capacidade para grandes pedidos.</p>
+      <div class="text-center mx-auto mb-5" style="max-width:560px;">
+        <p class="eyebrow-light mb-2">Estrutura</p>
+        <h2 class="fw-bolder text-white mb-2">Nosso Estoque e Barracão</h2>
+        <p class="text-white-50">Amplo estoque de válvulas industriais prontas para entrega, com capacidade para grandes pedidos.</p>
       </div>
-      <div class="galeria-grid">
-        <div class="galeria-item galeria-grande">
-          <img src="img/galeria-borboleta.jpg" alt="Válvulas borboleta de grande porte" loading="lazy" />
-          <div class="galeria-label">Válvulas borboleta — grandes bitolas com atuador</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="galeria-item galeria-grande" style="min-height:100%;">
+            <img src="img/galeria-borboleta.jpg" alt="Válvulas borboleta de grande porte" loading="lazy" />
+            <div class="galeria-label">Válvulas borboleta — grandes bitolas com atuador</div>
+          </div>
         </div>
-        <div class="galeria-item">
-          <img src="img/galeria-mix.jpg" alt="Galpão com estoque de válvulas" loading="lazy" />
-          <div class="galeria-label">Amplo estoque pronto para entrega</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/hero.jpg" alt="Linha de válvulas gaveta vermelhas" loading="lazy" />
-          <div class="galeria-label">Produção em série — válvulas gaveta</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/galeria-borboleta2.jpg" alt="Fila de válvulas borboleta" loading="lazy" />
-          <div class="galeria-label">Fila de borboletas grandes — pronto para entrega</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/galeria-vermelho.jpg" alt="Válvulas borboleta vermelhas" loading="lazy" />
-          <div class="galeria-label">Válvulas borboleta bi-excêntricas</div>
+        <div class="col-md-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="galeria-item">
+                <img src="img/galeria-mix.jpg" alt="Galpão com estoque de válvulas" loading="lazy" />
+                <div class="galeria-label">Amplo estoque pronto para entrega</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="galeria-item">
+                <img src="img/hero.jpg" alt="Linha de válvulas gaveta vermelhas" loading="lazy" />
+                <div class="galeria-label">Produção em série — válvulas gaveta</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="galeria-item">
+                <img src="img/galeria-borboleta2.jpg" alt="Fila de válvulas borboleta" loading="lazy" />
+                <div class="galeria-label">Fila de borboletas grandes — pronto para entrega</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="galeria-item">
+                <img src="img/galeria-vermelho.jpg" alt="Válvulas borboleta vermelhas" loading="lazy" />
+                <div class="galeria-label">Válvulas borboleta bi-excêntricas</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PARCERIA -->
-  <section class="parceria" id="parceria">
-    <div class="container parceria-inner">
-      <div class="parceria-badge">PARCERIA OFICIAL</div>
-      <h2>Revenda Oficial W.Burger</h2>
-      <p>
-        Somos revendedores oficiais das válvulas de segurança e alívio <strong>W.Burger</strong>,
-        marca reconhecida nacionalmente pela excelência e tradição — com quase
-        <strong>80 anos de experiência</strong> no setor industrial.
-      </p>
-      <p>
-        Amplamente utilizadas em caldeiras, sistemas de vapor e processos petroquímicos,
-        as válvulas W.Burger são referência em segurança e confiabilidade.
-      </p>
-      <div class="wb-series">
-        <div class="wb-item"><strong>WB 2500</strong><span>Válvula de segurança</span></div>
-        <div class="wb-item"><strong>WB 3000</strong><span>Válvula de segurança</span></div>
-        <div class="wb-item"><strong>WB 7000</strong><span>Válvula de alívio</span></div>
-        <div class="wb-item"><strong>Sentinela</strong><span>Linha especial</span></div>
+  <section class="py-5 bg-ink text-center" id="parceria" style="padding-top:80px; padding-bottom:80px;">
+    <div class="container">
+      <div class="mx-auto" style="max-width:720px;">
+        <span class="badge bg-brand-dark text-white rounded-pill px-3 py-2 mb-3 eyebrow-light">Parceria Oficial</span>
+        <h2 class="fw-bolder text-white mb-3">Revenda Oficial W.Burger</h2>
+        <p class="text-white-50">
+          Somos revendedores oficiais das válvulas de segurança e alívio <strong class="text-white-50">W.Burger</strong>,
+          marca reconhecida nacionalmente pela excelência e tradição — com quase
+          <strong class="text-white-50">80 anos de experiência</strong> no setor industrial.
+        </p>
+        <p class="text-white-50 mb-4">
+          Amplamente utilizadas em caldeiras, sistemas de vapor e processos petroquímicos,
+          as válvulas W.Burger são referência em segurança e confiabilidade.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+          <div class="wb-item"><strong>WB 2500</strong><span>Válvula de segurança</span></div>
+          <div class="wb-item"><strong>WB 3000</strong><span>Válvula de segurança</span></div>
+          <div class="wb-item"><strong>WB 7000</strong><span>Válvula de alívio</span></div>
+          <div class="wb-item"><strong>Sentinela</strong><span>Linha especial</span></div>
+        </div>
+        <a href="#contato" class="btn btn-brand">Consultar disponibilidade</a>
       </div>
-      <a href="#contato" class="btn btn-primary">Consultar disponibilidade</a>
     </div>
   </section>
 
   <!-- CONTATO -->
-  <section class="contato" id="contato">
-    <div class="container contato-grid">
-      <div class="contato-info">
-        <p class="section-label">Fale conosco</p>
-        <h2>Solicite um orçamento</h2>
-        <p>
-          Nossa equipe técnica está pronta para ajudar a encontrar a solução
-          ideal para a sua aplicação. Entre em contato hoje mesmo.
-        </p>
-        <div class="contato-itens">
-          <div class="contato-item">
-            <span class="ci-icon">📞</span>
-            <div>
-              <strong>Telefone / WhatsApp</strong>
-              <a href="https://wa.me/5516997223976" target="_blank">(16) 99722-3976</a>
+  <section class="py-5 bg-surface" id="contato" style="padding-top:96px; padding-bottom:96px;">
+    <div class="container">
+      <div class="row gx-5">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <p class="eyebrow mb-2">Fale conosco</p>
+          <h2 class="fw-bolder mb-3">Solicite um orçamento</h2>
+          <p class="text-body-secondary mb-4">
+            Nossa equipe técnica está pronta para ajudar a encontrar a solução
+            ideal para a sua aplicação. Entre em contato hoje mesmo.
+          </p>
+          <div class="d-flex flex-column gap-4">
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-telephone-fill contato-icon mt-1"></i>
+              <div>
+                <strong class="d-block small">Telefone / WhatsApp</strong>
+                <a href="https://wa.me/5516997223976" target="_blank" class="text-body-secondary text-decoration-none">(16) 99722-3976</a>
+              </div>
+            </div>
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-envelope-fill contato-icon mt-1"></i>
+              <div>
+                <strong class="d-block small">E-mail</strong>
+                <a href="mailto:comercial@newequipamentos.ind.br" class="text-body-secondary text-decoration-none">comercial@newequipamentos.ind.br</a>
+              </div>
+            </div>
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-geo-alt-fill contato-icon mt-1"></i>
+              <div>
+                <strong class="d-block small">Localização</strong>
+                <span class="text-body-secondary">Sertãozinho — SP | Atendemos todo o Brasil</span>
+              </div>
             </div>
           </div>
-          <div class="contato-item">
-            <span class="ci-icon">✉️</span>
-            <div>
-              <strong>E-mail</strong>
-              <a href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a>
+        </div>
+        <div class="col-lg-7">
+          <form class="bg-white border rounded-4 p-4 p-md-5 shadow-sm" id="contatoForm" novalidate>
+            <div class="row g-3 mb-1">
+              <div class="col-md-6">
+                <label for="nome" class="form-label small fw-semibold">Nome completo *</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required />
+              </div>
+              <div class="col-md-6">
+                <label for="empresa" class="form-label small fw-semibold">Empresa</label>
+                <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Nome da empresa" />
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label small fw-semibold">E-mail *</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required />
+              </div>
+              <div class="col-md-6">
+                <label for="telefone" class="form-label small fw-semibold">Telefone</label>
+                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(11) 99999-9999" />
+              </div>
+              <div class="col-12">
+                <label for="produto" class="form-label small fw-semibold">Produto / Serviço de interesse</label>
+                <select id="produto" name="produto" class="form-select">
+                  <option value="">Selecione</option>
+                  <option>Válvula Bi-excêntrica Alta Performance</option>
+                  <option>Válvula Borboleta</option>
+                  <option>Válvula de Retenção</option>
+                  <option>Posicionador Pneumático</option>
+                  <option>Atuador Pneumático</option>
+                  <option>Válvula Solenóide NAMUR</option>
+                  <option>Caixa Redutora</option>
+                  <option>Válvulas W.Burger</option>
+                  <option>Manutenção de Válvulas</option>
+                  <option>Montagem Industrial</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="mensagem" class="form-label small fw-semibold">Mensagem *</label>
+                <textarea id="mensagem" name="mensagem" rows="4" class="form-control" placeholder="Descreva sua necessidade, bitola, especificações técnicas, quantidade..." required></textarea>
+              </div>
             </div>
-          </div>
-          <div class="contato-item">
-            <span class="ci-icon">📍</span>
-            <div>
-              <strong>Localização</strong>
-              <span>Sertãozinho — SP | Atendemos todo o Brasil</span>
+            <button type="submit" class="btn btn-brand w-100 mt-4">Enviar Mensagem</button>
+            <p class="text-center small text-body-secondary mt-3 mb-0">* Campos obrigatórios. Respondemos em até 24 horas.</p>
+            <div class="form-success mt-3" id="formSuccess">
+              <i class="bi bi-check-circle-fill"></i> Mensagem enviada! Entraremos em contato em breve.
             </div>
-          </div>
+          </form>
         </div>
       </div>
-      <form class="contato-form" id="contatoForm" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">Nome completo *</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
-          </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">E-mail *</label>
-            <input type="email" id="email" name="email" placeholder="seu@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="produto">Produto / Serviço de interesse</label>
-          <select id="produto" name="produto">
-            <option value="">Selecione</option>
-            <option>Válvula Bi-excêntrica Alta Performance</option>
-            <option>Válvula Borboleta</option>
-            <option>Válvula de Retenção</option>
-            <option>Posicionador Pneumático</option>
-            <option>Atuador Pneumático</option>
-            <option>Válvula Solenóide NAMUR</option>
-            <option>Caixa Redutora</option>
-            <option>Válvulas W.Burger</option>
-            <option>Manutenção de Válvulas</option>
-            <option>Montagem Industrial</option>
-            <option>Outro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="mensagem">Mensagem *</label>
-          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Descreva sua necessidade, bitola, especificações técnicas, quantidade..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
-        <p class="form-note">* Campos obrigatórios. Respondemos em até 24 horas.</p>
-        <div class="form-success" id="formSuccess">
-          ✅ Mensagem enviada! Entraremos em contato em breve.
-        </div>
-      </form>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#inicio" class="logo">
-          <div class="logo-icon logo-icon-sm">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="24,2 46,44 2,44" fill="none" stroke="#1a5c2a" stroke-width="4" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="logo-text">
-            <span class="logo-new">NEW</span>
-            <span class="logo-sub">Válvulas e Equip. Industriais</span>
-          </div>
-        </a>
-        <p>Sertãozinho — SP | Atendemos todo o território nacional.</p>
+  <footer class="bg-ink text-white py-5">
+    <div class="container">
+      <div class="row g-4 pb-4">
+        <div class="col-lg-5">
+          <a href="#inicio" class="d-flex align-items-center gap-2 text-decoration-none mb-3">
+            <div class="navbar-logo-icon" style="width:32px; height:32px;">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="24,2 46,44 2,44" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="navbar-brand-text">
+              <span class="brand-new">NEW</span>
+              <span class="brand-sub">Válvulas e Equip. Industriais</span>
+            </span>
+          </a>
+          <p class="text-white-50 small mb-0" style="max-width:280px;">Sertãozinho — SP | Atendemos todo o território nacional.</p>
+        </div>
+        <div class="col-lg-3 col-6">
+          <strong class="d-block mb-3">Navegação</strong>
+          <nav class="footer-nav d-flex flex-column gap-2">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre nós</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#parceria">Parceria</a>
+            <a href="#contato">Contato</a>
+          </nav>
+        </div>
+        <div class="col-lg-4 col-6">
+          <strong class="d-block mb-3">Produtos</strong>
+          <nav class="footer-nav d-flex flex-column gap-2">
+            <a href="#produtos">Válvula Bi-excêntrica</a>
+            <a href="#produtos">Válvula Borboleta</a>
+            <a href="#produtos">Válvula de Retenção</a>
+            <a href="#produtos">Acessórios de Automação</a>
+            <a href="#parceria">Válvulas W.Burger</a>
+          </nav>
+        </div>
       </div>
-      <nav class="footer-nav">
-        <strong>Navegação</strong>
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre nós</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#parceria">Parceria</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <nav class="footer-nav">
-        <strong>Produtos</strong>
-        <a href="#produtos">Válvula Bi-excêntrica</a>
-        <a href="#produtos">Válvula Borboleta</a>
-        <a href="#produtos">Válvula de Retenção</a>
-        <a href="#produtos">Acessórios de Automação</a>
-        <a href="#parceria">Válvulas W.Burger</a>
-      </nav>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <span>© 2025 NEW Válvulas e Equipamentos Industriais. Todos os direitos reservados.</span>
+      <div class="footer-bottom pt-4 text-center">
+        © 2025 NEW Válvulas e Equipamentos Industriais. Todos os direitos reservados.
       </div>
     </div>
   </footer>
 
+  <script src="js/vendor/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

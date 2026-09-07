@@ -1,37 +1,32 @@
 /* New Equipamentos — main.js */
 
-// Navbar: scroll effect + mobile menu
+// Navbar: efeito de scroll (o menu mobile já é resolvido pelo Bootstrap Collapse)
 const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
 
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  navbar.classList.toggle('navbar-scrolled', window.scrollY > 40);
 });
 
-hamburger.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-});
-
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
-    hamburger.setAttribute('aria-expanded', 'false');
+// Fecha o menu mobile ao clicar em um link (usa a API do Bootstrap)
+const navLinksEl = document.getElementById('navLinks');
+if (navLinksEl && window.bootstrap) {
+  const collapseInstance = window.bootstrap.Collapse.getOrCreateInstance(navLinksEl, { toggle: false });
+  navLinksEl.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navLinksEl.classList.contains('show')) collapseInstance.hide();
+    });
   });
-});
+}
 
 // Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id], header[id]');
+const links = document.querySelectorAll('.navbar-nav .nav-link');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       links.forEach(l => l.classList.remove('active'));
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      const active = document.querySelector(`.navbar-nav .nav-link[href="#${e.target.id}"]`);
       if (active) active.classList.add('active');
     }
   });
@@ -49,7 +44,7 @@ const animObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.produto-card, .sobre-card, .contato-item').forEach(el => {
+document.querySelectorAll('.produto-card, .card-info, .anim-fade').forEach(el => {
   el.classList.add('anim-fade');
   animObserver.observe(el);
 });
@@ -63,9 +58,9 @@ form.addEventListener('submit', (e) => {
   let valid = true;
 
   form.querySelectorAll('[required]').forEach(field => {
-    field.classList.remove('error');
+    field.classList.remove('is-invalid');
     if (!field.value.trim()) {
-      field.classList.add('error');
+      field.classList.add('is-invalid');
       valid = false;
     }
   });
@@ -88,7 +83,7 @@ form.addEventListener('submit', (e) => {
 
 // Remove error class on input
 form.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', () => el.classList.remove('error'));
+  el.addEventListener('input', () => el.classList.remove('is-invalid'));
 });
 
 // Phone mask
