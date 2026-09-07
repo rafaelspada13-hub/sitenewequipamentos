@@ -45,7 +45,7 @@ h1, h2, h3, h4 {
   letter-spacing: -.01em;
 }
 
-.mono, .spec-value, .servico-num, .hero-stat strong, .wb-item strong {
+.mono, .spec-value, .servico-num, .hero-stat strong {
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
@@ -223,6 +223,23 @@ h1, h2, h3, h4 {
   -webkit-mask-image: radial-gradient(ellipse 62% 60% at 50% 45%, #000 60%, transparent 100%);
   mask-image: radial-gradient(ellipse 62% 60% at 50% 45%, #000 60%, transparent 100%);
 }
+.hero-product-tag {
+  position: relative;
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.75);
+  background: rgba(21,32,26,.75);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 4px 12px;
+  white-space: nowrap;
+}
 .hero h1 {
   font-size: clamp(2.6rem, 5.6vw, 4.2rem);
   line-height: 1.02;
@@ -384,20 +401,6 @@ h1, h2, h3, h4 {
   transition: opacity .3s ease;
 }
 .galeria-item:hover .galeria-label { opacity: 1; }
-
-/* ============================================
-   PARCERIA
-   ============================================ */
-.wb-item {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: var(--radius);
-  padding: 16px 22px;
-  min-width: 130px;
-  text-align: center;
-}
-.wb-item strong { display: block; font-size: 1.15rem; font-weight: 600; color: #8fd6a0; margin-bottom: 2px; }
-.wb-item span { font-family: 'IBM Plex Sans', sans-serif; font-size: .76rem; color: rgba(255,255,255,.5); }
 
 /* ============================================
    CONTATO
