@@ -1,8 +1,16 @@
 /* ============================================
    NEW Válvulas e Equip. Industriais — Stylesheet
    Base estrutural: Bootstrap 5 (grid, componentes, forms)
-   Este arquivo cobre apenas identidade visual e peças
-   que o Bootstrap não fornece pronto.
+   Este arquivo cobre identidade visual e peças que o
+   Bootstrap não fornece pronto.
+
+   Direção: linguagem de desenho técnico/industrial —
+   Big Shoulders Display (nascida do apelido "Cidade dos
+   Ombros Largos" de Chicago, cidade do aço) nos títulos,
+   IBM Plex Sans no corpo, IBM Plex Mono nas especificações
+   técnicas (como uma folha de dados de válvula de verdade).
+   Cantos retos, marcações tipo desenho técnico ([ ], //),
+   nada de ícones coloridos repetidos em cada seção.
    ============================================ */
 
 :root {
@@ -10,29 +18,41 @@
   --brand-dark:   #0f3a1a;
   --brand-light:  #2d8044;
   --brand-muted:  #e8f5eb;
-  --ink:          #1e2022;
-  --ink-soft:     #4a5a4a;
-  --surface:      #f7f8f7;
-  --surface-alt:  #eef0ee;
-  --border:       #d8ddd8;
-  --dark-surface: #1e2820;
-  --radius:       10px;
-  --shadow:       0 4px 24px rgba(0,0,0,.09);
-  --shadow-lg:    0 12px 40px rgba(0,0,0,.14);
-  --transition:   .25s ease;
+  --ink:          #191b1d;
+  --ink-soft:     #52605a;
+  --surface:      #f4f6f4;
+  --surface-alt:  #eaede9;
+  --border:       #d6dbd5;
+  --dark-surface: #15201a;
+  --steel:        #3a4440;
+  --radius:       3px;
+  --shadow:       0 4px 20px rgba(15,25,15,.08);
+  --shadow-lg:    0 16px 44px rgba(15,25,15,.16);
+  --transition:   .2s ease;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
   color: var(--ink);
 }
 
-h1, h2, h3, h4 { text-wrap: balance; }
+h1, h2, h3, h4 {
+  text-wrap: balance;
+  font-family: 'Big Shoulders Display', 'IBM Plex Sans', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.mono, .spec-value, .servico-num, .hero-stat strong, .wb-item strong {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
 
 /* ---- Brand color utilities (Bootstrap keeps its own --bs-primary blue,
    we layer our own brand classes instead of fighting its variables) ---- */
+.btn { border-radius: var(--radius); font-family: 'IBM Plex Sans', sans-serif; }
 .btn-brand {
   background: var(--brand);
   border-color: var(--brand);
@@ -70,25 +90,40 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .bg-ink { background-color: var(--ink) !important; }
 .bg-dark-surface { background-color: var(--dark-surface) !important; }
 
-.badge-brand {
-  background: var(--brand-muted);
-  color: var(--brand);
-  font-weight: 600;
-}
-.eyebrow {
+/* Rótulo tipo anotação de desenho técnico: [ SOBRE NÓS ] */
+.eyebrow, .eyebrow-light {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .12em;
+  font-weight: 600;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  color: var(--brand);
 }
-.eyebrow-light {
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #7dcc8f;
+.eyebrow { color: var(--brand); }
+.eyebrow-light { color: #8fd6a0; }
+.eyebrow::before { content: '['; opacity: .6; }
+.eyebrow::after { content: ']'; opacity: .6; }
+.eyebrow-light::before { content: '['; opacity: .6; }
+.eyebrow-light::after { content: ']'; opacity: .6; }
+
+/* Tag técnica (substitui os badges "pill" genéricos) */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--ink-soft);
+  background: transparent;
 }
+.tag-brand { border-color: var(--brand); color: var(--brand); }
+.tag-light { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
 
 /* ============================================
    NAVBAR
@@ -96,22 +131,24 @@ h1, h2, h3, h4 { text-wrap: balance; }
 #navbar {
   transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
   background: transparent;
-  padding-top: .9rem;
-  padding-bottom: .9rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
 }
 #navbar.navbar-scrolled {
   background: var(--ink);
   box-shadow: 0 2px 16px rgba(0,0,0,.25);
-  padding-top: .55rem;
-  padding-bottom: .55rem;
+  padding-top: .6rem;
+  padding-bottom: .6rem;
 }
 #navbar .nav-link {
   font-weight: 500;
-  font-size: .92rem;
+  font-size: .9rem;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
 }
 #navbar .nav-link.active {
   color: #fff !important;
-  font-weight: 600;
+  border-bottom-color: var(--brand-light);
 }
 @media (max-width: 991.98px) {
   #navbar .navbar-collapse {
@@ -124,17 +161,23 @@ h1, h2, h3, h4 { text-wrap: balance; }
   #navbar .navbar-nav .nav-link { padding-top: .5rem; padding-bottom: .5rem; }
 }
 
-.navbar-logo-icon { width: 38px; height: 38px; flex-shrink: 0; }
+.navbar-logo-icon { width: 36px; height: 36px; flex-shrink: 0; }
 .navbar-logo-icon svg { width: 100%; height: 100%; }
-.navbar-brand-text { line-height: 1.1; }
-.navbar-brand-text .brand-new { font-size: 1.25rem; font-weight: 900; color: #fff; letter-spacing: -.02em; }
+.navbar-brand-text { line-height: 1.05; }
+.navbar-brand-text .brand-new {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
 .navbar-brand-text .brand-sub {
   display: block;
-  font-size: .62rem;
-  font-weight: 600;
-  letter-spacing: .04em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .03em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.6);
+  color: rgba(255,255,255,.55);
 }
 
 /* ============================================
@@ -143,56 +186,42 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(140deg, var(--ink) 0%, #2d3133 55%, #1a2e1a 100%);
+  background: var(--ink);
   padding-top: 160px;
-  padding-bottom: 100px;
+  padding-bottom: 110px;
 }
 .hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 600px 500px at 75% 40%, rgba(26,92,42,.25) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  z-index: 0;
+    linear-gradient(100deg, var(--ink) 0%, rgba(25,27,29,.55) 48%, rgba(25,27,29,.25) 100%);
+  z-index: 1;
 }
 .hero-img {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: .13;
+  filter: grayscale(.55) contrast(1.05);
   z-index: 0;
 }
-.hero > .container { position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 900; line-height: 1.12; }
-.hero .lead { color: rgba(255,255,255,.68); max-width: 560px; }
-.hero-stat strong { display: block; font-size: 1.4rem; font-weight: 800; color: #fff; }
-.hero-stat span { font-size: .8rem; color: rgba(255,255,255,.5); }
+.hero-img::after { content: none; }
+.hero > .container { position: relative; z-index: 2; }
+.hero h1 {
+  font-size: clamp(2.6rem, 5.6vw, 4.2rem);
+  line-height: 1.02;
+  color: #fff;
+}
+.hero .lead { color: rgba(255,255,255,.65); max-width: 540px; font-size: 1.05rem; }
+.hero-stats { border-top: 1px solid rgba(255,255,255,.15); padding-top: 24px; }
+.hero-stat strong { display: block; font-size: 1.6rem; font-weight: 600; color: #fff; }
+.hero-stat span { font-family: 'IBM Plex Sans', sans-serif; font-size: .78rem; color: rgba(255,255,255,.5); }
 .hero-stat-divider { width: 1px; align-self: stretch; background: rgba(255,255,255,.15); }
 
 /* ============================================
-   FEATURE / ICON BOXES (sobre, produtos, serviços)
+   SOBRE — cards viram um índice de folha técnica,
+   sem ícone colorido repetido: número + regra.
    ============================================ */
-.icon-box {
-  width: 52px; height: 52px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: var(--radius);
-  background: var(--brand);
-  background-image: linear-gradient(135deg, var(--brand-light), var(--brand));
-  color: #fff;
-  font-size: 1.35rem;
-  flex-shrink: 0;
-}
-.icon-box-outline {
-  width: 52px; height: 52px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--border);
-  color: var(--brand);
-  font-size: 1.35rem;
-  flex-shrink: 0;
-}
-
 .sobre-foto {
   border-radius: var(--radius);
   overflow: hidden;
@@ -202,82 +231,109 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .sobre-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .sobre-foto:hover img { transform: scale(1.03); }
 
+.spec-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+}
+.spec-row:last-child { border-bottom: 1px solid var(--border); }
+.spec-row .spec-index {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--brand);
+  flex-shrink: 0;
+  padding-top: .1rem;
+}
+.spec-row strong { display: block; font-size: .98rem; font-weight: 700; margin-bottom: 2px; }
+.spec-row p { font-size: .87rem; color: var(--ink-soft); margin: 0; }
+
 .card-info {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: var(--transition);
 }
-.card-info:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-.card-info.card-accent { background: var(--brand); border-color: var(--brand); color: #fff; }
-.card-info.card-accent p { color: rgba(255,255,255,.75); }
-.card-info.card-accent .icon-box { background: rgba(255,255,255,.15); }
+.card-info:hover { box-shadow: var(--shadow); }
 
 /* ============================================
-   SEGMENTOS (faixa de badges)
+   SEGMENTOS (faixa técnica, sem pills)
    ============================================ */
-.segmentos-strip { padding: 28px 0; }
-.seg-pill {
+.segmentos-strip { padding: 22px 0; border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+.seg-list { display: flex; flex-wrap: wrap; }
+.seg-item {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(255,255,255,.14);
-  border: 1px solid rgba(255,255,255,.2);
-  color: #fff;
-  font-size: .83rem;
-  font-weight: 600;
-  padding: 7px 16px;
-  border-radius: 100px;
+  align-items: baseline;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  font-size: .84rem;
+  font-weight: 500;
+  padding: 4px 18px;
+  border-left: 1px solid rgba(255,255,255,.25);
   white-space: nowrap;
 }
+.seg-item:first-child { border-left: none; padding-left: 0; }
+.seg-item .seg-num { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: rgba(255,255,255,.5); }
 
 /* ============================================
-   PRODUTOS
+   PRODUTOS — especificação em formato tabular,
+   como uma folha de dados de válvula de verdade.
    ============================================ */
-.produto-card { position: relative; display: flex; flex-direction: column; }
-.produto-card.destaque { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
+.produto-card { position: relative; display: flex; flex-direction: column; border-radius: var(--radius); }
+.produto-card.destaque { border-color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
 .produto-badge {
   position: absolute;
-  top: -12px; left: 20px;
+  top: 0; left: 0;
   background: var(--brand);
   color: #fff;
-  font-size: .7rem;
-  font-weight: 700;
-  padding: 4px 14px;
-  border-radius: 100px;
-  letter-spacing: .06em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
-.produto-card .list-check { list-style: none; padding: 0; margin: 0 0 1rem; }
-.produto-card .list-check li {
-  font-size: .84rem;
-  color: var(--ink-soft);
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  margin-bottom: 5px;
+.produto-card .produto-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.produto-glyph {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
-.produto-card .list-check li i { color: var(--brand); margin-top: 2px; }
-.prod-tags .badge { font-weight: 600; }
+.produto-card.destaque .produto-glyph { border-color: var(--brand); color: var(--brand); }
+
+.spec-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .82rem; }
+.spec-table tr { border-top: 1px solid var(--border); }
+.spec-table td { padding: 6px 0; color: var(--ink-soft); }
+.spec-table td:first-child { color: var(--ink-soft); opacity: .75; width: 46%; }
+.spec-table td:last-child { text-align: right; font-family: 'IBM Plex Mono', monospace; color: var(--ink); font-weight: 500; }
+
+.prod-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
 .produto-card .btn-link-brand {
   margin-top: auto;
   color: var(--brand);
   font-weight: 600;
-  font-size: .88rem;
+  font-size: .86rem;
   text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
 }
 .produto-card .btn-link-brand:hover { color: var(--brand-dark); }
 
 /* ============================================
    SERVIÇOS
    ============================================ */
-.servico-num { font-size: 2.2rem; font-weight: 900; color: var(--border); line-height: 1; }
-.servico-foto { border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; }
-.servico-foto img { width: 100%; height: 100%; object-fit: cover; }
+.servico-num { font-size: 2rem; font-weight: 600; color: var(--brand); line-height: 1; opacity: .35; }
+.servico-foto { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/9; }
+.servico-foto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.25); }
 .step-label {
-  font-size: .78rem;
-  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .74rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   color: var(--brand);
 }
 
@@ -289,24 +345,25 @@ h1, h2, h3, h4 { text-wrap: balance; }
   border-radius: var(--radius);
   overflow: hidden;
   aspect-ratio: 4/3;
-  background: #2d3133;
+  background: var(--steel);
 }
 .galeria-grande { aspect-ratio: unset; height: 100%; }
 .galeria-item img {
   width: 100%; height: 100%;
   object-fit: cover;
   transition: transform .5s ease, filter .4s ease;
-  filter: brightness(.9);
+  filter: brightness(.88) saturate(.95);
 }
-.galeria-item:hover img { transform: scale(1.05); filter: brightness(1); }
+.galeria-item:hover img { transform: scale(1.04); filter: brightness(1) saturate(1); }
 .galeria-label {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 28px 16px 14px;
-  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 100%);
+  padding: 26px 16px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 100%);
   color: #fff;
-  font-size: .8rem;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .76rem;
+  font-weight: 500;
   opacity: 0;
   transition: opacity .3s ease;
 }
@@ -316,19 +373,20 @@ h1, h2, h3, h4 { text-wrap: balance; }
    PARCERIA
    ============================================ */
 .wb-item {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: var(--radius);
   padding: 16px 22px;
   min-width: 130px;
   text-align: center;
 }
-.wb-item strong { display: block; font-size: 1.05rem; font-weight: 800; color: #5ec87a; margin-bottom: 2px; }
-.wb-item span { font-size: .76rem; color: rgba(255,255,255,.5); }
+.wb-item strong { display: block; font-size: 1.15rem; font-weight: 600; color: #8fd6a0; margin-bottom: 2px; }
+.wb-item span { font-family: 'IBM Plex Sans', sans-serif; font-size: .76rem; color: rgba(255,255,255,.5); }
 
 /* ============================================
    CONTATO
    ============================================ */
+.form-control, .form-select { border-radius: var(--radius); }
 .form-control:focus, .form-select:focus {
   border-color: var(--brand);
   box-shadow: 0 0 0 3px rgba(26,92,42,.12);
@@ -337,10 +395,10 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .contato-icon { color: var(--brand); font-size: 1.2rem; }
 .form-success {
   display: none;
-  background: #dcfce7;
-  border: 1px solid #86efac;
-  color: #166534;
-  border-radius: 8px;
+  background: var(--brand-muted);
+  border: 1px solid var(--brand-light);
+  color: var(--brand-dark);
+  border-radius: var(--radius);
   padding: 14px 18px;
   font-size: .9rem;
   font-weight: 500;
@@ -352,12 +410,12 @@ h1, h2, h3, h4 { text-wrap: balance; }
    ============================================ */
 .footer-nav a { color: rgba(255,255,255,.55); font-size: .87rem; text-decoration: none; transition: color var(--transition); }
 .footer-nav a:hover { color: #fff; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); font-size: .82rem; color: rgba(255,255,255,.5); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: rgba(255,255,255,.45); }
 
 /* ============================================
    ANIMATIONS
    ============================================ */
-.anim-fade { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+.anim-fade { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
 .anim-fade.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .anim-fade { opacity: 1; transform: none; transition: none; }
@@ -369,4 +427,5 @@ h1, h2, h3, h4 { text-wrap: balance; }
 @media (max-width: 991.98px) {
   .hero { padding-top: 130px; }
   .galeria-grande { aspect-ratio: 4/3; }
+  .seg-item { border-left: none; padding-left: 0; padding-right: 14px; }
 }

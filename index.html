@@ -27,7 +27,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 
   <!-- Structured data (SEO local business) -->
@@ -91,8 +91,8 @@
     <div class="container">
       <div class="row justify-content-center justify-content-xl-start">
         <div class="col-xl-8">
-          <span class="badge bg-brand-soft text-brand rounded-pill px-3 py-2 mb-4 eyebrow">Válvulas e Equipamentos Industriais</span>
-          <h1 class="text-white mb-3">Soluções industriais<br /><span class="text-brand" style="color:#5ec87a !important;">de alta performance</span></h1>
+          <p class="eyebrow-light mb-3">Válvulas e Equipamentos Industriais</p>
+          <h1 class="text-white mb-3">Soluções industriais<br /><span style="color:#8fd6a0;">de alta performance</span></h1>
           <p class="lead mb-5">
             Fornecimento, automação e manutenção de válvulas industriais com
             engenharia especializada — atendemos todo o território nacional.
@@ -101,7 +101,7 @@
             <a href="#produtos" class="btn btn-brand btn-lg px-4">Ver Produtos</a>
             <a href="#contato" class="btn btn-outline-brand btn-lg px-4">Solicitar Orçamento</a>
           </div>
-          <div class="d-flex flex-wrap align-items-center gap-4">
+          <div class="hero-stats d-flex flex-wrap align-items-center gap-4">
             <div class="hero-stat"><strong>Nacional</strong><span>Atendimento em todo Brasil</span></div>
             <div class="hero-stat-divider d-none d-sm-block"></div>
             <div class="hero-stat"><strong>5+</strong><span>Segmentos industriais</span></div>
@@ -121,26 +121,26 @@
           <div class="sobre-foto mb-3 anim-fade">
             <img src="img/sobre-galpao.jpg" alt="Galpão New Equipamentos" loading="lazy" />
           </div>
-          <div class="d-flex flex-column gap-3">
-            <div class="card-info card-accent p-4 d-flex flex-row align-items-start gap-3 anim-fade">
-              <span class="icon-box"><i class="bi bi-gear-fill"></i></span>
+          <div class="anim-fade">
+            <div class="spec-row">
+              <span class="spec-index">01</span>
               <div>
-                <strong class="d-block mb-1">Alta Performance</strong>
-                <p class="mb-0 small">Válvulas projetadas para as condições mais críticas de pressão e temperatura.</p>
+                <strong>Alta Performance</strong>
+                <p>Válvulas projetadas para as condições mais críticas de pressão e temperatura.</p>
               </div>
             </div>
-            <div class="card-info p-4 d-flex flex-row align-items-start gap-3 anim-fade">
-              <span class="icon-box-outline"><i class="bi bi-tools"></i></span>
+            <div class="spec-row">
+              <span class="spec-index">02</span>
               <div>
-                <strong class="d-block mb-1">Manutenção em Campo</strong>
-                <p class="mb-0 small text-body-secondary">Processo completo: recebimento, diagnóstico e reparo no barracão ou in loco.</p>
+                <strong>Manutenção em Campo</strong>
+                <p>Processo completo: recebimento, diagnóstico e reparo no barracão ou in loco.</p>
               </div>
             </div>
-            <div class="card-info p-4 d-flex flex-row align-items-start gap-3 anim-fade">
-              <span class="icon-box-outline"><i class="bi bi-award-fill"></i></span>
+            <div class="spec-row">
+              <span class="spec-index">03</span>
               <div>
-                <strong class="d-block mb-1">Revenda Autorizada</strong>
-                <p class="mb-0 small text-body-secondary">Revendedores oficiais das válvulas W.Burger — referência nacional há 80 anos.</p>
+                <strong>Revenda Autorizada</strong>
+                <p>Revendedores oficiais das válvulas W.Burger — referência nacional há 80 anos.</p>
               </div>
             </div>
           </div>
@@ -157,12 +157,12 @@
             Com equipe técnica especializada, entregamos soluções sob medida para
             os segmentos mais exigentes da indústria brasileira.
           </p>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-4">
-            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Usinas de açúcar e álcool</li>
-            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Estações de tratamento de água (ETAs/ETEs)</li>
-            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Mineradoras</li>
-            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Papel e celulose</li>
-            <li class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-brand"></i> Petrolíferas e petroquímica</li>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-4" style="font-size:.94rem;">
+            <li><span class="mono text-brand">—</span> Usinas de açúcar e álcool</li>
+            <li><span class="mono text-brand">—</span> Estações de tratamento de água (ETAs/ETEs)</li>
+            <li><span class="mono text-brand">—</span> Mineradoras</li>
+            <li><span class="mono text-brand">—</span> Papel e celulose</li>
+            <li><span class="mono text-brand">—</span> Petrolíferas e petroquímica</li>
           </ul>
           <a href="#contato" class="btn btn-brand">Entre em contato</a>
         </div>
@@ -173,13 +173,13 @@
   <!-- SEGMENTOS -->
   <section class="segmentos-strip bg-brand">
     <div class="container d-flex align-items-center flex-wrap gap-4">
-      <p class="mb-0 text-white-50 text-uppercase fw-bold small" style="letter-spacing:.12em; white-space:nowrap;">Segmentos atendidos</p>
-      <div class="d-flex flex-wrap gap-2 flex-grow-1">
-        <span class="seg-pill"><i class="bi bi-building"></i> Usinas de Açúcar e Álcool</span>
-        <span class="seg-pill"><i class="bi bi-droplet-fill"></i> Estações de Tratamento de Água</span>
-        <span class="seg-pill"><i class="bi bi-gem"></i> Mineradoras</span>
-        <span class="seg-pill"><i class="bi bi-file-earmark-text-fill"></i> Papel e Celulose</span>
-        <span class="seg-pill"><i class="bi bi-fuel-pump-fill"></i> Petrolíferas e Petroquímica</span>
+      <p class="mb-0 eyebrow-light" style="white-space:nowrap;">Segmentos atendidos</p>
+      <div class="seg-list flex-grow-1">
+        <span class="seg-item"><span class="seg-num">01</span> Usinas de Açúcar e Álcool</span>
+        <span class="seg-item"><span class="seg-num">02</span> Estações de Tratamento de Água</span>
+        <span class="seg-item"><span class="seg-num">03</span> Mineradoras</span>
+        <span class="seg-item"><span class="seg-num">04</span> Papel e Celulose</span>
+        <span class="seg-item"><span class="seg-num">05</span> Petrolíferas e Petroquímica</span>
       </div>
     </div>
   </section>
@@ -197,68 +197,74 @@
       <div class="row g-4 mb-5">
 
         <div class="col-md-6 col-lg-4">
-          <div class="card-info produto-card destaque bg-white p-4 h-100">
+          <div class="card-info produto-card destaque bg-white p-4 pt-5 h-100">
             <span class="produto-badge">Alta Performance</span>
-            <div class="icon-box mb-3"><i class="bi bi-disc-fill"></i></div>
-            <h3 class="h5 fw-bold mb-2">Válvula Bi-excêntrica</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h5 fw-bold mb-0">Válvula Bi-excêntrica</h3>
+              <span class="produto-glyph">⏺</span>
+            </div>
             <p class="text-body-secondary small">Válvula borboleta de alta performance com duplo offset para serviços críticos de alta pressão e temperatura.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 48"</li>
-              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
-              <li><i class="bi bi-check-lg"></i> -120°C a 280°C</li>
-              <li><i class="bi bi-check-lg"></i> Classe VI (ANSI FCI 70-2 / IEC 60534-4)</li>
-              <li><i class="bi bi-check-lg"></i> Corpo: Aço-Carbono | Inox | Níquel</li>
-              <li><i class="bi bi-check-lg"></i> Sede: RPTFE</li>
-            </ul>
-            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
-              <span class="badge badge-brand rounded-pill">Alta Pressão</span>
-              <span class="badge badge-brand rounded-pill">Alta Temp.</span>
-              <span class="badge badge-brand rounded-pill">Serviço Crítico</span>
+            <table class="spec-table">
+              <tr><td>Bitolas</td><td class="spec-value">2" – 48"</td></tr>
+              <tr><td>Classe</td><td class="spec-value">ASME 150</td></tr>
+              <tr><td>Temperatura</td><td class="spec-value">-120° – 280°C</td></tr>
+              <tr><td>Vedação</td><td class="spec-value">Classe VI</td></tr>
+              <tr><td>Corpo</td><td class="spec-value">Aço-C. / Inox / Níquel</td></tr>
+              <tr><td>Sede</td><td class="spec-value">RPTFE</td></tr>
+            </table>
+            <div class="prod-tags">
+              <span class="tag tag-brand">Alta Pressão</span>
+              <span class="tag tag-brand">Alta Temp.</span>
+              <span class="tag tag-brand">Serviço Crítico</span>
             </div>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-4">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-circle-half"></i></div>
-            <h3 class="h5 fw-bold mb-2">Válvula Borboleta</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h5 fw-bold mb-0">Válvula Borboleta</h3>
+              <span class="produto-glyph">◐</span>
+            </div>
             <p class="text-body-secondary small">Válvula borboleta wafer/lug para controle e isolamento em sistemas industriais diversos.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 40"</li>
-              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
-              <li><i class="bi bi-check-lg"></i> 20°C a 260°C</li>
-              <li><i class="bi bi-check-lg"></i> Corpo: Aço-Carbono | Inox | Níquel</li>
-              <li><i class="bi bi-check-lg"></i> Sede: EPDM / Teflon / Buna / Viton</li>
-            </ul>
-            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
-              <span class="badge badge-brand rounded-pill">Alta Temp.</span>
-              <span class="badge badge-brand rounded-pill">Baixa Temp.</span>
-              <span class="badge badge-brand rounded-pill">Serviço Crítico</span>
+            <table class="spec-table">
+              <tr><td>Bitolas</td><td class="spec-value">2" – 40"</td></tr>
+              <tr><td>Classe</td><td class="spec-value">ASME 150</td></tr>
+              <tr><td>Temperatura</td><td class="spec-value">20° – 260°C</td></tr>
+              <tr><td>Corpo</td><td class="spec-value">Aço-C. / Inox / Níquel</td></tr>
+              <tr><td>Sede</td><td class="spec-value">EPDM/Teflon/Buna/Viton</td></tr>
+            </table>
+            <div class="prod-tags">
+              <span class="tag tag-brand">Alta Temp.</span>
+              <span class="tag tag-brand">Baixa Temp.</span>
+              <span class="tag tag-brand">Serviço Crítico</span>
             </div>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-4">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-arrow-return-left"></i></div>
-            <h3 class="h5 fw-bold mb-2">Válvula de Retenção</h3>
-            <p class="text-body-secondary small">Válvula de retenção wafer para prevenção de refluxo em sistemas de bombeamento e processos industriais.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Bitolas: 2" a 40"</li>
-              <li><i class="bi bi-check-lg"></i> ASME Classe 150</li>
-              <li><i class="bi bi-check-lg"></i> 10°C a 400°C</li>
-              <li><i class="bi bi-check-lg"></i> Corpo: Ferro Fundido / Aço-C. / Inox</li>
-              <li><i class="bi bi-check-lg"></i> Sede: EPDM / Buna / Viton / Metal</li>
-            </ul>
-            <div class="prod-tags d-flex flex-wrap gap-2 mb-3">
-              <span class="badge badge-brand rounded-pill">Químicos</span>
-              <span class="badge badge-brand rounded-pill">Vapor</span>
-              <span class="badge badge-brand rounded-pill">Óleo</span>
-              <span class="badge badge-brand rounded-pill">Água</span>
+            <div class="produto-head mb-2">
+              <h3 class="h5 fw-bold mb-0">Válvula de Retenção</h3>
+              <span class="produto-glyph">↩</span>
             </div>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <p class="text-body-secondary small">Válvula de retenção wafer para prevenção de refluxo em sistemas de bombeamento e processos industriais.</p>
+            <table class="spec-table">
+              <tr><td>Bitolas</td><td class="spec-value">2" – 40"</td></tr>
+              <tr><td>Classe</td><td class="spec-value">ASME 150</td></tr>
+              <tr><td>Temperatura</td><td class="spec-value">10° – 400°C</td></tr>
+              <tr><td>Corpo</td><td class="spec-value">Ferro Fund. / Aço-C. / Inox</td></tr>
+              <tr><td>Sede</td><td class="spec-value">EPDM/Buna/Viton/Metal</td></tr>
+            </table>
+            <div class="prod-tags">
+              <span class="tag tag-brand">Químicos</span>
+              <span class="tag tag-brand">Vapor</span>
+              <span class="tag tag-brand">Óleo</span>
+              <span class="tag tag-brand">Água</span>
+            </div>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
@@ -269,61 +275,65 @@
 
         <div class="col-md-6 col-lg-3">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-broadcast"></i></div>
-            <h3 class="h6 fw-bold mb-2">Posicionador Pneumático</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h6 fw-bold mb-0">Posicionador Pneumático</h3>
+              <span class="produto-glyph"><i class="bi bi-broadcast"></i></span>
+            </div>
             <p class="text-body-secondary small">Posicionador 4–20 mA para atuadores de ação simples e dupla, com carcaça robusta para ambientes hostis.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Sinal: 4 a 20 mA</li>
-              <li><i class="bi bi-check-lg"></i> Ação simples e dupla</li>
-              <li><i class="bi bi-check-lg"></i> Carcaça alumínio fundido</li>
-              <li><i class="bi bi-check-lg"></i> Indicador de posição de alta visibilidade</li>
-            </ul>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <table class="spec-table">
+              <tr><td>Sinal</td><td class="spec-value">4–20 mA</td></tr>
+              <tr><td>Ação</td><td class="spec-value">Simples / Dupla</td></tr>
+              <tr><td>Carcaça</td><td class="spec-value">Alumínio fundido</td></tr>
+            </table>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-wind"></i></div>
-            <h3 class="h6 fw-bold mb-2">Atuador Pneumático</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h6 fw-bold mb-0">Atuador Pneumático</h3>
+              <span class="produto-glyph"><i class="bi bi-wind"></i></span>
+            </div>
             <p class="text-body-secondary small">Atuador de dupla ou simples ação para automação de válvulas, conforme padrão ISO 5211 / NAMUR.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Torque: até 12.992 Nm</li>
-              <li><i class="bi bi-check-lg"></i> Pressão: 3,0 a 8,0 bar</li>
-              <li><i class="bi bi-check-lg"></i> -20°C a +80°C</li>
-              <li><i class="bi bi-check-lg"></i> Corpo: alumínio anodizado / epóxi</li>
-            </ul>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <table class="spec-table">
+              <tr><td>Torque</td><td class="spec-value">até 12.992 Nm</td></tr>
+              <tr><td>Pressão</td><td class="spec-value">3,0–8,0 bar</td></tr>
+              <tr><td>Temperatura</td><td class="spec-value">-20° – 80°C</td></tr>
+            </table>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-lightning-fill"></i></div>
-            <h3 class="h6 fw-bold mb-2">Válvula Solenóide NAMUR</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h6 fw-bold mb-0">Válvula Solenóide NAMUR</h3>
+              <span class="produto-glyph"><i class="bi bi-lightning-fill"></i></span>
+            </div>
             <p class="text-body-secondary small">Válvula solenóide direcional 5/2 vias para controle de atuadores pneumáticos de dupla ação.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> 24 VCC</li>
-              <li><i class="bi bi-check-lg"></i> Montagem NAMUR direta</li>
-              <li><i class="bi bi-check-lg"></i> IP65 — conector DIN 43650</li>
-              <li><i class="bi bi-check-lg"></i> Corpo em alumínio</li>
-            </ul>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <table class="spec-table">
+              <tr><td>Alimentação</td><td class="spec-value">24 VCC</td></tr>
+              <tr><td>Montagem</td><td class="spec-value">NAMUR direta</td></tr>
+              <tr><td>Proteção</td><td class="spec-value">IP65 / DIN 43650</td></tr>
+            </table>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
           <div class="card-info produto-card bg-white p-4 h-100">
-            <div class="icon-box-outline mb-3"><i class="bi bi-gear-fill"></i></div>
-            <h3 class="h6 fw-bold mb-2">Caixa Redutora</h3>
+            <div class="produto-head mb-2">
+              <h3 class="h6 fw-bold mb-0">Caixa Redutora</h3>
+              <span class="produto-glyph"><i class="bi bi-gear-fill"></i></span>
+            </div>
             <p class="text-body-secondary small">Redutor de engrenagens para acionamento manual de válvulas de grande porte com flange ISO 5211.</p>
-            <ul class="list-check">
-              <li><i class="bi bi-check-lg"></i> Torque: até 8.000 Nm</li>
-              <li><i class="bi bi-check-lg"></i> Flange: ISO 5211</li>
-              <li><i class="bi bi-check-lg"></i> IP65 — corpo ferro fundido</li>
-              <li><i class="bi bi-check-lg"></i> Volante em aço ou alumínio</li>
-            </ul>
-            <a href="#contato" class="btn-link-brand">Solicitar orçamento <i class="bi bi-arrow-right"></i></a>
+            <table class="spec-table">
+              <tr><td>Torque</td><td class="spec-value">até 8.000 Nm</td></tr>
+              <tr><td>Flange</td><td class="spec-value">ISO 5211</td></tr>
+              <tr><td>Proteção</td><td class="spec-value">IP65</td></tr>
+            </table>
+            <a href="#contato" class="btn-link-brand">Solicitar orçamento →</a>
           </div>
         </div>
 
@@ -457,7 +467,7 @@
   <section class="py-5 bg-ink text-center" id="parceria" style="padding-top:80px; padding-bottom:80px;">
     <div class="container">
       <div class="mx-auto" style="max-width:720px;">
-        <span class="badge bg-brand-dark text-white rounded-pill px-3 py-2 mb-3 eyebrow-light">Parceria Oficial</span>
+        <p class="eyebrow-light mb-3 justify-content-center">Parceria Oficial</p>
         <h2 class="fw-bolder text-white mb-3">Revenda Oficial W.Burger</h2>
         <p class="text-white-50">
           Somos revendedores oficiais das válvulas de segurança e alívio <strong class="text-white-50">W.Burger</strong>,
