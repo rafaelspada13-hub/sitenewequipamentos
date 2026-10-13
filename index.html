@@ -3,655 +3,332 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="NEW Válvulas e Equipamentos Industriais — Fornecimento, manutenção e automação de válvulas industriais em Sertãozinho/SP. Estoque imediato. Atendemos todo o território nacional." />
-  <title>NEW Válvulas e Equip. Industriais</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="img/logo-new-verde.png" />
-  <link rel="apple-touch-icon" href="img/logo-new-verde.png" />
-
-  <!-- Open Graph / WhatsApp / LinkedIn -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://rafaelspada13-hub.github.io/sitenewequipamentos/" />
+  <title>NEW Válvulas | Manutenção e fabricação de válvulas industriais</title>
+  <meta name="description" content="Manutenção completa de válvulas industriais, fabricação de válvulas borboleta bicêntrica e monobloco de 2&quot; a 48&quot;, revenda e automação. Estrutura própria em Sertãozinho/SP." />
+  <meta name="theme-color" content="#00472B" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,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" />
   <meta property="og:title" content="NEW Válvulas e Equipamentos Industriais" />
-  <meta property="og:description" content="Fornecimento, automação e manutenção de válvulas industriais. Estoque imediato. Sertãozinho/SP — atendemos todo o Brasil." />
-  <meta property="og:image" content="https://rafaelspada13-hub.github.io/sitenewequipamentos/img/hero.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="NEW Válvulas e Equipamentos Industriais" />
-  <meta name="twitter:description" content="Fornecimento, automação e manutenção de válvulas industriais. Estoque imediato. Sertãozinho/SP." />
-  <meta name="twitter:image" content="https://rafaelspada13-hub.github.io/sitenewequipamentos/img/hero.jpg" />
-
-  <link rel="stylesheet" href="css/style.css" />
+  <meta property="og:description" content="Manutenção, fabricação e revenda de válvulas industriais. Sertãozinho/SP." />
+  <meta property="og:image" content="img/galeria-borboleta.jpg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "NEW Service Equipamentos Industriais Ltda",
+    "alternateName": "NEW Válvulas",
+    "description": "Manutenção, fabricação e revenda de válvulas industriais.",
+    "telephone": "+55 16 99722-3976",
+    "email": "comercial@newequipamentos.ind.br",
+    "taxID": "50.582.366/0001-94",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Argentina Grillo Badia, 960 - Distrito Industrial",
+      "addressLocality": "Sertãozinho",
+      "addressRegion": "SP",
+      "postalCode": "14176-113",
+      "addressCountry": "BR"
+    },
+    "areaServed": "BR"
+  }
+  </script>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="#inicio" class="logo">
-        <img src="img/logo-new-verde.png" alt="NEW Válvulas e Equipamentos Industriais" class="logo-img" width="160" height="44" style="height:44px;width:auto;max-width:160px;" />
-      </a>
-      <nav class="nav-links" id="navLinks">
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#ferramentas">Ferramentas</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo" id="topo">
+  <div class="wrap topo-in">
+    <a href="#inicio" class="marca" aria-label="NEW Válvulas, voltar ao início">
+      <img src="data:image/png;base64,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" alt="NEW Válvulas e Equipamentos Industriais" width="104" height="73" />
+    </a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="#manutencao">Manutenção</a>
+      <a href="#fabricacao">Fabricação</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#revenda">Revenda</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-zap topo-zap" href="https://wa.me/5516997223976?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NEW%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.2-.2-.4-.3Z"/></svg>
+      <span>(16) 99722-3976</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <div class="hero-bg"></div>
-    <div class="hero-img" style="background-image:url('img/hero.jpg')"></div>
-    <div class="container hero-content">
-      <p class="hero-tag">Válvulas e Equipamentos Industriais</p>
-      <h1>Válvulas industriais<br /><span class="highlight">com estoque imediato</span></h1>
-      <p class="hero-sub">
-        Fornecimento, automação e manutenção de válvulas industriais.
-        Sertãozinho/SP — entrega rápida para todo o território nacional.
-      </p>
-      <div class="hero-actions">
-        <a href="#produtos" class="btn btn-primary">Ver Produtos</a>
-        <a href="#contato" class="btn btn-outline">Solicitar Orçamento</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <strong>Estoque</strong>
-          <span>Pronta entrega nacional</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <strong>5+</strong>
-          <span>Segmentos industriais</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <strong>Sertãozinho</strong>
-          <span>Polo industrial — SP</span>
+    <div class="wrap hero-in">
+      <div class="hero-txt">
+        <h1>Sua válvula volta testada e pronta para operar</h1>
+        <p class="hero-sub">Manutenção completa, fabricação de válvulas borboleta, revenda e automação. Estrutura própria em Sertãozinho/SP, atendendo usinas, saneamento e indústria em todo o Brasil.</p>
+        <div class="hero-acoes">
+          <a class="btn btn-verde" href="#contato">Pedir orçamento</a>
+          <a class="btn btn-linha" href="#manutencao">Como funciona a manutenção</a>
         </div>
       </div>
-    </div>
-    <div class="hero-scroll"><span></span></div>
-  </section>
 
-  <!-- SOBRE -->
-  <section class="sobre" id="sobre">
-    <div class="container sobre-grid">
-      <div class="sobre-visual">
-        <div class="sobre-foto">
-          <img src="img/sobre-galpao.jpg" alt="Galpão New Equipamentos" loading="lazy" />
-        </div>
-        <div class="sobre-card card-accent">
-          <span class="card-icon">⚙️</span>
-          <div>
-            <strong>Alta Performance</strong>
-            <p>Válvulas projetadas para as condições mais críticas de pressão e temperatura.</p>
-          </div>
-        </div>
-        <div class="sobre-card">
-          <span class="card-icon">🔧</span>
-          <div>
-            <strong>Manutenção em Campo</strong>
-            <p>Processo completo: recebimento, diagnóstico e reparo no barracão ou in loco.</p>
-          </div>
-        </div>
-        <div class="sobre-card">
-          <span class="card-icon">📦</span>
-          <div>
-            <strong>Estoque Imediato</strong>
-            <p>Amplo estoque de válvulas prontas para entrega rápida em todo o território nacional.</p>
-          </div>
-        </div>
-      </div>
-      <div class="sobre-texto">
-        <p class="section-label">Sobre nós</p>
-        <h2>Especialistas em válvulas e automação industrial</h2>
-        <p>
-          A <strong>NEW Válvulas e Equipamentos Industriais</strong>, sediada em Sertãozinho/SP,
-          atua no fornecimento, automação e manutenção de válvulas industriais,
-          atendendo todo o território nacional.
-        </p>
-        <p>
-          Com equipe técnica especializada, entregamos soluções sob medida para
-          os segmentos mais exigentes da indústria brasileira.
-        </p>
-        <ul class="sobre-lista">
-          <li>Estoque imediato para pronta entrega em todo o Brasil</li>
-          <li>Manutenção com rastreabilidade e laudo fotográfico</li>
-          <li>Suporte técnico especializado no barracão e em campo</li>
-          <li>Desenvolvimento de válvulas conforme projeto do cliente</li>
-          <li>Sertãozinho/SP — polo industrial de válvulas no Brasil</li>
-        </ul>
-        <a href="#contato" class="btn btn-primary">Entre em contato</a>
+      <div class="hero-foto">
+        <img src="img/galeria-borboleta.jpg" alt="Válvulas borboleta de grande porte recuperadas, com protetores de face nos flanges, no barracão da NEW" width="1400" height="1050" fetchpriority="high" />
+
+        <dl class="plaqueta" aria-label="Dados da empresa">
+          <i class="rebite r1"></i><i class="rebite r2"></i><i class="rebite r3"></i><i class="rebite r4"></i>
+          <div class="pl-topo">NEW Service Equip. Industriais</div>
+          <div class="pl-linha"><dt>Fabricação</dt><dd>Borboleta bicêntrica e monobloco</dd></div>
+          <div class="pl-linha"><dt>Diâmetros</dt><dd>2" a 48"</dd></div>
+          <div class="pl-linha"><dt>Materiais</dt><dd>WCB, ferro nodular, CF8, CF8M, CF3</dd></div>
+          <div class="pl-linha"><dt>Registro</dt><dd>CREA-SP 2619052</dd></div>
+          <div class="pl-linha"><dt>Origem</dt><dd>Sertãozinho/SP</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
   <!-- SEGMENTOS -->
-  <section class="segmentos">
-    <div class="container">
-      <p class="seg-label">Segmentos atendidos</p>
-      <div class="seg-list">
-        <div class="seg-item"><span>🏭</span>Usinas de Açúcar e Álcool</div>
-        <div class="seg-item"><span>💧</span>Estações de Tratamento de Água</div>
-        <div class="seg-item"><span>⛏️</span>Mineradoras</div>
-        <div class="seg-item"><span>📄</span>Papel e Celulose</div>
-        <div class="seg-item"><span>🛢️</span>Petrolíferas e Petroquímica</div>
+  <section class="segmentos" aria-label="Segmentos atendidos">
+    <div class="wrap">
+      <p><strong>Atendemos</strong> usinas de açúcar e etanol, saneamento (ETAs e ETEs), petroquímica, mineração, papel e celulose e indústria em geral.</p>
+    </div>
+  </section>
+
+  <!-- MANUTENCAO -->
+  <section class="sec" id="manutencao">
+    <div class="wrap">
+      <div class="sec-cab">
+        <h2>Manutenção de válvulas</h2>
+        <p>Desmontagem, recuperação, usinagem, montagem e teste feitos na nossa estrutura, com laudo e rastreabilidade por válvula. Atendemos no barracão ou em campo.</p>
+      </div>
+
+      <ul class="tipos" aria-label="Tipos de válvula atendidos">
+        <li>Válvulas manuais</li>
+        <li>Válvulas controladoras</li>
+        <li>Condicionadoras de vapor</li>
+        <li>Redutoras de pressão</li>
+        <li>Segurança e alívio</li>
+        <li>Atuadores pneumáticos</li>
+      </ul>
+
+      <div class="antes-depois">
+        <figure>
+          <img src="img/WhatsApp%20Image%202026-04-08%20at%2010.07.45.jpeg" alt="Válvulas oxidadas recebidas para manutenção" loading="lazy" width="1050" height="1400" />
+          <figcaption><b>Como chegam</b> Oxidadas, com vazamento ou travadas.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/WhatsApp%20Image%202026-04-20%20at%2015.18.32.jpeg" alt="Válvulas gaveta recuperadas, pintadas e com protetores de face" loading="lazy" width="1050" height="1400" />
+          <figcaption><b>Como saem</b> Recuperadas, testadas, pintadas e com face protegida.</figcaption>
+        </figure>
+      </div>
+
+      <ol class="etapas">
+        <li>
+          <h3>Recebimento</h3>
+          <p>Conferência, identificação por TAG e registro fotográfico na chegada.</p>
+        </li>
+        <li>
+          <h3>Desmontagem e limpeza</h3>
+          <p>Jateamento abrasivo em cabine própria para remover oxidação e incrustações.</p>
+        </li>
+        <li>
+          <h3>Inspeção e laudo</h3>
+          <p>Avaliação de cada componente, com relatório técnico e fotos.</p>
+        </li>
+        <li>
+          <h3>Recuperação e usinagem</h3>
+          <p>Peças recuperadas ou fabricadas na nossa usinagem, com controle dimensional.</p>
+        </li>
+        <li>
+          <h3>Montagem e teste</h3>
+          <p>Ensaios hidrostático, pneumático, de estanqueidade e funcional em bancada própria.</p>
+        </li>
+        <li>
+          <h3>Pintura e liberação</h3>
+          <p>Inspeção final com dupla checagem antes da válvula voltar à operação.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FABRICACAO -->
+  <section class="sec sec-concreto" id="fabricacao">
+    <div class="wrap fab">
+      <div class="fab-txt">
+        <h2>Fabricação própria</h2>
+        <p>Fabricamos válvulas borboleta de 2" a 48" no material que o seu processo pede. Corpo, disco e haste saem na liga especificada, e as buchas são feitas em bronze ou no mesmo material do corpo, conforme a aplicação.</p>
+
+        <div class="produtos">
+          <div>
+            <h3>Válvula borboleta bicêntrica</h3>
+            <p>Duplo excêntrico para serviços com pressão e temperatura mais altas e vedação mais exigente.</p>
+          </div>
+          <div>
+            <h3>Válvula borboleta monobloco</h3>
+            <p>Corpo inteiriço para água, saneamento e processos industriais em geral.</p>
+          </div>
+        </div>
+
+        <table class="tabela">
+          <caption>Materiais disponíveis</caption>
+          <thead>
+            <tr><th scope="col">Componente</th><th scope="col">Material</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Corpo, disco e haste</th><td>WCB, ferro nodular, CF8 (inox 304), CF8M (inox 316), CF3</td></tr>
+            <tr><th scope="row">Buchas</th><td>Bronze ou o mesmo material do corpo</td></tr>
+            <tr><th scope="row">Diâmetros</th><td>2" a 48"</td></tr>
+          </tbody>
+        </table>
+
+        <a class="btn btn-verde" href="#contato" data-assunto="Fabricação de válvula">Cotar uma válvula</a>
+      </div>
+      <figure class="fab-foto">
+        <img src="img/WhatsApp%20Image%202026-04-08%20at%2010.07.44.jpeg" alt="Válvulas borboleta com caixa redutora vermelha prontas para entrega" loading="lazy" width="1050" height="1400" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ESTRUTURA -->
+  <section class="sec sec-grafite" id="estrutura">
+    <div class="wrap">
+      <div class="sec-cab">
+        <h2>Estrutura própria</h2>
+        <p>As principais etapas acontecem dentro de casa. Isso nos dá controle sobre qualidade, prazo e rastreabilidade, sem depender de terceiros.</p>
+      </div>
+
+      <dl class="recursos">
+        <div><dt>Usinagem</dt><dd>Torno CNC, torno convencional, mandrilhadora, fresadora e furadeira radial.</dd></div>
+        <div><dt>Bancada de testes</dt><dd>Ensaios hidrostáticos, pneumáticos, de estanqueidade e funcionais.</dd></div>
+        <div><dt>Jateamento</dt><dd>Cabine própria para preparar superfícies antes da pintura.</dd></div>
+        <div><dt>Estoque de peças</dt><dd>Vedações, sedes e fixadores à mão para reduzir o tempo de parada.</dd></div>
+        <div><dt>Equipe</dt><dd>Técnicos com mais de 20 anos em manutenção industrial.</dd></div>
+        <div><dt>Responsável técnico</dt><dd>Engenheiro mecânico, empresa registrada no CREA-SP.</dd></div>
+      </dl>
+
+      <div class="mosaico">
+        <img class="m-a" src="img/WhatsApp%20Image%202026-04-08%20at%2010.07.45%20%282%29.jpeg" alt="Vista do barracão com válvulas em manutenção" loading="lazy" width="1400" height="1050" />
+        <img class="m-b" src="img/WhatsApp%20Image%202026-04-08%20at%2010.07.42%20%282%29.jpeg" alt="Válvulas de segurança ao lado do centro de usinagem" loading="lazy" width="1050" height="1400" />
+        <img class="m-c" src="img/WhatsApp%20Image%202026-04-08%20at%2019.59.43.jpeg" alt="Válvulas controladoras com atuador azul em paletes" loading="lazy" width="1050" height="1400" />
+        <img class="m-d" src="img/WhatsApp%20Image%202026-06-03%20at%2009.35.41.jpeg" alt="Fileira de válvulas borboleta com volantes" loading="lazy" width="1400" height="1050" />
+        <img class="m-e" src="img/WhatsApp%20Image%202026-04-08%20at%2010.07.38.jpeg" alt="Válvulas carregadas em caminhão para entrega" loading="lazy" width="1400" height="1050" />
       </div>
     </div>
   </section>
 
-  <!-- PRODUTOS -->
-  <section class="produtos" id="produtos">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Catálogo</p>
-        <h2>Nossos Produtos</h2>
-        <p class="section-sub">Válvulas industriais de alta performance e acessórios para automação, atendendo às mais exigentes especificações técnicas.</p>
+  <!-- REVENDA -->
+  <section class="sec" id="revenda">
+    <div class="wrap revenda">
+      <div class="rev-wb">
+        <h2>Revenda e automação</h2>
+        <p>Além do que fabricamos e recuperamos, fornecemos os acessórios para automatizar suas válvulas, já montados e ajustados na nossa bancada.</p>
+        <a class="btn btn-verde" href="#contato" data-assunto="Automação e acessórios">Consultar disponibilidade</a>
       </div>
-
-      <h3 class="sub-titulo">Válvulas</h3>
-      <div class="produtos-grid">
-
-        <div class="produto-card destaque">
-          <span class="badge">Alta Performance</span>
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><line x1="16" y1="3" x2="16" y2="29"/><path d="M7 11c3 3 6 5 9 5s6-2 9-5"/><path d="M7 21c3-3 6-5 9-5s6 2 9 5"/><circle cx="16" cy="16" r="2.5" fill="currentColor" stroke="none"/></svg></div>
-          <h3>Válvula Bi-excêntrica</h3>
-          <p>Válvula borboleta de alta performance com duplo offset para serviços críticos de alta pressão e temperatura.</p>
-          <ul>
-            <li>Bitolas: 2" a 48"</li>
-            <li>ASME Classe 150</li>
-            <li>-120°C a 280°C</li>
-            <li>Classe VI (ANSI FCI 70-2 / IEC 60534-4)</li>
-            <li>Corpo: Aço-Carbono | Inox | Níquel</li>
-            <li>Sede: RPTFE</li>
-          </ul>
-          <span class="prod-tags"><span>Alta Pressão</span><span>Alta Temp.</span><span>Serviço Crítico</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><line x1="16" y1="3" x2="16" y2="29"/><path d="M7 11c3 3 6 5 9 5s6-2 9-5"/><path d="M7 21c3-3 6-5 9-5s6 2 9 5"/><circle cx="16" cy="16" r="2.5" fill="currentColor" stroke="none"/></svg></div>
-          <h3>Válvula Borboleta</h3>
-          <p>Válvula borboleta wafer/lug para controle e isolamento em sistemas industriais diversos.</p>
-          <ul>
-            <li>Bitolas: 2" a 40"</li>
-            <li>ASME Classe 150</li>
-            <li>20°C a 260°C</li>
-            <li>Corpo: Aço-Carbono | Inox | Níquel</li>
-            <li>Sede: EPDM / Teflon / Buna / Viton</li>
-          </ul>
-          <span class="prod-tags"><span>Alta Temp.</span><span>Baixa Temp.</span><span>Serviço Crítico</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="26" height="14" rx="2"/><line x1="16" y1="9" x2="16" y2="23"/><polyline points="16,13 22,16 16,20"/><line x1="3" y1="16" x2="7" y2="16"/><line x1="25" y1="16" x2="29" y2="16"/></svg></div>
-          <h3>Válvula de Retenção</h3>
-          <p>Válvula de retenção wafer para prevenção de refluxo em sistemas de bombeamento e processos industriais.</p>
-          <ul>
-            <li>Bitolas: 2" a 40"</li>
-            <li>ASME Classe 150</li>
-            <li>10°C a 400°C</li>
-            <li>Corpo: Ferro Fundido / Aço-C. / Inox</li>
-            <li>Sede: EPDM / Buna / Viton / Metal</li>
-          </ul>
-          <span class="prod-tags"><span>Químicos</span><span>Vapor</span><span>Óleo</span><span>Água</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="16" y1="4" x2="16" y2="1"/><rect x="12" y="1" width="8" height="3" rx="1"/><line x1="10" y1="13" x2="22" y2="13"/><line x1="10" y1="17" x2="22" y2="17"/><line x1="10" y1="21" x2="18" y2="21"/></svg></div>
-          <h3>Válvula Gaveta</h3>
-          <p>Válvula gaveta de isolamento total para aplicações em alta pressão, vapor, óleo e sistemas de processo industrial.</p>
-          <ul>
-            <li>Bitolas: 1/2" a 24"</li>
-            <li>Classes ASME 150 a 900</li>
-            <li>Corpo: Aço-Carbono / Inox / Liga</li>
-            <li>Extremidades: Flangeada / Soldada / Roscada</li>
-            <li>Aplicações: vapor, óleo, gás, água</li>
-          </ul>
-          <span class="prod-tags"><span>Alta Pressão</span><span>Vapor</span><span>Isolamento</span></span>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-      </div>
-
-      <h3 class="sub-titulo" style="margin-top:56px;">Acessórios para Automação</h3>
-      <div class="produtos-grid acess-grid">
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="24" height="15" rx="2"/><line x1="10" y1="10" x2="10" y2="6"/><line x1="22" y1="10" x2="22" y2="6"/><line x1="10" y1="6" x2="4" y2="6"/><line x1="22" y1="6" x2="28" y2="6"/><circle cx="14" cy="18" r="2.5" fill="currentColor" stroke="none"/><line x1="18" y1="18" x2="23" y2="18"/></svg></div>
-          <h3>Posicionador Pneumático</h3>
-          <p>Posicionador 4–20 mA para atuadores de ação simples e dupla, com carcaça robusta para ambientes hostis.</p>
-          <ul>
-            <li>Sinal: 4 a 20 mA</li>
-            <li>Ação simples e dupla</li>
-            <li>Carcaça alumínio fundido</li>
-            <li>Indicador de posição de alta visibilidade</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="22" height="16" rx="2"/><line x1="16" y1="20" x2="16" y2="28"/><rect x="10" y="25" width="12" height="4" rx="2"/><line x1="9" y1="12" x2="23" y2="12"/><line x1="5" y1="8" x2="27" y2="8"/></svg></div>
-          <h3>Atuador Pneumático</h3>
-          <p>Atuador de dupla ou simples ação para automação de válvulas, conforme padrão ISO 5211 / NAMUR.</p>
-          <ul>
-            <li>Torque: até 12.992 Nm</li>
-            <li>Pressão: 3,0 a 8,0 bar</li>
-            <li>-20°C a +80°C</li>
-            <li>Corpo: alumínio anodizado / epóxi</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="5" width="16" height="22" rx="2"/><line x1="3" y1="16" x2="8" y2="16"/><line x1="24" y1="16" x2="29" y2="16"/><line x1="12" y1="11" x2="20" y2="11"/><line x1="12" y1="16" x2="20" y2="16"/><line x1="12" y1="21" x2="20" y2="21"/></svg></div>
-          <h3>Válvula Solenóide NAMUR</h3>
-          <p>Válvula solenóide direcional 5/2 vias para controle de atuadores pneumáticos de dupla ação.</p>
-          <ul>
-            <li>24 VCC</li>
-            <li>Montagem NAMUR direta</li>
-            <li>IP65 — conector DIN 43650</li>
-            <li>Corpo em alumínio</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-        <div class="produto-card">
-          <div class="produto-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="5"/><path d="M16 4v5M16 23v5M4 16h5M23 16h5M7.5 7.5l3.5 3.5M21 21l3.5 3.5M7.5 24.5l3.5-3.5M21 11l3.5-3.5"/></svg></div>
-          <h3>Caixa Redutora</h3>
-          <p>Redutor de engrenagens para acionamento manual de válvulas de grande porte com flange ISO 5211.</p>
-          <ul>
-            <li>Torque: até 8.000 Nm</li>
-            <li>Flange: ISO 5211</li>
-            <li>IP65 — corpo ferro fundido</li>
-            <li>Volante em aço ou alumínio</li>
-          </ul>
-          <a href="#contato" class="btn-link">Solicitar orçamento →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVIÇOS -->
-  <section class="servicos" id="servicos">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">O que fazemos</p>
-        <h2>Serviços</h2>
-        <p class="section-sub">Soluções completas do recebimento até a entrega em campo, com rigoroso controle técnico e rastreabilidade.</p>
-      </div>
-      <div class="servicos-grid">
-
-        <div class="servico-card">
-          <div class="servico-num">01</div>
-          <h3>Processo de Manutenção</h3>
-          <p>Fluxo técnico rigoroso com rastreabilidade em cada etapa:</p>
-          <div class="steps">
-            <div class="step"><span>Recebimento</span><p>Conferência e listagem completa dos equipamentos na chegada.</p></div>
-            <div class="step"><span>Diagnóstico</span><p>Avaliação detalhada com relatório técnico e laudo fotográfico.</p></div>
-            <div class="step"><span>Reparo</span><p>Industrialização conforme especificações técnicas originais.</p></div>
-          </div>
-          <p class="servico-obs">Atendimento no barracão ou diretamente em campo.</p>
-        </div>
-
-        <div class="servico-card">
-          <div class="servico-num">02</div>
-          <h3>Montagens Industriais</h3>
-          <p>
-            Executamos montagens industriais completas com alto padrão de qualidade.
-            Atuamos desde a preparação até a instalação final de equipamentos,
-            tubulações e sistemas industriais.
-          </p>
-          <ul class="servico-lista">
-            <li>Instalação de válvulas e atuadores</li>
-            <li>Montagem de tubulações industriais</li>
-            <li>Comissionamento de sistemas</li>
-            <li>Equipe técnica qualificada em campo</li>
-          </ul>
-        </div>
-
-        <div class="servico-card">
-          <div class="servico-num">03</div>
-          <h3>Fabricação de Componentes</h3>
-          <p>
-            Fabricamos componentes industriais sob medida com processos modernos
-            de industrialização e rigoroso controle de qualidade.
-          </p>
-          <ul class="servico-lista">
-            <li>Suportes e flanges</li>
-            <li>Peças usinadas sob encomenda</li>
-            <li>Subconjuntos e estruturas personalizadas</li>
-            <li>Foco em eficiência e resistência</li>
-          </ul>
-        </div>
-
-        <div class="servico-card servico-destaque">
-          <div class="servico-num">04</div>
-          <h3>Desenvolvimento de Válvulas sob Projeto</h3>
-          <p>
-            Desenvolvemos a válvula ideal para a sua aplicação. Quando o mercado
-            não oferece o que você precisa, a NEW projeta e fabrica a solução sob medida.
-          </p>
-          <ul class="servico-lista">
-            <li>Análise técnica da aplicação e condições de processo</li>
-            <li>Projeto de válvula conforme especificação do cliente</li>
-            <li>Fabricação com materiais selecionados para cada serviço</li>
-            <li>Homologação e testes antes da entrega</li>
-            <li>Atendemos normas ASME, API, DIN e especificações proprietárias</li>
-          </ul>
-          <a href="#contato" class="btn btn-primary" style="margin-top:20px;font-size:.88rem;padding:11px 22px;">Falar com um engenheiro →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SELETOR TÉCNICO -->
-  <section class="ferramentas" id="ferramentas">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Ferramenta técnica</p>
-        <h2>Encontre a Válvula Ideal</h2>
-        <p class="section-sub">Informe as condições de processo e receba uma recomendação técnica instantânea com material de sede.</p>
-      </div>
-      <div class="seletor-wrapper">
-
-        <div class="seletor-form-area">
-          <div class="sel-group" data-group="fluido">
-            <p class="sel-group-label"><span>1</span>Tipo de fluido</p>
-            <div class="sel-btns">
-              <button class="sel-btn" data-value="agua">💧 Água / Neutro</button>
-              <button class="sel-btn" data-value="vapor">♨️ Vapor</button>
-              <button class="sel-btn" data-value="oleo">🛢️ Óleo / Hidro.</button>
-              <button class="sel-btn" data-value="gas">💨 Gás / Ar</button>
-              <button class="sel-btn" data-value="quimico">⚗️ Ácidos / Químicos</button>
-              <button class="sel-btn" data-value="polpa">🌿 Polpa / Pasta</button>
-            </div>
-          </div>
-          <div class="sel-group" data-group="pressao">
-            <p class="sel-group-label"><span>2</span>Pressão de operação</p>
-            <div class="sel-btns">
-              <button class="sel-btn" data-value="baixa">Baixa<span>até 10 bar</span></button>
-              <button class="sel-btn" data-value="media">Média<span>10 – 40 bar</span></button>
-              <button class="sel-btn" data-value="alta">Alta<span>acima de 40 bar</span></button>
-            </div>
-          </div>
-          <div class="sel-group" data-group="temp">
-            <p class="sel-group-label"><span>3</span>Temperatura</p>
-            <div class="sel-btns">
-              <button class="sel-btn" data-value="amb">Ambiente<span>até 80°C</span></button>
-              <button class="sel-btn" data-value="media">Moderada<span>80 – 200°C</span></button>
-              <button class="sel-btn" data-value="alta">Alta<span>acima de 200°C</span></button>
-            </div>
-          </div>
-          <div class="sel-group" data-group="funcao">
-            <p class="sel-group-label"><span>4</span>Função principal</p>
-            <div class="sel-btns">
-              <button class="sel-btn" data-value="isolamento">Isolamento</button>
-              <button class="sel-btn" data-value="controle">Controle de fluxo</button>
-              <button class="sel-btn" data-value="retencao">Anti-retorno</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="seletor-result" id="selResult">
-          <div class="result-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="20"/><line x1="24" y1="4" x2="24" y2="44"/><path d="M12 17c4 4 8 7 12 7s8-3 12-7"/><path d="M12 31c4-4 8-7 12-7s8 3 12 7"/><circle cx="24" cy="24" r="3.5" fill="currentColor" stroke="none"/></svg>
-            <p>Selecione as condições<br/>de processo ao lado</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- TABELA DN -->
-  <section class="conversao" id="conversao">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Referência técnica</p>
-        <h2>Tabela DN / Polegadas / mm</h2>
-        <p class="section-sub">Consulta rápida de bitolas para especificação de válvulas e tubulações. Norma ASME B36.10.</p>
-      </div>
-      <div class="conv-wrapper">
-        <div class="conv-search">
-          <svg class="conv-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-          <input type="text" id="convSearch" placeholder="Buscar por DN, polegadas ou mm..." autocomplete="off" />
-        </div>
-        <div class="conv-table-wrap">
-          <table class="conv-table">
-            <thead>
-              <tr><th>DN</th><th>Polegadas</th><th>mm (OD)</th><th>Aplicação típica</th></tr>
-            </thead>
-            <tbody>
-              <tr class="conv-row"><td>DN 15</td><td>1/2"</td><td>21,3 mm</td><td>Instrumentação, utilidades</td></tr>
-              <tr class="conv-row"><td>DN 20</td><td>3/4"</td><td>26,9 mm</td><td>Instrumentação, utilidades</td></tr>
-              <tr class="conv-row"><td>DN 25</td><td>1"</td><td>33,7 mm</td><td>Processos auxiliares</td></tr>
-              <tr class="conv-row"><td>DN 32</td><td>1.1/4"</td><td>42,4 mm</td><td>Processos auxiliares</td></tr>
-              <tr class="conv-row"><td>DN 40</td><td>1.1/2"</td><td>48,3 mm</td><td>Processos auxiliares</td></tr>
-              <tr class="conv-row"><td>DN 50</td><td>2"</td><td>60,3 mm</td><td>Processo principal, bombas</td></tr>
-              <tr class="conv-row"><td>DN 65</td><td>2.1/2"</td><td>73,0 mm</td><td>Processo principal</td></tr>
-              <tr class="conv-row"><td>DN 80</td><td>3"</td><td>88,9 mm</td><td>Recalque, processo principal</td></tr>
-              <tr class="conv-row"><td>DN 100</td><td>4"</td><td>114,3 mm</td><td>Processo principal, headers</td></tr>
-              <tr class="conv-row"><td>DN 125</td><td>5"</td><td>139,7 mm</td><td>Processo principal, headers</td></tr>
-              <tr class="conv-row"><td>DN 150</td><td>6"</td><td>168,3 mm</td><td>Grandes processos, cooling</td></tr>
-              <tr class="conv-row"><td>DN 200</td><td>8"</td><td>219,1 mm</td><td>Grandes processos, ETA/ETE</td></tr>
-              <tr class="conv-row"><td>DN 250</td><td>10"</td><td>273,0 mm</td><td>Grandes processos, ETA/ETE</td></tr>
-              <tr class="conv-row"><td>DN 300</td><td>12"</td><td>323,9 mm</td><td>Adutoras, transferência</td></tr>
-              <tr class="conv-row"><td>DN 350</td><td>14"</td><td>355,6 mm</td><td>Grandes plantas, adutoras</td></tr>
-              <tr class="conv-row"><td>DN 400</td><td>16"</td><td>406,4 mm</td><td>Grandes plantas, adutoras</td></tr>
-              <tr class="conv-row"><td>DN 450</td><td>18"</td><td>457,2 mm</td><td>Grandes adutoras</td></tr>
-              <tr class="conv-row"><td>DN 500</td><td>20"</td><td>508,0 mm</td><td>Grandes adutoras</td></tr>
-              <tr class="conv-row"><td>DN 600</td><td>24"</td><td>609,6 mm</td><td>Adutoras, usinas</td></tr>
-            </tbody>
-          </table>
-          <div class="conv-no-results" id="convNoResults" style="display:none">Nenhum resultado encontrado.</div>
-        </div>
-        <p class="conv-nota">* Diâmetros externos (OD) conforme ASME B36.10. Para aplicações especiais, consulte nossa equipe técnica.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALERIA -->
-  <section class="galeria" id="galeria">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Estrutura</p>
-        <h2>Nosso Estoque e Barracão</h2>
-        <p class="section-sub">Amplo estoque de válvulas industriais prontas para entrega, com capacidade para grandes pedidos.</p>
-      </div>
-      <div class="galeria-grid">
-        <div class="galeria-item galeria-grande">
-          <img src="img/galeria-borboleta.jpg" alt="Válvulas borboleta de grande porte" loading="lazy" />
-          <div class="galeria-label">Válvulas borboleta — grandes bitolas com atuador</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/galeria-mix.jpg" alt="Galpão com estoque de válvulas" loading="lazy" />
-          <div class="galeria-label">Amplo estoque pronto para entrega</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/hero.jpg" alt="Linha de válvulas gaveta vermelhas" loading="lazy" />
-          <div class="galeria-label">Produção em série — válvulas gaveta</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/galeria-borboleta2.jpg" alt="Fila de válvulas borboleta" loading="lazy" />
-          <div class="galeria-label">Fila de borboletas grandes — pronto para entrega</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/galeria-vermelho.jpg" alt="Válvulas borboleta vermelhas" loading="lazy" />
-          <div class="galeria-label">Válvulas borboleta bi-excêntricas</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/estoque-vitrine.jpg" alt="Vitrine de estoque imediato de válvulas e sedes" loading="lazy" />
-          <div class="galeria-label">Estoque imediato — válvulas e sedes</div>
-        </div>
-        <div class="galeria-item">
-          <img src="img/estoque-borboletas.jpg" alt="Válvulas borboleta em diversos tamanhos" loading="lazy" />
-          <div class="galeria-label">Linha completa borboleta — pronta entrega</div>
-        </div>
+      <div class="rev-acc">
+        <h3>O que fornecemos</h3>
+        <ul class="lista">
+          <li><b>Atuador pneumático</b> Dupla ou simples ação, padrão ISO 5211 / NAMUR</li>
+          <li><b>Posicionador</b> Sinal 4 a 20 mA, para ação simples e dupla</li>
+          <li><b>Válvula solenoide NAMUR</b> 5/2 vias, 24 VCC, IP65</li>
+          <li><b>Caixa redutora</b> Acionamento manual de válvulas de grande porte</li>
+          <li><b>Válvula de retenção</b> Wafer, de 2" a 40"</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <!-- CONTATO -->
-  <section class="contato" id="contato">
-    <div class="container contato-grid">
-      <div class="contato-info">
-        <p class="section-label">Fale conosco</p>
-        <h2>Solicite um orçamento</h2>
-        <p>
-          Nossa equipe técnica está pronta para ajudar a encontrar a solução
-          ideal para a sua aplicação. Entre em contato hoje mesmo.
-        </p>
-        <div class="contato-itens">
-          <div class="contato-item">
-            <span class="ci-icon">📞</span>
-            <div>
-              <strong>Telefone / WhatsApp</strong>
-              <a href="https://wa.me/5516997223976" target="_blank">(16) 99722-3976</a>
-            </div>
-          </div>
-          <div class="contato-item">
-            <span class="ci-icon">✉️</span>
-            <div>
-              <strong>E-mail</strong>
-              <a href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a>
-            </div>
-          </div>
-          <div class="contato-item">
-            <span class="ci-icon">📍</span>
-            <div>
-              <strong>Endereço</strong>
-              <span>R. Argentina Grilo Badia, 960<br />Cidade Industrial e Empresarial<br />Sertãozinho — SP, 14176-113</span>
-            </div>
-          </div>
-        </div>
-        <div class="contato-mapa">
-          <iframe
-            title="Localização NEW Válvulas e Equipamentos"
-            src="https://maps.google.com/maps?q=R.+Argentina+Grilo+Badia,+960,+Sertãozinho+SP+14176-113&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            width="100%" height="220" style="border:0;border-radius:10px;"
-            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      <form class="contato-form" id="contatoForm" action="https://formsubmit.co/comercial@newequipamentos.ind.br" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="Novo contato — NEW Válvulas e Equipamentos" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">Nome completo *</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
-          </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">E-mail *</label>
-            <input type="email" id="email" name="email" placeholder="seu@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="produto">Produto / Serviço de interesse</label>
-          <select id="produto" name="produto">
-            <option value="">Selecione</option>
-            <option>Válvula Bi-excêntrica Alta Performance</option>
-            <option>Válvula Borboleta</option>
-            <option>Válvula de Retenção</option>
-            <option>Válvula Gaveta</option>
-            <option>Desenvolvimento de Válvula sob Projeto</option>
-            <option>Posicionador Pneumático</option>
-            <option>Atuador Pneumático</option>
-            <option>Válvula Solenóide NAMUR</option>
-            <option>Caixa Redutora</option>
+  <section class="sec sec-verde" id="contato">
+    <div class="wrap contato">
+      <div class="ct-info">
+        <h2>Peça seu orçamento</h2>
+        <p>Mande o tipo de válvula, diâmetro, classe e quantidade. Se tiver, inclua o TAG ou uma foto da plaqueta. Respondemos em até 1 dia útil.</p>
 
-            <option>Manutenção de Válvulas</option>
-            <option>Montagem Industrial</option>
+        <ul class="canais">
+          <li>
+            <span>WhatsApp</span>
+            <a href="https://wa.me/5516997223976" target="_blank" rel="noopener">(16) 99722-3976</a>
+          </li>
+          <li>
+            <span>E-mail</span>
+            <a href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a>
+          </li>
+          <li>
+            <span>Endereço</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Argentina+Grillo+Badia+960+Sert%C3%A3ozinho+SP" target="_blank" rel="noopener">Rua Argentina Grillo Badia, 960<br />Distrito Industrial, Sertãozinho/SP<br />CEP 14176-113</a>
+          </li>
+        </ul>
+      </div>
+
+      <form class="form" id="form" name="orcamento" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="orcamento" />
+        <p class="oculto"><label>Não preencha: <input name="bot-field" /></label></p>
+
+        <div class="f-2">
+          <label class="campo">
+            <span>Nome *</span>
+            <input type="text" name="nome" autocomplete="name" required />
+          </label>
+          <label class="campo">
+            <span>Empresa</span>
+            <input type="text" name="empresa" autocomplete="organization" />
+          </label>
+        </div>
+        <div class="f-2">
+          <label class="campo">
+            <span>WhatsApp ou telefone *</span>
+            <input type="tel" name="telefone" autocomplete="tel" inputmode="tel" required />
+          </label>
+          <label class="campo">
+            <span>E-mail</span>
+            <input type="email" name="email" autocomplete="email" />
+          </label>
+        </div>
+        <label class="campo">
+          <span>Assunto</span>
+          <select name="assunto" id="assunto">
+            <option>Manutenção de válvula</option>
+            <option>Fabricação de válvula</option>
+            <option>Automação e acessórios</option>
             <option>Outro</option>
           </select>
-        </div>
-        <div class="form-group">
-          <label for="mensagem">Mensagem *</label>
-          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Descreva sua necessidade, bitola, especificações técnicas, quantidade..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
-        <p class="form-note">* Campos obrigatórios. Respondemos em até 24 horas.</p>
-        <div class="form-success" id="formSuccess">
-          ✅ Mensagem enviada! Entraremos em contato em breve.
-        </div>
+        </label>
+        <label class="campo">
+          <span>O que você precisa? *</span>
+          <textarea name="mensagem" rows="5" required placeholder="Ex.: 4 válvulas borboleta 12&quot; classe 150 para manutenção completa"></textarea>
+        </label>
+
+        <p class="f-erro" id="fErro" role="alert" hidden></p>
+        <button class="btn btn-claro" type="submit" id="fBtn">Enviar pedido de orçamento</button>
+        <p class="f-ok" id="fOk" role="status" hidden>Pedido enviado. Vamos responder pelo WhatsApp ou e-mail informado.</p>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#inicio" class="logo">
-          <img src="img/logo-new-verde.png" alt="NEW Válvulas e Equipamentos Industriais" class="logo-img logo-img-footer" width="140" height="40" style="height:40px;width:auto;max-width:140px;" />
-        </a>
-        <p>R. Argentina Grilo Badia, 960 — Sertãozinho/SP<br />Atendemos todo o território nacional.</p>
-      </div>
-      <nav class="footer-nav">
-        <strong>Navegação</strong>
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre nós</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <nav class="footer-nav">
-        <strong>Produtos</strong>
-        <a href="#produtos">Válvula Bi-excêntrica</a>
-        <a href="#produtos">Válvula Borboleta</a>
-        <a href="#produtos">Válvula de Retenção</a>
-        <a href="#produtos">Acessórios de Automação</a>
-        <a href="#produtos">Válvulas sob Projeto</a>
-      </nav>
-    </div>
-    <div class="footer-bottom">
-      <div class="container footer-bottom-inner">
-        <span>© 2026 NEW Válvulas e Equipamentos Industriais. Todos os direitos reservados.</span>
-        <span class="footer-lgpd">Este site coleta dados via formulário de contato exclusivamente para retorno comercial, conforme a <strong>LGPD (Lei 13.709/2018)</strong>.</span>
-      </div>
-    </div>
-  </footer>
+</main>
 
-  <!-- LGPD Cookie Banner -->
-  <div class="lgpd-banner" id="lgpdBanner">
-    <p>Este site utiliza seus dados de contato somente para fins comerciais, em conformidade com a <strong>LGPD</strong>. Ao continuar, você concorda com essa política.</p>
-    <button class="lgpd-btn" id="lgpdAccept">Entendi</button>
+<footer class="rodape">
+  <div class="wrap rod-in">
+    <div class="rod-marca">
+      <span class="rod-logo"><img src="data:image/png;base64,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" alt="NEW Válvulas" width="90" height="63" loading="lazy" /></span>
+      <p>NEW Service Equipamentos Industriais Ltda<br />CNPJ 50.582.366/0001-94<br />CREA-SP 2619052</p>
+    </div>
+    <p>Rua Argentina Grillo Badia, 960<br />Distrito Industrial, Sertãozinho/SP<br />CEP 14176-113</p>
+    <p><a href="https://wa.me/5516997223976" target="_blank" rel="noopener">(16) 99722-3976</a><br /><a href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a></p>
   </div>
+  <div class="wrap rod-base">© <span id="ano">2026</span> NEW Válvulas e Equipamentos Industriais</div>
+</footer>
 
-  <!-- WhatsApp Float -->
-  <a href="https://wa.me/5516997223976" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale pelo WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
+<a class="zap-flutuante" href="https://wa.me/5516997223976?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20NEW%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.2-.2-.4-.3Z"/></svg>
+</a>
 
-  <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
