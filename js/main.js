@@ -1,102 +1,117 @@
-/* New Equipamentos — main.js */
+// NEW Válvulas — comportamento do site
+(function () {
+  const WHATS = '5516997223976';
 
-// Navbar: scroll effect + mobile menu
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+  // Ano no rodapé
+  const ano = document.getElementById('ano');
+  if (ano) ano.textContent = new Date().getFullYear();
 
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+  // Menu celular
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const aberto = menu.classList.toggle('aberto');
+      btn.setAttribute('aria-expanded', String(aberto));
+      btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('aberto');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menu');
+    }));
+  }
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-});
+  // Marca no menu a seção visível
+  const links = [...document.querySelectorAll('.menu a')];
+  const secoes = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && secoes.length) {
+    const obs = new IntersectionObserver(entradas => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.toggle('ativo', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secoes.forEach(s => obs.observe(s));
+  }
 
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
+  // Botões que já escolhem o assunto do formulário
+  const assunto = document.getElementById('assunto');
+  document.querySelectorAll('[data-assunto]').forEach(a => {
+    a.addEventListener('click', () => { if (assunto) assunto.value = a.dataset.assunto; });
   });
-});
 
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-links a');
+  // Formulário de orçamento
+  // Envia por e-mail (FormSubmit) para comercial@newequipamentos.ind.br.
+  // Fora do Netlify (ou se o envio falhar) abre o WhatsApp com a mensagem pronta.
+  const form = document.getElementById('form');
+  if (!form) return;
+  const erro = document.getElementById('fErro');
+  const ok = document.getElementById('fOk');
+  const enviar = document.getElementById('fBtn');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      links.forEach(l => l.classList.remove('active'));
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
+  function textoWhats(d) {
+    return [
+      'Pedido de orçamento pelo site',
+      'Nome: ' + d.get('nome'),
+      d.get('empresa') ? 'Empresa: ' + d.get('empresa') : null,
+      'Telefone: ' + d.get('telefone'),
+      d.get('email') ? 'E-mail: ' + d.get('email') : null,
+      'Assunto: ' + d.get('assunto'),
+      '',
+      d.get('mensagem')
+    ].filter(l => l !== null).join('\n');
+  }
+
+  form.querySelectorAll('input, textarea').forEach(el =>
+    el.addEventListener('input', () => el.classList.remove('erro')));
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    erro.hidden = true; ok.hidden = true;
+
+    const faltando = [...form.querySelectorAll('[required]')].filter(c => !c.value.trim());
+    faltando.forEach(c => c.classList.add('erro'));
+    if (faltando.length) {
+      erro.textContent = 'Preencha nome, telefone e o que você precisa para enviarmos o orçamento.';
+      erro.hidden = false;
+      faltando[0].focus();
+      return;
+    }
+
+    const dados = new FormData(form);
+    enviar.disabled = true;
+    enviar.textContent = 'Enviando...';
+
+    let enviado = false;
+    if (location.protocol !== 'file:') {
+      try {
+        const corpo = Object.fromEntries(dados.entries());
+        delete corpo['bot-field']; delete corpo['form-name'];
+        corpo._subject = 'Pedido de orçamento pelo site - ' + (corpo.assunto || '');
+        corpo._template = 'table';
+        const r = await fetch('https://formsubmit.co/ajax/comercial@newequipamentos.ind.br', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(corpo)
+        });
+        const j = await r.json().catch(() => ({}));
+        enviado = r.ok && String(j.success) === 'true';
+      } catch (_) { enviado = false; }
+    }
+
+    enviar.disabled = false;
+    enviar.textContent = 'Enviar pedido de orçamento';
+
+    if (enviado) {
+      form.reset();
+      ok.textContent = 'Pedido enviado. Vamos responder pelo WhatsApp ou e-mail informado.';
+      ok.hidden = false;
+    } else {
+      window.open('https://wa.me/' + WHATS + '?text=' + encodeURIComponent(textoWhats(dados)), '_blank', 'noopener');
+      ok.textContent = 'Abrimos o WhatsApp com o seu pedido pronto. É só tocar em enviar.';
+      ok.hidden = false;
     }
   });
-}, { threshold: 0.4 });
-
-sections.forEach(s => observer.observe(s));
-
-// Animate elements on scroll
-const animObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      animObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.produto-card, .sobre-card, .contato-item').forEach(el => {
-  el.classList.add('anim-fade');
-  animObserver.observe(el);
-});
-
-// Contact form
-const form = document.getElementById('contatoForm');
-const formSuccess = document.getElementById('formSuccess');
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let valid = true;
-
-  form.querySelectorAll('[required]').forEach(field => {
-    field.classList.remove('error');
-    if (!field.value.trim()) {
-      field.classList.add('error');
-      valid = false;
-    }
-  });
-
-  if (!valid) return;
-
-  // Simulate sending (replace with real backend/emailjs/formspree)
-  const btn = form.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-
-  setTimeout(() => {
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Enviar Mensagem';
-    formSuccess.classList.add('show');
-    setTimeout(() => formSuccess.classList.remove('show'), 5000);
-  }, 1200);
-});
-
-// Remove error class on input
-form.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', () => el.classList.remove('error'));
-});
-
-// Phone mask
-const telefoneInput = document.getElementById('telefone');
-if (telefoneInput) {
-  telefoneInput.addEventListener('input', (e) => {
-    let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-    if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
-    else if (v.length > 0) v = `(${v}`;
-    e.target.value = v;
-  });
-}
+})();
