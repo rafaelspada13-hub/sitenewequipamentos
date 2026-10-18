@@ -290,13 +290,15 @@ figure { margin: 0; }
 .mosaico {
   display: grid; gap: 12px;
   grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 240px 240px;
+  grid-template-rows: 240px 240px 340px;
   grid-template-areas:
     "a b c"
-    "a d e";
+    "a d e"
+    "f f f";
 }
 .mosaico img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--raio); }
 .m-a { grid-area: a; } .m-b { grid-area: b; } .m-c { grid-area: c; } .m-d { grid-area: d; } .m-e { grid-area: e; }
+.m-f { grid-area: f; object-position: center 50%; }
 @media (max-width: 560px) {
   .tipos { gap: 8px; margin-bottom: 36px; }
   .tipos li { padding: 6px 12px; font-size: .88rem; }
@@ -304,8 +306,8 @@ figure { margin: 0; }
 @media (max-width: 768px) {
   .mosaico {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 220px 160px 160px;
-    grid-template-areas: "a a" "b c" "d e";
+    grid-template-rows: 220px 160px 160px 260px;
+    grid-template-areas: "a a" "b c" "d e" "f f";
   }
 }
 
