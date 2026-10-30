@@ -27,6 +27,7 @@
   } else {
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
+  window.__newReady = true;
 
   /* ---------- Cabeçalho, menu e botão flutuante ---------- */
   var header = document.querySelector('.site-header');
@@ -99,7 +100,15 @@
     });
 
     if (invalid.length) {
-      formError.hidden = false;
+      var message = 'Preencha nome, um e-mail válido e a mensagem para enviar.';
+      if (formError.hidden) {
+        formError.textContent = message;
+        formError.hidden = false;
+      } else {
+        // Já visível: limpa e reescreve para o leitor de tela anunciar de novo.
+        formError.textContent = '';
+        setTimeout(function () { formError.textContent = message; }, 50);
+      }
       invalid[0].focus();
       return;
     }
@@ -107,7 +116,10 @@
     formError.hidden = true;
     var data = {};
     new FormData(form).forEach(function (value, key) { data[key] = String(value); });
-    window.open(window.NEW.buildWhatsAppUrl(data), '_blank', 'noopener');
+    var url = window.NEW && window.NEW.buildWhatsAppUrl
+      ? window.NEW.buildWhatsAppUrl(data)
+      : 'https://wa.me/5516997223976';
+    window.open(url, '_blank', 'noopener');
 
     var label = submitBtn.textContent;
     submitBtn.textContent = 'Abrindo o WhatsApp…';
@@ -193,19 +205,25 @@
 
   /* ---------- Vídeo do barracão: toca só quando visível ---------- */
   var video = document.querySelector('.frame--video video');
-  if (video) {
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      video.controls = true;
-    } else {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            video.play().catch(function () { video.controls = true; });
-          } else {
-            video.pause();
-          }
-        });
-      }, { threshold: 0.4 }).observe(video);
-    }
+  var motionToggle = document.getElementById('motionToggle');
+  var motionPaused = reduceMotion;
+
+  var setMotion = function (paused) {
+    motionPaused = paused;
+    root.classList.toggle('motion-paused', paused);
+    motionToggle.setAttribute('aria-pressed', String(paused));
+    motionToggle.textContent = paused ? 'Retomar animação' : 'Pausar animação';
+    if (paused && video) video.pause();
+  };
+  motionToggle.addEventListener('click', function () { setMotion(!motionPaused); });
+  if (reduceMotion) setMotion(true);
+
+  if (video && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !motionPaused) video.play().catch(function () {});
+        else if (!entry.isIntersecting) video.pause();
+      });
+    }, { threshold: 0.4 }).observe(video);
   }
 })();

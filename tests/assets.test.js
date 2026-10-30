@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
 const SLUGS = [
-  'hero-borboleta-atuador', 'borboleta-vermelha', 'usinagem', 'globo-controle',
+  'borboleta-vermelha', 'usinagem', 'globo-controle',
   'gaveta-par', 'borboleta-grande-1', 'borboleta-grande-2', 'borboleta-grande-3',
   'borboletas-lote', 'estoque-mix', 'controle-azul', 'redutores',
   'gaveta-galpao', 'globo-volante', 'lote-gavetas',

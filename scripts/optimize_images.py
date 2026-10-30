@@ -15,7 +15,6 @@ QUALITY = 78
 
 # slug -> (arquivo original, recorte opcional em frações (esq, topo, dir, base))
 PHOTOS = {
-    "hero-borboleta-atuador": ("WhatsApp Image 2026-04-08 at 10.07.44.jpeg", None),
     "borboleta-vermelha": ("galeria-vermelho.jpg", None),
     "usinagem": ("WhatsApp Image 2026-04-08 at 10.07.42 (2).jpeg", None),
     "globo-controle": ("Foto_II.jpeg", None),

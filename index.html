@@ -11,7 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+    // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
+    document.documentElement.classList.add("js");
+    setTimeout(function () { if (!window.__newReady) document.documentElement.classList.remove("js"); }, 3000);
+  </script>
 </head>
 <body>
 
@@ -43,8 +47,8 @@
           </div>
         </div>
         <picture class="hero-photo">
-          <source srcset="img/opt/hero-borboleta-atuador.webp" type="image/webp" />
-          <img src="img/opt/hero-borboleta-atuador.jpg" alt="Válvulas borboleta com atuadores vermelhos prontas para entrega no barracão da NEW" width="1200" height="1600" fetchpriority="high" />
+          <source srcset="img/opt/borboleta-grande-3.webp" type="image/webp" />
+          <img src="img/opt/borboleta-grande-3.jpg" alt="Válvula borboleta de grande porte com protetor de flange, no barracão da NEW" width="1600" height="1200" fetchpriority="high" />
         </picture>
         <div class="hero-line hero-line--clip" aria-hidden="true">
           <div class="hero-track">
@@ -60,6 +64,7 @@
       </div>
       <div class="hero-foot">
         <a href="#produtos" class="link-arrow">Ver as válvulas</a>
+        <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pausar animação</button>
         <a href="#contato" class="btn">Pedir orçamento</a>
       </div>
     </section>
@@ -354,7 +359,7 @@
                 <tr><th scope="row">Disco</th><td>WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
                 <tr><th scope="row">Haste</th><td>WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
                 <tr><th scope="row">Buchas</th><td>Bronze, WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
-                <tr><th scope="row">Sede</th><td>RPTFE, PTFE reforçado com fibra de vidro</td></tr>
+                <tr><th scope="row">Sede</th><td>RPTFE (PTFE reforçado com fibra de vidro)</td></tr>
                 <tr><th scope="row">Gaxeta</th><td>Carbono e grafite</td></tr>
               </tbody>
             </table>
@@ -471,9 +476,9 @@
         <h2 class="section-title">Estrutura e estoque</h2>
         <p>Estoque de válvulas prontas para entrega e bancada própria de manutenção e usinagem.</p>
       </div>
-      <div class="gallery-row" tabindex="0" aria-label="Fotos do barracão e do estoque">
+      <div class="gallery-row" tabindex="0" role="region" aria-label="Fotos do barracão e do estoque">
         <figure class="frame frame--video">
-          <video src="img/opt/estoque-video.mp4" poster="img/opt/estoque-video-poster.jpg" muted loop playsinline preload="none" width="478" height="850" aria-label="Vídeo: solda e válvulas borboleta no barracão"></video>
+          <video src="img/opt/estoque-video.mp4" poster="img/opt/estoque-video-poster.jpg" muted loop playsinline controls preload="none" width="478" height="850" aria-label="Vídeo: solda e válvulas borboleta no barracão"></video>
         </figure>
         <a class="frame js-lightbox" href="img/opt/borboleta-grande-2.jpg" data-alt="Válvulas borboleta de grande diâmetro em linha no barracão">
           <picture><source srcset="img/opt/borboleta-grande-2.webp" type="image/webp" /><img src="img/opt/borboleta-grande-2.jpg" alt="Válvulas borboleta de grande diâmetro em linha no barracão" width="1200" height="1600" loading="lazy" /></picture>
@@ -499,9 +504,6 @@
         <a class="frame js-lightbox" href="img/opt/lote-gavetas.jpg" data-alt="Lote de válvulas gaveta e globo pronto para expedição">
           <picture><source srcset="img/opt/lote-gavetas.webp" type="image/webp" /><img src="img/opt/lote-gavetas.jpg" alt="Lote de válvulas gaveta e globo pronto para expedição" width="1600" height="1200" loading="lazy" /></picture>
         </a>
-        <a class="frame js-lightbox" href="img/opt/borboleta-grande-3.jpg" data-alt="Válvula borboleta de grande porte vista de perto">
-          <picture><source srcset="img/opt/borboleta-grande-3.webp" type="image/webp" /><img src="img/opt/borboleta-grande-3.jpg" alt="Válvula borboleta de grande porte vista de perto" width="1600" height="1200" loading="lazy" /></picture>
-        </a>
       </div>
     </section>
 
@@ -524,7 +526,7 @@
         <form class="quote-form" id="orcamentoForm" novalidate>
           <div class="field">
             <label for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" autocomplete="name" required />
+            <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="formError" />
           </div>
           <div class="field">
             <label for="empresa">Empresa <span class="opt">(opcional)</span></label>
@@ -532,7 +534,7 @@
           </div>
           <div class="field">
             <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
+            <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="formError" />
           </div>
           <div class="field">
             <label for="telefone">Telefone <span class="opt">(opcional)</span></label>
@@ -558,9 +560,9 @@
           </div>
           <div class="field field--wide">
             <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="4" required placeholder="Fluido, pressão, temperatura, diâmetro e quantidade"></textarea>
+            <textarea id="mensagem" name="mensagem" rows="4" required aria-describedby="formError" placeholder="Fluido, pressão, temperatura, diâmetro e quantidade"></textarea>
           </div>
-          <p class="form-error" id="formError" role="alert" hidden>Preencha nome, e-mail e mensagem para enviar.</p>
+          <p class="form-error" id="formError" role="alert" hidden></p>
           <button type="submit" class="btn">Enviar pelo WhatsApp</button>
         </form>
       </div>

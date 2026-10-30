@@ -61,6 +61,7 @@ ul { padding: 0; list-style: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 
 :focus-visible { outline: 3px solid var(--brand-bright); outline-offset: 3px; }
+.tech :focus-visible, .slip :focus-visible, .footer :focus-visible { outline-color: var(--brand); }
 ::selection { background: var(--brand-bright); color: var(--on-bright); }
 
 .visually-hidden {
@@ -71,7 +72,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .skip:not(:focus) {
-  position: absolute; width: 1px; height: 1px;
+  position: absolute; width: 1px; height: 1px; /* taste-skill-ignore: técnica de ocultar link de acessibilidade, não é linha */
   overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 .skip:focus {
@@ -124,6 +125,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   transition: transform 0.3s var(--ease);
 }
 .site-header.is-hidden { transform: translateY(-100%); }
+.site-header:focus-within { transform: none; }
 
 .brand img { height: 56px; width: auto; }
 
@@ -210,6 +212,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 0.22em; height: 0.22em; border-radius: 50%;
   background: currentColor;
 }
+
+.motion-paused .hero-track,
+.motion-paused .segments-track { animation-play-state: paused; }
+
+.motion-toggle {
+  display: none;
+  min-height: 44px; padding: 0 4px;
+  background: none; border: 0; cursor: pointer;
+  color: var(--muted); font-weight: 500;
+  text-decoration: underline; text-underline-offset: 5px;
+}
+.js .motion-toggle { display: inline-block; }
+.motion-toggle:hover { color: var(--ink); }
 
 @keyframes marquee {
   from { transform: translateX(0); }
