@@ -1,102 +1,190 @@
-/* New Equipamentos — main.js */
+// Interações do site: entradas ao rolar, menu, orçamento por WhatsApp, galeria e vídeo.
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
 
-// Navbar: scroll effect + mobile menu
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-});
-
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
+  /* ---------- Entradas ao rolar ---------- */
+  var reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(function (el) {
+    var siblings = Array.prototype.filter.call(el.parentElement.children, function (c) {
+      return c.classList.contains('reveal');
+    });
+    el.style.setProperty('--delay', siblings.indexOf(el) * 80 + 'ms');
   });
-});
 
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-links a');
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    reveals.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-in'); });
+  }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      links.forEach(l => l.classList.remove('active'));
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
-    }
+  /* ---------- Cabeçalho, menu e botão flutuante ---------- */
+  var header = document.querySelector('.site-header');
+  var nav = document.getElementById('nav');
+  var toggle = document.getElementById('menuToggle');
+  var floatBtn = document.querySelector('.whatsapp-float');
+  var hero = document.getElementById('inicio');
+
+  function setMenu(open) {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Fechar' : 'Menu';
+  }
+
+  toggle.addEventListener('click', function () {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
   });
-}, { threshold: 0.4 });
-
-sections.forEach(s => observer.observe(s));
-
-// Animate elements on scroll
-const animObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      animObserver.unobserve(e.target);
-    }
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setMenu(false);
   });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.produto-card, .sobre-card, .contato-item').forEach(el => {
-  el.classList.add('anim-fade');
-  animObserver.observe(el);
-});
-
-// Contact form
-const form = document.getElementById('contatoForm');
-const formSuccess = document.getElementById('formSuccess');
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let valid = true;
-
-  form.querySelectorAll('[required]').forEach(field => {
-    field.classList.remove('error');
-    if (!field.value.trim()) {
-      field.classList.add('error');
-      valid = false;
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      setMenu(false);
+      toggle.focus();
     }
   });
 
-  if (!valid) return;
+  var lastY = window.scrollY;
+  function onScroll() {
+    var y = window.scrollY;
+    var pastHero = y > hero.offsetHeight * 0.75;
+    floatBtn.classList.toggle('is-visible', pastHero);
+    var menuOpen = nav.classList.contains('is-open');
+    header.classList.toggle('is-hidden', !menuOpen && y > lastY && y > 400);
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  // Simulate sending (replace with real backend/emailjs/formspree)
-  const btn = form.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
+  /* ---------- Orçamento ---------- */
+  var form = document.getElementById('orcamentoForm');
+  var formError = document.getElementById('formError');
+  var produto = document.getElementById('produto');
+  var submitBtn = form.querySelector('button[type="submit"]');
 
-  setTimeout(() => {
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Enviar Mensagem';
-    formSuccess.classList.add('show');
-    setTimeout(() => formSuccess.classList.remove('show'), 5000);
-  }, 1200);
-});
-
-// Remove error class on input
-form.querySelectorAll('input, textarea').forEach(el => {
-  el.addEventListener('input', () => el.classList.remove('error'));
-});
-
-// Phone mask
-const telefoneInput = document.getElementById('telefone');
-if (telefoneInput) {
-  telefoneInput.addEventListener('input', (e) => {
-    let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-    if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
-    else if (v.length > 0) v = `(${v}`;
-    e.target.value = v;
+  document.querySelectorAll('.js-orcar').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var nome = btn.closest('[data-produto]').getAttribute('data-produto');
+      var hasOption = Array.prototype.some.call(produto.options, function (o) { return o.value === nome; });
+      if (hasOption) produto.value = nome;
+      form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      document.getElementById('nome').focus({ preventScroll: true });
+    });
   });
-}
+
+  form.addEventListener('input', function (e) {
+    if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity()) {
+      e.target.removeAttribute('aria-invalid');
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var invalid = [];
+    form.querySelectorAll('[required], [type="email"]').forEach(function (field) {
+      var empty = field.hasAttribute('required') && !field.value.trim();
+      var ok = !empty && field.checkValidity();
+      if (ok) field.removeAttribute('aria-invalid');
+      else { field.setAttribute('aria-invalid', 'true'); invalid.push(field); }
+    });
+
+    if (invalid.length) {
+      formError.hidden = false;
+      invalid[0].focus();
+      return;
+    }
+
+    formError.hidden = true;
+    var data = {};
+    new FormData(form).forEach(function (value, key) { data[key] = String(value); });
+    window.open(window.NEW.buildWhatsAppUrl(data), '_blank', 'noopener');
+
+    var label = submitBtn.textContent;
+    submitBtn.textContent = 'Abrindo o WhatsApp…';
+    setTimeout(function () { submitBtn.textContent = label; }, 3000);
+  });
+
+  /* ---------- Galeria ampliada ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('a.js-lightbox'));
+  if (links.length && typeof HTMLDialogElement === 'function') {
+    var dialog, img, caption;
+    var current = 0;
+    var opener = null;
+
+    var show = function (index) {
+      current = (index + links.length) % links.length;
+      var link = links[current];
+      img.src = link.getAttribute('href');
+      img.alt = link.getAttribute('data-alt') || '';
+      caption.textContent = (current + 1) + ' de ' + links.length + ' · ' + img.alt;
+    };
+
+    // A janela é criada no primeiro clique, para não deixar uma imagem vazia na página.
+    var buildDialog = function () {
+      dialog = document.createElement('dialog');
+      dialog.className = 'lightbox';
+      dialog.setAttribute('aria-label', 'Foto ampliada');
+      dialog.innerHTML =
+        '<img />' +
+        '<div class="lightbox-bar"><p></p><div>' +
+        '<button type="button" data-step="-1" aria-label="Foto anterior">←</button>' +
+        '<button type="button" data-step="1" aria-label="Próxima foto">→</button>' +
+        '<button type="button" data-close>Fechar</button>' +
+        '</div></div>';
+      document.body.appendChild(dialog);
+      img = dialog.querySelector('img');
+      caption = dialog.querySelector('p');
+
+      dialog.addEventListener('click', function (e) {
+        var step = e.target.getAttribute('data-step');
+        if (step) show(current + Number(step));
+        else if (e.target.hasAttribute('data-close') || e.target === dialog) dialog.close();
+      });
+      dialog.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') show(current + 1);
+        if (e.key === 'ArrowLeft') show(current - 1);
+      });
+      dialog.addEventListener('close', function () {
+        if (opener) opener.focus();
+      });
+    };
+
+    links.forEach(function (link, i) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!dialog) buildDialog();
+        opener = link;
+        show(i);
+        dialog.showModal();
+      });
+    });
+  }
+
+  /* ---------- Vídeo do barracão: toca só quando visível ---------- */
+  var video = document.querySelector('.frame--video video');
+  if (video) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      video.controls = true;
+    } else {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            video.play().catch(function () { video.controls = true; });
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.4 }).observe(video);
+    }
+  }
+})();
