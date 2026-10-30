@@ -35,7 +35,6 @@
 
     <!-- Abertura: o nome em movimento sobre a foto -->
     <section class="hero" id="inicio">
-      <h1 class="visually-hidden">NEW Válvulas Industriais</h1>
       <div class="hero-stage">
         <div class="hero-line" aria-hidden="true">
           <div class="hero-track">
@@ -55,7 +54,8 @@
         </div>
       </div>
       <div class="hero-copy">
-        <p class="hero-lead">Fornecimento, automação e manutenção de válvulas para usinas e indústrias de todo o Brasil.</p>
+        <h1 class="hero-title">Válvulas industriais</h1>
+        <p class="hero-lead">Fornecimento, automação e manutenção de borboleta bi‑excêntrica, gaveta, globo e retenção para usinas e indústrias de todo o Brasil.</p>
         <p class="hero-fact">Sertãozinho/SP · atendimento em todo o território nacional</p>
       </div>
       <div class="hero-foot">
@@ -86,7 +86,7 @@
             <source srcset="img/opt/borboleta-vermelha.webp" type="image/webp" />
             <img src="img/opt/borboleta-vermelha.jpg" alt="Válvula borboleta bi-excêntrica com corpo e atuador vermelhos" width="1200" height="1600" loading="lazy" />
           </picture>
-          <figcaption class="panel-title">Borboleta bi‑excêntrica<br />Classe 150</figcaption>
+          <figcaption class="panel-title">Bi‑excêntrica<br />Classe 150</figcaption>
         </figure>
         <figure class="panel">
           <picture>
@@ -110,7 +110,7 @@
       <p class="caption">Borboleta, gaveta, globo e retenção, do fornecimento à automação.</p>
 
       <div class="catalog">
-        <h2 class="catalog-word" aria-label="Catálogo de válvulas e acessórios">Catálogo</h2>
+        <h2 class="catalog-word reveal" aria-label="Catálogo de válvulas e acessórios">Catálogo</h2>
 
         <details class="item" data-produto="Válvula Borboleta Bi-excêntrica Classe 150" open>
           <summary>Borboleta bi-excêntrica Classe 150</summary>
@@ -241,15 +241,15 @@
 
     <!-- Ficha técnica da bi-excêntrica: dados do boletim DT-VB150-001 -->
     <section class="tech" id="bi-excentrica">
-      <div class="tech-head">
-        <h2 class="section-title">Borboleta bi‑excêntrica Classe 150</h2>
+      <div class="tech-head reveal">
+        <h2 class="section-title">Bi‑excêntrica Classe 150</h2>
         <div class="tech-intro">
-          <p>Fabricada em aço carbono WCB, ferro nodular ou aço inoxidável (CF8, CF8M, CF3), com sede em RPTFE reforçado com fibra de vidro. Projeto conforme API 609 Categoria B, para vapor, caldo, xarope, etanol, óleo térmico e limpeza CIP.</p>
+          <p>Válvula borboleta de dupla excentricidade, fabricada em aço carbono WCB, ferro nodular ou aço inoxidável (CF8, CF8M, CF3), com sede em RPTFE reforçado com fibra de vidro. Projeto conforme API 609 Categoria B, para vapor, caldo, xarope, etanol, óleo térmico e limpeza CIP.</p>
           <a class="btn btn--dark" href="docs/tecnico/DT-VB150-001-valvula-borboleta-bi-excentrica-classe-150.pdf" download>Baixar boletim técnico (PDF)</a>
         </div>
       </div>
 
-      <dl class="tech-facts">
+      <dl class="tech-facts reveal">
         <div><dt>Diâmetros</dt><dd>2" a 48"</dd></div>
         <div><dt>Classe de pressão</dt><dd>ASME 150</dd></div>
         <div><dt>Temperatura contínua</dt><dd>até 250 °C</dd></div>
@@ -258,11 +258,11 @@
       </dl>
 
       <div class="bx">
-        <figure class="bx-drawing">
+        <figure class="bx-drawing reveal">
           <img src="img/bi-excentrica-dimensional.png" alt="Desenho dimensional da válvula borboleta bi-excêntrica com as cotas A, B, C, D, E e F" width="1253" height="614" loading="lazy" />
         </figure>
-        <div class="bx-panel">
-          <h3>Dimensões por bitola</h3>
+        <div class="bx-panel reveal">
+          <h3>Dimensões por bitola, em mm</h3>
           <label class="bx-range" for="bitola">Escolha a bitola</label>
           <input class="bx-range" id="bitola" type="range" min="0" max="18" step="1" value="5" aria-valuetext='8"' />
           <p class="bx-size"><output id="bx-bitola" for="bitola">8"</output> <span>DN <span id="bx-DN">200</span></span></p>
@@ -276,11 +276,10 @@
             <div><dt>Nº de furos</dt><dd id="bx-furos">4</dd></div>
             <div><dt>Flange ISO 5211</dt><dd id="bx-iso">F10</dd></div>
           </dl>
-          <p class="bx-note">Medidas em milímetros.</p>
         </div>
       </div>
 
-      <div class="tech-block">
+      <div class="tech-block reveal">
         <h3>Tabela dimensional</h3>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela dimensional, role para o lado">
           <table id="tabela-dimensional">
@@ -314,7 +313,7 @@
       </div>
 
       <div class="tech-split">
-        <div class="tech-block">
+        <div class="tech-block reveal">
           <h3>Limites operacionais</h3>
           <figure class="pt">
             <svg id="curva-pt" class="pt-chart" viewBox="0 0 640 400" role="img" aria-labelledby="curva-pt-titulo">
@@ -345,7 +344,7 @@
           <p class="tech-note">Ferro nodular: ASME B16.42, máximo de 17,5 kgf/cm² (17,2 bar) a 38 °C. Vale sempre o menor limite entre corpo e sede; em temperatura elevada, opere com margem de segurança.</p>
         </div>
 
-        <div class="tech-block">
+        <div class="tech-block reveal">
           <h3>Configuração construtiva</h3>
           <div class="table-scroll" tabindex="0" role="region" aria-label="Materiais por componente">
             <table>
@@ -376,7 +375,7 @@
         </div>
       </div>
 
-      <div class="tech-block" id="aplicacoes">
+      <div class="tech-block reveal" id="aplicacoes">
         <h3>Onde aplicar</h3>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Aplicações no setor sucroenergético">
           <table>
@@ -421,7 +420,7 @@
           <span>Usinas de açúcar e etanol</span><i></i><span>Etanol de milho</span><i></i><span>Tratamento de água e efluentes</span><i></i><span>Mineração</span><i></i><span>Papel e celulose</span><i></i><span>Petroquímica</span><i></i>
         </div>
       </div>
-      <div class="segments-copy">
+      <div class="segments-copy reveal">
         <h2 class="section-title">Segmentos atendidos</h2>
         <ul class="segments-list">
           <li>Usinas de açúcar e etanol</li>
@@ -468,7 +467,7 @@
 
     <!-- Estrutura e estoque -->
     <section class="gallery" id="estrutura">
-      <div class="gallery-head">
+      <div class="gallery-head reveal">
         <h2 class="section-title">Estrutura e estoque</h2>
         <p>Estoque de válvulas prontas para entrega e bancada própria de manutenção e usinagem.</p>
       </div>
