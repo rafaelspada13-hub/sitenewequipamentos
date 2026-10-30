@@ -41,6 +41,16 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
     check(await page.locator(`#orcamentoForm [name="${f}"][required]`).count() === 1, `campo ${f} deveria ser obrigatório`);
   }
   check(await page.locator('video[poster]').count() === 1, 'vídeo com poster ausente');
+  // Conteúdo do catálogo de apresentação e da ficha cadastral.
+  for (const nome of ['Usina Caeté', 'Usina Santa Isabel', 'Usina Santa Fé', 'ADM do Brasil', 'Usiminas', 'Ball']) {
+    check(text.includes(nome), `cliente "${nome}" ausente`);
+  }
+  for (const produto of ['Borboleta concêntrica', 'Esfera segmentada', 'Guilhotina', 'Gaveta e globo', 'Pressure seal']) {
+    check(await page.locator(`.item summary:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente do catálogo`);
+  }
+  check(text.includes('24 anos'), 'tempo de experiência ausente');
+  check(await page.locator('img[src*="fachada"]').count() === 1, 'foto da fachada ausente');
+  for (const s of ['Caldeiraria', 'Frota própria']) check(text.includes(s), `serviço "${s}" ausente`);
   // Endereços versionados: o navegador não pode reaproveitar o CSS/JS do site antigo em cache.
   for (const sel of ['link[rel=stylesheet][href^="css/style.css"]', 'script[src^="js/main.js"]', 'script[src^="js/whatsapp.js"]']) {
     const url = await page.getAttribute(sel, sel.startsWith('link') ? 'href' : 'src');

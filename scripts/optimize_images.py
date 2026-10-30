@@ -29,6 +29,7 @@ PHOTOS = {
     "gaveta-galpao": ("sobre-galpao.jpg", None),
     "globo-volante": ("Foto_I.jpeg", None),
     "lote-gavetas": ("WhatsApp Image 2026-04-08 at 10.07.38.jpeg", None),
+    "fachada": ("catalogo/fachada.jpeg", None),
 }
 
 
