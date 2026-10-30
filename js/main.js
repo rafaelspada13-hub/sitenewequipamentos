@@ -170,6 +170,27 @@
     });
   }
 
+  /* ---------- Seletor de bitola (lê a tabela dimensional) ---------- */
+  var range = document.getElementById('bitola');
+  var dimTable = document.getElementById('tabela-dimensional');
+  if (range && dimTable) {
+    var outputs = ['bx-bitola', 'bx-DN', 'bx-A', 'bx-B', 'bx-C', 'bx-D', 'bx-E', 'bx-F', 'bx-furos', 'bx-iso']
+      .map(function (id) { return document.getElementById(id); });
+    var dimRows = dimTable.querySelectorAll('tbody tr');
+
+    var update = function () {
+      var row = dimRows[Number(range.value)];
+      row.querySelectorAll('th, td').forEach(function (cell, i) {
+        outputs[i].textContent = cell.textContent.trim();
+      });
+      range.setAttribute('aria-valuetext', outputs[0].textContent);
+      dimRows.forEach(function (r) { r.classList.toggle('is-current', r === row); });
+    };
+    range.max = String(dimRows.length - 1);
+    range.addEventListener('input', update);
+    update();
+  }
+
   /* ---------- Vídeo do barracão: toca só quando visível ---------- */
   var video = document.querySelector('.frame--video video');
   if (video) {

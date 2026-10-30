@@ -86,7 +86,7 @@
             <source srcset="img/opt/borboleta-vermelha.webp" type="image/webp" />
             <img src="img/opt/borboleta-vermelha.jpg" alt="Válvula borboleta bi-excêntrica com corpo e atuador vermelhos" width="1200" height="1600" loading="lazy" />
           </picture>
-          <figcaption class="panel-title">Borboleta bi-excêntrica<br />Classe 150</figcaption>
+          <figcaption class="panel-title">Borboleta bi‑excêntrica<br />Classe 150</figcaption>
         </figure>
         <figure class="panel">
           <picture>
@@ -239,9 +239,178 @@
       </div>
     </section>
 
-    <!-- Ficha técnica da bi-excêntrica (preenchida na Task 6) -->
+    <!-- Ficha técnica da bi-excêntrica: dados do boletim DT-VB150-001 -->
     <section class="tech" id="bi-excentrica">
-      <h2 class="section-title">Borboleta bi-excêntrica Classe 150</h2>
+      <div class="tech-head">
+        <h2 class="section-title">Borboleta bi‑excêntrica Classe 150</h2>
+        <div class="tech-intro">
+          <p>Fabricada em aço carbono WCB, ferro nodular ou aço inoxidável (CF8, CF8M, CF3), com sede em RPTFE reforçado com fibra de vidro. Projeto conforme API 609 Categoria B, para vapor, caldo, xarope, etanol, óleo térmico e limpeza CIP.</p>
+          <a class="btn btn--dark" href="docs/tecnico/DT-VB150-001-valvula-borboleta-bi-excentrica-classe-150.pdf" download>Baixar boletim técnico (PDF)</a>
+        </div>
+      </div>
+
+      <dl class="tech-facts">
+        <div><dt>Diâmetros</dt><dd>2" a 48"</dd></div>
+        <div><dt>Classe de pressão</dt><dd>ASME 150</dd></div>
+        <div><dt>Temperatura contínua</dt><dd>até 250 °C</dd></div>
+        <div><dt>Projeto</dt><dd>API 609 B</dd></div>
+        <div><dt>Estanqueidade</dt><dd>Bubble tight</dd></div>
+      </dl>
+
+      <div class="bx">
+        <figure class="bx-drawing">
+          <img src="img/bi-excentrica-dimensional.png" alt="Desenho dimensional da válvula borboleta bi-excêntrica com as cotas A, B, C, D, E e F" width="1253" height="614" loading="lazy" />
+        </figure>
+        <div class="bx-panel">
+          <h3>Dimensões por bitola</h3>
+          <label class="bx-range" for="bitola">Escolha a bitola</label>
+          <input class="bx-range" id="bitola" type="range" min="0" max="18" step="1" value="5" aria-valuetext='8"' />
+          <p class="bx-size"><output id="bx-bitola" for="bitola">8"</output> <span>DN <span id="bx-DN">200</span></span></p>
+          <dl class="bx-dims">
+            <div><dt>ØA passagem</dt><dd id="bx-A">182</dd></div>
+            <div><dt>B face a face</dt><dd id="bx-B">64</dd></div>
+            <div><dt>□C quadrado da haste</dt><dd id="bx-C">22</dd></div>
+            <div><dt>ØD externo do corpo</dt><dd id="bx-D">270</dd></div>
+            <div><dt>ØE furos do acoplamento</dt><dd id="bx-E">12,7</dd></div>
+            <div><dt>ØF círculo de furação</dt><dd id="bx-F">102</dd></div>
+            <div><dt>Nº de furos</dt><dd id="bx-furos">4</dd></div>
+            <div><dt>Flange ISO 5211</dt><dd id="bx-iso">F10</dd></div>
+          </dl>
+          <p class="bx-note">Medidas em milímetros.</p>
+        </div>
+      </div>
+
+      <div class="tech-block">
+        <h3>Tabela dimensional</h3>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabela dimensional, role para o lado">
+          <table id="tabela-dimensional">
+            <thead>
+              <tr><th scope="col">Bitola</th><th scope="col">DN</th><th scope="col">ØA</th><th scope="col">B</th><th scope="col">□C</th><th scope="col">ØD</th><th scope="col">ØE</th><th scope="col">ØF</th><th scope="col">Furos</th><th scope="col">ISO 5211</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">2"</th><td>50</td><td>52</td><td>45,5</td><td>11</td><td>100</td><td>10</td><td>70</td><td>4</td><td>F07</td></tr>
+              <tr><th scope="row">2½"</th><td>65</td><td>62,6</td><td>48</td><td>11</td><td>110</td><td>10</td><td>70</td><td>4</td><td>F07</td></tr>
+              <tr><th scope="row">3"</th><td>80</td><td>74</td><td>48</td><td>11</td><td>127</td><td>10</td><td>70</td><td>4</td><td>F07</td></tr>
+              <tr><th scope="row">4"</th><td>100</td><td>96</td><td>54</td><td>14</td><td>157</td><td>10</td><td>70</td><td>4</td><td>F07</td></tr>
+              <tr><th scope="row">6"</th><td>150</td><td>144</td><td>57</td><td>17</td><td>216</td><td>10</td><td>70</td><td>4</td><td>F07</td></tr>
+              <tr><th scope="row">8"</th><td>200</td><td>182</td><td>64</td><td>22</td><td>270</td><td>12,7</td><td>102</td><td>4</td><td>F10</td></tr>
+              <tr><th scope="row">10"</th><td>250</td><td>237</td><td>71</td><td>22</td><td>325</td><td>12,7</td><td>102</td><td>4</td><td>F10</td></tr>
+              <tr><th scope="row">12"</th><td>300</td><td>284</td><td>81</td><td>27</td><td>380</td><td>14</td><td>125</td><td>4</td><td>F12</td></tr>
+              <tr><th scope="row">14"</th><td>350</td><td>320</td><td>92</td><td>27</td><td>420</td><td>14</td><td>125</td><td>4</td><td>F12</td></tr>
+              <tr><th scope="row">18"</th><td>450</td><td>396</td><td>114</td><td>36</td><td>534</td><td>18</td><td>140</td><td>4</td><td>F14</td></tr>
+              <tr><th scope="row">20"</th><td>500</td><td>456</td><td>127</td><td>46</td><td>580</td><td>20</td><td>165</td><td>4</td><td>F16</td></tr>
+              <tr><th scope="row">24"</th><td>600</td><td>546</td><td>154</td><td>46</td><td>696</td><td>22</td><td>165</td><td>4</td><td>F16</td></tr>
+              <tr><th scope="row">28"</th><td>700</td><td>632</td><td>164</td><td>46</td><td>804</td><td>18</td><td>254</td><td>8</td><td>F25</td></tr>
+              <tr><th scope="row">30"</th><td>750</td><td>698,5</td><td>165</td><td>55</td><td>840</td><td>18</td><td>254</td><td>8</td><td>F25</td></tr>
+              <tr><th scope="row">32"</th><td>800</td><td>735</td><td>190</td><td>55</td><td>900</td><td>18</td><td>254</td><td>8</td><td>F25</td></tr>
+              <tr><th scope="row">36"</th><td>900</td><td>850,9</td><td>216</td><td>55</td><td>1022</td><td>18</td><td>254</td><td>8</td><td>F25</td></tr>
+              <tr><th scope="row">40"</th><td>1000</td><td>952</td><td>240</td><td>75</td><td>1120</td><td>22</td><td>298</td><td>8</td><td>F30</td></tr>
+              <tr><th scope="row">44"</th><td>1100</td><td>1054</td><td>260</td><td>75</td><td>1250</td><td>22</td><td>298</td><td>8</td><td>F30</td></tr>
+              <tr><th scope="row">48"</th><td>1200</td><td>1120</td><td>270</td><td>75</td><td>1380</td><td>22</td><td>298</td><td>8</td><td>F30</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tech-note">Dimensões em milímetros. Face a face (B) conforme API 609, Tabela 3a (2½" a 24", tolerância ±3,3 mm); 2" e 28" a 48" no padrão do fabricante, como a norma permite. Diâmetros não listados, como 16", e dimensões certificadas sob consulta.</p>
+      </div>
+
+      <div class="tech-split">
+        <div class="tech-block">
+          <h3>Limites operacionais</h3>
+          <figure class="pt">
+            <svg id="curva-pt" class="pt-chart" viewBox="0 0 640 400" role="img" aria-labelledby="curva-pt-titulo">
+              <title id="curva-pt-titulo">Pressão máxima admissível do corpo, em kgf/cm², de 38 °C a 300 °C, para WCB, CF8/CF3 e CF8M. Os dados estão na tabela ao lado.</title>
+              <line class="pt-grid" x1="64" x2="600" y1="352.0" y2="352.0" /><text class="pt-tick" x="54" y="357.0" text-anchor="end">0</text><line class="pt-grid" x1="64" x2="600" y1="277.5" y2="277.5" /><text class="pt-tick" x="54" y="282.5" text-anchor="end">5</text><line class="pt-grid" x1="64" x2="600" y1="202.9" y2="202.9" /><text class="pt-tick" x="54" y="207.9" text-anchor="end">10</text><line class="pt-grid" x1="64" x2="600" y1="128.4" y2="128.4" /><text class="pt-tick" x="54" y="133.4" text-anchor="end">15</text><line class="pt-grid" x1="64" x2="600" y1="53.8" y2="53.8" /><text class="pt-tick" x="54" y="58.8" text-anchor="end">20</text><text class="pt-tick" x="64.0" y="378" text-anchor="middle">0</text><text class="pt-tick" x="153.3" y="378" text-anchor="middle">50</text><text class="pt-tick" x="242.7" y="378" text-anchor="middle">100</text><text class="pt-tick" x="332.0" y="378" text-anchor="middle">150</text><text class="pt-tick" x="421.3" y="378" text-anchor="middle">200</text><text class="pt-tick" x="510.7" y="378" text-anchor="middle">250</text><text class="pt-tick" x="600.0" y="378" text-anchor="middle">300</text><line class="pt-seat" x1="510.7" x2="510.7" y1="24" y2="352" /><text class="pt-note" x="502.7" y="38" text-anchor="end">limite contínuo da sede · 250 °C</text>
+              <polyline data-serie="WCB" class="pt-line pt-wcb" points="131.9,53.8 242.7,83.6 332.0,112.0 421.3,141.8 510.7,168.6 600.0,196.9" />
+              <polyline data-serie="CF8/CF3" class="pt-line pt-cf8" points="131.9,62.8 242.7,113.5 332.0,135.8 421.3,150.7 510.7,168.6 600.0,196.9" />
+              <polyline data-serie="CF8M" class="pt-line pt-cf8m" points="131.9,62.8 242.7,106.0 332.0,126.9 421.3,143.3 510.7,168.6 600.0,196.9" />
+              <text class="pt-label pt-wcb" x="137.9" y="43.8">WCB</text><text class="pt-label pt-cf8m" x="252.7" y="94.0">CF8M</text><text class="pt-label pt-cf8" x="236.7" y="139.5">CF8/CF3</text>
+              <text class="pt-axis" x="64" y="404">Temperatura (°C)</text>
+              <text class="pt-axis" x="12" y="18">kgf/cm²</text>
+            </svg>
+          </figure>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Pressão por temperatura">
+            <table id="tabela-pt">
+              <caption>Pressão máxima admissível do corpo (kgf/cm²), ASME B16.34 Classe 150</caption>
+              <thead><tr><th scope="col">Temperatura</th><th scope="col">WCB</th><th scope="col">CF8/CF3</th><th scope="col">CF8M</th></tr></thead>
+              <tbody>
+              <tr><th scope="row">38 °C</th><td>20,0</td><td>19,4</td><td>19,4</td></tr>
+              <tr><th scope="row">100 °C</th><td>18,0</td><td>16,0</td><td>16,5</td></tr>
+              <tr><th scope="row">150 °C</th><td>16,1</td><td>14,5</td><td>15,1</td></tr>
+              <tr><th scope="row">200 °C</th><td>14,1</td><td>13,5</td><td>14,0</td></tr>
+              <tr><th scope="row">250 °C</th><td>12,3</td><td>12,3</td><td>12,3</td></tr>
+              <tr><th scope="row">300 °C (pico)</th><td>10,4</td><td>10,4</td><td>10,4</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="tech-note">Ferro nodular: ASME B16.42, máximo de 17,5 kgf/cm² (17,2 bar) a 38 °C. Vale sempre o menor limite entre corpo e sede; em temperatura elevada, opere com margem de segurança.</p>
+        </div>
+
+        <div class="tech-block">
+          <h3>Configuração construtiva</h3>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Materiais por componente">
+            <table>
+              <thead><tr><th scope="col">Componente</th><th scope="col">Materiais disponíveis</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Corpo</th><td>WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
+                <tr><th scope="row">Disco</th><td>WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
+                <tr><th scope="row">Haste</th><td>WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
+                <tr><th scope="row">Buchas</th><td>Bronze, WCB, ferro nodular, CF8, CF8M, CF3</td></tr>
+                <tr><th scope="row">Sede</th><td>RPTFE, PTFE reforçado com fibra de vidro</td></tr>
+                <tr><th scope="row">Gaxeta</th><td>Carbono e grafite</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="tech-note">WCB: ASTM A216 Gr. WCB. CF8, CF8M e CF3: ASTM A351, equivalentes a AISI 304, 316 e 304L. A combinação é definida pelo fluido, pela temperatura e pela especificação do cliente.</p>
+
+          <h3 class="tech-sub">Normas de referência</h3>
+          <dl class="norms">
+            <div><dt>API 609</dt><dd>Projeto, Categoria B</dd></div>
+            <div><dt>API 598</dt><dd>Inspeção e ensaios</dd></div>
+            <div><dt>ASME B16.34</dt><dd>P × T, aço e inox</dd></div>
+            <div><dt>ASME B16.42</dt><dd>P × T, ferro nodular</dd></div>
+            <div><dt>ASME B16.5</dt><dd>Furação 2" a 24"</dd></div>
+            <div><dt>ASME B16.47</dt><dd>Furação 26" a 48"</dd></div>
+            <div><dt>ISO 5211</dt><dd>Acoplamento do atuador</dd></div>
+            <div><dt>ASTM A216 / A351</dt><dd>Materiais fundidos</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="tech-block" id="aplicacoes">
+        <h3>Onde aplicar</h3>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Aplicações no setor sucroenergético">
+          <table>
+            <caption>Setor sucroenergético</caption>
+            <thead><tr><th scope="col">Serviço</th><th scope="col">Condição</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Vapor saturado</th><td>Até ≈ 13–14 kgf/cm² e 195 °C</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Caldo bruto, clarificado e filtrado</th><td>Evitar alto teor de areia</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Xarope e mel final</th><td>Dentro da curva P × T</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Etanol e derivados</th><td>Dentro da curva P × T</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Óleo térmico</th><td>Até 250 °C contínuo; confirmar exigência de fire-safe</td><td class="st st--warn">Com restrição</td></tr>
+              <tr><th scope="row">Fluidos com sólidos abrasivos</th><td>Desgaste acelerado da sede</td><td class="st st--no">Não recomendada</td></tr>
+              <tr><th scope="row">Serviço fire-safe certificado</th><td>Válvula sem certificação API 607</td><td class="st st--no">Não recomendada</td></tr>
+              <tr><th scope="row">Operação contínua acima de 250 °C</th><td>Limite térmico da sede RPTFE</td><td class="st st--no">Não recomendada</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Aplicações em plantas de etanol de milho">
+          <table>
+            <caption>Plantas de etanol de milho</caption>
+            <thead><tr><th scope="col">Fluido</th><th scope="col">Condição típica</th><th scope="col">Corpo, disco, haste e buchas</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Óleo</th><td>Óleo de milho ou térmico, até 250 °C</td><td>WCB, ferro nodular, CF8, CF8M, CF3</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Xarope</th><td>Vinhaça concentrada, levemente ácida (pH ≈ 4), quente</td><td>CF8, CF8M, CF3</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Soda cáustica</th><td>CIP alcalino, diluída, até ≈ 90 °C</td><td>WCB, ferro nodular, CF8, CF8M, CF3</td><td class="st st--ok">Indicada</td></tr>
+              <tr><th scope="row">Ácido sulfâmico</th><td>Desincrustação de evaporadores, diluído</td><td>CF8M, CF8, CF3</td><td class="st st--warn">Somente inox</td></tr>
+              <tr><th scope="row">Ácido nítrico (CIP ácido)</th><td>pH 1 a 3, 0,5 a 2 %</td><td>CF3, CF8, CF8M</td><td class="st st--warn">Somente inox</td></tr>
+              <tr><th scope="row">CIP alternado ácido e soda</th><td>A mesma linha recebe os dois ciclos</td><td>CF8M, CF3</td><td class="st st--warn">Somente inox</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tech-note">WCB e ferro nodular não devem ser aplicados em contato com ácidos. Sede RPTFE e gaxeta de carbono e grafite são compatíveis com todos os fluidos acima. Ácido sulfâmico: limitar a ≈ 60 °C. A seleção final deve considerar as condições reais de operação; consulte a NEW para aplicações fora destes limites.</p>
+      </div>
     </section>
 
     <!-- Segmentos -->
