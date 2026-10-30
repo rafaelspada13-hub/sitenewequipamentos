@@ -11,7 +11,7 @@ const URL = 'file://' + path.join(ROOT, 'index.html');
 async function openPage(browser, { block, viewport } = {}) {
   const page = await browser.newPage({ viewport: viewport || { width: 1440, height: 900 } });
   await page.addInitScript(() => { window.__opened = []; window.open = (u) => { window.__opened.push(u); return null; }; });
-  if (block) await page.route('**/' + block, (route) => route.abort());
+  if (block) await page.route((u) => u.pathname.endsWith('/' + block), (route) => route.abort());
   await page.goto(URL);
   return page;
 }
