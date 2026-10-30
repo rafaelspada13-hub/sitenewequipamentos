@@ -35,7 +35,8 @@ const tests = {
   '"Orçar este item" leva ao formulário com o produto selecionado': async (browser) => {
     const page = await openPage(browser);
     await page.locator('[data-produto="Válvula Borboleta Bi-excêntrica Classe 150"] .js-orcar').click();
-    await page.waitForTimeout(900);
+    // A rolagem suave pode levar alguns segundos numa página longa.
+    await page.waitForFunction(() => { const t = document.getElementById('orcamentoForm').getBoundingClientRect().top; return t >= 0 && t < 900; }, null, { timeout: 5000 }).catch(() => {});
     assert.strictEqual(await page.$eval('#produto', (s) => s.value), 'Válvula Borboleta Bi-excêntrica Classe 150');
     const top = await page.$eval('#orcamentoForm', (f) => f.getBoundingClientRect().top);
     assert.ok(top >= 0 && top < 900, `formulário fora da tela (top ${top})`);

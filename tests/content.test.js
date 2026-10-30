@@ -50,6 +50,8 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   }
   check(text.includes('24 anos'), 'tempo de experiência ausente');
   check(await page.locator('img[src*="fachada"]').count() === 1, 'foto da fachada ausente');
+  check(await page.locator('#bi-excentrica img[src*="bi-excentrica-new"]').count() === 1, 'render da bi-excêntrica NEW ausente da ficha técnica');
+  check(await page.locator('[data-produto*="Bi-excêntrica"] img[src*="bi-excentrica-new"]').count() === 1, 'render ausente do item do catálogo');
   for (const s of ['Caldeiraria', 'Frota própria']) check(text.includes(s), `serviço "${s}" ausente`);
   // Endereços versionados: o navegador não pode reaproveitar o CSS/JS do site antigo em cache.
   for (const sel of ['link[rel=stylesheet][href^="css/style.css"]', 'script[src^="js/main.js"]', 'script[src^="js/whatsapp.js"]']) {
