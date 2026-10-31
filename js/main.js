@@ -55,6 +55,25 @@
     valveEl.style.transform = prev;
   }
 
+  // Posição do palco: no computador a válvula fica à direita do texto; no celular/tablet,
+  // embaixo dele e centralizada, com a altura ajustada ao espaço livre.
+  var copyEl = heroEl.querySelector('.hero-copy');
+  var RAZAO = 3600 / 1400, CENTRO = 0.50083, TOPO_VALVULA = 0.229;
+  function ajustarPalco() {
+    var w = stage.clientWidth, alturaPalco = stage.clientHeight, h, cx;
+    if (window.innerWidth > 900) {
+      h = alturaPalco;
+      var fimTexto = copyEl.offsetLeft + copyEl.offsetWidth;
+      cx = Math.max(w * 0.7, fimTexto + h * 0.3);
+    } else {
+      var baseTexto = copyEl.offsetTop + copyEl.offsetHeight + 12;
+      h = Math.max(220, Math.min(alturaPalco * 0.62, (alturaPalco - baseTexto) / (1 - TOPO_VALVULA)));
+      cx = w / 2;
+    }
+    valveEl.style.height = h + 'px';
+    valveEl.style.left = (cx - h * RAZAO * CENTRO) + 'px';
+  }
+
   function abrirSite() {
     if (root.classList.contains('site-aberto')) return;
     root.classList.add('site-aberto');
@@ -176,7 +195,8 @@
   }
 
   window.addEventListener('scroll', function () { window.requestAnimationFrame(updateValve); }, { passive: true });
-  window.addEventListener('resize', function () { centroBase = null; redimensionar(); updateValve(); });
+  window.addEventListener('resize', function () { centroBase = null; ajustarPalco(); redimensionar(); updateValve(); });
+  ajustarPalco();
   updateValve();
 
   /* ---------- Cabeçalho, menu e botão flutuante ---------- */

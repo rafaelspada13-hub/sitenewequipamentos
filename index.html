@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261031j" />
+  <link rel="stylesheet" href="css/style.css?v=20261031m" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
@@ -41,6 +41,16 @@
     <section class="hero" id="inicio">
       <div class="hero-pin">
         <div class="hero-stage">
+          <div id="valvula" class="valve-photo" role="img" aria-label="Válvula borboleta bi-excêntrica NEW: conforme a página rola, o disco gira, o vapor passa e a válvula se abre para o site">
+            <span class="valve-bore" aria-hidden="true"></span>
+            <img class="valve-body" src="img/produtos/palco-valvula.webp" alt="" width="3600" height="1400" fetchpriority="high" />
+            <span class="valve-edge" aria-hidden="true"></span>
+            <picture class="valve-disc-wrap" aria-hidden="true">
+              <source srcset="img/produtos/valvula-disco.webp" type="image/webp" />
+              <img id="valvula-disco" class="valve-disc" src="img/produtos/valvula-disco.png" alt="" width="352" height="392" />
+            </picture>
+          </div>
+
           <div class="hero-copy">
             <h1 class="hero-title">Válvulas industriais</h1>
             <p class="hero-lead">Fornecimento, automação e manutenção de borboleta bi‑excêntrica, gaveta, globo e retenção para usinas e indústrias de todo o Brasil.</p>
@@ -49,26 +59,11 @@
               <a href="#contato" class="btn">Pedir orçamento</a>
               <a href="#simulador" class="link-arrow">Simular minha aplicação</a>
             </div>
-          </div>
-
-          <figure class="valve">
-            <div id="valvula" class="valve-photo" role="img" aria-label="Válvula borboleta bi-excêntrica NEW: conforme a página rola, o disco gira, o fluido passa e a válvula se abre para o site">
-              <span class="valve-bore" aria-hidden="true"></span>
-              <picture class="valve-body">
-                <source srcset="img/produtos/valvula-corpo.webp" type="image/webp" />
-                <img src="img/produtos/valvula-corpo.png" alt="" width="704" height="1140" fetchpriority="high" />
-              </picture>
-              <span class="valve-edge" aria-hidden="true"></span>
-              <picture class="valve-disc-wrap" aria-hidden="true">
-                <source srcset="img/produtos/valvula-disco.webp" type="image/webp" />
-                <img id="valvula-disco" class="valve-disc" src="img/produtos/valvula-disco.png" alt="" width="352" height="392" />
-              </picture>
-            </div>
-            <figcaption class="valve-readout" aria-live="off">
+            <p class="valve-readout" aria-live="off">
               <span class="valve-pct" id="valvula-abertura">100%</span>
               <span class="valve-label">aberta · <span id="valvula-angulo">90°</span></span>
-            </figcaption>
-          </figure>
+            </p>
+          </div>
 
           <p class="hero-hint" aria-hidden="true">Role para abrir a válvula</p>
           <canvas id="valvula-fluxo" class="valve-particles" aria-hidden="true"></canvas>
@@ -845,10 +840,10 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/engenharia.js?v=20261031j"></script>
-  <script src="js/whatsapp.js?v=20261031j"></script>
-  <script src="js/interativo.js?v=20261031j"></script>
-  <script src="js/vapor.js?v=20261031j"></script>
-  <script src="js/main.js?v=20261031j"></script>
+  <script src="js/engenharia.js?v=20261031m"></script>
+  <script src="js/whatsapp.js?v=20261031m"></script>
+  <script src="js/interativo.js?v=20261031m"></script>
+  <script src="js/vapor.js?v=20261031m"></script>
+  <script src="js/main.js?v=20261031m"></script>
 </body>
 </html>

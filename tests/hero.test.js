@@ -124,8 +124,9 @@ const tests = {
   'no celular a abertura cabe sem rolagem horizontal': async (browser) => {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.goto(URL);
-    const box = await page.$eval('#valvula', (s) => s.getBoundingClientRect().right);
-    assert.ok(box <= 390, `válvula passa da tela (${box})`);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= 390), 'página rola na horizontal');
+    const disco = await page.$eval('#valvula-disco', (d) => { const r = d.getBoundingClientRect(); return [r.left, r.right]; });
+    assert.ok(disco[0] >= 0 && disco[1] <= 390, `disco fora da tela (${disco})`);
     assert.ok(await page.isVisible('#inicio h1'));
   },
 };
