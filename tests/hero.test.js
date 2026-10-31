@@ -31,6 +31,15 @@ const tests = {
     assert.ok(await page.isVisible('#inicio a.btn[href="#contato"]'));
     assert.strictEqual(await page.locator('.hero-line, .hero-track').count(), 0, 'letreiro antigo ainda presente');
   },
+  'pelo furo passa fluxo, não foto': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    assert.strictEqual(await page.locator('#valvula image').count(), 0, 'ainda há foto dentro da válvula');
+    assert.ok(await page.locator('#valvula-fluxo line').count() >= 24, 'fluxo ausente');
+    const opacityAt = async (f) => { await scrollHeroTo(page, f); return parseFloat(await page.$eval('#valvula-fluxo', (g) => getComputedStyle(g).opacity)); };
+    assert.ok((await opacityAt(0)) < 0.05, 'fluxo visível com a válvula fechada');
+    assert.ok((await opacityAt(1)) > 0.9, 'fluxo fraco com a válvula aberta');
+  },
   'no topo a válvula está fechada': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);

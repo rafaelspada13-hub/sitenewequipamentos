@@ -198,7 +198,21 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .v-wheel { fill: none; stroke: #9aa29c; stroke-width: 8; }
 .v-neck { fill: #3a403c; stroke: #7d857f; stroke-width: 2; }
 .v-holes circle { fill: var(--bg); stroke: #7d857f; stroke-width: 2; }
-.v-photo { filter: brightness(calc(0.45 + var(--p) * 0.55)); }
+.v-bore { fill: #0d0f0e; }
+.v-tube { fill: none; stroke: #232826; stroke-width: 2; }
+#valvula-fluxo { opacity: clamp(0, calc(var(--p) * 1.25 - 0.08), 1); }
+.v-streak {
+  stroke: var(--brand-bright); stroke-width: 2.5; stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  transform-box: view-box; transform-origin: 300px 430px;
+  animation: fluxo 1.6s linear infinite;
+}
+.v-streak--hi { stroke: #e9fff2; }
+@keyframes fluxo {
+  0% { transform: scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: scale(5.6); opacity: 0.15; }
+}
 .v-seat { fill: none; stroke: #c2187a; stroke-width: 16; }
 .v-disc { fill: #454c47; stroke: #c4cbc6; stroke-width: 3; }
 .v-disc-ring { fill: none; stroke: #6c746e; stroke-width: 2; }
@@ -256,7 +270,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 0.22em; height: 0.22em; border-radius: 50%;
   background: currentColor;
 }
-.motion-paused .segments-track { animation-play-state: paused; }
+.motion-paused .segments-track,
+.motion-paused .v-streak { animation-play-state: paused; }
 
 .motion-toggle {
   display: none;
@@ -670,6 +685,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .segments-track { animation: none; }
+  .v-streak { animation: none; transform: scale(2.6); }
   .js .reveal { transform: none; transition: opacity 0.3s; }
   .panel, .frame img, .btn, .link-arrow::after { transition: none; }
 }
