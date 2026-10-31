@@ -96,65 +96,77 @@
     if (window.scrollY > pin.offsetTop + run - 2 && !reduceMotion) abrirSite();
   }
 
-  /* Partículas do fluxo: saem do centro do furo em direção a quem olha.
-     Ficam presas à elipse do furo; no mergulho, a elipse cresce e vira jato na tela inteira. */
-  var ctx = canvas.getContext && canvas.getContext('2d');
+  /* Fluxo pelo furo: vapor em WebGL (js/vapor.js); sem WebGL, partículas em 2D.
+     Fica preso à elipse do furo; no mergulho, a elipse cresce e o fluxo toma a tela inteira. */
+  var vapor = !reduceMotion && window.NEW && window.NEW.criarVapor ? window.NEW.criarVapor(canvas) : null;
+  var ctx = !vapor && canvas.getContext ? canvas.getContext('2d') : null;
+  canvas.dataset.modo = vapor ? 'vapor' : 'particulas';
   var particulas = [];
   var ultimoQuadro = 0;
+  var tempo = 0;
   var ativo = false;
 
   function redimensionar() {
+    if (vapor) return vapor.redimensionar(stage.clientWidth, stage.clientHeight);
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(stage.clientWidth * dpr);
     canvas.height = Math.round(stage.clientHeight * dpr);
     if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
+  function geometriaDoFuro() {
+    var b = boreEl.getBoundingClientRect(), st = stage.getBoundingClientRect();
+    return {
+      cx: b.left + b.width / 2 - st.left, cy: b.top + b.height / 2 - st.top,
+      rx: b.width / 2, ry: b.height / 2, w: st.width, h: st.height,
+    };
+  }
+
+  function desenharParticulas(geo, dt, r, z) {
+    ctx.clearRect(0, 0, geo.w, geo.h);
+    if (r <= 0.02) { particulas.length = 0; return; }
+    var vel = 0.35 + r * 0.55 + z * 2.6;          // raios por segundo
+    var nascem = Math.round((r * 3 + z * 10) * (60 * dt));
+    for (var n = 0; n < nascem && particulas.length < 900; n++) {
+      particulas.push({ a: Math.random() * Math.PI * 2, d: Math.random() * 0.08, v: 0.6 + Math.random() * 0.8, t: Math.random(), luz: Math.random() < 0.3 });
+    }
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(geo.cx, geo.cy, geo.rx, geo.ry, 0, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.lineCap = 'round';
+    for (var i = particulas.length - 1; i >= 0; i--) {
+      var q = particulas[i];
+      var d0 = q.d;
+      q.d += q.v * vel * dt * (0.4 + q.d * 1.6);  // acelera ao se aproximar, como perspectiva
+      if (q.d > 1.15) { particulas.splice(i, 1); continue; }
+      var cos = Math.cos(q.a), sin = Math.sin(q.a);
+      var cauda = Math.max(d0, q.d - (0.02 + z * 0.12 + q.d * 0.05));
+      ctx.globalAlpha = Math.min(1, q.d * 2.2) * (0.55 + q.t * 0.45);
+      ctx.strokeStyle = q.luz ? '#f2fff7' : '#4ac480';
+      ctx.lineWidth = (0.8 + q.d * 2.6) * (1 + z * 0.8);
+      ctx.beginPath();
+      ctx.moveTo(geo.cx + cos * cauda * geo.rx, geo.cy + sin * cauda * geo.ry);
+      ctx.lineTo(geo.cx + cos * q.d * geo.rx, geo.cy + sin * q.d * geo.ry);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   function quadro(agora) {
     if (!ativo) return;
     var dt = Math.min(0.05, (agora - (ultimoQuadro || agora)) / 1000);
     ultimoQuadro = agora;
-    var r = estado.r, z = estado.z;
-    var w = stage.clientWidth, h = stage.clientHeight;
-    ctx.clearRect(0, 0, w, h);
-
-    if (r > 0.02 && !root.classList.contains('motion-paused')) {
-      var b = boreEl.getBoundingClientRect(), st = stage.getBoundingClientRect();
-      var cx = b.left + b.width / 2 - st.left, cy = b.top + b.height / 2 - st.top;
-      var rx = b.width / 2, ry = b.height / 2;
-      var vel = 0.35 + r * 0.55 + z * 2.6;          // raios por segundo
-      var nascem = Math.round((r * 3 + z * 10) * (60 * dt));
-      for (var n = 0; n < nascem && particulas.length < 900; n++) {
-        particulas.push({ a: Math.random() * Math.PI * 2, d: Math.random() * 0.08, v: 0.6 + Math.random() * 0.8, t: Math.random(), luz: Math.random() < 0.3 });
-      }
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.lineCap = 'round';
-      for (var i = particulas.length - 1; i >= 0; i--) {
-        var q = particulas[i];
-        var d0 = q.d;
-        q.d += q.v * vel * dt * (0.4 + q.d * 1.6);  // acelera ao se aproximar, como perspectiva
-        if (q.d > 1.15) { particulas.splice(i, 1); continue; }
-        var cos = Math.cos(q.a), sin = Math.sin(q.a);
-        var cauda = Math.max(d0, q.d - (0.02 + z * 0.12 + q.d * 0.05));
-        ctx.globalAlpha = Math.min(1, q.d * 2.2) * (0.55 + q.t * 0.45);
-        ctx.strokeStyle = q.luz ? '#f2fff7' : '#4ac480';
-        ctx.lineWidth = (0.8 + q.d * 2.6) * (1 + z * 0.8);
-        ctx.beginPath();
-        ctx.moveTo(cx + cos * cauda * rx, cy + sin * cauda * ry);
-        ctx.lineTo(cx + cos * q.d * rx, cy + sin * q.d * ry);
-        ctx.stroke();
-      }
-      ctx.restore();
-    } else if (r <= 0.02) {
-      particulas.length = 0;
+    if (!root.classList.contains('motion-paused')) {
+      tempo += dt;
+      var geo = geometriaDoFuro();
+      if (vapor) vapor.desenhar(geo, tempo, Math.min(1, estado.r * 1.3), estado.z);
+      else desenharParticulas(geo, dt, estado.r, estado.z);
     }
     window.requestAnimationFrame(quadro);
   }
 
-  if (ctx && !reduceMotion) {
+  if ((vapor || ctx) && !reduceMotion) {
     redimensionar();
     new IntersectionObserver(function (entries) {
       var visivel = entries[0].isIntersecting;

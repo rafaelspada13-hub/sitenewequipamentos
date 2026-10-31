@@ -40,6 +40,13 @@ const tests = {
     assert.ok((await opacityAt(0)) < 0.05, 'fluxo visível com a válvula fechada');
     assert.ok((await opacityAt(0.55)) > 0.9, 'fluxo fraco com a válvula aberta');
   },
+  'o fluxo é vapor desenhado em WebGL': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    await scrollHeroTo(page, 0.55);
+    await page.waitForTimeout(400);
+    assert.strictEqual(await page.$eval('#valvula-fluxo', (c) => c.dataset.modo), 'vapor');
+  },
   'no topo a válvula está fechada': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
