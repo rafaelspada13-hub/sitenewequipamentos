@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261031d" />
+  <link rel="stylesheet" href="css/style.css?v=20261031e" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
@@ -26,10 +26,10 @@
       <img src="img/logo-claro.png" alt="NEW Válvulas e Equipamentos Industriais" width="916" height="642" />
     </a>
     <nav class="nav" id="nav" aria-label="Principal">
-      <a href="#produtos">Válvulas</a>
-      <a href="#bi-excentrica">Ficha técnica</a>
+      <a href="#linha">Válvulas</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#configurador">Monte a sua</a>
       <a href="#servicos">Serviços</a>
-      <a href="#estrutura">Estrutura</a>
       <a href="#contato" class="nav-cta">Pedir orçamento</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -47,7 +47,7 @@
             <p class="hero-fact">Sertãozinho/SP · atendimento em todo o território nacional</p>
             <div class="hero-actions">
               <a href="#contato" class="btn">Pedir orçamento</a>
-              <a href="#produtos" class="link-arrow">Ver as válvulas</a>
+              <a href="#simulador" class="link-arrow">Simular minha aplicação</a>
             </div>
           </div>
 
@@ -112,44 +112,89 @@
         </picture>
         <p class="intro-note reveal">Nossa missão: garantir confiabilidade e eficiência nas operações industriais, com válvulas de alta performance, suporte técnico ágil e atendimento transparente.</p>
       </div>
+      <dl class="stats">
+        <div class="stat"><dt>anos de experiência da equipe</dt><dd class="stat-num" data-count="24">24</dd></div>
+        <div class="stat"><dt>clientes atendidos</dt><dd class="stat-num" data-count="18">18</dd></div>
+        <div class="stat"><dt>borboletas de 2" até</dt><dd class="stat-num" data-count="72" data-suffix='"'>72"</dd></div>
+        <div class="stat"><dt>gaveta, globo e retenção até</dt><dd class="stat-num" data-count="1500" data-suffix="#">1.500#</dd></div>
+      </dl>
     </section>
 
-    <!-- Produtos -->
-    <section class="showcase" id="produtos">
-      <h2 class="section-title reveal">Válvulas para serviço pesado</h2>
-      <div class="panels">
-        <figure class="panel">
-          <picture>
-            <source srcset="img/opt/borboleta-vermelha.webp" type="image/webp" />
-            <img src="img/opt/borboleta-vermelha.jpg" alt="Válvula borboleta bi-excêntrica com corpo e atuador vermelhos" width="1200" height="1600" loading="lazy" />
-          </picture>
-          <figcaption class="panel-title">Bi‑excêntrica<br />Classe 150</figcaption>
-        </figure>
-        <figure class="panel">
-          <picture>
-            <source srcset="img/opt/gaveta-par.webp" type="image/webp" />
-            <img src="img/opt/gaveta-par.jpg" alt="Par de válvulas gaveta com volantes vermelhos sobre palete" width="1200" height="1600" loading="lazy" />
-          </picture>
-        </figure>
-        <figure class="panel">
-          <picture>
-            <source srcset="img/opt/borboleta-grande-1.webp" type="image/webp" />
-            <img src="img/opt/borboleta-grande-1.jpg" alt="Válvulas borboleta de grande diâmetro com protetores de flange" width="1200" height="1600" loading="lazy" />
-          </picture>
-        </figure>
-        <figure class="panel">
-          <picture>
-            <source srcset="img/opt/globo-controle.webp" type="image/webp" />
-            <img src="img/opt/globo-controle.jpg" alt="Válvula globo de controle com atuador pneumático azul" width="1200" height="1600" loading="lazy" />
-          </picture>
-        </figure>
+    <!-- Linha de válvulas: desliza na horizontal com a rolagem -->
+    <section class="rail" id="linha" aria-label="Válvulas">
+      <div class="rail-sticky">
+        <div class="rail-head">
+          <h2 class="section-title">Linha de válvulas</h2>
+          <p>Fabricação e fornecimento para vapor, caldo, água, químicos, pastas e alta pressão.</p>
+        </div>
+        <div class="rail-viewport" tabindex="0" role="region" aria-label="Linha de válvulas, role para o lado">
+          <div class="rail-track">
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/bi-excentrica-new.webp" type="image/webp" /><img src="img/produtos/bi-excentrica-new.jpg" alt="Válvula borboleta bi-excêntrica NEW com caixa redutora" width="704" height="1534" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Borboleta bi‑excêntrica</h3>
+                <ul><li>2" a 48"</li><li>ASME 150</li><li>até 250 °C</li></ul>
+                <a class="link-arrow" href="#item-bi">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/borboleta-concentrica.webp" type="image/webp" /><img src="img/produtos/borboleta-concentrica.jpg" alt="Válvula borboleta concêntrica wafer vermelha" width="226" height="350" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Borboleta concêntrica</h3>
+                <ul><li>2" a 40"</li><li>API 609</li><li>wafer e semi-lug</li></ul>
+                <a class="link-arrow" href="#item-concentrica">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/esfera-segmentada.webp" type="image/webp" /><img src="img/produtos/esfera-segmentada.jpg" alt="Válvula esfera segmentada em inox" width="330" height="548" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Esfera segmentada</h3>
+                <ul><li>CF8 / CF8M</li><li>Classe VI</li><li>4 acionamentos</li></ul>
+                <a class="link-arrow" href="#item-esfera">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/guilhotina.webp" type="image/webp" /><img src="img/produtos/guilhotina.jpg" alt="Válvula guilhotina com atuador pneumático" width="237" height="558" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Guilhotina</h3>
+                <ul><li>2" a 30"</li><li>sólidos e pastas</li><li>vedação em inox</li></ul>
+                <a class="link-arrow" href="#item-guilhotina">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/gaveta.webp" type="image/webp" /><img src="img/produtos/gaveta.jpg" alt="Válvula gaveta flangeada com volante" width="133" height="320" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Gaveta</h3>
+                <ul><li>150# a 1.500#</li><li>WCB a CA15</li><li>4 acionamentos</li></ul>
+                <a class="link-arrow" href="#item-gaveta">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card">
+              <picture class="rail-img"><source srcset="img/produtos/pressure-seal.webp" type="image/webp" /><img src="img/produtos/pressure-seal.jpg" alt="Corte de válvulas pressure seal" width="308" height="285" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Pressure seal</h3>
+                <ul><li>150# a 1.500#</li><li>alta pressão</li><li>alta temperatura</li></ul>
+                <a class="link-arrow" href="#item-pressureseal">Ver ficha</a>
+              </div>
+            </article>
+            <article class="rail-card rail-card--photo">
+              <picture class="rail-img"><source srcset="img/opt/globo-controle.webp" type="image/webp" /><img src="img/opt/globo-controle.jpg" alt="Válvula globo de controle com atuador azul no barracão" width="1200" height="1600" loading="lazy" /></picture>
+              <div class="rail-info">
+                <h3>Globo de controle</h3>
+                <ul><li>controle e bloqueio</li><li>atuador pneumático</li><li>150# a 1.500#</li></ul>
+                <a class="link-arrow" href="#item-gaveta">Ver ficha</a>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
-      <p class="caption">Borboleta, gaveta, globo e retenção, do fornecimento à automação.</p>
+    </section>
 
+    <section class="catalog-section" aria-label="Catálogo">
       <div class="catalog">
         <h2 class="catalog-word reveal" aria-label="Catálogo de válvulas e acessórios">Catálogo</h2>
 
-        <details class="item" data-produto="Válvula Borboleta Bi-excêntrica Classe 150" open>
+        <details class="item" id="item-bi" data-produto="Válvula Borboleta Bi-excêntrica Classe 150" open>
           <summary>Borboleta bi-excêntrica Classe 150</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/bi-excentrica-new-mini.webp" type="image/webp" /><img src="img/produtos/bi-excentrica-new-mini.jpg" alt="Válvula borboleta bi-excêntrica NEW com caixa redutora" width="240" height="523" loading="lazy" /></picture>
@@ -169,7 +214,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula Borboleta Concêntrica">
+        <details class="item" id="item-concentrica" data-produto="Válvula Borboleta Concêntrica">
           <summary>Borboleta concêntrica</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/borboleta-concentrica.webp" type="image/webp" /><img src="img/produtos/borboleta-concentrica.jpg" alt="Válvula borboleta concêntrica wafer com corpo vermelho" width="226" height="350" loading="lazy" /></picture>
@@ -186,7 +231,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula de Retenção">
+        <details class="item" id="item-retencao" data-produto="Válvula de Retenção">
           <summary>Retenção wafer</summary>
           <div class="item-body">
             <p>Evita refluxo em sistemas de bombeamento e processo: químicos, vapor, óleo e água.</p>
@@ -203,7 +248,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula Gaveta e Globo">
+        <details class="item" id="item-gaveta" data-produto="Válvula Gaveta e Globo">
           <summary>Gaveta e globo</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/gaveta.webp" type="image/webp" /><img src="img/produtos/gaveta.jpg" alt="Válvula gaveta flangeada com volante" width="133" height="320" loading="lazy" /></picture>
@@ -219,7 +264,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula Pressure Seal">
+        <details class="item" id="item-pressureseal" data-produto="Válvula Pressure Seal">
           <summary>Pressure seal</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/pressure-seal.webp" type="image/webp" /><img src="img/produtos/pressure-seal.jpg" alt="Corte de válvulas pressure seal mostrando a vedação do castelo" width="308" height="285" loading="lazy" /></picture>
@@ -235,7 +280,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula Esfera Segmentada">
+        <details class="item" id="item-esfera" data-produto="Válvula Esfera Segmentada">
           <summary>Esfera segmentada</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/esfera-segmentada.webp" type="image/webp" /><img src="img/produtos/esfera-segmentada.jpg" alt="Válvula esfera segmentada em inox com atuador" width="330" height="548" loading="lazy" /></picture>
@@ -252,7 +297,7 @@
           </div>
         </details>
 
-        <details class="item" data-produto="Válvula Guilhotina">
+        <details class="item" id="item-guilhotina" data-produto="Válvula Guilhotina">
           <summary>Guilhotina</summary>
           <div class="item-body">
             <picture class="item-img"><source srcset="img/produtos/guilhotina.webp" type="image/webp" /><img src="img/produtos/guilhotina.jpg" alt="Válvula guilhotina com atuador pneumático vermelho" width="237" height="558" loading="lazy" /></picture>
@@ -509,6 +554,92 @@
       </div>
     </section>
 
+    <!-- Simulador de aplicação -->
+    <section class="sim" id="simulador">
+      <div class="sim-head reveal">
+        <h2 class="section-title">Simulador de aplicação</h2>
+        <p>Escolha o fluido e ajuste temperatura e pressão. A resposta segue as regras do boletim técnico da bi‑excêntrica Classe 150.</p>
+      </div>
+      <p class="sim-fallback">O simulador precisa de JavaScript. Consulte a tabela "Onde aplicar" na ficha técnica acima ou fale com a NEW.</p>
+      <div class="sim-app">
+        <form class="sim-controls" onsubmit="return false">
+          <fieldset>
+            <legend>Fluido</legend>
+            <div class="chips"><label class="chip"><input type="radio" name="fluido" value="vapor" checked /><span>Vapor saturado</span></label><label class="chip"><input type="radio" name="fluido" value="caldo" /><span>Caldo de cana</span></label><label class="chip"><input type="radio" name="fluido" value="xarope" /><span>Xarope e mel</span></label><label class="chip"><input type="radio" name="fluido" value="etanol" /><span>Etanol</span></label><label class="chip"><input type="radio" name="fluido" value="oleo" /><span>Óleo térmico</span></label><label class="chip"><input type="radio" name="fluido" value="vinhaca" /><span>Vinhaça (milho)</span></label><label class="chip"><input type="radio" name="fluido" value="soda" /><span>Soda cáustica</span></label><label class="chip"><input type="radio" name="fluido" value="sulfamico" /><span>Ácido sulfâmico</span></label><label class="chip"><input type="radio" name="fluido" value="nitrico" /><span>Ácido nítrico</span></label><label class="chip"><input type="radio" name="fluido" value="cip" /><span>CIP ácido/soda</span></label><label class="chip"><input type="radio" name="fluido" value="abrasivo" /><span>Sólidos abrasivos</span></label><label class="chip"><input type="radio" name="fluido" value="firesafe" /><span>Fire-safe certificado</span></label></div>
+          </fieldset>
+          <div class="sim-range">
+            <label for="sim-temp">Temperatura</label>
+            <output id="sim-temp-out" for="sim-temp">180 °C</output>
+            <input id="sim-temp" type="range" min="20" max="320" step="5" value="180" />
+          </div>
+          <div class="sim-range">
+            <label for="sim-pressao">Pressão de operação</label>
+            <output id="sim-pressao-out" for="sim-pressao">10 kgf/cm²</output>
+            <input id="sim-pressao" type="range" min="0" max="22" step="0.5" value="10" />
+          </div>
+        </form>
+        <div class="sim-result" aria-live="polite">
+          <p class="sim-status" id="sim-status" data-status="indicada">Indicada</p>
+          <p class="sim-mat-label">Materiais de corpo e disco que atendem</p>
+          <ul class="sim-mats" id="sim-mats"></ul>
+          <ul class="sim-motivos" id="sim-motivos"></ul>
+          <svg class="sim-chart" data-x0="64" data-x1="600" data-y0="352" data-y1="24" data-pmax="22" viewBox="0 0 640 400" role="img" aria-label="Curva de pressão por temperatura com o ponto da sua aplicação">
+            <line class="pt-grid" x1="64" x2="600" y1="352.0" y2="352.0" /><text class="pt-tick" x="54" y="357.0" text-anchor="end">0</text><line class="pt-grid" x1="64" x2="600" y1="277.5" y2="277.5" /><text class="pt-tick" x="54" y="282.5" text-anchor="end">5</text><line class="pt-grid" x1="64" x2="600" y1="202.9" y2="202.9" /><text class="pt-tick" x="54" y="207.9" text-anchor="end">10</text><line class="pt-grid" x1="64" x2="600" y1="128.4" y2="128.4" /><text class="pt-tick" x="54" y="133.4" text-anchor="end">15</text><line class="pt-grid" x1="64" x2="600" y1="53.8" y2="53.8" /><text class="pt-tick" x="54" y="58.8" text-anchor="end">20</text><text class="pt-tick" x="64.0" y="378" text-anchor="middle">0</text><text class="pt-tick" x="153.3" y="378" text-anchor="middle">50</text><text class="pt-tick" x="242.7" y="378" text-anchor="middle">100</text><text class="pt-tick" x="332.0" y="378" text-anchor="middle">150</text><text class="pt-tick" x="421.3" y="378" text-anchor="middle">200</text><text class="pt-tick" x="510.7" y="378" text-anchor="middle">250</text><text class="pt-tick" x="600.0" y="378" text-anchor="middle">300</text>
+            <line class="pt-seat" x1="510.7" x2="510.7" y1="24" y2="352" />
+            <polyline class="pt-line pt-wcb" points="131.9,53.8 242.7,83.6 332.0,112.0 421.3,141.8 510.7,168.6 600.0,196.9" />
+            <polyline class="pt-line pt-cf8" points="131.9,62.8 242.7,113.5 332.0,135.8 421.3,150.7 510.7,168.6 600.0,196.9" />
+            <polyline class="pt-line pt-cf8m" points="131.9,62.8 242.7,106.0 332.0,126.9 421.3,143.3 510.7,168.6 600.0,196.9" />
+            <line id="sim-guia-x" class="sim-guia" x1="0" x2="0" y1="24" y2="352" />
+            <line id="sim-guia-y" class="sim-guia" x1="64" x2="600" y1="0" y2="0" />
+            <circle id="sim-ponto" class="sim-ponto" cx="385.6" cy="202.9" r="9" />
+            <text class="pt-axis" x="64" y="404">Temperatura (°C)</text>
+            <text class="pt-axis" x="12" y="18">kgf/cm²</text>
+          </svg>
+          <button type="button" class="btn btn--dark" id="sim-orcar">Orçar esta aplicação</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monte sua válvula -->
+    <section class="cfg" id="configurador">
+      <div class="cfg-head reveal">
+        <h2 class="section-title">Monte sua válvula</h2>
+        <p>Escolha tipo, bitola, classe, material e acionamento. O pedido chega pronto para a equipe técnica.</p>
+      </div>
+      <p class="sim-fallback">O configurador precisa de JavaScript. Use o formulário de orçamento abaixo.</p>
+      <div class="cfg-app">
+        <form class="cfg-steps" onsubmit="return false">
+          <fieldset>
+            <legend>Tipo</legend>
+            <div class="chips" id="cfg-tipos"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Bitola</legend>
+            <select id="cfg-bitola" aria-label="Bitola"></select>
+            <input id="cfg-bitola-livre" type="text" placeholder="Informe a bitola, ex.: 6&quot;" aria-label="Bitola" hidden />
+          </fieldset>
+          <fieldset>
+            <legend>Classe de pressão</legend>
+            <div class="chips" id="cfg-classes"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Material</legend>
+            <div class="chips" id="cfg-materiais"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Acionamento</legend>
+            <div class="chips" id="cfg-acionamentos"></div>
+          </fieldset>
+        </form>
+        <aside class="cfg-card" aria-live="polite">
+          <picture class="cfg-img"><img id="cfg-img" src="img/produtos/bi-excentrica-new-mini.jpg" alt="" width="240" height="523" /></picture>
+          <h3 id="cfg-nome">Borboleta bi‑excêntrica</h3>
+          <p id="cfg-resumo" class="cfg-resumo"></p>
+          <button type="button" class="btn" id="cfg-orcar">Orçar esta configuração</button>
+        </aside>
+      </div>
+    </section>
+
     <!-- Segmentos -->
     <section class="segments" id="segmentos">
       <div class="segments-band" aria-hidden="true">
@@ -594,6 +725,22 @@
           <p class="slip-total"><span>Válvula pronta para operar</span><b>com documentação</b></p>
         </div>
       </div>
+    </section>
+
+    <!-- Logística -->
+    <section class="map" id="logistica">
+      <div class="map-copy reveal">
+        <h2 class="section-title">Logística própria</h2>
+        <p>Frota própria e transportadoras parceiras, com equipe treinada e uniformizada. Toque numa região para ver a distância da base.</p>
+        <div class="map-btns"><button type="button" class="map-btn is-active" data-lugar="sertaozinho" data-info="Base da NEW no Distrito Industrial de Sertãozinho: estoque, manutenção e expedição.">Sertãozinho</button><button type="button" class="map-btn" data-lugar="ribeirao" data-info="Ribeirão Preto: ≈20 km em linha reta de Sertãozinho. Região de Sertãozinho e Ribeirão Preto, com frota própria.">Ribeirão Preto</button><button type="button" class="map-btn" data-lugar="rio-preto" data-info="São José do Rio Preto: ≈150 km em linha reta de Sertãozinho. Usinas e indústrias da região de São José do Rio Preto.">São José do Rio Preto</button><button type="button" class="map-btn" data-lugar="triangulo" data-info="Triângulo Mineiro: ≈155 km em linha reta de Sertãozinho. Uberaba, Uberlândia e usinas do Triângulo Mineiro.">Triângulo Mineiro</button><button type="button" class="map-btn" data-lugar="sul-minas" data-info="Sul de Minas: ≈270 km em linha reta de Sertãozinho. Varginha, Poços de Caldas e o Sul de Minas.">Sul de Minas</button><button type="button" class="map-btn" data-lugar="sao-paulo" data-info="Grande São Paulo: ≈300 km em linha reta de Sertãozinho. Capital e região metropolitana, com transportadoras parceiras.">Grande São Paulo</button></div>
+        <p class="map-info" id="mapa-info" aria-live="polite">Base da NEW no Distrito Industrial de Sertãozinho: estoque, manutenção e expedição.</p>
+      </div>
+      <svg class="map-radar" viewBox="0 0 640 640" role="img" aria-label="Esquema das regiões de entrega ao redor de Sertãozinho, posicionadas pelas coordenadas reais">
+        <circle class="map-ring" cx="320" cy="320" r="85" /><text class="map-ring-label" x="386" y="394">100 km</text><circle class="map-ring" cx="320" cy="320" r="170" /><text class="map-ring-label" x="446" y="454">200 km</text><circle class="map-ring" cx="320" cy="320" r="255" /><text class="map-ring-label" x="506" y="514">300 km</text>
+        <line class="map-axis" x1="320" y1="40" x2="320" y2="600" /><line class="map-axis" x1="40" y1="320" x2="600" y2="320" />
+        <text class="map-n" x="320" y="30" text-anchor="middle">N</text>
+        <g class="map-place map-place--base"><circle cx="320" cy="320" r="11" /><text x="306" y="346" text-anchor="end">Sertãozinho · NEW</text></g><g class="map-place" data-lugar="ribeirao"><line class="map-ray" x1="320" y1="320" x2="336" y2="324" /><circle cx="336" cy="324" r="8" /><text x="346" y="353" text-anchor="start">Ribeirão Preto</text></g><g class="map-place" data-lugar="rio-preto"><line class="map-ray" x1="320" y1="320" x2="198" y2="289" /><circle cx="198" cy="289" r="8" /><text x="184" y="294" text-anchor="end">São José do Rio Preto</text></g><g class="map-place" data-lugar="triangulo"><line class="map-ray" x1="320" y1="320" x2="325" y2="189" /><circle cx="325" cy="189" r="8" /><text x="339" y="194" text-anchor="start">Triângulo Mineiro</text></g><g class="map-place" data-lugar="sul-minas"><line class="map-ray" x1="320" y1="320" x2="546" y2="359" /><circle cx="546" cy="359" r="8" /><text x="560" y="364" text-anchor="start">Sul de Minas</text></g><g class="map-place" data-lugar="sao-paulo"><line class="map-ray" x1="320" y1="320" x2="440" y2="547" /><circle cx="440" cy="547" r="8" /><text x="454" y="552" text-anchor="start">Grande São Paulo</text></g>
+      </svg>
     </section>
 
     <!-- Estrutura e estoque -->
@@ -704,7 +851,7 @@
       <p class="footer-invite">Sua linha parou?<br />Fale com a NEW.</p>
       <a href="https://wa.me/5516997223976" class="btn btn--dark" target="_blank" rel="noopener">Chamar no WhatsApp</a>
       <ul class="footer-links">
-        <li><a href="#produtos">Válvulas</a></li>
+        <li><a href="#linha">Válvulas</a></li>
         <li><a href="#bi-excentrica">Ficha técnica</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="mailto:comercial@newequipamentos.ind.br">E-mail</a></li>
@@ -723,7 +870,9 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/whatsapp.js?v=20261031d"></script>
-  <script src="js/main.js?v=20261031d"></script>
+  <script src="js/engenharia.js?v=20261031e"></script>
+  <script src="js/whatsapp.js?v=20261031e"></script>
+  <script src="js/interativo.js?v=20261031e"></script>
+  <script src="js/main.js?v=20261031e"></script>
 </body>
 </html>

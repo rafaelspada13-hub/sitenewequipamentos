@@ -3,7 +3,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const URL = 'file://' + path.join(__dirname, '..', 'index.html');
-const SECTIONS = ['inicio', 'sobre', 'produtos', 'bi-excentrica', 'servicos', 'segmentos', 'estrutura', 'contato'];
+const SECTIONS = ['inicio', 'sobre', 'linha', 'bi-excentrica', 'servicos', 'segmentos', 'estrutura', 'contato'];
 
 let failures = 0;
 const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } };

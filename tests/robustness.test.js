@@ -67,7 +67,8 @@ const tests = {
   },
   'nenhuma foto aparece duas vezes na página': async (browser) => {
     const page = await openPage(browser);
-    const srcs = await page.$$eval('main img', (imgs) => imgs.map((i) => i.getAttribute('src')));
+    // Só fotografias (img/opt); imagens de produto se repetem de propósito em cartão, ficha e configurador.
+    const srcs = await page.$$eval('main img[src^="img/opt/"]', (imgs) => imgs.map((i) => i.getAttribute('src')));
     const hashes = srcs.map((s) => crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, s))).digest('hex'));
     const dup = srcs.filter((s, i) => hashes.indexOf(hashes[i]) !== i);
     assert.deepStrictEqual(dup, []);
