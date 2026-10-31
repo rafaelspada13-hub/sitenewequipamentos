@@ -49,6 +49,7 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
     check(await page.locator(`.item summary:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente do catálogo`);
   }
   check(text.includes('24 anos'), 'tempo de experiência ausente');
+  check(!text.includes('72"') && !/borboletas? de 150# a 300#/.test(text), 'borboleta só até 48" Classe 150');
   check(!/18\s*clientes/i.test(text) && !text.includes('clientes atendidos'), 'contagem de clientes não deve aparecer');
   check(text.includes('Principais clientes'), 'título "Principais clientes" ausente');
   check(await page.locator('img[src*="fachada"]').count() === 1, 'foto da fachada ausente');

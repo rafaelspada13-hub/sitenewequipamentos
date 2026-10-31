@@ -98,7 +98,7 @@
       materiais: ['WCB', 'Ferro nodular', 'CF8', 'CF8M', 'CF3'],
       acionamentos: ['Caixa redutora com volante', 'Atuador pneumático'] },
     { id: 'concentrica', nome: 'Borboleta concêntrica', produto: 'Válvula Borboleta Concêntrica',
-      bitolas: ate('40"'), classes: ['150#', '300#'],
+      bitolas: ate('40"'), classes: ['150#'],
       materiais: ['Ferro nodular', 'Aço-carbono', 'Inox'],
       acionamentos: ['Caixa redutora com volante', 'Atuador pneumático'] },
     { id: 'retencao', nome: 'Retenção', produto: 'Válvula de Retenção',

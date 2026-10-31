@@ -62,6 +62,8 @@ const tests = {
     const bi = E.TIPOS.find((t) => t.id === 'bi');
     assert.strictEqual(bi.bitolas[0], '2"');
     assert.strictEqual(bi.bitolas[bi.bitolas.length - 1], '48"');
+    const conc = E.TIPOS.find((t) => t.id === 'concentrica');
+    assert.deepStrictEqual(conc.classes, ['150#'], 'borboleta é Classe 150');
     const gui = E.TIPOS.find((t) => t.id === 'guilhotina');
     assert.strictEqual(gui.bitolas[gui.bitolas.length - 1], '30"');
     const gav = E.TIPOS.find((t) => t.id === 'gaveta');
