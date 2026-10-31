@@ -29,23 +29,142 @@
   }
   window.__newReady = true;
 
-  /* ---------- Abertura: a válvula abre conforme a página rola ---------- */
+  /* ---------- Abertura: a válvula abre, a câmera mergulha no furo e o site abre ---------- */
   var heroEl = document.getElementById('inicio');
   var pin = heroEl.querySelector('.hero-pin');
+  var stage = heroEl.querySelector('.hero-stage');
+  var valveEl = document.getElementById('valvula');
+  var boreEl = valveEl.querySelector('.valve-bore');
   var pctOut = document.getElementById('valvula-abertura');
   var angOut = document.getElementById('valvula-angulo');
+  var canvas = document.getElementById('valvula-fluxo');
+  var ABRE_ATE = 0.55;   // fração da rolagem em que o disco termina de girar
+  var MERGULHO = 0.6;    // a partir daqui a câmera entra pelo furo
+  var clamp01 = function (v) { return Math.min(1, Math.max(0, v)); };
+  var suave = function (t) { return t * t * (3 - 2 * t); };
+  var estado = { r: 1, z: 0 };
+  var centroBase = null;
+
+  // Centro do furo na tela, medido com a válvula sem ampliação (o palco fica fixo enquanto rola).
+  function medirCentro() {
+    var prev = valveEl.style.transform;
+    valveEl.style.transform = 'none';
+    var b = boreEl.getBoundingClientRect();
+    var st = stage.getBoundingClientRect();
+    centroBase = { x: b.left + b.width / 2 - st.left, y: b.top + b.height / 2 - st.top };
+    valveEl.style.transform = prev;
+  }
+
+  function abrirSite() {
+    if (root.classList.contains('site-aberto')) return;
+    root.classList.add('site-aberto');
+    // "Quem somos" entra sozinho, em sequência, sem esperar a rolagem.
+    document.querySelectorAll('#sobre .reveal').forEach(function (el, i) {
+      el.style.setProperty('--delay', (150 + i * 140) + 'ms');
+      el.classList.add('is-in');
+    });
+  }
 
   function updateValve() {
     var run = pin.offsetHeight - window.innerHeight;
-    var p = reduceMotion || run <= 0 ? 1 : Math.min(1, Math.max(0, (window.scrollY - pin.offsetTop) / run));
-    var angle = p * 90;
-    heroEl.style.setProperty('--p', p.toFixed(3));
+    var p = reduceMotion || run <= 0 ? 1 : clamp01((window.scrollY - pin.offsetTop) / run);
+    var r = reduceMotion ? 1 : clamp01(p / ABRE_ATE);
+    var z = reduceMotion ? 0 : clamp01((p - MERGULHO) / (1 - MERGULHO));
+    estado.r = r; estado.z = z;
+    var angle = r * 90;
+    heroEl.style.setProperty('--p', r.toFixed(3));
+    heroEl.style.setProperty('--z', z.toFixed(3));
     heroEl.style.setProperty('--sx', Math.max(0.02, Math.cos(angle * Math.PI / 180)).toFixed(3));
-    pctOut.textContent = Math.round(p * 100) + '%';
+    // clarão curto: sobe até 90% do mergulho e se desfaz até o fim
+    heroEl.style.setProperty('--flash', (suave(clamp01(1 - Math.abs(z - 0.9) / 0.1)) * 0.9).toFixed(3));
+    pctOut.textContent = Math.round(r * 100) + '%';
     angOut.textContent = Math.round(angle) + '°';
+    canvas.style.opacity = clamp01(r * 1.25 - 0.08).toFixed(3);
+
+    if (z > 0) {
+      if (!centroBase) medirCentro();
+      var ez = suave(z);
+      var escala = 1 + Math.pow(z, 2.2) * 16;
+      var st = stage.getBoundingClientRect();
+      var tx = (st.width / 2 - centroBase.x) * ez;
+      var ty = (st.height / 2 - centroBase.y) * ez;
+      valveEl.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + escala.toFixed(3) + ')';
+    } else {
+      valveEl.style.transform = '';
+      centroBase = null;
+    }
+    if (window.scrollY > pin.offsetTop + run - 2 && !reduceMotion) abrirSite();
   }
+
+  /* Partículas do fluxo: saem do centro do furo em direção a quem olha.
+     Ficam presas à elipse do furo; no mergulho, a elipse cresce e vira jato na tela inteira. */
+  var ctx = canvas.getContext && canvas.getContext('2d');
+  var particulas = [];
+  var ultimoQuadro = 0;
+  var ativo = false;
+
+  function redimensionar() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(stage.clientWidth * dpr);
+    canvas.height = Math.round(stage.clientHeight * dpr);
+    if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function quadro(agora) {
+    if (!ativo) return;
+    var dt = Math.min(0.05, (agora - (ultimoQuadro || agora)) / 1000);
+    ultimoQuadro = agora;
+    var r = estado.r, z = estado.z;
+    var w = stage.clientWidth, h = stage.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    if (r > 0.02 && !root.classList.contains('motion-paused')) {
+      var b = boreEl.getBoundingClientRect(), st = stage.getBoundingClientRect();
+      var cx = b.left + b.width / 2 - st.left, cy = b.top + b.height / 2 - st.top;
+      var rx = b.width / 2, ry = b.height / 2;
+      var vel = 0.35 + r * 0.55 + z * 2.6;          // raios por segundo
+      var nascem = Math.round((r * 3 + z * 10) * (60 * dt));
+      for (var n = 0; n < nascem && particulas.length < 900; n++) {
+        particulas.push({ a: Math.random() * Math.PI * 2, d: Math.random() * 0.08, v: 0.6 + Math.random() * 0.8, t: Math.random(), luz: Math.random() < 0.3 });
+      }
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.lineCap = 'round';
+      for (var i = particulas.length - 1; i >= 0; i--) {
+        var q = particulas[i];
+        var d0 = q.d;
+        q.d += q.v * vel * dt * (0.4 + q.d * 1.6);  // acelera ao se aproximar, como perspectiva
+        if (q.d > 1.15) { particulas.splice(i, 1); continue; }
+        var cos = Math.cos(q.a), sin = Math.sin(q.a);
+        var cauda = Math.max(d0, q.d - (0.02 + z * 0.12 + q.d * 0.05));
+        ctx.globalAlpha = Math.min(1, q.d * 2.2) * (0.55 + q.t * 0.45);
+        ctx.strokeStyle = q.luz ? '#f2fff7' : '#4ac480';
+        ctx.lineWidth = (0.8 + q.d * 2.6) * (1 + z * 0.8);
+        ctx.beginPath();
+        ctx.moveTo(cx + cos * cauda * rx, cy + sin * cauda * ry);
+        ctx.lineTo(cx + cos * q.d * rx, cy + sin * q.d * ry);
+        ctx.stroke();
+      }
+      ctx.restore();
+    } else if (r <= 0.02) {
+      particulas.length = 0;
+    }
+    window.requestAnimationFrame(quadro);
+  }
+
+  if (ctx && !reduceMotion) {
+    redimensionar();
+    new IntersectionObserver(function (entries) {
+      var visivel = entries[0].isIntersecting;
+      if (visivel && !ativo) { ativo = true; ultimoQuadro = 0; window.requestAnimationFrame(quadro); }
+      if (!visivel) ativo = false;
+    }).observe(stage);
+  }
+
   window.addEventListener('scroll', function () { window.requestAnimationFrame(updateValve); }, { passive: true });
-  window.addEventListener('resize', updateValve);
+  window.addEventListener('resize', function () { centroBase = null; redimensionar(); updateValve(); });
   updateValve();
 
   /* ---------- Cabeçalho, menu e botão flutuante ---------- */

@@ -162,7 +162,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* --sx: escala do disco (1 fechado, ~0 aberto). Sem JS ou com movimento reduzido fica aberta. */
 .hero { --sx: 0.02; --p: 1; }
 .hero-pin { position: relative; height: 100svh; min-height: 620px; }
-.js .hero-pin { height: 260svh; }
+.js .hero-pin { height: 380svh; }
 @media (prefers-reduced-motion: reduce) { .js .hero-pin { height: 100svh; } }
 
 .hero-stage {
@@ -202,6 +202,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .valve-bore { left: var(--disc-l); width: var(--disc-w); z-index: 1; }
 .valve-disc-wrap { left: var(--disc-l); width: var(--disc-w); z-index: 3; }
+.valve-disc-wrap, .valve-edge { opacity: clamp(0, calc(1 - var(--z, 0) * 3.5), 1); }
 .valve-disc {
   width: 100%; height: 100%;
   transform: scaleX(var(--sx)); transform-origin: center;
@@ -213,20 +214,31 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: calc((1 - var(--sx)) * 3%); transform: translateX(-50%);
   background: #9a9e9b; border-inline: 1px solid #6e716f;
 }
-.v-bore { fill: #0b0d0c; }
-.v-tube { fill: none; stroke: #1f2422; stroke-width: 2; }
-#valvula-fluxo { opacity: clamp(0, calc(var(--p) * 1.25 - 0.08), 1); }
-.v-streak {
-  stroke: var(--brand-bright); stroke-width: 2.5; stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  transform-box: view-box; transform-origin: 176px 196px;
-  animation: fluxo 1.6s linear infinite;
+/* furo: interior do tubo, escuro, com dois anéis de profundidade */
+.valve-bore {
+  left: var(--disc-l); width: var(--disc-w); z-index: 1;
+  border-radius: 50%; background: #0b0d0c;
 }
-.v-streak--hi { stroke: #e9fff2; }
-@keyframes fluxo {
-  0% { transform: scale(0.4); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: scale(5.6); opacity: 0.15; }
+.valve-bore::before, .valve-bore::after {
+  content: ""; position: absolute; border-radius: 50%; border: 2px solid #1c211f;
+}
+.valve-bore::before { inset: 18%; }
+.valve-bore::after { inset: 36%; border-color: #161a18; }
+
+/* partículas do fluxo, desenhadas sobre a abertura inteira */
+.valve-particles {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 5; pointer-events: none; opacity: 0;
+}
+
+/* mergulho no furo: a válvula cresce até tomar a tela e o texto sai de cena */
+#valvula { transform-origin: 50.426% 57.018%; will-change: transform; }
+.hero-copy { opacity: clamp(0, calc(1 - var(--z, 0) * 2.5), 1); transform: translateY(calc(var(--z, 0) * -48px)); }
+.valve-readout { opacity: clamp(0, calc(1 - var(--z, 0) * 3), 1); }
+.hero-hint { opacity: clamp(0, calc(1 - var(--p) * 4), 1); }
+.hero-flash {
+  position: absolute; inset: 0; z-index: 6; pointer-events: none;
+  background: #eafff3; opacity: var(--flash, 0);
 }
 
 .valve-readout {
@@ -243,7 +255,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero-hint {
   position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
   color: var(--muted); font-size: var(--step-small);
-  opacity: calc(1 - var(--p) * 4);
   display: none;
 }
 .js .hero-hint { display: block; }
@@ -278,8 +289,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 0.22em; height: 0.22em; border-radius: 50%;
   background: currentColor;
 }
-.motion-paused .segments-track,
-.motion-paused .v-streak { animation-play-state: paused; }
+.motion-paused .segments-track { animation-play-state: paused; }
 
 .motion-toggle {
   display: none;
@@ -693,7 +703,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .segments-track { animation: none; }
-  .v-streak { animation: none; transform: scale(2.6); }
   .js .reveal { transform: none; transition: opacity 0.3s; }
   .panel, .frame img, .btn, .link-arrow::after { transition: none; }
 }
@@ -1032,3 +1041,9 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
   .map-place--base circle { animation: pulso 2.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
 }
 @keyframes pulso { 0% { stroke-width: 3; } 70% { stroke-width: 14; stroke-opacity: 0; } 100% { stroke-width: 3; stroke-opacity: 0; } }
+
+/* ---------- O site abre depois do mergulho ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .site-aberto .site-header { animation: desce 0.8s var(--ease) both; }
+}
+@keyframes desce { from { transform: translateY(-100%); } to { transform: none; } }

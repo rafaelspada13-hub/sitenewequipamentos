@@ -35,10 +35,10 @@ const tests = {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
     assert.strictEqual(await page.locator('#valvula .valve-bore image').count(), 0, 'há foto dentro do furo');
-    assert.ok(await page.locator('#valvula-fluxo line').count() >= 24, 'fluxo ausente');
+    assert.strictEqual(await page.$eval('#valvula-fluxo', (c) => c.tagName), 'CANVAS', 'fluxo deveria ser partículas em canvas');
     const opacityAt = async (f) => { await scrollHeroTo(page, f); return parseFloat(await page.$eval('#valvula-fluxo', (g) => getComputedStyle(g).opacity)); };
     assert.ok((await opacityAt(0)) < 0.05, 'fluxo visível com a válvula fechada');
-    assert.ok((await opacityAt(1)) > 0.9, 'fluxo fraco com a válvula aberta');
+    assert.ok((await opacityAt(0.55)) > 0.9, 'fluxo fraco com a válvula aberta');
   },
   'no topo a válvula está fechada': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
@@ -50,7 +50,7 @@ const tests = {
   'na metade da rolagem a válvula está entreaberta': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    await scrollHeroTo(page, 0.5);
+    await scrollHeroTo(page, 0.25);
     const pct = parseInt(await counter(page), 10);
     assert.ok(pct > 25 && pct < 90, `abertura ${pct}%`);
     const s = await discScale(page);
@@ -62,6 +62,37 @@ const tests = {
     await scrollHeroTo(page, 1);
     assert.strictEqual((await counter(page)).trim(), '100%');
     assert.ok((await discScale(page)) < 0.1, 'disco deveria estar de lado');
+  },
+  'aos 100% a câmera mergulha no furo e o texto sai de cena': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    await scrollHeroTo(page, 1);
+    const scale = await page.$eval('#valvula', (v) => new DOMMatrixReadOnly(getComputedStyle(v).transform).a);
+    assert.ok(scale > 6, `válvula não ampliou (${scale})`);
+    const op = parseFloat(await page.$eval('.hero-copy', (c) => getComputedStyle(c).opacity));
+    assert.ok(op < 0.1, `texto ainda visível (${op})`);
+  },
+  'depois do mergulho o site abre com efeitos automáticos': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    assert.ok(!(await page.evaluate(() => document.documentElement.classList.contains('site-aberto'))));
+    await scrollHeroTo(page, 1);
+    await page.evaluate(() => window.scrollBy(0, 40));
+    await page.waitForTimeout(300);
+    assert.ok(await page.evaluate(() => document.documentElement.classList.contains('site-aberto')), 'site não abriu');
+    await page.waitForTimeout(1500);
+    const visiveis = await page.$$eval('#sobre .reveal', (els) => els.every((e) => e.classList.contains('is-in')));
+    assert.ok(visiveis, 'Quem somos não entrou sozinho');
+  },
+  'voltando ao topo a válvula fecha de novo': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    await scrollHeroTo(page, 1);
+    await scrollHeroTo(page, 0);
+    assert.strictEqual((await counter(page)).trim(), '0%');
+    assert.ok((await discScale(page)) > 0.95);
+    const scale = await page.$eval('#valvula', (v) => new DOMMatrixReadOnly(getComputedStyle(v).transform).a);
+    assert.ok(scale < 1.2, `válvula continua ampliada (${scale})`);
   },
   'com animações reduzidas a válvula já aparece aberta e sem rolagem extra': async (browser) => {
     const ctx = await browser.newContext({ viewport: VIEW, reducedMotion: 'reduce' });
