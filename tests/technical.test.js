@@ -20,6 +20,11 @@ const tests = {
     const last = await cells(page, 19);
     assert.deepStrictEqual([last[0], last[1], last[last.length - 1]], ['48"', '1200', 'F30']);
   },
+  'tabela dimensional fica recolhida e abre pelo link': async (page) => {
+    assert.ok(!(await page.isVisible('#tabela-dimensional')), 'tabela aparece sem ser pedida');
+    await page.click('.dim-more summary');
+    assert.ok(await page.isVisible('#tabela-dimensional'), 'tabela não abre');
+  },
   'curva P×T tem as três séries de material': async (page) => {
     const series = await page.$$eval('#curva-pt [data-serie]', (s) => s.map((x) => x.getAttribute('data-serie')));
     assert.deepStrictEqual(series.sort(), ['CF8/CF3', 'CF8M', 'WCB']);
@@ -61,6 +66,7 @@ const tests = {
   await phone.goto(URL);
   try {
     assert.ok(await phone.evaluate(() => document.documentElement.scrollWidth <= 360), 'página rola na horizontal');
+    await phone.click('.dim-more summary');
     const [sw, cw] = await phone.$eval('#tabela-dimensional', (t) => [t.closest('.table-scroll').scrollWidth, t.closest('.table-scroll').clientWidth]);
     assert.ok(sw > cw, 'tabela não rola dentro do contêiner');
     console.log('ok   em 360px a tabela rola dentro do contêiner');
