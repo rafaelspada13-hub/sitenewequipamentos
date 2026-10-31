@@ -27,7 +27,8 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   }
   check(await page.locator('a[href^="https://wa.me/5516997223976"]').count() > 0, 'sem link de WhatsApp');
 
-  const semAlt = await page.$$eval('img', (imgs) => imgs.filter((i) => !i.getAttribute('alt')).map((i) => i.src));
+  // alt vazio só vale para camadas dentro de um contêiner role="img" que já tem a descrição.
+  const semAlt = await page.$$eval('img', (imgs) => imgs.filter((i) => !i.getAttribute('alt') && !i.closest('[role="img"][aria-label]')).map((i) => i.src));
   check(semAlt.length === 0, `imagens sem alt: ${semAlt.join(', ')}`);
   const quebradas = await page.$$eval('img', (imgs) => imgs.filter((i) => i.complete && i.naturalWidth === 0 && i.loading !== 'lazy').map((i) => i.src));
   check(quebradas.length === 0, `imagens quebradas: ${quebradas.join(', ')}`);

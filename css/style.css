@@ -188,23 +188,38 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: grid; justify-items: center; gap: 12px;
   height: 100%; align-content: center;
 }
+/* Foto da bi-excêntrica NEW em camadas: furo com fluxo, corpo vazado e disco que gira.
+   Caixa do disco na foto recortada (704 × 1140): x 179–531, y 454–846. */
 #valvula {
-  height: min(72svh, 640px); width: auto; max-width: 100%;
-  overflow: visible;
-  transform: scale(calc(1 + var(--p) * 0.06));
+  --disc-l: 25.426%; --disc-t: 39.825%; --disc-w: 50%; --disc-h: 34.386%;
+  position: relative; overflow: hidden;
+  height: min(76svh, 700px); aspect-ratio: 704 / 1140; max-width: 100%;
+  background: #a69e95;
 }
-.v-body { fill: var(--bg-3); stroke: #7d857f; stroke-width: 2; }
-.v-gear { fill: #b3261e; stroke: #e0584f; stroke-width: 2; }
-.v-wheel { fill: none; stroke: #9aa29c; stroke-width: 8; }
-.v-neck { fill: #3a403c; stroke: #7d857f; stroke-width: 2; }
-.v-holes circle { fill: var(--bg); stroke: #7d857f; stroke-width: 2; }
-.v-bore { fill: #0d0f0e; }
-.v-tube { fill: none; stroke: #232826; stroke-width: 2; }
+.valve-body, .valve-body img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; }
+.valve-bore, .valve-disc-wrap, .valve-edge {
+  position: absolute; top: var(--disc-t); height: var(--disc-h);
+}
+.valve-bore { left: var(--disc-l); width: var(--disc-w); z-index: 1; }
+.valve-disc-wrap { left: var(--disc-l); width: var(--disc-w); z-index: 3; }
+.valve-disc {
+  width: 100%; height: 100%;
+  transform: scaleX(var(--sx)); transform-origin: center;
+  filter: brightness(calc(0.7 + var(--sx) * 0.3));
+}
+/* espessura do disco, que aparece quando ele fica de lado */
+.valve-edge {
+  left: calc(var(--disc-l) + var(--disc-w) / 2); z-index: 4;
+  width: calc((1 - var(--sx)) * 3%); transform: translateX(-50%);
+  background: #9a9e9b; border-inline: 1px solid #6e716f;
+}
+.v-bore { fill: #0b0d0c; }
+.v-tube { fill: none; stroke: #1f2422; stroke-width: 2; }
 #valvula-fluxo { opacity: clamp(0, calc(var(--p) * 1.25 - 0.08), 1); }
 .v-streak {
   stroke: var(--brand-bright); stroke-width: 2.5; stroke-linecap: round;
   vector-effect: non-scaling-stroke;
-  transform-box: view-box; transform-origin: 300px 430px;
+  transform-box: view-box; transform-origin: 176px 196px;
   animation: fluxo 1.6s linear infinite;
 }
 .v-streak--hi { stroke: #e9fff2; }
@@ -213,13 +228,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   20% { opacity: 1; }
   100% { transform: scale(5.6); opacity: 0.15; }
 }
-.v-seat { fill: none; stroke: #c2187a; stroke-width: 16; }
-.v-disc { fill: #454c47; stroke: #c4cbc6; stroke-width: 3; }
-.v-disc-ring { fill: none; stroke: #6c746e; stroke-width: 2; }
-.v-hub { fill: #5a615c; stroke: #c4cbc6; stroke-width: 2; }
-#valvula-disco { transform: scaleX(var(--sx)); transform-box: fill-box; transform-origin: center; }
-.v-axis { stroke: var(--brand-bright); stroke-width: 2; stroke-dasharray: 14 8; }
-.v-dim { stroke: var(--brand-bright); stroke-width: 2; }
 
 .valve-readout {
   display: flex; align-items: baseline; gap: 12px;
@@ -254,7 +262,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .hero-actions { margin-top: 18px; }
   .hero-actions .btn { flex: 1 1 100%; }
   .valve { grid-column: 1; grid-row: 2; height: auto; align-content: start; }
-  #valvula { height: min(40svh, 360px); }
+  #valvula { height: min(44svh, 400px); }
   .valve-pct { font-size: 2.25rem; }
   .hero-hint { bottom: 10px; }
 }

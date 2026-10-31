@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261031g" />
+  <link rel="stylesheet" href="css/style.css?v=20261031h" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
@@ -52,44 +52,24 @@
           </div>
 
           <figure class="valve">
-            <svg id="valvula" viewBox="0 0 600 820" role="img" aria-labelledby="valvula-titulo">
-              <title id="valvula-titulo">Desenho de uma válvula borboleta vista de frente: conforme a página rola, o disco gira e o fluido passa pela válvula</title>
-              <defs>
-                <clipPath id="valvula-furo"><circle cx="300" cy="430" r="178" /></clipPath>
-              </defs>
-              <!-- caixa redutora e haste -->
-              <rect class="v-gear" x="226" y="22" width="148" height="92" rx="6" />
-              <circle class="v-wheel" cx="438" cy="68" r="40" />
-              <line class="v-wheel" x1="374" y1="68" x2="398" y2="68" />
-              <rect class="v-neck" x="276" y="114" width="48" height="74" />
-              <!-- corpo com orelhas e furação -->
-              <rect class="v-body" x="232" y="160" width="136" height="70" rx="10" />
-              <rect class="v-body" x="232" y="630" width="136" height="70" rx="10" />
-              <rect class="v-neck" x="278" y="700" width="44" height="54" />
-              <circle class="v-body" cx="300" cy="430" r="252" />
-              <g class="v-holes"><circle cx="522.0" cy="430.0" r="10" /><circle cx="457.0" cy="587.0" r="10" /><circle cx="300.0" cy="652.0" r="10" /><circle cx="143.0" cy="587.0" r="10" /><circle cx="78.0" cy="430.0" r="10" /><circle cx="143.0" cy="273.0" r="10" /><circle cx="300.0" cy="208.0" r="10" /><circle cx="457.0" cy="273.0" r="10" /></g>
-              <!-- furo: com a válvula aberta, o fluido vem em direção a quem olha -->
-              <g clip-path="url(#valvula-furo)">
-                <circle class="v-bore" cx="300" cy="430" r="178" />
-                <circle class="v-tube" cx="300" cy="430" r="36" /><circle class="v-tube" cx="300" cy="430" r="72" /><circle class="v-tube" cx="300" cy="430" r="112" /><circle class="v-tube" cx="300" cy="430" r="150" />
+            <div id="valvula" class="valve-photo" role="img" aria-label="Válvula borboleta bi-excêntrica NEW: conforme a página rola, o disco gira e o fluido passa pela válvula">
+              <svg class="valve-bore" viewBox="0 0 352 392" aria-hidden="true">
+                <ellipse class="v-bore" cx="176" cy="196" rx="176" ry="196" />
+                <ellipse class="v-tube" cx="176" cy="196" rx="34" ry="38" /><ellipse class="v-tube" cx="176" cy="196" rx="70" ry="78" /><ellipse class="v-tube" cx="176" cy="196" rx="110" ry="122" /><ellipse class="v-tube" cx="176" cy="196" rx="150" ry="167" />
                 <g id="valvula-fluxo">
-                  <line class="v-streak v-streak--hi" x1="316.4" y1="429.7" x2="334.2" y2="429.4" style="animation-delay:-0.12s" /><line class="v-streak" x1="319.6" y1="433.2" x2="330.2" y2="434.9" style="animation-delay:-0.81s" /><line class="v-streak" x1="320.2" y1="435.5" x2="330.7" y2="438.3" style="animation-delay:-0.15s" /><line class="v-streak v-streak--hi" x1="324.4" y1="442.2" x2="334.6" y2="447.3" style="animation-delay:-0.36s" /><line class="v-streak" x1="323.4" y1="447.5" x2="336.9" y2="457.6" style="animation-delay:-0.63s" /><line class="v-streak" x1="309.9" y1="440.9" x2="323.5" y2="456.0" style="animation-delay:-0.46s" /><line class="v-streak v-streak--hi" x1="309.8" y1="442.5" x2="318.3" y2="453.3" style="animation-delay:-1.31s" /><line class="v-streak" x1="311.3" y1="450.4" x2="319.8" y2="465.9" style="animation-delay:-0.60s" /><line class="v-streak" x1="304.6" y1="444.3" x2="307.8" y2="454.5" style="animation-delay:-0.33s" /><line class="v-streak v-streak--hi" x1="302.9" y1="450.6" x2="304.8" y2="464.3" style="animation-delay:-0.94s" /><line class="v-streak" x1="300.1" y1="448.8" x2="300.2" y2="468.3" style="animation-delay:-1.12s" /><line class="v-streak" x1="297.0" y1="453.0" x2="294.9" y2="469.2" style="animation-delay:-1.40s" /><line class="v-streak v-streak--hi" x1="293.8" y1="447.6" x2="286.6" y2="468.1" style="animation-delay:-0.19s" /><line class="v-streak" x1="288.3" y1="453.4" x2="283.1" y2="463.9" style="animation-delay:-0.78s" /><line class="v-streak" x1="286.5" y1="450.7" x2="276.0" y2="466.7" style="animation-delay:-0.92s" /><line class="v-streak v-streak--hi" x1="286.0" y1="442.9" x2="272.6" y2="455.4" style="animation-delay:-0.95s" /><line class="v-streak" x1="282.7" y1="442.4" x2="266.3" y2="454.0" style="animation-delay:-1.51s" /><line class="v-streak" x1="278.1" y1="441.2" x2="268.5" y2="446.1" style="animation-delay:-1.12s" /><line class="v-streak v-streak--hi" x1="271.4" y1="438.8" x2="252.5" y2="444.6" style="animation-delay:-0.46s" /><line class="v-streak" x1="275.7" y1="434.2" x2="265.5" y2="435.9" style="animation-delay:-0.74s" /><line class="v-streak" x1="284.1" y1="430.6" x2="273.4" y2="430.9" style="animation-delay:-1.23s" /><line class="v-streak v-streak--hi" x1="282.2" y1="427.9" x2="267.6" y2="426.1" style="animation-delay:-1.39s" /><line class="v-streak" x1="279.6" y1="424.3" x2="263.6" y2="419.9" style="animation-delay:-1.41s" /><line class="v-streak" x1="275.6" y1="416.5" x2="264.0" y2="410.1" style="animation-delay:-0.66s" /><line class="v-streak v-streak--hi" x1="277.0" y1="413.8" x2="259.4" y2="401.4" style="animation-delay:-0.24s" /><line class="v-streak" x1="287.1" y1="417.9" x2="277.7" y2="409.2" style="animation-delay:-0.78s" /><line class="v-streak" x1="289.4" y1="415.2" x2="283.6" y2="407.0" style="animation-delay:-0.67s" /><line class="v-streak v-streak--hi" x1="289.2" y1="409.6" x2="279.3" y2="390.6" style="animation-delay:-1.10s" /><line class="v-streak" x1="292.7" y1="407.3" x2="287.1" y2="390.0" style="animation-delay:-0.09s" /><line class="v-streak" x1="297.0" y1="403.7" x2="294.6" y2="383.3" style="animation-delay:-1.28s" /><line class="v-streak v-streak--hi" x1="299.8" y1="409.6" x2="299.6" y2="398.4" style="animation-delay:-1.01s" /><line class="v-streak" x1="301.7" y1="415.0" x2="303.1" y2="402.6" style="animation-delay:-0.26s" /><line class="v-streak" x1="304.3" y1="415.8" x2="307.3" y2="406.2" style="animation-delay:-0.24s" /><line class="v-streak v-streak--hi" x1="308.3" y1="412.0" x2="312.5" y2="402.6" style="animation-delay:-1.40s" /><line class="v-streak" x1="309.8" y1="416.9" x2="317.6" y2="406.4" style="animation-delay:-0.56s" /><line class="v-streak" x1="311.1" y1="418.6" x2="325.2" y2="404.1" style="animation-delay:-1.59s" /><line class="v-streak v-streak--hi" x1="317.5" y1="417.2" x2="326.4" y2="410.6" style="animation-delay:-0.16s" /><line class="v-streak" x1="316.1" y1="421.5" x2="333.7" y2="412.1" style="animation-delay:-0.26s" /><line class="v-streak" x1="327.3" y1="419.6" x2="342.6" y2="413.8" style="animation-delay:-0.23s" /><line class="v-streak v-streak--hi" x1="314.3" y1="427.8" x2="330.4" y2="425.3" style="animation-delay:-1.57s" />
+                  <line class="v-streak v-streak--hi" x1="190.1" y1="195.7" x2="206.3" y2="195.4" style="animation-delay:-0.12s" /><line class="v-streak" x1="192.9" y1="199.0" x2="202.4" y2="200.8" style="animation-delay:-0.81s" /><line class="v-streak" x1="193.4" y1="201.3" x2="202.9" y2="204.1" style="animation-delay:-0.15s" /><line class="v-streak v-streak--hi" x1="197.1" y1="207.7" x2="206.4" y2="212.8" style="animation-delay:-0.36s" /><line class="v-streak" x1="196.2" y1="212.8" x2="208.5" y2="223.0" style="animation-delay:-0.63s" /><line class="v-streak" x1="184.5" y1="206.4" x2="196.9" y2="221.6" style="animation-delay:-0.46s" /><line class="v-streak v-streak--hi" x1="184.4" y1="207.9" x2="192.1" y2="218.7" style="animation-delay:-1.31s" /><line class="v-streak" x1="185.7" y1="215.6" x2="193.5" y2="231.1" style="animation-delay:-0.60s" /><line class="v-streak" x1="179.9" y1="209.6" x2="182.9" y2="219.8" style="animation-delay:-0.33s" /><line class="v-streak v-streak--hi" x1="178.5" y1="215.8" x2="180.2" y2="229.5" style="animation-delay:-0.94s" /><line class="v-streak" x1="176.1" y1="214.0" x2="176.2" y2="233.7" style="animation-delay:-1.12s" /><line class="v-streak" x1="173.4" y1="218.1" x2="171.5" y2="234.3" style="animation-delay:-1.40s" /><line class="v-streak v-streak--hi" x1="170.7" y1="212.8" x2="164.1" y2="233.5" style="animation-delay:-0.19s" /><line class="v-streak" x1="165.9" y1="218.4" x2="161.1" y2="229.0" style="animation-delay:-0.78s" /><line class="v-streak" x1="164.3" y1="215.8" x2="154.8" y2="232.0" style="animation-delay:-0.92s" /><line class="v-streak v-streak--hi" x1="164.0" y1="208.4" x2="151.7" y2="220.9" style="animation-delay:-0.95s" /><line class="v-streak" x1="161.0" y1="207.9" x2="146.2" y2="219.6" style="animation-delay:-1.51s" /><line class="v-streak" x1="157.0" y1="206.8" x2="148.4" y2="211.7" style="animation-delay:-1.12s" /><line class="v-streak v-streak--hi" x1="151.2" y1="204.5" x2="134.0" y2="210.4" style="animation-delay:-0.46s" /><line class="v-streak" x1="154.9" y1="200.0" x2="145.8" y2="201.7" style="animation-delay:-0.74s" /><line class="v-streak" x1="162.4" y1="196.5" x2="152.7" y2="196.9" style="animation-delay:-1.23s" /><line class="v-streak v-streak--hi" x1="160.6" y1="194.0" x2="147.4" y2="192.2" style="animation-delay:-1.39s" /><line class="v-streak" x1="158.4" y1="190.6" x2="143.9" y2="186.1" style="animation-delay:-1.41s" /><line class="v-streak" x1="154.9" y1="183.1" x2="144.3" y2="176.6" style="animation-delay:-0.66s" /><line class="v-streak v-streak--hi" x1="156.1" y1="180.4" x2="140.1" y2="167.9" style="animation-delay:-0.24s" /><line class="v-streak" x1="164.9" y1="184.4" x2="156.4" y2="175.7" style="animation-delay:-0.78s" /><line class="v-streak" x1="166.9" y1="181.8" x2="161.7" y2="173.6" style="animation-delay:-0.67s" /><line class="v-streak v-streak--hi" x1="166.7" y1="176.4" x2="157.6" y2="157.3" style="animation-delay:-1.10s" /><line class="v-streak" x1="169.7" y1="174.2" x2="164.6" y2="156.8" style="animation-delay:-0.09s" /><line class="v-streak" x1="173.4" y1="170.7" x2="171.2" y2="150.2" style="animation-delay:-1.28s" /><line class="v-streak v-streak--hi" x1="175.8" y1="176.5" x2="175.7" y2="165.2" style="animation-delay:-1.01s" /><line class="v-streak" x1="177.4" y1="181.7" x2="178.7" y2="169.3" style="animation-delay:-0.26s" /><line class="v-streak" x1="179.7" y1="182.5" x2="182.4" y2="172.9" style="animation-delay:-0.24s" /><line class="v-streak v-streak--hi" x1="183.1" y1="178.8" x2="187.0" y2="169.4" style="animation-delay:-1.40s" /><line class="v-streak" x1="184.4" y1="183.5" x2="191.4" y2="173.0" style="animation-delay:-0.56s" /><line class="v-streak" x1="185.6" y1="185.1" x2="198.3" y2="170.5" style="animation-delay:-1.59s" /><line class="v-streak v-streak--hi" x1="191.1" y1="183.7" x2="199.2" y2="177.2" style="animation-delay:-0.16s" /><line class="v-streak" x1="189.9" y1="187.8" x2="205.9" y2="178.4" style="animation-delay:-0.26s" /><line class="v-streak" x1="199.7" y1="186.0" x2="213.5" y2="180.1" style="animation-delay:-0.23s" /><line class="v-streak v-streak--hi" x1="188.2" y1="193.9" x2="202.9" y2="191.4" style="animation-delay:-1.57s" />
                 </g>
-              </g>
-              <circle class="v-seat" cx="300" cy="430" r="186" />
-              <!-- disco -->
-              <g id="valvula-disco">
-                <circle class="v-disc" cx="300" cy="430" r="176" />
-                <rect class="v-hub" x="284" y="254" width="32" height="54" rx="4" />
-                <rect class="v-hub" x="284" y="552" width="32" height="54" rx="4" />
-                <circle class="v-disc-ring" cx="300" cy="430" r="120" />
-              </g>
-              <line class="v-axis" x1="300" y1="140" x2="300" y2="760" />
-              <!-- cota do diâmetro -->
-              <line class="v-dim" x1="122" y1="790" x2="478" y2="790" />
-              <line class="v-dim" x1="122" y1="776" x2="122" y2="804" />
-              <line class="v-dim" x1="478" y1="776" x2="478" y2="804" />
-            </svg>
+              </svg>
+              <picture class="valve-body">
+                <source srcset="img/produtos/valvula-corpo.webp" type="image/webp" />
+                <img src="img/produtos/valvula-corpo.png" alt="" width="704" height="1140" fetchpriority="high" />
+              </picture>
+              <span class="valve-edge" aria-hidden="true"></span>
+              <picture class="valve-disc-wrap" aria-hidden="true">
+                <source srcset="img/produtos/valvula-disco.webp" type="image/webp" />
+                <img id="valvula-disco" class="valve-disc" src="img/produtos/valvula-disco.png" alt="" width="352" height="392" />
+              </picture>
+            </div>
             <figcaption class="valve-readout" aria-live="off">
               <span class="valve-pct" id="valvula-abertura">100%</span>
               <span class="valve-label">aberta · <span id="valvula-angulo">90°</span></span>
@@ -869,9 +849,9 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/engenharia.js?v=20261031g"></script>
-  <script src="js/whatsapp.js?v=20261031g"></script>
-  <script src="js/interativo.js?v=20261031g"></script>
-  <script src="js/main.js?v=20261031g"></script>
+  <script src="js/engenharia.js?v=20261031h"></script>
+  <script src="js/whatsapp.js?v=20261031h"></script>
+  <script src="js/interativo.js?v=20261031h"></script>
+  <script src="js/main.js?v=20261031h"></script>
 </body>
 </html>

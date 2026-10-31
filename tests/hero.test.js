@@ -23,10 +23,10 @@ async function scrollHeroTo(page, fraction) {
 }
 
 const tests = {
-  'abertura tem a válvula desenhada, o título e o pedido de orçamento': async (browser) => {
+  'abertura tem a foto da válvula com o disco, o título e o pedido de orçamento': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    assert.strictEqual(await page.locator('#inicio svg#valvula #valvula-disco').count(), 1);
+    assert.strictEqual(await page.locator('#inicio #valvula #valvula-disco').count(), 1);
     assert.strictEqual((await page.textContent('#inicio h1')).trim(), 'Válvulas industriais');
     assert.ok(await page.isVisible('#inicio a.btn[href="#contato"]'));
     assert.strictEqual(await page.locator('.hero-line, .hero-track').count(), 0, 'letreiro antigo ainda presente');
@@ -34,7 +34,7 @@ const tests = {
   'pelo furo passa fluxo, não foto': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    assert.strictEqual(await page.locator('#valvula image').count(), 0, 'ainda há foto dentro da válvula');
+    assert.strictEqual(await page.locator('#valvula .valve-bore image').count(), 0, 'há foto dentro do furo');
     assert.ok(await page.locator('#valvula-fluxo line').count() >= 24, 'fluxo ausente');
     const opacityAt = async (f) => { await scrollHeroTo(page, f); return parseFloat(await page.$eval('#valvula-fluxo', (g) => getComputedStyle(g).opacity)); };
     assert.ok((await opacityAt(0)) < 0.05, 'fluxo visível com a válvula fechada');
