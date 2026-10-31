@@ -49,6 +49,8 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
     check(await page.locator(`.item summary:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente do catálogo`);
   }
   check(text.includes('24 anos'), 'tempo de experiência ausente');
+  check(!/18\s*clientes/i.test(text) && !text.includes('clientes atendidos'), 'contagem de clientes não deve aparecer');
+  check(text.includes('Principais clientes'), 'título "Principais clientes" ausente');
   check(await page.locator('img[src*="fachada"]').count() === 1, 'foto da fachada ausente');
   check(await page.locator('#bi-excentrica img[src*="bi-excentrica-new"]').count() === 1, 'render da bi-excêntrica NEW ausente da ficha técnica');
   check(await page.locator('[data-produto*="Bi-excêntrica"] img[src*="bi-excentrica-new"]').count() === 1, 'render ausente do item do catálogo');

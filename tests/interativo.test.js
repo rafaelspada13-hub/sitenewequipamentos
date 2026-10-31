@@ -104,12 +104,12 @@ const tests = {
     await page.locator('.stats').scrollIntoViewIfNeeded();
     await page.waitForTimeout(2200);
     const vals = await page.$$eval('.stat-num', (s) => s.map((x) => x.textContent.trim()));
-    assert.deepStrictEqual(vals, ['24', '18', '72"', '1.500#']);
+    assert.deepStrictEqual(vals, ['24', '72"', '1.500#']);
   },
   'sem JavaScript os números e as peças aparecem prontos': async (b) => {
     const page = await open(b, { javaScriptEnabled: false });
     const vals = await page.$$eval('.stat-num', (s) => s.map((x) => x.textContent.trim()));
-    assert.deepStrictEqual(vals, ['24', '18', '72"', '1.500#']);
+    assert.deepStrictEqual(vals, ['24', '72"', '1.500#']);
     assert.ok(await page.isVisible('#simulador .sim-fallback'));
     assert.strictEqual(await page.$eval('#linha .rail-viewport', (v) => getComputedStyle(v).overflowX), 'auto');
     await page.ctx.close();
