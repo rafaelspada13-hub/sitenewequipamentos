@@ -54,7 +54,7 @@ const tests = {
   'movimento pode ser pausado e o vídeo tem controles': async (browser) => {
     const page = await openPage(browser);
     await page.click('#motionToggle');
-    const states = await page.$$eval('.hero-track, .segments-track', (t) => t.map((x) => getComputedStyle(x).animationPlayState));
+    const states = await page.$$eval('.segments-track', (t) => t.map((x) => getComputedStyle(x).animationPlayState));
     assert.ok(states.every((s) => s === 'paused'), states.join());
     assert.strictEqual(await page.getAttribute('#motionToggle', 'aria-pressed'), 'true');
     assert.ok(await page.$eval('.frame--video video', (v) => v.controls));

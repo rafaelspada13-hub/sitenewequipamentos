@@ -99,7 +99,7 @@ const tests = {
   'botão flutuante do WhatsApp só aparece depois da abertura': async (browser) => {
     const page = await openPage(browser);
     assert.strictEqual(await page.$eval('.whatsapp-float', (e) => getComputedStyle(e).opacity), '0');
-    await page.evaluate(() => window.scrollTo(0, 1600));
+    await page.evaluate(() => window.scrollTo(0, document.getElementById('sobre').offsetTop));
     await page.waitForTimeout(500);
     assert.strictEqual(await page.$eval('.whatsapp-float', (e) => getComputedStyle(e).opacity), '1');
   },

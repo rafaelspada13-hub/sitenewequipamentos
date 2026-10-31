@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261031a" />
+  <link rel="stylesheet" href="css/style.css?v=20261031b" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
@@ -37,35 +37,63 @@
 
   <main id="conteudo">
 
-    <!-- Abertura: o nome em movimento sobre a foto -->
+    <!-- Abertura: a válvula abre conforme a página rola -->
     <section class="hero" id="inicio">
-      <div class="hero-stage">
-        <div class="hero-line" aria-hidden="true">
-          <div class="hero-track">
-            <span>NEW</span><i></i><span>Válvulas industriais</span><i></i>
-            <span>NEW</span><i></i><span>Válvulas industriais</span><i></i>
+      <div class="hero-pin">
+        <div class="hero-stage">
+          <div class="hero-copy">
+            <h1 class="hero-title">Válvulas industriais</h1>
+            <p class="hero-lead">Fornecimento, automação e manutenção de borboleta bi‑excêntrica, gaveta, globo e retenção para usinas e indústrias de todo o Brasil.</p>
+            <p class="hero-fact">Sertãozinho/SP · atendimento em todo o território nacional</p>
+            <div class="hero-actions">
+              <a href="#contato" class="btn">Pedir orçamento</a>
+              <a href="#produtos" class="link-arrow">Ver as válvulas</a>
+            </div>
           </div>
+
+          <figure class="valve">
+            <svg id="valvula" viewBox="0 0 600 820" role="img" aria-labelledby="valvula-titulo">
+              <title id="valvula-titulo">Desenho de uma válvula borboleta vista de frente, que se abre conforme a página rola</title>
+              <defs>
+                <clipPath id="valvula-furo"><circle cx="300" cy="430" r="178" /></clipPath>
+              </defs>
+              <!-- caixa redutora e haste -->
+              <rect class="v-gear" x="226" y="22" width="148" height="92" rx="6" />
+              <circle class="v-wheel" cx="438" cy="68" r="40" />
+              <line class="v-wheel" x1="374" y1="68" x2="398" y2="68" />
+              <rect class="v-neck" x="276" y="114" width="48" height="74" />
+              <!-- corpo com orelhas e furação -->
+              <rect class="v-body" x="232" y="160" width="136" height="70" rx="10" />
+              <rect class="v-body" x="232" y="630" width="136" height="70" rx="10" />
+              <rect class="v-neck" x="278" y="700" width="44" height="54" />
+              <circle class="v-body" cx="300" cy="430" r="252" />
+              <g class="v-holes"><circle cx="522.0" cy="430.0" r="10" /><circle cx="457.0" cy="587.0" r="10" /><circle cx="300.0" cy="652.0" r="10" /><circle cx="143.0" cy="587.0" r="10" /><circle cx="78.0" cy="430.0" r="10" /><circle cx="143.0" cy="273.0" r="10" /><circle cx="300.0" cy="208.0" r="10" /><circle cx="457.0" cy="273.0" r="10" /></g>
+              <!-- furo: a foto aparece quando o disco gira -->
+              <g clip-path="url(#valvula-furo)">
+                <image class="v-photo" href="img/opt/borboletas-lote.jpg" x="122" y="192" width="356" height="475" preserveAspectRatio="xMidYMid slice" />
+              </g>
+              <circle class="v-seat" cx="300" cy="430" r="186" />
+              <!-- disco -->
+              <g id="valvula-disco">
+                <circle class="v-disc" cx="300" cy="430" r="176" />
+                <rect class="v-hub" x="284" y="254" width="32" height="54" rx="4" />
+                <rect class="v-hub" x="284" y="552" width="32" height="54" rx="4" />
+                <circle class="v-disc-ring" cx="300" cy="430" r="120" />
+              </g>
+              <line class="v-axis" x1="300" y1="140" x2="300" y2="760" />
+              <!-- cota do diâmetro -->
+              <line class="v-dim" x1="122" y1="790" x2="478" y2="790" />
+              <line class="v-dim" x1="122" y1="776" x2="122" y2="804" />
+              <line class="v-dim" x1="478" y1="776" x2="478" y2="804" />
+            </svg>
+            <figcaption class="valve-readout" aria-live="off">
+              <span class="valve-pct" id="valvula-abertura">100%</span>
+              <span class="valve-label">aberta · <span id="valvula-angulo">90°</span></span>
+            </figcaption>
+          </figure>
+
+          <p class="hero-hint" aria-hidden="true">Role para abrir a válvula</p>
         </div>
-        <picture class="hero-photo">
-          <source srcset="img/opt/borboleta-grande-3.webp" type="image/webp" />
-          <img src="img/opt/borboleta-grande-3.jpg" alt="Válvula borboleta de grande porte com protetor de flange, no barracão da NEW" width="1600" height="1200" fetchpriority="high" />
-        </picture>
-        <div class="hero-line hero-line--clip" aria-hidden="true">
-          <div class="hero-track">
-            <span>NEW</span><i></i><span>Válvulas industriais</span><i></i>
-            <span>NEW</span><i></i><span>Válvulas industriais</span><i></i>
-          </div>
-        </div>
-      </div>
-      <div class="hero-copy">
-        <h1 class="hero-title">Válvulas industriais</h1>
-        <p class="hero-lead">Fornecimento, automação e manutenção de borboleta bi‑excêntrica, gaveta, globo e retenção para usinas e indústrias de todo o Brasil.</p>
-        <p class="hero-fact">Sertãozinho/SP · atendimento em todo o território nacional</p>
-      </div>
-      <div class="hero-foot">
-        <a href="#produtos" class="link-arrow">Ver as válvulas</a>
-        <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pausar animação</button>
-        <a href="#contato" class="btn">Pedir orçamento</a>
       </div>
     </section>
 
@@ -485,6 +513,7 @@
           <span>Usina Caeté</span><i></i><span>Usina São Francisco</span><i></i><span>Usina Santa Isabel</span><i></i><span>Usina Santa Clotilde</span><i></i><span>Usina Santa Fé</span><i></i><span>Usina Branco Peres</span><i></i><span>Usina Caçu</span><i></i><span>Energética Serranópolis</span><i></i><span>ADM do Brasil</span><i></i><span>Ball</span><i></i><span>Usiminas</span><i></i><span>Fiber Citrus</span><i></i><span>Comigo</span><i></i><span>Icofort</span><i></i><span>Agimix</span><i></i><span>Agropecuária Terra Nobre</span><i></i><span>Ativineo</span><i></i><span>CT Consultoria</span><i></i>
         </div>
       </div>
+      <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pausar animação</button>
       <div class="segments-copy reveal">
         <h2 class="section-title">Clientes e segmentos</h2>
         <div class="segments-cols">
@@ -690,7 +719,7 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/whatsapp.js?v=20261031a"></script>
-  <script src="js/main.js?v=20261031a"></script>
+  <script src="js/whatsapp.js?v=20261031b"></script>
+  <script src="js/main.js?v=20261031b"></script>
 </body>
 </html>

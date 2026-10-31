@@ -29,6 +29,25 @@
   }
   window.__newReady = true;
 
+  /* ---------- Abertura: a válvula abre conforme a página rola ---------- */
+  var heroEl = document.getElementById('inicio');
+  var pin = heroEl.querySelector('.hero-pin');
+  var pctOut = document.getElementById('valvula-abertura');
+  var angOut = document.getElementById('valvula-angulo');
+
+  function updateValve() {
+    var run = pin.offsetHeight - window.innerHeight;
+    var p = reduceMotion || run <= 0 ? 1 : Math.min(1, Math.max(0, (window.scrollY - pin.offsetTop) / run));
+    var angle = p * 90;
+    heroEl.style.setProperty('--p', p.toFixed(3));
+    heroEl.style.setProperty('--sx', Math.max(0.02, Math.cos(angle * Math.PI / 180)).toFixed(3));
+    pctOut.textContent = Math.round(p * 100) + '%';
+    angOut.textContent = Math.round(angle) + '°';
+  }
+  window.addEventListener('scroll', function () { window.requestAnimationFrame(updateValve); }, { passive: true });
+  window.addEventListener('resize', updateValve);
+  updateValve();
+
   /* ---------- Cabeçalho, menu e botão flutuante ---------- */
   var header = document.querySelector('.site-header');
   var nav = document.getElementById('nav');
@@ -58,7 +77,7 @@
   var lastY = window.scrollY;
   function onScroll() {
     var y = window.scrollY;
-    var pastHero = y > hero.offsetHeight * 0.75;
+    var pastHero = y > hero.offsetHeight - window.innerHeight * 0.5;
     floatBtn.classList.toggle('is-visible', pastHero);
     var menuOpen = nav.classList.contains('is-open');
     header.classList.toggle('is-hidden', !menuOpen && y > lastY && y > 400);
