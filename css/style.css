@@ -840,6 +840,7 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 .auto-pecas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 6px; }
 .auto-pecas figure { margin: 0; background: var(--paper); }
 .auto-pecas img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.auto-pecas--uma { grid-template-columns: minmax(0, 260px); }
 .auto-pecas figcaption { padding: 8px 12px 10px; background: var(--bg-2); font-size: var(--step-small); font-weight: 600; }
 /* Clientes e segmentos: foto da indústria sob o título */
 .segments-intro { display: grid; gap: 28px; align-content: start; }

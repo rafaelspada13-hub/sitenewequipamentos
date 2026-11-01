@@ -60,7 +60,8 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   const imgsProduto = await page.$$eval('.produto img, .tech-render img', (i) => i.map((x) => x.getAttribute('src')));
   check(imgsProduto.length >= 8 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
   check(text.includes('24 anos'), 'tempo de experiência ausente');
-  check(await page.locator('.servico-destaque img[src*="estudio/redutora"]').count() === 1, 'redutora ausente dos serviços');
+  // a redutora do render é de saneamento: não ilustra o bloco de vapor e processo
+  check(await page.locator('.servico-destaque img[src*="estudio/redutora"]').count() === 0, 'redutora de saneamento no bloco de vapor');
   check(await page.locator('.servico-destaque img[src*="estudio/controle"]').count() === 1, 'válvula de controle ausente dos serviços');
   check(await page.locator('#segmentos img[src*="opt/industria"]').count() === 1, 'imagem da indústria ausente dos segmentos');
   for (const t of ['válvulas condicionadoras de vapor', 'válvulas redutoras de pressão', 'válvulas automáticas', 'Hiter', 'Foxwall']) {
