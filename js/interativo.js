@@ -134,6 +134,38 @@
     montarTipo('bi');
   }
 
+  /* ---------- Abas: simulador e configurador ---------- */
+  var bloco = $('.ferramentas');
+  if (bloco) {
+    document.documentElement.classList.add('abas-on');
+    var abas = $$('[role="tab"]', bloco);
+    var mostrar = function (id, foco) {
+      bloco.dataset.aba = id;
+      abas.forEach(function (aba) {
+        var ativa = aba.getAttribute('aria-controls') === id;
+        aba.setAttribute('aria-selected', String(ativa));
+        aba.tabIndex = ativa ? 0 : -1;
+        document.getElementById(aba.getAttribute('aria-controls')).hidden = !ativa;
+        if (ativa && foco) aba.focus();
+      });
+    };
+    abas.forEach(function (aba, i) {
+      aba.addEventListener('click', function () { mostrar(aba.getAttribute('aria-controls')); });
+      aba.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        mostrar(abas[(i + d + abas.length) % abas.length].getAttribute('aria-controls'), true);
+      });
+    });
+    // Links do menu para #simulador ou #configurador abrem a aba certa antes de rolar.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href="#simulador"], a[href="#configurador"]');
+      if (a) mostrar(a.getAttribute('href').slice(1));
+    }, true);
+    mostrar(location.hash === '#configurador' ? 'configurador' : 'simulador');
+  }
+
   // Links para produtos abrem a ficha dentro do cartão.
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#item-"]');

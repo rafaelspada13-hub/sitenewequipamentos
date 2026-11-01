@@ -49,6 +49,7 @@ const tests = {
   },
   'configurador troca as bitolas conforme o tipo': async (b) => {
     const page = await open(b);
+    await page.click('#aba-configurador');
     await page.locator('label.chip:has(input[name=\"cfg-tipo\"][value=\"guilhotina\"])').click();
     const ops = await page.$$eval('#cfg-bitola option', (o) => o.map((x) => x.textContent));
     assert.strictEqual(ops[ops.length - 1], '30"');
@@ -58,6 +59,7 @@ const tests = {
   },
   'configurador monta o resumo e o pedido': async (b) => {
     const page = await open(b);
+    await page.click('#aba-configurador');
     await page.locator('label.chip:has(input[name=\"cfg-tipo\"][value=\"bi\"])').click();
     await page.selectOption('#cfg-bitola', '8"');
     await page.locator('label.chip:has(input[name=\"cfg-material\"][value=\"CF8M\"])').click();
@@ -67,6 +69,18 @@ const tests = {
     await waitForm(page);
     assert.strictEqual(await page.$eval('#produto', (s) => s.value), 'Válvula Borboleta Bi-excêntrica Classe 150');
     assert.ok((await page.$eval('#mensagem', (t) => t.value)).includes('CF8M'));
+  },
+  'simulador e configurador dividem um bloco em abas': async (b) => {
+    const page = await open(b);
+    assert.ok(await page.isVisible('#simulador') && !(await page.isVisible('#configurador')));
+    await page.click('#aba-configurador');
+    assert.ok(!(await page.isVisible('#simulador')) && await page.isVisible('#configurador'));
+    await page.focus('#aba-configurador');
+    await page.keyboard.press('ArrowLeft');
+    assert.strictEqual(await page.getAttribute('#aba-simulador', 'aria-selected'), 'true');
+    await page.evaluate(() => document.querySelector('a[href="#configurador"]').click());
+    assert.ok(await page.isVisible('#configurador'), 'link do menu deveria abrir a aba');
+    await page.ctx.close();
   },
   'linha de válvulas é uma grade de 6 produtos, sem rolagem lateral': async (b) => {
     const page = await open(b);
