@@ -46,10 +46,11 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   for (const nome of ['Usina Caeté', 'Usina Santa Isabel', 'Usina Santa Fé', 'ADM do Brasil', 'Usiminas', 'Ball']) {
     check(text.includes(nome), `cliente "${nome}" ausente`);
   }
-  for (const produto of ['Borboleta bi‑excêntrica', 'Borboleta concêntrica', 'Esfera segmentada', 'Guilhotina', 'Gaveta e globo', 'Pressure seal']) {
+  for (const produto of ['Borboleta bi‑excêntrica', 'Borboleta concêntrica', 'Retenção dupla porta', 'Esfera segmentada', 'Guilhotina', 'Gaveta e globo', 'Pressure seal']) {
     check(await page.locator(`.produto h3:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente da linha`);
   }
-  check(await page.locator('.outros summary:has-text("Retenção")').count() === 1, 'retenção ausente de "outros"');
+  check(await page.locator('#item-retencao img[src*="estudio/retencao"]').count() === 1, 'retenção sem foto no estúdio');
+  check(await page.locator('.outros summary:has-text("Retenção")').count() === 0, 'retenção repetida em "outros"');
   // enxugado: sem faixa de clientes, radar, recibo, linhas gigantes de contato e marcador da abertura
   for (const sel of ['.segments-band', '.map-radar', '.slip', '.contact-rows', '#valvula-abertura', '.rail-track', '.catalog-section']) {
     check(await page.locator(sel).count() === 0, `${sel} deveria ter saído`);
@@ -57,7 +58,7 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   // um só estilo de botão principal e nenhum "quadrado" em volta das imagens de produto
   check(await page.locator('.btn--dark').count() === 0, 'ainda há botão .btn--dark');
   const imgsProduto = await page.$$eval('.produto img, .tech-render img', (i) => i.map((x) => x.getAttribute('src')));
-  check(imgsProduto.length >= 7 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
+  check(imgsProduto.length >= 8 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
   check(text.includes('24 anos'), 'tempo de experiência ausente');
   for (const t of ['válvulas condicionadoras de vapor', 'válvulas redutoras de pressão', 'válvulas automáticas', 'Hiter', 'Foxwall']) {
     check(text.toLowerCase().includes(t.toLowerCase()), `manutenção especializada sem "${t}"`);

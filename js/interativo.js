@@ -74,7 +74,7 @@
   var cfg = $('#configurador');
   if (cfg && E) {
     var IMGS = {
-      bi: 'bi-excentrica', concentrica: 'concentrica', retencao: null, gaveta: 'gaveta-globo',
+      bi: 'bi-excentrica', concentrica: 'concentrica', retencao: 'retencao', gaveta: 'gaveta-globo',
       pressureseal: 'pressure-seal', esfera: 'esfera', guilhotina: 'guilhotina',
     };
     var sel = {};

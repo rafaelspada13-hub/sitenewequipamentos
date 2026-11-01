@@ -100,6 +100,13 @@ def render_no_estudio(render_path, w, h):
     return compor(recortar_render(render_path), w, h, altura=0.8)
 
 
+# fotos reais já recortadas do fundo (PNG com transparência), por nome de saída
+FOTOS = {
+    "concentrica": "concentrica.png",
+    "retencao": "retencao.png",
+}
+
+
 def salvar(img, nome):
     img.save(OUT / f"{nome}.webp", "WEBP", quality=84, method=6)
     img.save(OUT / f"{nome}.jpg", "JPEG", quality=84, optimize=True, progressive=True)
@@ -110,6 +117,10 @@ def main(midia, render):
     OUT.mkdir(parents=True, exist_ok=True)
     for nome, arquivo in RECORTES.items():
         salvar(compor(Image.open(Path(midia) / arquivo).convert("RGBA")), nome)
+    recortes = Path(midia).parent.parent.parent.parent / "recortes"
+    for nome, arquivo in FOTOS.items():
+        if (recortes / arquivo).exists():
+            salvar(compor(Image.open(recortes / arquivo).convert("RGBA"), altura=0.7), nome)
     salvar(render_no_estudio(render, 600, 750), "bi-excentrica")
     salvar(render_no_estudio(render, 720, 1080), "bi-excentrica-alta")
 
