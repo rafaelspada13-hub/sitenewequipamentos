@@ -1,0 +1,31 @@
+/* Estados iniciais da camada de movimento (js/movimento.js).
+   Só valem com a classe .motion-on, que o <head> remove se a biblioteca não carregar. */
+
+/* a biblioteca assume as entradas: o sistema antigo de .reveal fica neutro */
+.motion-on .reveal,
+.motion-on .reveal.is-in { opacity: 1; transform: none; transition: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* abertura: etiquetas começam escondidas */
+  .motion-on:not(.motion-pronto) .anot circle { transform: scale(0); }
+  .motion-on:not(.motion-pronto) .anot path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .motion-on:not(.motion-pronto) .anot-rotulo > * { opacity: 0; }
+
+  /* listas começam escondidas até entrarem na tela */
+  .motion-on :is(.produtos-grid, .clients-grid, .segments-list, .etapas, .gallery-grid, .contato-card, .regioes) > * { opacity: 0; }
+  .motion-on .reveal { opacity: 0; }
+}
+
+.anot path { stroke-dasharray: 1; }
+.anot circle { transform-box: fill-box; transform-origin: center; }
+
+/* títulos: cada palavra sobe de trás de uma máscara */
+.m-palavra { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.m-palavra > span { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .motion-on .m-palavra > span { transform: translateY(110%); }
+}
+
+/* cartões com inclinação 3D */
+.produtos-grid { perspective: 1200px; }
+.produto { transform-style: preserve-3d; will-change: transform; }

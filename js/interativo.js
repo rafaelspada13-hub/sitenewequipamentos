@@ -148,7 +148,9 @@
   var escrever = function (el, v) {
     el.textContent = String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (el.dataset.suffix || '');
   };
-  if (nums.length && !reduceMotion && 'IntersectionObserver' in window) {
+  // Com a camada de movimento (js/movimento.js) ativa, a contagem fica com ela.
+  var comMotion = window.Motion && document.documentElement.classList.contains('motion-on');
+  if (nums.length && !reduceMotion && !comMotion && 'IntersectionObserver' in window) {
     nums.forEach(function (el) { escrever(el, 0); });
     var contar = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
