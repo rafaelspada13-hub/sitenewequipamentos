@@ -1,4 +1,4 @@
-// Abertura: a válvula borboleta que abre conforme a página rola.
+// Abertura parada: a bi-excêntrica NEW no palco de estúdio, título e dois botões.
 const path = require('path');
 const assert = require('assert');
 const { chromium } = require('playwright');
@@ -6,120 +6,35 @@ const { chromium } = require('playwright');
 const URL = 'file://' + path.join(__dirname, '..', 'index.html');
 const VIEW = { width: 1366, height: 768 };
 
-// Escala horizontal do disco (1 = fechado de frente, ~0 = aberto de lado).
-const discScale = (page) => page.$eval('#valvula-disco', (d) => {
-  const m = new DOMMatrixReadOnly(getComputedStyle(d).transform);
-  return Math.abs(m.a);
-});
-
-async function scrollHeroTo(page, fraction) {
-  await page.evaluate((f) => {
-    const pin = document.querySelector('.hero-pin');
-    const run = pin.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: pin.offsetTop + run * f, behavior: 'instant' });
-  }, fraction);
-  await page.waitForTimeout(250);
-}
-
 const tests = {
-  'abertura tem a foto da válvula com o disco, o título e o pedido de orçamento': async (browser) => {
+  'abertura tem a foto no palco, o título e os dois botões': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    assert.strictEqual(await page.locator('#inicio #valvula #valvula-disco').count(), 1);
     assert.strictEqual((await page.textContent('#inicio h1')).trim(), 'Válvulas industriais');
     assert.ok(await page.isVisible('#inicio a.btn[href="#contato"]'));
-    assert.strictEqual(await page.locator('.hero-line, .hero-track').count(), 0, 'letreiro antigo ainda presente');
+    assert.ok(await page.isVisible('#inicio a[href^="https://wa.me/5516997223976"]'));
+    const src = await page.getAttribute('#inicio .hero-palco img', 'src');
+    assert.ok(src && src.includes('palco-estatico'), `foto do palco ausente (${src})`);
+    assert.ok(await page.isVisible('#inicio .hero-palco img'));
   },
-  'pelo furo passa fluxo, não foto': async (browser) => {
+  'sem animação de rolagem: nada de canvas, vapor ou disco separado': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    assert.strictEqual(await page.locator('#valvula .valve-bore image').count(), 0, 'há foto dentro do furo');
-    assert.strictEqual(await page.$eval('#valvula-fluxo', (c) => c.tagName), 'CANVAS', 'fluxo deveria ser partículas em canvas');
-    const opacityAt = async (f) => { await scrollHeroTo(page, f); return parseFloat(await page.$eval('#valvula-fluxo', (g) => getComputedStyle(g).opacity)); };
-    assert.ok((await opacityAt(0)) < 0.05, 'fluxo visível com a válvula fechada');
-    assert.ok((await opacityAt(0.55)) > 0.9, 'fluxo fraco com a válvula aberta');
+    for (const sel of ['#inicio canvas', '#valvula-disco', '.hero-flash', '.hero-hint', 'script[src*="vapor.js"]']) {
+      assert.strictEqual(await page.locator(sel).count(), 0, `${sel} deveria ter saído`);
+    }
   },
-  'o fluxo é vapor desenhado em WebGL': async (browser) => {
+  'a abertura ocupa uma tela e a rolagem segue direto para o site': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    await scrollHeroTo(page, 0.55);
-    await page.waitForTimeout(400);
-    assert.strictEqual(await page.$eval('#valvula-fluxo', (c) => c.dataset.modo), 'vapor');
+    const h = await page.$eval('#inicio', (s) => s.offsetHeight);
+    assert.ok(h <= VIEW.height * 1.05, `abertura ocupa ${h}px`);
   },
-  'no topo a válvula está fechada': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    await page.waitForTimeout(200);
-    assert.ok((await discScale(page)) > 0.95, 'disco deveria estar de frente');
-  },
-  'na metade da rolagem a válvula está entreaberta': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    await scrollHeroTo(page, 0.25);
-    const s = await discScale(page);
-    assert.ok(s > 0.1 && s < 0.95, `escala ${s}`);
-  },
-  'ao fim da rolagem a válvula está toda aberta': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    await scrollHeroTo(page, 1);
-    assert.ok((await discScale(page)) < 0.1, 'disco deveria estar de lado');
-  },
-  'aos 100% a câmera mergulha no furo e o texto sai de cena': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    await scrollHeroTo(page, 1);
-    const scale = await page.$eval('#valvula', (v) => new DOMMatrixReadOnly(getComputedStyle(v).transform).a);
-    assert.ok(scale > 6, `válvula não ampliou (${scale})`);
-    const op = parseFloat(await page.$eval('.hero-copy', (c) => getComputedStyle(c).opacity));
-    assert.ok(op < 0.1, `texto ainda visível (${op})`);
-  },
-  'depois do mergulho o site abre com efeitos automáticos': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    assert.ok(!(await page.evaluate(() => document.documentElement.classList.contains('site-aberto'))));
-    await scrollHeroTo(page, 1);
-    await page.evaluate(() => window.scrollBy(0, 40));
-    await page.waitForTimeout(300);
-    assert.ok(await page.evaluate(() => document.documentElement.classList.contains('site-aberto')), 'site não abriu');
-    await page.waitForTimeout(1500);
-    const visiveis = await page.$$eval('#sobre .reveal', (els) => els.every((e) => e.classList.contains('is-in')));
-    assert.ok(visiveis, 'Quem somos não entrou sozinho');
-  },
-  'voltando ao topo a válvula fecha de novo': async (browser) => {
-    const page = await browser.newPage({ viewport: VIEW });
-    await page.goto(URL);
-    await scrollHeroTo(page, 1);
-    await scrollHeroTo(page, 0);
-    assert.ok((await discScale(page)) > 0.95);
-    const scale = await page.$eval('#valvula', (v) => new DOMMatrixReadOnly(getComputedStyle(v).transform).a);
-    assert.ok(scale < 1.2, `válvula continua ampliada (${scale})`);
-  },
-  'com animações reduzidas a válvula já aparece aberta e sem rolagem extra': async (browser) => {
-    const ctx = await browser.newContext({ viewport: VIEW, reducedMotion: 'reduce' });
-    const page = await ctx.newPage();
-    await page.goto(URL);
-    await page.waitForTimeout(200);
-    assert.ok((await discScale(page)) < 0.1);
-    const h = await page.$eval('.hero-pin', (p) => p.offsetHeight);
-    assert.ok(h <= VIEW.height * 1.25, `abertura ocupa ${h}px`);
-    await ctx.close();
-  },
-  'sem JavaScript a válvula aparece aberta e sem rolagem extra': async (browser) => {
-    const ctx = await browser.newContext({ viewport: VIEW, javaScriptEnabled: false });
-    const page = await ctx.newPage();
-    await page.goto(URL);
-    assert.ok((await discScale(page)) < 0.1);
-    const h = await page.$eval('.hero-pin', (p) => p.offsetHeight);
-    assert.ok(h <= VIEW.height * 1.25, `abertura ocupa ${h}px`);
-    await ctx.close();
-  },
-  'no celular a abertura cabe sem rolagem horizontal': async (browser) => {
+  'no celular a válvula aparece inteira, sem rolagem horizontal': async (browser) => {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.goto(URL);
+    await page.waitForTimeout(300);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= 390), 'página rola na horizontal');
-    const disco = await page.$eval('#valvula-disco', (d) => { const r = d.getBoundingClientRect(); return [r.left, r.right]; });
-    assert.ok(disco[0] >= 0 && disco[1] <= 390, `disco fora da tela (${disco})`);
     assert.ok(await page.isVisible('#inicio h1'));
   },
 };

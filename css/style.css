@@ -159,16 +159,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 /* ---------- Abertura: a bi-excêntrica NEW em palco de estúdio ---------- */
-/* A foto foi estendida para um palco largo (3600 × 1400), válvula no centro, com as quatro bordas no tom do fundo: a válvula fica à direita
-   e o fundo de estúdio ocupa a tela inteira. --sx: escala do disco (1 fechado, ~0 aberto).
-   Sem JS ou com movimento reduzido a válvula fica aberta. */
-.hero { --sx: 0.02; --p: 1; }
-.hero-pin { position: relative; height: 100svh; min-height: 620px; }
-.js .hero-pin { height: 260svh; }
-@media (prefers-reduced-motion: reduce) { .js .hero-pin { height: 100svh; } }
-
+/* A foto foi estendida para um palco largo (3600 × 1400), válvula no centro, com as quatro
+   bordas no tom do fundo: a imagem some no fundo da seção em qualquer tela. */
 .hero-stage {
-  position: sticky; top: 0;
+  position: relative;
   height: 100svh; min-height: 620px;
   display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter);
   align-items: center;
@@ -176,50 +170,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
   overflow: hidden;
   background: #beb8af; color: var(--ink-dark);
 }
-
-#valvula {
-  --disc-l: 45.194%; --disc-t: 51%; --disc-w: 9.778%; --disc-h: 28%;
-  position: absolute; bottom: 0; height: 100%; aspect-ratio: 3600 / 1400;
+.hero-palco {
+  position: absolute; bottom: 0; height: 100%; width: calc(100svh * 2.5714);
   left: calc(70% - 100svh * 2.5714 * 0.50083); /* o JS refina para não encostar no texto */
-  transform-origin: 50.083% 65%; will-change: transform;
 }
-.valve-body { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; }
-.valve-bore, .valve-disc-wrap, .valve-edge { position: absolute; top: var(--disc-t); height: var(--disc-h); }
-.valve-disc-wrap { left: var(--disc-l); width: var(--disc-w); z-index: 3; }
-.valve-disc-wrap { opacity: clamp(0, calc(1 - var(--z, 0) * 3.5), 1); }
-/* a espessura só aparece quando o disco começa a virar */
-.valve-edge { opacity: clamp(0, min(calc((1 - var(--sx)) * 12), calc(1 - var(--z, 0) * 3.5)), 1); }
-.valve-disc {
-  width: 100%; height: 100%;
-  transform: scaleX(var(--sx)); transform-origin: center;
-  filter: brightness(calc(0.7 + var(--sx) * 0.3));
-}
-/* espessura do disco, que aparece quando ele fica de lado */
-.valve-edge {
-  left: calc(var(--disc-l) + var(--disc-w) / 2); z-index: 4;
-  width: calc((1 - var(--sx)) * 0.6%); transform: translateX(-50%);
-  background: #9a9e9b; border-inline: 1px solid #6e716f;
-}
-/* furo: interior do tubo, escuro, com dois anéis de profundidade */
-.valve-bore {
-  left: var(--disc-l); width: var(--disc-w); z-index: 1;
-  border-radius: 50%; background: #0b0d0c;
-}
-.valve-bore::before, .valve-bore::after {
-  content: ""; position: absolute; border-radius: 50%; border: 2px solid #1c211f;
-}
-.valve-bore::before { inset: 18%; }
-.valve-bore::after { inset: 36%; border-color: #161a18; }
-
-/* vapor/partículas do fluxo, desenhados sobre o palco inteiro */
-.valve-particles {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  z-index: 5; pointer-events: none; opacity: 0;
-}
+.hero-palco, .hero-palco img { max-width: none; } /* o palco é mais largo que a tela de propósito */
+.hero-palco img { width: 100%; height: 100%; }
 
 .hero-copy {
-  grid-column: 1 / 7; grid-row: 1; position: relative; z-index: 6;
-  opacity: clamp(0, calc(1 - var(--z, 0) * 2.5), 1); transform: translateY(calc(var(--z, 0) * -48px));
+  grid-column: 1 / 7; grid-row: 1; position: relative; z-index: 2;
 }
 .hero-title {
   font-family: var(--font-display); font-weight: 600;
@@ -231,34 +190,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero :focus-visible { outline-color: var(--brand); }
 
 .hero-spec { margin-top: 28px; font-weight: 600; color: var(--muted-dark); font-variant-numeric: tabular-nums; }
-.hero .motion-toggle {
-  position: absolute; right: var(--gutter); bottom: 14px; z-index: 6; margin: 0;
-  color: var(--muted-dark);
-}
-.hero .motion-toggle:hover { color: var(--ink-dark); }
-.valve-readout {
-  display: flex; align-items: baseline; gap: 12px; margin-top: clamp(28px, 5vh, 56px);
-  font-variant-numeric: tabular-nums;
-}
-.valve-pct {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(2.5rem, 1.8rem + 2.4vw, 4rem); line-height: 1;
-  color: var(--brand); min-width: 3.2ch;
-}
-.valve-label { color: var(--muted-dark); font-weight: 500; }
-
-.hero-flash {
-  position: absolute; inset: 0; z-index: 7; pointer-events: none;
-  background: #eafff3; opacity: var(--flash, 0);
-}
-.hero-hint {
-  position: absolute; left: 50%; bottom: 20px; z-index: 6; transform: translateX(-50%);
-  color: var(--muted-dark); font-size: var(--step-small);
-  opacity: clamp(0, calc(1 - var(--p) * 4), 1);
-  display: none;
-}
-.js .hero-hint { display: block; }
-.hero-hint::after { content: " ↓"; }
 
 @media (max-width: 900px) {
   .hero-stage {
@@ -266,44 +197,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
     padding-top: calc(var(--header-h) + 12px);
   }
   .hero-copy { grid-column: 1; }
+  .hero-palco { height: 56svh; width: calc(56svh * 2.5714); left: calc(50% - 56svh * 2.5714 * 0.50083); }
   .hero-title { font-size: clamp(2.5rem, 11vw, 4rem); }
   .hero-lead { margin-top: 12px; font-size: 1rem; }
   .hero-fact { display: none; }
   .hero-actions { margin-top: 18px; }
   .hero-actions .btn { flex: 1 1 100%; }
   .hero-spec { margin-top: 14px; font-size: var(--step-small); }
-  .valve-pct { font-size: 2.25rem; }
-  /* no celular o palco ocupa a metade de baixo, centrado na válvula */
-  #valvula { height: 56svh; left: calc(50% - 56svh * 2.5714 * 0.50083); }
-  .hero-hint { bottom: 10px; }
-}
-
-/* ---------- Faixa em movimento (clientes) ---------- */
-.segments-track {
-  display: flex; align-items: center; flex-shrink: 0;
-  animation: marquee 70s linear infinite;
-}
-.segments-track span { padding: 0 0.28em; }
-.segments-track i {
-  flex-shrink: 0;
-  width: 0.22em; height: 0.22em; border-radius: 50%;
-  background: currentColor;
-}
-.motion-paused .segments-track { animation-play-state: paused; }
-
-.motion-toggle {
-  display: none;
-  min-height: 44px; margin: 8px var(--gutter) 0; padding: 0 4px;
-  background: none; border: 0; cursor: pointer;
-  color: var(--muted); font-weight: 500;
-  text-decoration: underline; text-underline-offset: 5px;
-}
-.js .motion-toggle { display: inline-block; }
-.motion-toggle:hover { color: var(--ink); }
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 /* ---------- Quem somos ---------- */
@@ -590,7 +490,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .js .reveal.is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .segments-track { animation: none; }
   .js .reveal { transform: none; transition: opacity 0.3s; }
   .panel, .frame img, .btn, .link-arrow::after { transition: none; }
 }
@@ -860,11 +759,6 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
   .cfg-img { height: 220px; }
 }
 
-/* ---------- O site abre depois do mergulho ---------- */
-@media (prefers-reduced-motion: no-preference) {
-  .site-aberto .site-header { animation: desce 0.8s var(--ease) both; }
-}
-@keyframes desce { from { transform: translateY(-100%); } to { transform: none; } }
 
 /* ---------- WhatsApp direto ---------- */
 .nav-whatsapp {
@@ -897,8 +791,6 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 .tech-mais[open] > summary::after { transform: rotate(45deg); }
 .tech-mais .tech-block:first-child, .tech-mais > .tech-split { margin-top: 8px; }
 .tech-mais + .tech-mais { margin-top: 0; }
-/* abertura: dica de rolagem à esquerda, pausa à direita */
-.hero-hint { left: var(--gutter); transform: none; }
 /* rodapé mais compacto */
 .footer { padding-top: clamp(64px, 8vw, 120px); }
 @media (max-width: 600px) {

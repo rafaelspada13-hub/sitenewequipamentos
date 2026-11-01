@@ -51,11 +51,8 @@ const tests = {
     const color = await page.$eval('#bitola', (e) => getComputedStyle(e).outlineColor);
     assert.strictEqual(color, 'rgb(0, 74, 44)');
   },
-  'movimento pode ser pausado e o vídeo tem controles': async (browser) => {
+  'o vídeo da galeria tem controles para pausar': async (browser) => {
     const page = await openPage(browser);
-    await page.click('#motionToggle');
-    assert.ok(await page.evaluate(() => document.documentElement.classList.contains('motion-paused')), 'animação não pausou');
-    assert.strictEqual(await page.getAttribute('#motionToggle', 'aria-pressed'), 'true');
     assert.ok(await page.$eval('.frame--video video', (v) => v.controls));
   },
   'sede descrita como RPTFE (PTFE reforçado com fibra de vidro)': async (browser) => {
