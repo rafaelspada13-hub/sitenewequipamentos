@@ -65,14 +65,14 @@ def compor(produto, w=600, h=750, altura=0.74):
     return bg
 
 
-def recortar_render(render_path):
+def recortar_render(render_path, caixa=(0, 110, 704, 1090)):
     """Separa a bi-excêntrica do fundo do render.
 
     O fundo do render é um degradê suave: para cada linha, estima-se a cor do fundo pelas
     bordas (interpolando entre esquerda e direita) e fica opaco só o que difere dela.
     O reflexo no chão é cortado para a sombra do estúdio assumir esse papel.
     """
-    src = Image.open(render_path).convert("RGB").crop((0, 110, 704, 1090))
+    src = Image.open(render_path).convert("RGB").crop(caixa)
     w, h = src.size
     px = src.load()
     alfa = Image.new("L", (w, h), 0)
@@ -102,8 +102,12 @@ def render_no_estudio(render_path, w, h):
 
 # fotos reais já recortadas do fundo (PNG com transparência), por nome de saída
 FOTOS = {
-    "concentrica": "concentrica.png",
     "retencao": "retencao.png",
+}
+
+# renders feitos no ChatGPT no padrão da bi-excêntrica: arquivo -> (nome, caixa sem o reflexo)
+RENDERS = {
+    "render-concentrica.png": ("concentrica", (0, 76, 1024, 1404)),  # acima de 76 só há fundo
 }
 
 
@@ -121,6 +125,9 @@ def main(midia, render):
     for nome, arquivo in FOTOS.items():
         if (recortes / arquivo).exists():
             salvar(compor(Image.open(recortes / arquivo).convert("RGBA"), altura=0.7), nome)
+    for arquivo, (nome, caixa) in RENDERS.items():
+        if (recortes / arquivo).exists():
+            salvar(compor(recortar_render(recortes / arquivo, caixa), altura=0.8), nome)
     salvar(render_no_estudio(render, 600, 750), "bi-excentrica")
     salvar(render_no_estudio(render, 720, 1080), "bi-excentrica-alta")
 
