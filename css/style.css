@@ -686,7 +686,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); /* taste-skill-ignore: botão flutuante é sobreposição */
   transition: transform 0.2s var(--ease), opacity 0.2s;
 }
-.js .whatsapp-float:not(.is-visible) { opacity: 0; pointer-events: none; transform: translateY(12px); }
+
 .whatsapp-float:hover { transform: scale(1.06); }
 
 /* ---------- Entradas ao rolar (só com JS) ---------- */
@@ -1043,3 +1043,27 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
   .site-aberto .site-header { animation: desce 0.8s var(--ease) both; }
 }
 @keyframes desce { from { transform: translateY(-100%); } to { transform: none; } }
+
+/* ---------- WhatsApp direto ---------- */
+.nav-whatsapp {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+  margin-left: auto; color: var(--brand-bright); font-weight: 600; text-decoration: none;
+}
+.nav-whatsapp:hover { color: #6bd69b; }
+.site-header .nav { margin-left: auto; }
+.site-header .nav + .nav-whatsapp { margin-left: 0; }
+.btn--wa { gap: 8px; }
+.hero .btn--wa { background: #1f7a4a; }
+.hero .btn--wa:hover { background: #18663d; }
+@media (max-width: 900px) {
+  .nav-whatsapp span { display: none; }
+  .nav-whatsapp { padding: 0 10px; }
+  .hero-actions .btn--wa { flex: 1 1 100%; }
+}
+.servico-destaque { background: var(--bg-3); padding: 22px 24px; }
+.servico-destaque h3 { color: var(--brand-bright); }
+.servico-destaque .link-arrow { margin-top: 12px; }
+/* no celular a abertura já tem o botão grande de WhatsApp: o flutuante entra depois dela */
+@media (max-width: 900px) {
+  .js .whatsapp-float:not(.is-visible) { opacity: 0; pointer-events: none; transform: translateY(12px); }
+}

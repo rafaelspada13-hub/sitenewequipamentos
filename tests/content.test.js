@@ -50,6 +50,10 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
     check(await page.locator(`.item summary:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente do catálogo`);
   }
   check(text.includes('24 anos'), 'tempo de experiência ausente');
+  for (const t of ['válvulas condicionadoras de vapor', 'válvulas redutoras de pressão', 'válvulas automáticas', 'Hiter', 'Foxwall']) {
+    check(text.toLowerCase().includes(t.toLowerCase()), `manutenção especializada sem "${t}"`);
+  }
+  check(await page.locator('header a.nav-whatsapp[href^="https://wa.me/5516997223976"]').count() === 1, 'ícone do WhatsApp ausente no menu');
   check(!text.includes('72"') && !/borboletas? de 150# a 300#/.test(text), 'borboleta só até 48" Classe 150');
   check(!/18\s*clientes/i.test(text) && !text.includes('clientes atendidos'), 'contagem de clientes não deve aparecer');
   check(text.includes('Principais clientes'), 'título "Principais clientes" ausente');

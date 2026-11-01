@@ -96,9 +96,10 @@ const tests = {
     await page.click('#nav a[href="#servicos"]');
     assert.strictEqual(await page.getAttribute('#menuToggle', 'aria-expanded'), 'false');
   },
-  'botão flutuante do WhatsApp só aparece depois da abertura': async (browser) => {
+  'botão flutuante do WhatsApp aparece desde a abertura': async (browser) => {
     const page = await openPage(browser);
-    assert.strictEqual(await page.$eval('.whatsapp-float', (e) => getComputedStyle(e).opacity), '0');
+    await page.waitForTimeout(500);
+    assert.strictEqual(await page.$eval('.whatsapp-float', (e) => getComputedStyle(e).opacity), '1');
     await page.evaluate(() => window.scrollTo(0, document.getElementById('sobre').offsetTop));
     await page.waitForTimeout(500);
     assert.strictEqual(await page.$eval('.whatsapp-float', (e) => getComputedStyle(e).opacity), '1');
