@@ -50,6 +50,13 @@
     palco.style.height = h + 'px';
     palco.style.width = h * RAZAO + 'px';
     palco.style.left = (cx - h * RAZAO * CENTRO) + 'px';
+    // etiquetas técnicas só quando cabem inteiras na tela (some entre ~900 e ~1100 px)
+    root.classList.remove('anot-sem-espaco');
+    var limite = window.innerWidth - 16;
+    var vazam = Array.prototype.some.call(heroEl.querySelectorAll('.anot-rotulo'), function (r) {
+      return r.getBoundingClientRect().right > limite;
+    });
+    root.classList.toggle('anot-sem-espaco', vazam);
   }
   window.addEventListener('resize', ajustarPalco);
   ajustarPalco();
@@ -61,10 +68,14 @@
   var floatBtn = document.querySelector('.whatsapp-float');
   var hero = document.getElementById('inicio');
 
+  var fundo = [document.querySelector('main'), document.querySelector('footer'), floatBtn];
   function setMenu(open) {
     nav.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.textContent = open ? 'Fechar' : 'Menu';
+    root.classList.toggle('menu-aberto', open);
+    // com o menu aberto, o Tab fica no menu: o resto da página sai do caminho
+    fundo.forEach(function (el) { if (el) el.inert = open; });
   }
 
   toggle.addEventListener('click', function () {
@@ -94,6 +105,8 @@
 
   /* ---------- Orçamento ---------- */
   var form = document.getElementById('orcamentoForm');
+  // Sem JavaScript o formulário cai no e-mail (action mailto); com ele, a validação é nossa.
+  form.noValidate = true;
   var formError = document.getElementById('formError');
   var produto = document.getElementById('produto');
   var submitBtn = form.querySelector('button[type="submit"]');
@@ -158,12 +171,21 @@
     var current = 0;
     var opener = null;
 
+    // A foto nova é decodificada antes de entrar, e troca com um cruzamento curto.
     var show = function (index) {
       current = (index + links.length) % links.length;
       var link = links[current];
-      img.src = link.getAttribute('href');
-      img.alt = link.getAttribute('data-alt') || '';
-      caption.textContent = (current + 1) + ' de ' + links.length + ' · ' + img.alt;
+      var alt = link.getAttribute('data-alt') || '';
+      var proxima = new Image();
+      proxima.src = link.getAttribute('href');
+      var trocar = function () {
+        img.src = proxima.src;
+        img.alt = alt;
+        caption.textContent = (current + 1) + ' de ' + links.length + ' · ' + alt;
+        img.classList.remove('is-trocando');
+      };
+      img.classList.add('is-trocando');
+      (proxima.decode ? proxima.decode() : Promise.resolve()).then(trocar, trocar);
     };
 
     // A janela é criada no primeiro clique, para não deixar uma imagem vazia na página.
@@ -203,6 +225,7 @@
         opener = link;
         show(i);
         dialog.showModal();
+        dialog.querySelector('[data-close]').focus();
       });
     });
   }
@@ -229,13 +252,33 @@
   }
 
   /* ---------- Vídeo do barracão: toca só quando visível ---------- */
+  // Sem a barra do navegador: um botão discreto pausa e retoma (e toca, com movimento reduzido).
   var video = document.querySelector('.frame--video video');
-  if (video && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !reduceMotion) video.play().catch(function () {});
-        else if (!entry.isIntersecting) video.pause();
-      });
-    }, { threshold: 0.4 }).observe(video);
+  var videoBtn = document.querySelector('.video-toggle');
+  if (video && videoBtn) {
+    video.removeAttribute('controls');
+    videoBtn.hidden = false;
+    var pausadoPeloUsuario = reduceMotion;
+    var marcar = function () {
+      var tocando = !video.paused;
+      videoBtn.setAttribute('aria-pressed', String(!tocando));
+      videoBtn.setAttribute('aria-label', tocando ? 'Pausar vídeo' : 'Tocar vídeo');
+      videoBtn.classList.toggle('is-pausado', !tocando);
+    };
+    video.addEventListener('play', marcar);
+    video.addEventListener('pause', marcar);
+    videoBtn.addEventListener('click', function () {
+      if (video.paused) { pausadoPeloUsuario = false; video.play().catch(function () {}); }
+      else { pausadoPeloUsuario = true; video.pause(); }
+    });
+    marcar();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !pausadoPeloUsuario) video.play().catch(function () {});
+          else if (!entry.isIntersecting) video.pause();
+        });
+      }, { threshold: 0.4 }).observe(video);
+    }
   }
 })();

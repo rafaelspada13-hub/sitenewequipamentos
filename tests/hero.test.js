@@ -10,7 +10,7 @@ const tests = {
   'abertura tem a foto no palco, o título e os dois botões': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
-    assert.strictEqual((await page.textContent('#inicio h1')).trim(), 'Válvulas industriais');
+    assert.strictEqual((await page.textContent('#inicio h1')).trim(), 'Fabricamos e recuperamos válvulas industriais');
     assert.ok(await page.isVisible('#inicio a.btn[href="#contato"]'));
     assert.ok(await page.isVisible('#inicio a[href^="https://wa.me/5516997223976"]'));
     const src = await page.getAttribute('#inicio .hero-palco img', 'src');
@@ -33,6 +33,7 @@ const tests = {
     await page.goto(URL);
     await page.waitForTimeout(3500);
     assert.ok(!(await page.evaluate(() => document.documentElement.classList.contains('motion-on'))));
+    await page.waitForTimeout(1200); // entradas do sistema simples terminam a transição
     const ops = await page.$$eval('.anot-rotulo > *, .reveal', (els) => els.map((e) => getComputedStyle(e).opacity));
     assert.ok(ops.every((o) => parseFloat(o) > 0.25), 'conteúdo escondido sem a biblioteca');
   },

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rafaelspada13-hub.github.io/sitenewequipamentos/sitemap.xml

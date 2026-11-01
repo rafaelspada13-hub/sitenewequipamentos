@@ -4,12 +4,8 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
-const SLUGS = [
-  'borboleta-vermelha', 'usinagem', 'globo-controle',
-  'gaveta-par', 'borboleta-grande-1', 'borboleta-grande-2', 'borboleta-grande-3',
-  'borboletas-lote', 'estoque-mix', 'controle-azul', 'redutores',
-  'gaveta-galpao', 'globo-volante', 'lote-gavetas', 'fachada',
-];
+// fotos publicadas (as demais ficam em _originais/, fora do site)
+const SLUGS = ['borboleta-grande-2', 'borboletas-lote', 'controle-azul', 'redutores', 'fachada'];
 
 let failures = 0;
 const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } };

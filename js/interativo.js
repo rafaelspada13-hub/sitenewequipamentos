@@ -6,6 +6,13 @@
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
   var fmt = function (n) { return String(n).replace('.', ','); };
+  // Leitor de tela: um aviso curto, só depois que a pessoa para de mexer (não a cada passo do controle).
+  var avisar = function (id, texto) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.textContent = texto; }, 450);
+  };
 
   // Leva um pedido ao formulário de orçamento (produto + mensagem) e rola até ele.
   function levarAoOrcamento(produto, mensagem) {
@@ -40,7 +47,11 @@
       $('#sim-pressao-out').textContent = fmt(p) + ' kgf/cm²';
       var status = $('#sim-status');
       status.textContent = STATUS[r.status];
+      var mudou = sim.dataset.status !== r.status;
       sim.dataset.status = r.status;
+      if (mudou) sim.dispatchEvent(new CustomEvent('sim:status'));
+      avisar('sim-aviso', STATUS[r.status] + ', ' + t + ' graus, ' + fmt(p) + ' quilos.' +
+        (r.materiais.length ? ' Atendem: ' + r.materiais.join(', ') + '.' : ''));
 
       $('#sim-mats').innerHTML = ['WCB', 'CF8', 'CF8M', 'CF3'].map(function (m) {
         var ok = r.materiais.indexOf(m) !== -1;
@@ -74,8 +85,9 @@
   var cfg = $('#configurador');
   if (cfg && E) {
     var IMGS = {
+      // pressure seal e esfera: sem foto até chegarem os renders no padrão do estúdio
       bi: 'bi-excentrica', concentrica: 'concentrica', retencao: 'retencao', gaveta: 'gaveta-globo',
-      pressureseal: 'pressure-seal', esfera: 'esfera', guilhotina: 'guilhotina',
+      guilhotina: 'guilhotina',
     };
     var sel = {};
     var tipoAtual = function () { return E.TIPOS.filter(function (t) { return t.id === sel.tipo; })[0]; };
@@ -116,7 +128,12 @@
       $('#cfg-nome').textContent = t.nome;
       resumir();
     };
-    var resumir = function () { $('#cfg-resumo').textContent = E.resumoConfiguracao(sel); };
+    var resumir = function () {
+      var texto = E.resumoConfiguracao(sel);
+      $('#cfg-resumo').textContent = texto;
+      avisar('cfg-aviso', texto);
+      cfg.dispatchEvent(new CustomEvent('cfg:mudou'));
+    };
 
     cfg.addEventListener('change', function (e) {
       var n = e.target.name;
@@ -139,6 +156,20 @@
   if (bloco) {
     document.documentElement.classList.add('abas-on');
     var abas = $$('[role="tab"]', bloco);
+    var trilho = document.createElement('span');
+    trilho.className = 'abas-trilho';
+    trilho.setAttribute('aria-hidden', 'true');
+    abas[0].parentNode.appendChild(trilho);
+    var posicionarTrilho = function () {
+      var ativa = abas.filter(function (a) { return a.getAttribute('aria-selected') === 'true'; })[0];
+      if (!ativa) return;
+      trilho.style.left = ativa.offsetLeft + 'px';
+      trilho.style.top = (ativa.offsetTop + ativa.offsetHeight - 4) + 'px';
+      trilho.style.bottom = 'auto';
+      trilho.style.width = ativa.offsetWidth + 'px';
+    };
+    window.addEventListener('resize', posicionarTrilho);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(posicionarTrilho);
     var mostrar = function (id, foco) {
       bloco.dataset.aba = id;
       abas.forEach(function (aba) {
@@ -148,14 +179,15 @@
         document.getElementById(aba.getAttribute('aria-controls')).hidden = !ativa;
         if (ativa && foco) aba.focus();
       });
+      posicionarTrilho();
     };
     abas.forEach(function (aba, i) {
       aba.addEventListener('click', function () { mostrar(aba.getAttribute('aria-controls')); });
       aba.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (!d) return;
+        var alvo = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? abas.length - 1 : null;
+        if (alvo === null) return;
         e.preventDefault();
-        mostrar(abas[(i + d + abas.length) % abas.length].getAttribute('aria-controls'), true);
+        mostrar(abas[(alvo + abas.length) % abas.length].getAttribute('aria-controls'), true);
       });
     });
     // Links do menu para #simulador ou #configurador abrem a aba certa antes de rolar.

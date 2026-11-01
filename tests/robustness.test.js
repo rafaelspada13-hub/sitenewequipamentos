@@ -8,8 +8,8 @@ const { chromium } = require('playwright');
 const ROOT = path.join(__dirname, '..');
 const URL = 'file://' + path.join(ROOT, 'index.html');
 
-async function openPage(browser, { block, viewport } = {}) {
-  const page = await browser.newPage({ viewport: viewport || { width: 1440, height: 900 } });
+async function openPage(browser, { block, viewport, javaScriptEnabled = true } = {}) {
+  const page = await browser.newPage({ viewport: viewport || { width: 1440, height: 900 }, javaScriptEnabled });
   await page.addInitScript(() => { window.__opened = []; window.open = (u) => { window.__opened.push(u); return null; }; });
   if (block) await page.route((u) => u.pathname.endsWith('/' + block), (route) => route.abort());
   await page.goto(URL);
@@ -54,9 +54,19 @@ const tests = {
     const color = await page.$eval('#bitola', (e) => getComputedStyle(e).outlineColor);
     assert.strictEqual(color, 'rgb(0, 74, 44)');
   },
-  'o vídeo da galeria tem controles para pausar': async (browser) => {
+  'o vídeo da galeria tem botão para pausar e tocar (e controles sem JS)': async (browser) => {
     const page = await openPage(browser);
-    assert.ok(await page.$eval('.frame--video video', (v) => v.controls));
+    assert.ok(!(await page.$eval('.frame--video video', (v) => v.controls)), 'barra do navegador ainda aparece');
+    const btn = page.locator('.video-toggle');
+    await btn.scrollIntoViewIfNeeded();
+    assert.ok(await btn.isVisible(), 'botão de pausa ausente');
+    await page.$eval('.frame--video video', (v) => v.play().catch(() => {}));
+    await page.waitForTimeout(300);
+    await btn.click();
+    assert.ok(await page.$eval('.frame--video video', (v) => v.paused), 'botão não pausou');
+    assert.strictEqual(await btn.getAttribute('aria-label'), 'Tocar vídeo');
+    const semJs = await openPage(browser, { javaScriptEnabled: false });
+    assert.ok(await semJs.$eval('.frame--video video', (v) => v.controls), 'sem JS o vídeo precisa da barra do navegador');
   },
   'sede descrita como RPTFE (PTFE reforçado com fibra de vidro)': async (browser) => {
     const page = await openPage(browser);

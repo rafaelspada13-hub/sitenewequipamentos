@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # (arquivo de origem, larguras a gerar)
 ALVOS = [
     *[(f"img/estudio/{n}.webp", (300,)) for n in
-      ("bi-excentrica", "concentrica", "retencao", "gaveta-globo", "pressure-seal", "esfera", "guilhotina", "controle")],
+      ("bi-excentrica", "concentrica", "retencao", "gaveta-globo", "guilhotina", "controle")],
     *[(f"img/opt/{n}.webp", (600,)) for n in ("borboleta-grande-2", "controle-azul", "borboletas-lote", "redutores", "fachada")],
     ("img/produtos/palco-estatico.webp", (1600,)),
 ]

@@ -65,7 +65,22 @@ def compor(produto, w=600, h=750, altura=0.74):
     return bg
 
 
-def recortar_render(render_path, caixa=(0, 110, 704, 1090)):
+def compor_par(atras, frente, w=600, h=750):
+    """Duas peças no mesmo estúdio: uma atrás à esquerda, outra à frente à direita."""
+    bg = fundo_estudio(w, h)
+    camadas = []
+    for peca, altura, cx, base in ((atras, 0.62, 0.37, 0.80), (frente, 0.50, 0.66, 0.90)):
+        p = peca.crop(peca.getbbox())
+        escala = h * altura / p.height
+        p = p.resize((round(p.width * escala), round(p.height * escala)), Image.LANCZOS)
+        camadas.append((p, round(w * cx - p.width / 2), round(h * base) - p.height, round(w * cx), round(h * base)))
+    for p, x, y, cx, b in camadas:
+        bg.paste((60, 55, 50), (0, 0), sombra_chao(w, h, cx, b, p.width * 0.9))
+        bg.paste(p, (x, y), p)
+    return bg
+
+
+def recortar_render(render_path, caixa=(0, 110, 704, 1090), limiar=9):
     """Separa a bi-excêntrica do fundo do render.
 
     O fundo do render é um degradê suave: para cada linha, estima-se a cor do fundo pelas
@@ -88,7 +103,7 @@ def recortar_render(render_path, caixa=(0, 110, 704, 1090)):
             t = x / (w - 1)
             fundo = [esq[i] + (dir_[i] - esq[i]) * t for i in range(3)]
             d = math.sqrt(sum((px[x, y][i] - fundo[i]) ** 2 for i in range(3)))
-            ap[x, y] = max(0, min(255, round((d - 9) / 22 * 255)))
+            ap[x, y] = max(0, min(255, round((d - limiar) / 22 * 255)))
     alfa = alfa.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.GaussianBlur(0.8))
     out = src.convert("RGBA")
     out.putalpha(alfa)
@@ -109,7 +124,10 @@ FOTOS = {
 # renders feitos no ChatGPT no padrão da bi-excêntrica: arquivo -> (nome, caixa sem o reflexo)
 RENDERS = {
     "render-concentrica.png": ("concentrica", (0, 76, 1024, 1404)),  # acima de 76 só há fundo
+    "render-globo.png": ("globo", (0, 0, 1024, 1432)),               # a flange esquerda desce até 1430
 }
+# gaveta (marca de terceiro apagada) atrás e globo à frente, no mesmo quadro do cartão "Gaveta e globo"
+PAR_GAVETA_GLOBO = (("render-gaveta.png", (0, 0, 1024, 1476), 24), ("render-globo.png", (0, 0, 1024, 1432), 9))
 
 
 def salvar(img, nome):
@@ -127,8 +145,14 @@ def main(midia, render):
         if (recortes / arquivo).exists():
             salvar(compor(Image.open(recortes / arquivo).convert("RGBA"), altura=0.7), nome)
     for arquivo, (nome, caixa) in RENDERS.items():
-        if (recortes / arquivo).exists():
-            salvar(compor(recortar_render(recortes / arquivo, caixa), altura=0.8), nome)
+        # renders do ChatGPT: guardados em _originais/renders (ou na pasta de recortes antiga)
+        fonte = next((d / arquivo for d in (ROOT / "_originais" / "renders", recortes) if (d / arquivo).exists()), None)
+        if fonte:
+            salvar(compor(recortar_render(fonte, caixa), altura=0.8), nome)
+    pasta = ROOT / "_originais" / "renders"
+    if all((pasta / a).exists() for a, _, _ in PAR_GAVETA_GLOBO):
+        pecas = [recortar_render(pasta / a, c, limiar=l) for a, c, l in PAR_GAVETA_GLOBO]
+        salvar(compor_par(*pecas), "gaveta-globo")
     salvar(render_no_estudio(render, 600, 750), "bi-excentrica")
     salvar(render_no_estudio(render, 720, 1080), "bi-excentrica-alta")
 

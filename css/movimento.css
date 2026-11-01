@@ -6,13 +6,15 @@
 .motion-on .reveal.is-in { opacity: 1; transform: none; transition: none; }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* abertura: etiquetas começam escondidas */
+  /* abertura: o texto espera a fonte (no máximo 600 ms) e entra encadeado */
+  .motion-on:not(.abertura-viva):not(.motion-pronto) :is(.hero-title, .hero-lead, .hero-fact, .hero-actions, .hero-spec) { opacity: 0; }
+  /* etiquetas começam escondidas */
   .motion-on:not(.motion-pronto) .anot circle { opacity: 0; transform: scale(0.4); }
   .motion-on:not(.motion-pronto) .anot path { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .motion-on:not(.motion-pronto) .anot-rotulo > * { opacity: 0; }
 
-  /* listas começam escondidas até entrarem na tela */
-  .motion-on :is(.produtos-grid, .clients-grid, .segments-list, .etapas, .gallery-grid, .contato-card, .regioes) > * { opacity: 0; }
+  /* só os produtos entram em cascata */
+  .motion-on .produtos-grid > * { opacity: 0; }
   .motion-on .reveal { opacity: 0; }
 }
 
@@ -23,9 +25,22 @@
 .m-palavra { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 .m-palavra > span { display: inline-block; }
 @media (prefers-reduced-motion: no-preference) {
-  .motion-on .m-palavra > span { transform: translateY(110%); }
+  .motion-on:not(.motion-pronto) .hero-title .m-palavra > span,
+  .motion-on .section-title .m-palavra > span { transform: translateY(110%); }
 }
 
-/* cartões com inclinação 3D */
-.produtos-grid { perspective: 1200px; }
-.produto { transform-style: preserve-3d; will-change: transform; }
+/* cartões de produto: no lugar da inclinação, uma linha da marca cresce na base */
+.produto { position: relative; }
+.produto::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--brand-bright); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.produto:hover::after, .produto:focus-within::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .produto::after { transition: none; } }
+
+/* ferramentas em abas: o painel novo entra com um cruzamento curto */
+@media (prefers-reduced-motion: no-preference) {
+  .abas-on .ferramentas > section:not([hidden]) { animation: painel-entra 0.18s linear; }
+}
+@keyframes painel-entra { from { opacity: 0; } to { opacity: 1; } }

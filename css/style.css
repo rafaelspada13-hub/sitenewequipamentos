@@ -1,6 +1,3 @@
-/* NEW Válvulas — "Engenharia de precisão"
-   Grafite da marca, verde do logo e o nome em escala de monumento. */
-
 :root {
   --bg: #161817;
   --bg-2: #1f2321;
@@ -20,6 +17,7 @@
   --stop: #7d1f1f;      /* 5,9:1 sobre --paper-2 */
   --brand-bright-hover: #6bd69b;
   --white: #fff;
+  --preto: #000;
   --erro: #ff8a80;
   --erro-texto: #ffb4ab;
   --linha-atual: #d8eadf;  /* bitola escolhida na tabela */
@@ -37,13 +35,25 @@
   --step-lead: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
   --step-sub: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
   --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
-  --step-display: clamp(3rem, 1.6rem + 5vw, 6rem);
+  --step-display: clamp(2.75rem, 1.6rem + 3.4vw, 4.25rem);
 
   --gutter: clamp(20px, 2.5vw, 32px);
   --section: clamp(72px, 8vw, 144px);
   --header-h: 72px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+
+/* Fontes hospedadas no próprio site (subconjunto latino, woff2): sem CSS de terceiro bloqueando a página */
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/barlow-400.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/barlow-500.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/barlow-600.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Barlow Condensed'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/barlow-condensed-500.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Barlow Condensed'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/barlow-condensed-600.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+
+/* NEW Válvulas — "Engenharia de precisão"
+   Grafite da marca, verde do logo e o nome em escala de monumento. */
+
 
 /* ---------- Base ---------- */
 *,
@@ -110,10 +120,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
   border: 0; border-radius: 0;
   font-family: var(--font-body); font-weight: 600; font-size: var(--step-body);
   text-decoration: none; cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s var(--ease);
+  transition: background-color 0.2s;
 }
 .btn:hover { background: var(--brand-bright-hover); }
 .btn:active { transform: translateY(1px); }
+/* com a camada de movimento, o aperto é dela (escala); o CSS não disputa o transform */
+.motion-on .btn:active { transform: none; }
 .btn--small { min-height: 44px; padding: 0 20px; font-size: var(--step-small); }
 .btn--ghost { background: transparent; color: inherit; border: 2px solid currentColor; }
 .btn--ghost:hover { background: rgba(127, 127, 127, 0.14); }
@@ -189,15 +201,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero-palco, .hero-palco img { max-width: none; } /* o palco é mais largo que a tela de propósito */
 .hero-palco picture, .hero-palco img { display: block; width: 100%; height: 100%; }
 
-/* Luz de estúdio: um brilho que percorre só a peça (máscara com o contorno da válvula) */
-.hero-luz {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, 0.75) 50%, transparent 58%) 160% 0 / 300% 100% no-repeat; /* taste-skill-ignore: reflexo de luz sobre a peça, não fundo */
-  -webkit-mask: url("../img/produtos/palco-mascara.png") 0 0 / 100% 100%;
-  mask: url("../img/produtos/palco-mascara.png") 0 0 / 100% 100%;
-  mix-blend-mode: soft-light; opacity: 0;
-}
-
 /* Etiquetas técnicas: ponto na peça, linha até a coluna, nome e detalhe */
 .anot-linhas { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .anot path { fill: none; stroke: var(--ink-dark); stroke-width: 2; vector-effect: non-scaling-stroke; }
@@ -212,6 +215,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* no celular a válvula é pequena: fica só a luz, sem etiquetas */
 @media (max-width: 900px) { .anot-linhas, .anot-rotulos { display: none; } }
+.anot-sem-espaco .anot-linhas, .anot-sem-espaco .anot-rotulos { display: none; }
 
 .hero-copy {
   grid-column: 1 / 7; grid-row: 1; position: relative; z-index: 2;
@@ -253,7 +257,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .intro-title {
   grid-column: 1 / 6;
   font-family: var(--font-display); font-weight: 600;
-  font-size: var(--step-sub); line-height: 1;
+  font-size: var(--step-head); line-height: 0.95;
 }
 .intro-text {
   grid-column: 7 / 13;
@@ -284,7 +288,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .produtos-grid > .produto { grid-column: span 2; }
 /* 7 produtos: a última linha fica centralizada */
 .produtos-grid > .produto:last-child:nth-child(3n + 1) { grid-column: 3 / span 2; }
-.produto { display: grid; grid-template-rows: auto 1fr; background: var(--bg-2); }
+.produto { display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); min-width: 0; background: var(--bg-2); }
+.produto-info { min-width: 0; overflow-wrap: anywhere; }
 .produto-img { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper); }
 .produto-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
 .produto:hover .produto-img img { transform: scale(1.03); }
@@ -322,6 +327,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- Também fornecemos (retenção e acessórios) ---------- */
 .outros { max-width: 760px; margin-top: clamp(64px, 8vw, 112px); }
+@media (min-width: 1001px) {
+  /* lista à esquerda, a nota de "sob consulta" ocupa a coluna da direita */
+  .outros { max-width: none; display: grid; grid-template-columns: 7fr 5fr; column-gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .outros > * { grid-column: 1; }
+  .outros > .catalog-note { grid-column: 2; grid-row: 2 / span 4; margin-top: 0; max-width: 40ch; }
+}
 .outros h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-sub); line-height: 1; margin-bottom: 20px; }
 .item { background: var(--bg-2); margin-top: 6px; }
 .item[open] { background: var(--bg-3); }
@@ -407,7 +418,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .logistica { margin-top: 40px; }
 }
 
-/* ---------- Estrutura e manutenção: vídeo + 4 fotos ---------- */
+/* ---------- Oficina e estoque: vídeo + 4 fotos ---------- */
 .gallery { display: flex; flex-direction: column; gap: 48px; padding: var(--section) var(--gutter); }
 .gallery-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px clamp(32px, 5vw, 80px); }
 .gallery-head p { max-width: 44ch; color: var(--muted); }
@@ -503,14 +514,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   align-items: start;
 }
 .footer-invite {
-  grid-column: 1 / 8;
+  grid-column: 1 / 7;
   font-family: var(--font-display); font-weight: 600;
   font-size: var(--step-head); line-height: 0.98;
 }
-.footer-top .btn { grid-column: 1 / 8; grid-row: 2; justify-self: start; }
-.footer-links { grid-column: 10 / 13; grid-row: 1; display: grid; gap: 8px; }
-.footer-links a { text-decoration: none; font-weight: 500; text-underline-offset: 5px; }
-.footer-links a:hover { text-decoration: underline; }
+.footer-top .btn { grid-column: 1 / 7; grid-row: 2; justify-self: start; }
 
 /* espaço embaixo para o botão flutuante não cobrir o CNPJ */
 .footer-bottom {
@@ -526,10 +534,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 @media (max-width: 700px) {
-  .footer-invite, .footer-top .btn, .footer-links { grid-column: 1 / -1; }
+  .footer-invite, .footer-top .btn { grid-column: 1 / -1; }
   .footer-invite { font-size: var(--step-head); }
   .footer-top .btn { justify-self: stretch; }
-  .footer-links { grid-row: 3; display: flex; flex-wrap: wrap; gap: 8px 20px; }
   .footer-legal { justify-items: start; text-align: left; }
 }
 
@@ -544,6 +551,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .whatsapp-float:hover { transform: scale(1.06); }
+.whatsapp-float:active { transform: scale(0.96); }
 
 /* ---------- Entradas ao rolar (só com JS) ---------- */
 .js .reveal {
@@ -740,13 +748,13 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 
 .sim-fallback { padding: 0 var(--gutter); color: var(--muted-dark); }
-.js .sim-fallback { display: none; }
+:is(.js, .abas-on) .sim-fallback { display: none; }
 .sim-app, .cfg-app { display: none; }
-.js .sim-app, .js .cfg-app { display: grid; }
+:is(.js, .abas-on) .sim-app, :is(.js, .abas-on) .cfg-app { display: grid; }
 
 /* ---------- Ferramentas em abas ---------- */
 .ferramentas-abas { display: none; }
-.abas-on .ferramentas { background: var(--paper); transition: background-color 0.3s var(--ease); }
+.abas-on .ferramentas { background: var(--paper); }
 .abas-on .ferramentas[data-aba="configurador"] { background: var(--bg-2); }
 .abas-on .ferramentas-abas {
   display: flex; flex-wrap: wrap; gap: 8px 40px;
@@ -764,7 +772,12 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
   position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
 .ferramentas[data-aba="configurador"] .ferramentas-abas button { color: var(--muted); }
-.ferramentas-abas button[aria-selected="true"] { color: var(--brand); border-bottom-color: currentColor; }
+.ferramentas-abas button[aria-selected="true"] { color: var(--brand); }
+/* indicador da aba: um traço que desliza até a aba escolhida */
+.ferramentas-abas { position: relative; }
+.abas-trilho { position: absolute; bottom: 0; left: 0; height: 4px; width: 0; background: var(--brand); transition: left 0.35s var(--ease), width 0.35s var(--ease); }
+.ferramentas[data-aba="configurador"] .abas-trilho { background: var(--brand-bright); }
+@media (prefers-reduced-motion: reduce) { .abas-trilho { transition: none; } }
 .ferramentas[data-aba="configurador"] .ferramentas-abas button[aria-selected="true"] { color: var(--brand-bright); }
 .ferramentas-abas button:focus-visible { outline: 3px solid var(--brand-bright); outline-offset: 4px; }
 .abas-on .ferramentas > section { padding-top: 32px; background: transparent; }
@@ -880,11 +893,11 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 .footer { padding-top: clamp(64px, 8vw, 120px); }
 @media (max-width: 600px) {
   /* celular: produtos em duas colunas, cartão compacto */
-  .produtos-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .produtos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .produtos-grid > .produto { grid-column: auto; }
   .produtos-grid > .produto:last-child:nth-child(odd) { grid-column: auto; justify-self: stretch; width: auto; }
   /* a bi-excêntrica abre a linha em largura total, foto ao lado do texto; as outras seis ficam em 3 × 2 */
-  .produtos-grid > #item-bi { grid-column: 1 / -1; grid-template-columns: 44% 1fr; grid-template-rows: auto; }
+  .produtos-grid > #item-bi { grid-column: 1 / -1; grid-template-columns: 44% minmax(0, 1fr); grid-template-rows: auto; }
   #item-bi .produto-img { aspect-ratio: auto; height: 100%; }
   .produto-img { aspect-ratio: 1; }
   .produto-img img, #item-bi .produto-img img { object-fit: contain; }
@@ -915,7 +928,103 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
 .auto-pecas figcaption { padding: 8px 12px 10px; background: var(--bg-2); font-size: var(--step-small); font-weight: 600; }
 /* Clientes e segmentos: foto da indústria sob o título */
 .segments-intro { display: grid; gap: 28px; align-content: start; }
-.segments-foto img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.segments-lead { color: var(--muted); max-width: 34ch; }
 
 /* <details> fechado: o conteúdo sai do layout de fato (o Chrome ainda mede caixas ocultas) */
 details:not([open]) > :not(summary) { display: none; }
+
+/* ---------- Vídeo da oficina: botão discreto no lugar da barra do navegador ---------- */
+.frame--video { position: relative; }
+.video-toggle {
+  position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px;
+  display: grid; place-items: center; border: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(22, 24, 23, 0.72); color: var(--white);
+  transition: background-color 0.2s var(--ease);
+}
+.video-toggle:hover { background: var(--bg-2); }
+.video-toggle:focus-visible { outline: 3px solid var(--brand-bright); outline-offset: 3px; }
+/* pausa: duas barras; tocar: triângulo */
+.video-toggle span { width: 12px; height: 14px; border-left: 4px solid currentColor; border-right: 4px solid currentColor; }
+.video-toggle.is-pausado span { width: 0; height: 0; border: 0; border-left: 13px solid currentColor; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
+
+/* ---------- Galeria ampliada: entra com fade, troca de foto com cruzamento ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] { animation: lb-entra 0.24s var(--ease); }
+  .lightbox[open]::backdrop { animation: lb-fundo 0.2s linear; }
+  .lightbox img { transition: opacity 0.15s linear; }
+  .lightbox img.is-trocando { opacity: 0.35; }
+}
+@keyframes lb-entra { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes lb-fundo { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Menu no celular: desce com recorte, fundo escurecido atrás ---------- */
+.menu-toggle { -webkit-tap-highlight-color: transparent; min-width: 44px; }
+@media (max-width: 900px) {
+  .menu-aberto main, .menu-aberto .footer { filter: brightness(0.6); transition: filter 0.25s var(--ease); }
+  @media (prefers-reduced-motion: no-preference) {
+    .nav.is-open { animation: menu-desce 0.3s var(--ease); }
+    .nav.is-open a { animation: menu-link 0.3s var(--ease) both; }
+    .nav.is-open a:nth-child(2) { animation-delay: 30ms; }
+    .nav.is-open a:nth-child(3) { animation-delay: 60ms; }
+    .nav.is-open a:nth-child(4) { animation-delay: 90ms; }
+    .nav.is-open a:nth-child(5) { animation-delay: 120ms; }
+  }
+}
+@keyframes menu-desce { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes menu-link { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Alvos de toque de pelo menos 44 px ---------- */
+.nav-whatsapp { min-width: 44px; justify-content: center; }
+.footer-legal a { display: inline-block; padding-block: 12px; }
+.link-arrow { min-height: 44px; }
+
+/* ---------- Produto sem foto no padrão: painel com o dado principal ---------- */
+.produto-ficha {
+  display: grid; align-content: center; justify-items: center; gap: 10px; padding: 24px 16px; text-align: center;
+  background: var(--paper);
+  color: var(--ink-dark);
+}
+.produto-ficha-num { font-family: var(--font-display); font-weight: 600; font-size: var(--step-head); line-height: 0.9; }
+.produto-ficha-rot { font-size: var(--step-small); color: var(--muted-dark); max-width: 16ch; }
+
+/* cartão grande da bi-excêntrica: as bordas da foto se fundem ao fundo do estúdio */
+#item-bi .produto-img img {
+  -webkit-mask-image: radial-gradient(ellipse 58% 54% at 50% 50%, var(--preto) 72%, transparent 100%); /* taste-skill-ignore: máscara de borda, não preenchimento */
+  mask-image: radial-gradient(ellipse 58% 54% at 50% 50%, var(--preto) 72%, transparent 100%); /* taste-skill-ignore: máscara de borda, não preenchimento */
+}
+
+/* ---------- Rodapé: três colunas (válvulas, serviços, contato) ---------- */
+.footer-nav { grid-column: 7 / 13; grid-row: 1 / span 2; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px var(--gutter); }
+.footer-col { font-weight: 600; margin-bottom: 4px; }
+.footer-nav ul { display: grid; }
+.footer-nav a { display: inline-block; padding-block: 8px; min-height: 44px; color: var(--ink-dark); text-decoration: none; text-underline-offset: 5px; overflow-wrap: anywhere; }
+.footer-nav a:hover { text-decoration: underline; }
+.footer-col { color: var(--muted-dark); font-size: var(--step-small); }
+@media (max-width: 1000px) {
+  .footer-invite, .footer-top .btn { grid-column: 1 / -1; }
+  .footer-nav { grid-column: 1 / -1; grid-row: auto; }
+}
+/* no celular o menu do topo já leva às seções: o rodapé fica só com o contato */
+@media (max-width: 560px) {
+  .footer-nav { grid-template-columns: 1fr; }
+  .footer-nav > div:not(:last-child) { display: none; }
+  .footer-nav > div:last-child ul { display: flex; flex-wrap: wrap; column-gap: 20px; }
+}
+
+/* botão flutuante menor no celular: cobre menos do conteúdo */
+@media (max-width: 600px) { .whatsapp-float { width: 52px; height: 52px; right: 14px; bottom: 14px; } }
+
+/* ---------- Impressão: fica o conteúdo técnico, sai o que é tela ---------- */
+@media print {
+  @page { margin: 16mm; }
+  body { background: var(--white); color: var(--preto); font-size: 11pt; }
+  .site-header, .whatsapp-float, .skip, .ferramentas-abas, .hero-palco, .gallery, .quote-form,
+  .sim, .cfg, .footer-top .btn, .hero-actions, .js-orcar, .video-toggle, .lightbox { display: none !important; }
+  section, .footer { padding: 12pt 0 !important; background: var(--white) !important; color: var(--preto) !important; break-inside: auto; }
+  h1, h2, h3 { color: var(--preto) !important; break-after: avoid; }
+  table, .bx-dims, .tech-facts { break-inside: avoid; }
+  details > :not(summary) { display: block !important; }
+  a { color: var(--preto); text-decoration: none; }
+  .reveal, .produtos-grid > *, .m-palavra > span { opacity: 1 !important; transform: none !important; }
+  .produto-img img { max-height: 50mm; object-fit: contain; }
+}

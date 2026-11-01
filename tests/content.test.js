@@ -58,12 +58,15 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   // um só estilo de botão principal e nenhum "quadrado" em volta das imagens de produto
   check(await page.locator('.btn--dark').count() === 0, 'ainda há botão .btn--dark');
   const imgsProduto = await page.$$eval('.produto img, .tech-render img', (i) => i.map((x) => x.getAttribute('src')));
-  check(imgsProduto.length >= 8 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
+  // pressure seal e esfera: painel com o dado principal até chegarem os renders no padrão do estúdio
+  check(await page.locator('.produto .produto-ficha').count() === 2, 'painéis de ficha ausentes');
+  check(imgsProduto.length >= 6 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
   check(text.includes('24 anos'), 'tempo de experiência ausente');
   // a redutora do render é de saneamento: não ilustra o bloco de vapor e processo
   check(await page.locator('.servico-destaque img[src*="estudio/redutora"]').count() === 0, 'redutora de saneamento no bloco de vapor');
   check(await page.locator('.servico-destaque img[src*="estudio/controle"]').count() === 1, 'válvula de controle ausente dos serviços');
-  check(await page.locator('#segmentos img[src*="opt/industria"]').count() === 1, 'imagem da indústria ausente dos segmentos');
+  // a foto de banco de imagem (refinaria europeia) saiu: não representa os clientes da NEW
+  check(await page.locator('#segmentos img').count() === 0, 'foto genérica de indústria voltou aos segmentos');
   for (const t of ['válvulas condicionadoras de vapor', 'válvulas redutoras de pressão', 'válvulas automáticas', 'Hiter', 'Foxwall']) {
     check(text.toLowerCase().includes(t.toLowerCase()), `manutenção especializada sem "${t}"`);
   }

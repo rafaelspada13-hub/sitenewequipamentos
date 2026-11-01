@@ -80,6 +80,8 @@ const tests = {
     assert.ok(await dialog.isVisible(), 'lightbox não abriu');
     const src1 = await dialog.locator('img').getAttribute('src');
     await page.keyboard.press('ArrowRight');
+    // a foto nova é decodificada antes de entrar
+    await page.waitForFunction((s) => document.querySelector('dialog.lightbox img').getAttribute('src') !== s, src1, { timeout: 4000 }).catch(() => {});
     const src2 = await dialog.locator('img').getAttribute('src');
     assert.notStrictEqual(src1, src2, 'seta não trocou a foto');
     await page.keyboard.press('Escape');
