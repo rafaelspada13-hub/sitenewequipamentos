@@ -68,36 +68,26 @@ const tests = {
     assert.strictEqual(await page.$eval('#produto', (s) => s.value), 'Válvula Borboleta Bi-excêntrica Classe 150');
     assert.ok((await page.$eval('#mensagem', (t) => t.value)).includes('CF8M'));
   },
-  'linha de válvulas desliza na horizontal com a rolagem': async (b) => {
+  'linha de válvulas é uma grade de 6 produtos, sem rolagem lateral': async (b) => {
     const page = await open(b);
-    assert.ok(await page.locator('#linha .rail-card').count() >= 7);
-    const tx = () => page.$eval('#linha .rail-track', (t) => new DOMMatrixReadOnly(getComputedStyle(t).transform).m41);
-    await page.evaluate(() => { const s = document.getElementById('linha'); scrollTo({ top: s.offsetTop, behavior: 'instant' }); });
-    await page.waitForTimeout(300);
-    const a = await tx();
-    await page.evaluate(() => { const s = document.getElementById('linha'); scrollTo({ top: s.offsetTop + s.offsetHeight * 0.6, behavior: 'instant' }); });
-    await page.waitForTimeout(300);
-    const c = await tx();
-    assert.ok(c < a - 100, `trilho não deslizou (${a} → ${c})`);
-  },
-  'cartão da linha abre a ficha no catálogo': async (b) => {
-    const page = await open(b);
-    await page.locator('#linha .rail-card a[href="#item-guilhotina"]').evaluate((a) => a.click());
-    await page.waitForTimeout(400);
-    assert.ok(await page.$eval('#item-guilhotina', (d) => d.open));
-  },
-  'com animações reduzidas a linha vira rolagem lateral comum': async (b) => {
-    const page = await open(b, { reducedMotion: 'reduce' });
-    const h = await page.$eval('#linha', (s) => s.offsetHeight);
-    assert.ok(h < VIEW.height * 1.6, `seção fixada mesmo com animações reduzidas (${h}px)`);
-    assert.strictEqual(await page.$eval('#linha .rail-viewport', (v) => getComputedStyle(v).overflowX), 'auto');
+    assert.ok(await page.locator('#linha .produto').count() >= 6);
+    const [sw, cw] = await page.$eval('#linha', (s) => [s.scrollWidth, s.clientWidth]);
+    assert.ok(sw <= cw + 1, 'linha rola na horizontal');
     await page.ctx.close();
   },
-  'mapa de logística mostra as regiões e detalha ao tocar': async (b) => {
+  'a ficha abre dentro do cartão do produto': async (b) => {
     const page = await open(b);
-    assert.ok(await page.locator('#logistica .map-place').count() >= 6);
-    await page.locator('#logistica button[data-lugar="rio-preto"]').click();
-    assert.ok((await page.textContent('#mapa-info')).includes('São José do Rio Preto'));
+    const ficha = page.locator('#item-guilhotina details');
+    assert.ok(!(await ficha.evaluate((d) => d.open)));
+    await page.locator('#item-guilhotina details summary').click();
+    assert.ok(await ficha.evaluate((d) => d.open));
+    await page.ctx.close();
+  },
+  'logística lista as regiões com a distância': async (b) => {
+    const page = await open(b);
+    const txt = await page.textContent('#servicos');
+    for (const t of ['Ribeirão Preto', 'São José do Rio Preto', 'Triângulo Mineiro', 'Sul de Minas', 'Grande São Paulo', 'km']) assert.ok(txt.includes(t), t);
+    await page.ctx.close();
   },
   'números contam até o valor real': async (b) => {
     const page = await open(b);
@@ -111,7 +101,6 @@ const tests = {
     const vals = await page.$$eval('.stat-num', (s) => s.map((x) => x.textContent.trim()));
     assert.deepStrictEqual(vals, ['24', '48"', '1.500#']);
     assert.ok(await page.isVisible('#simulador .sim-fallback'));
-    assert.strictEqual(await page.$eval('#linha .rail-viewport', (v) => getComputedStyle(v).overflowX), 'auto');
     await page.ctx.close();
   },
 };

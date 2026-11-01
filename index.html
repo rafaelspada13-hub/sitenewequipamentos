@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261101a" />
+  <link rel="stylesheet" href="css/style.css?v=20261101c" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
@@ -58,16 +58,13 @@
             <p class="hero-fact">Sertãozinho/SP · atendimento em todo o território nacional</p>
             <div class="hero-actions">
               <a href="#contato" class="btn">Pedir orçamento</a>
-              <a href="https://wa.me/5516997223976" class="btn btn--wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>WhatsApp</a>
-              <a href="#simulador" class="link-arrow">Simular minha aplicação</a>
+              <a href="https://wa.me/5516997223976" class="btn btn--ghost" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>WhatsApp</a>
             </div>
-            <p class="valve-readout" aria-live="off">
-              <span class="valve-pct" id="valvula-abertura">100%</span>
-              <span class="valve-label">aberta · <span id="valvula-angulo">90°</span></span>
-            </p>
+            <p class="hero-spec">Bi‑excêntrica NEW · Classe 150 · 2" a 48" · API 609</p>
           </div>
 
           <p class="hero-hint" aria-hidden="true">Role para abrir a válvula</p>
+          <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pausar animação</button>
           <canvas id="valvula-fluxo" class="valve-particles" aria-hidden="true"></canvas>
           <div class="hero-flash" aria-hidden="true"></div>
         </div>
@@ -81,9 +78,9 @@
         <p class="intro-text reveal">A NEW nasceu em Sertãozinho, no coração do setor sucroenergético, com uma equipe que soma 24 anos de experiência em válvulas industriais. Fabricamos, fornecemos, automatizamos e recuperamos válvulas para usinas, estações de tratamento, mineradoras, papel e celulose e petroquímica, com responsabilidade técnica registrada no CREA-SP.</p>
         <picture class="intro-photo reveal">
           <source srcset="img/opt/fachada.webp" type="image/webp" />
-          <img src="img/opt/fachada.jpg" alt="Fachada do barracão da NEW na Rua Argentina Grillo Badia, em Sertãozinho" width="1600" height="899" loading="lazy" />
+          <img src="img/opt/fachada.jpg" alt="Fachada do barracão da NEW na Rua Argentina Grillo Badia, em Sertãozinho" width="960" height="540" loading="lazy" />
         </picture>
-        <p class="intro-note reveal">Nossa missão: garantir confiabilidade e eficiência nas operações industriais, com válvulas de alta performance, suporte técnico ágil e atendimento transparente.</p>
+        <p class="intro-note reveal"><strong>Nossa missão:</strong> garantir confiabilidade e eficiência nas operações industriais, com válvulas de alta performance, suporte técnico ágil e atendimento transparente.</p>
       </div>
       <dl class="stats">
         <div class="stat"><dt>anos de experiência da equipe</dt><dd class="stat-num" data-count="24">24</dd></div>
@@ -92,119 +89,97 @@
       </dl>
     </section>
 
-    <!-- Linha de válvulas: desliza na horizontal com a rolagem -->
-    <section class="rail" id="linha" aria-label="Válvulas">
-      <div class="rail-sticky">
-        <div class="rail-head">
-          <h2 class="section-title">Linha de válvulas</h2>
-          <p>Fabricação e fornecimento para vapor, caldo, água, químicos, pastas e alta pressão.</p>
-        </div>
-        <div class="rail-viewport" tabindex="0" role="region" aria-label="Linha de válvulas, role para o lado">
-          <div class="rail-track">
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/bi-excentrica-new.webp" type="image/webp" /><img src="img/produtos/bi-excentrica-new.jpg" alt="Válvula borboleta bi-excêntrica NEW com caixa redutora" width="704" height="1534" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Borboleta bi‑excêntrica</h3>
-                <ul><li>2" a 48"</li><li>ASME 150</li><li>até 250 °C</li></ul>
-                <a class="link-arrow" href="#item-bi">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/borboleta-concentrica.webp" type="image/webp" /><img src="img/produtos/borboleta-concentrica.jpg" alt="Válvula borboleta concêntrica wafer vermelha" width="226" height="350" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Borboleta concêntrica</h3>
-                <ul><li>2" a 40"</li><li>API 609</li><li>wafer e semi-lug</li></ul>
-                <a class="link-arrow" href="#item-concentrica">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/esfera-segmentada.webp" type="image/webp" /><img src="img/produtos/esfera-segmentada.jpg" alt="Válvula esfera segmentada em inox" width="330" height="548" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Esfera segmentada</h3>
-                <ul><li>CF8 / CF8M</li><li>Classe VI</li><li>4 acionamentos</li></ul>
-                <a class="link-arrow" href="#item-esfera">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/guilhotina.webp" type="image/webp" /><img src="img/produtos/guilhotina.jpg" alt="Válvula guilhotina com atuador pneumático" width="237" height="558" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Guilhotina</h3>
-                <ul><li>2" a 30"</li><li>sólidos e pastas</li><li>vedação em inox</li></ul>
-                <a class="link-arrow" href="#item-guilhotina">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/gaveta.webp" type="image/webp" /><img src="img/produtos/gaveta.jpg" alt="Válvula gaveta flangeada com volante" width="133" height="320" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Gaveta</h3>
-                <ul><li>150# a 1.500#</li><li>WCB a CA15</li><li>4 acionamentos</li></ul>
-                <a class="link-arrow" href="#item-gaveta">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card">
-              <picture class="rail-img"><source srcset="img/produtos/pressure-seal.webp" type="image/webp" /><img src="img/produtos/pressure-seal.jpg" alt="Corte de válvulas pressure seal" width="308" height="285" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Pressure seal</h3>
-                <ul><li>150# a 1.500#</li><li>alta pressão</li><li>alta temperatura</li></ul>
-                <a class="link-arrow" href="#item-pressureseal">Ver ficha</a>
-              </div>
-            </article>
-            <article class="rail-card rail-card--photo">
-              <picture class="rail-img"><source srcset="img/opt/globo-controle.webp" type="image/webp" /><img src="img/opt/globo-controle.jpg" alt="Válvula globo de controle com atuador azul no barracão" width="1200" height="1600" loading="lazy" /></picture>
-              <div class="rail-info">
-                <h3>Globo de controle</h3>
-                <ul><li>controle e bloqueio</li><li>atuador pneumático</li><li>150# a 1.500#</li></ul>
-                <a class="link-arrow" href="#item-gaveta">Ver ficha</a>
-              </div>
-            </article>
-          </div>
-        </div>
+    <!-- Linha de válvulas: todos os produtos no mesmo estúdio, ficha dentro do cartão -->
+    <section class="produtos" id="linha" aria-label="Válvulas">
+      <div class="produtos-head reveal">
+        <h2 class="section-title">Linha de válvulas</h2>
+        <p>Fabricação e fornecimento para vapor, caldo, água, químicos, pastas e alta pressão.</p>
       </div>
-    </section>
-
-    <section class="catalog-section" aria-label="Catálogo">
-      <div class="catalog">
-        <h2 class="catalog-word reveal" aria-label="Catálogo de válvulas e acessórios">Catálogo</h2>
-
-        <details class="item" id="item-bi" data-produto="Válvula Borboleta Bi-excêntrica Classe 150" open>
-          <summary>Borboleta bi-excêntrica Classe 150</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/bi-excentrica-new-mini.webp" type="image/webp" /><img src="img/produtos/bi-excentrica-new-mini.jpg" alt="Válvula borboleta bi-excêntrica NEW com caixa redutora" width="240" height="523" loading="lazy" /></picture>
-            <p>Dupla excentricidade, sede em RPTFE reforçado com fibra de vidro e projeto conforme API 609 Categoria B. Estanqueidade bubble tight no ensaio API 598.</p>
-            <dl class="specs">
-              <div><dt>Diâmetros</dt><dd>2" a 48" (DN 50 a 1200)</dd></div>
-              <div><dt>Classe de pressão</dt><dd>ASME 150</dd></div>
-              <div><dt>Extremidades</dt><dd>Semi-lug</dd></div>
-              <div><dt>Temperatura</dt><dd>até 250 °C contínuo</dd></div>
-              <div><dt>Corpo e disco</dt><dd>WCB, ferro nodular, CF8, CF8M, CF3</dd></div>
-              <div><dt>Sede</dt><dd>RPTFE</dd></div>
-            </dl>
-            <div class="item-actions">
+      <div class="produtos-grid">
+        <article class="produto reveal" id="item-bi" data-produto="Válvula Borboleta Bi-excêntrica Classe 150">
+          <picture class="produto-img"><source srcset="img/estudio/bi-excentrica.webp" type="image/webp" /><img src="img/estudio/bi-excentrica.jpg" alt="Válvula borboleta bi-excêntrica NEW com caixa redutora e volante" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Borboleta bi‑excêntrica</h3>
+            <ul class="produto-chaves"><li>2" a 48"</li><li>ASME Classe 150</li><li>até 250 °C contínuo</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Dupla excentricidade, sede em RPTFE reforçado com fibra de vidro e projeto conforme API 609 Categoria B. Estanqueidade bubble tight no ensaio API 598.</p>
+              <dl class="specs"><div><dt>Extremidades</dt><dd>Semi-lug</dd></div><div><dt>Corpo e disco</dt><dd>WCB, ferro nodular, CF8, CF8M, CF3</dd></div><div><dt>Sede</dt><dd>RPTFE</dd></div></dl>
               <a href="#bi-excentrica" class="link-arrow">Ficha técnica completa</a>
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
           </div>
-        </details>
-
-        <details class="item" id="item-concentrica" data-produto="Válvula Borboleta Concêntrica">
-          <summary>Borboleta concêntrica</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/borboleta-concentrica.webp" type="image/webp" /><img src="img/produtos/borboleta-concentrica.jpg" alt="Válvula borboleta concêntrica wafer com corpo vermelho" width="226" height="350" loading="lazy" /></picture>
-            <p>Tipo wafer e semi-lug, construção conforme API 609.</p>
-            <dl class="specs">
-              <div><dt>Monobloco</dt><dd>2" a 40"</dd></div>
-              <div><dt>Bipartida</dt><dd>2" a 24"</dd></div>
-              <div><dt>Corpo e disco</dt><dd>Ferro nodular, aço-carbono ou inox</dd></div>
-              <div><dt>Eixo</dt><dd>AISI 410, 304 ou 316</dd></div>
-            </dl>
-            <div class="item-actions">
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
+        </article>
+        <article class="produto reveal" id="item-concentrica" data-produto="Válvula Borboleta Concêntrica">
+          <picture class="produto-img"><source srcset="img/estudio/concentrica.webp" type="image/webp" /><img src="img/estudio/concentrica.jpg" alt="Válvula borboleta concêntrica wafer vermelha" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Borboleta concêntrica</h3>
+            <ul class="produto-chaves"><li>2" a 40"</li><li>API 609</li><li>wafer e semi-lug</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Construção conforme API 609.</p>
+              <dl class="specs"><div><dt>Monobloco</dt><dd>2" a 40"</dd></div><div><dt>Bipartida</dt><dd>2" a 24"</dd></div><div><dt>Corpo e disco</dt><dd>Ferro nodular, aço-carbono ou inox</dd></div><div><dt>Eixo</dt><dd>AISI 410, 304 ou 316</dd></div></dl>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
           </div>
-        </details>
-
+        </article>
+        <article class="produto reveal" id="item-gaveta" data-produto="Válvula Gaveta e Globo">
+          <picture class="produto-img"><source srcset="img/estudio/gaveta-globo.webp" type="image/webp" /><img src="img/estudio/gaveta-globo.jpg" alt="Corte de válvula globo mostrando haste, castelo e sede" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Gaveta e globo</h3>
+            <ul class="produto-chaves"><li>150# a 1.500#</li><li>WCB a CA15</li><li>volante a hidráulico</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Montagem entre flanges, para linhas de vapor, água e processo.</p>
+              <dl class="specs"><div><dt>Classes de pressão</dt><dd>150, 300, 600, 900 e 1.500</dd></div><div><dt>Fundidos</dt><dd>WCB, WC6, WC9, C12A, CA15</dd></div><div><dt>Acionamento</dt><dd>Volante, caixa de redução, elétrico ou hidráulico</dd></div></dl>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
+          </div>
+        </article>
+        <article class="produto reveal" id="item-pressureseal" data-produto="Válvula Pressure Seal">
+          <picture class="produto-img"><source srcset="img/estudio/pressure-seal.webp" type="image/webp" /><img src="img/estudio/pressure-seal.jpg" alt="Válvula pressure seal com volante e caixa de redução" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Pressure seal</h3>
+            <ul class="produto-chaves"><li>150# a 1.500#</li><li>alta pressão</li><li>alta temperatura</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Castelo com vedação por pressão, para alta pressão e alta temperatura.</p>
+              <dl class="specs"><div><dt>Classes de pressão</dt><dd>150, 300, 600, 900 e 1.500</dd></div><div><dt>Fundidos</dt><dd>WCB, WC6, WC9, C12A, CA15</dd></div><div><dt>Acionamento</dt><dd>Volante, caixa de redução, elétrico ou hidráulico</dd></div></dl>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
+          </div>
+        </article>
+        <article class="produto reveal" id="item-esfera" data-produto="Válvula Esfera Segmentada">
+          <picture class="produto-img"><source srcset="img/estudio/esfera.webp" type="image/webp" /><img src="img/estudio/esfera.jpg" alt="Válvula esfera segmentada em inox com atuador" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Esfera segmentada</h3>
+            <ul class="produto-chaves"><li>inox CF8 / CF8M</li><li>Classe VI</li><li>4 acionamentos</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Controle e bloqueio com vedação estanque Classe VI.</p>
+              <dl class="specs"><div><dt>Eixo</dt><dd>ASTM A276 tipo 316 ou 410</dd></div><div><dt>Vedação</dt><dd>PTFE, RPTFE, AISI 304 ou 316</dd></div><div><dt>Acionamento</dt><dd>Manual, pneumático, diafragma ou elétrico</dd></div></dl>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
+          </div>
+        </article>
+        <article class="produto reveal" id="item-guilhotina" data-produto="Válvula Guilhotina">
+          <picture class="produto-img"><source srcset="img/estudio/guilhotina.webp" type="image/webp" /><img src="img/estudio/guilhotina.jpg" alt="Válvula guilhotina com atuador pneumático vermelho" width="600" height="750" loading="lazy" /></picture>
+          <div class="produto-info">
+            <h3>Guilhotina</h3>
+            <ul class="produto-chaves"><li>2" a 30"</li><li>sólidos e pastas</li><li>vedação em inox</li></ul>
+            <details>
+              <summary>Especificações</summary>
+              <p>Para sólidos em suspensão, massas, pastas e pós: alimentício, saneamento, papel e celulose, petroquímica e mineração.</p>
+              <dl class="specs"><div><dt>Vedação</dt><dd>Unidirecional ou bidirecional, em inox</dd></div><div><dt>Materiais</dt><dd>Ferro nodular, CF8, CF8M</dd></div></dl>
+            </details>
+            <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
+          </div>
+        </article>
+      </div>
+      <div class="outros">
+        <h3>Também fornecemos</h3>
         <details class="item" id="item-retencao" data-produto="Válvula de Retenção">
-          <summary>Retenção wafer</summary>
+          <summary>Retenção</summary>
           <div class="item-body">
             <p>Evita refluxo em sistemas de bombeamento e processo: químicos, vapor, óleo e água.</p>
             <dl class="specs">
@@ -219,72 +194,6 @@
             </div>
           </div>
         </details>
-
-        <details class="item" id="item-gaveta" data-produto="Válvula Gaveta e Globo">
-          <summary>Gaveta e globo</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/gaveta.webp" type="image/webp" /><img src="img/produtos/gaveta.jpg" alt="Válvula gaveta flangeada com volante" width="133" height="320" loading="lazy" /></picture>
-            <p>Montagem entre flanges, para linhas de vapor, água e processo.</p>
-            <dl class="specs">
-              <div><dt>Classes de pressão</dt><dd>150, 300, 600, 900 e 1.500</dd></div>
-              <div><dt>Fundidos</dt><dd>WCB, WC6, WC9, C12A, CA15</dd></div>
-              <div><dt>Acionamento</dt><dd>Volante, caixa de redução, elétrico ou hidráulico</dd></div>
-            </dl>
-            <div class="item-actions">
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="item" id="item-pressureseal" data-produto="Válvula Pressure Seal">
-          <summary>Pressure seal</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/pressure-seal.webp" type="image/webp" /><img src="img/produtos/pressure-seal.jpg" alt="Corte de válvulas pressure seal mostrando a vedação do castelo" width="308" height="285" loading="lazy" /></picture>
-            <p>Castelo com vedação por pressão, para alta pressão e alta temperatura.</p>
-            <dl class="specs">
-              <div><dt>Classes de pressão</dt><dd>150, 300, 600, 900 e 1.500</dd></div>
-              <div><dt>Fundidos</dt><dd>WCB, WC6, WC9, C12A, CA15</dd></div>
-              <div><dt>Acionamento</dt><dd>Volante, caixa de redução, elétrico ou hidráulico</dd></div>
-            </dl>
-            <div class="item-actions">
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="item" id="item-esfera" data-produto="Válvula Esfera Segmentada">
-          <summary>Esfera segmentada</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/esfera-segmentada.webp" type="image/webp" /><img src="img/produtos/esfera-segmentada.jpg" alt="Válvula esfera segmentada em inox com atuador" width="330" height="548" loading="lazy" /></picture>
-            <p>Controle e bloqueio com vedação estanque Classe VI.</p>
-            <dl class="specs">
-              <div><dt>Corpo e esfera</dt><dd>Inox ASTM A351 CF8 ou CF8M</dd></div>
-              <div><dt>Eixo</dt><dd>ASTM A276 tipo 316 ou 410</dd></div>
-              <div><dt>Vedação</dt><dd>PTFE, RPTFE, AISI 304 ou 316</dd></div>
-              <div><dt>Acionamento</dt><dd>Manual, pneumático, diafragma ou elétrico</dd></div>
-            </dl>
-            <div class="item-actions">
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="item" id="item-guilhotina" data-produto="Válvula Guilhotina">
-          <summary>Guilhotina</summary>
-          <div class="item-body">
-            <picture class="item-img"><source srcset="img/produtos/guilhotina.webp" type="image/webp" /><img src="img/produtos/guilhotina.jpg" alt="Válvula guilhotina com atuador pneumático vermelho" width="237" height="558" loading="lazy" /></picture>
-            <p>Para sólidos em suspensão, massas, pastas e pós: alimentício, saneamento, papel e celulose, petroquímica e mineração.</p>
-            <dl class="specs">
-              <div><dt>Diâmetros</dt><dd>2" a 30"</dd></div>
-              <div><dt>Vedação</dt><dd>Unidirecional ou bidirecional, em inox</dd></div>
-              <div><dt>Materiais</dt><dd>Ferro nodular, CF8, CF8M</dd></div>
-            </dl>
-            <div class="item-actions">
-              <button type="button" class="btn btn--small js-orcar">Orçar este item</button>
-            </div>
-          </div>
-        </details>
-
         <details class="item" data-produto="Atuador Pneumático">
           <summary>Atuador pneumático</summary>
           <div class="item-body">
@@ -300,7 +209,6 @@
             </div>
           </div>
         </details>
-
         <details class="item" data-produto="Posicionador Pneumático">
           <summary>Posicionador pneumático</summary>
           <div class="item-body">
@@ -315,7 +223,6 @@
             </div>
           </div>
         </details>
-
         <details class="item" data-produto="Válvula Solenoide NAMUR">
           <summary>Solenoide NAMUR 5/2 vias</summary>
           <div class="item-body">
@@ -330,7 +237,6 @@
             </div>
           </div>
         </details>
-
         <details class="item" data-produto="Caixa Redutora">
           <summary>Caixa redutora</summary>
           <div class="item-body">
@@ -356,11 +262,11 @@
         <h2 class="section-title">Bi‑excêntrica Classe 150</h2>
         <div class="tech-intro">
           <p>Válvula borboleta de dupla excentricidade, fabricada em aço carbono WCB, ferro nodular ou aço inoxidável (CF8, CF8M, CF3), com sede em RPTFE reforçado com fibra de vidro. Projeto conforme API 609 Categoria B, para vapor, caldo, xarope, etanol, óleo térmico e limpeza CIP.</p>
-          <a class="btn btn--dark" href="docs/tecnico/DT-VB150-001-valvula-borboleta-bi-excentrica-classe-150.pdf" download>Baixar boletim técnico (PDF)</a>
+          <a class="btn btn--ghost" href="docs/tecnico/DT-VB150-001-valvula-borboleta-bi-excentrica-classe-150.pdf" download>Baixar boletim técnico (PDF)</a>
         </div>
         <picture class="tech-render">
-          <source srcset="img/produtos/bi-excentrica-new.webp" type="image/webp" />
-          <img src="img/produtos/bi-excentrica-new.jpg" alt="Válvula borboleta bi-excêntrica NEW em WCB, com a marca NEW fundida no corpo, sede magenta e caixa redutora vermelha com volante" width="704" height="1534" loading="lazy" />
+          <source srcset="img/estudio/bi-excentrica-alta.webp" type="image/webp" />
+          <img src="img/estudio/bi-excentrica-alta.jpg" alt="Válvula borboleta bi-excêntrica NEW em WCB, com a marca NEW fundida no corpo, sede magenta e caixa redutora vermelha com volante" width="720" height="1080" loading="lazy" />
         </picture>
       </div>
 
@@ -426,6 +332,8 @@
         </div>
       </div>
 
+      <details class="tech-mais">
+        <summary>Limites operacionais, materiais e normas</summary>
       <div class="tech-split">
         <div class="tech-block reveal">
           <h3>Limites operacionais</h3>
@@ -489,7 +397,11 @@
         </div>
       </div>
 
-      <div class="tech-block reveal" id="aplicacoes">
+      </details>
+
+      <details class="tech-mais" id="aplicacoes">
+        <summary>Onde aplicar: setor sucroenergético e etanol de milho</summary>
+      <div class="tech-block">
         <h3>Onde aplicar</h3>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Aplicações no setor sucroenergético">
           <table>
@@ -524,6 +436,7 @@
         </div>
         <p class="tech-note">WCB e ferro nodular não devem ser aplicados em contato com ácidos. Sede RPTFE e gaxeta de carbono e grafite são compatíveis com todos os fluidos acima. Ácido sulfâmico: limitar a ≈ 60 °C. A seleção final deve considerar as condições reais de operação; consulte a NEW para aplicações fora destes limites.</p>
       </div>
+      </details>
     </section>
 
     <!-- Simulador de aplicação -->
@@ -537,7 +450,12 @@
         <form class="sim-controls" onsubmit="return false">
           <fieldset>
             <legend>Fluido</legend>
-            <div class="chips"><label class="chip"><input type="radio" name="fluido" value="vapor" checked /><span>Vapor saturado</span></label><label class="chip"><input type="radio" name="fluido" value="caldo" /><span>Caldo de cana</span></label><label class="chip"><input type="radio" name="fluido" value="xarope" /><span>Xarope e mel</span></label><label class="chip"><input type="radio" name="fluido" value="etanol" /><span>Etanol</span></label><label class="chip"><input type="radio" name="fluido" value="oleo" /><span>Óleo térmico</span></label><label class="chip"><input type="radio" name="fluido" value="vinhaca" /><span>Vinhaça (milho)</span></label><label class="chip"><input type="radio" name="fluido" value="soda" /><span>Soda cáustica</span></label><label class="chip"><input type="radio" name="fluido" value="sulfamico" /><span>Ácido sulfâmico</span></label><label class="chip"><input type="radio" name="fluido" value="nitrico" /><span>Ácido nítrico</span></label><label class="chip"><input type="radio" name="fluido" value="cip" /><span>CIP ácido/soda</span></label><label class="chip"><input type="radio" name="fluido" value="abrasivo" /><span>Sólidos abrasivos</span></label><label class="chip"><input type="radio" name="fluido" value="firesafe" /><span>Fire-safe certificado</span></label></div>
+            <p class="chips-grupo">Vapor e processo</p>
+            <div class="chips"><label class="chip"><input type="radio" name="fluido" value="vapor" checked /><span>Vapor saturado</span></label><label class="chip"><input type="radio" name="fluido" value="caldo" /><span>Caldo de cana</span></label><label class="chip"><input type="radio" name="fluido" value="xarope" /><span>Xarope e mel</span></label><label class="chip"><input type="radio" name="fluido" value="etanol" /><span>Etanol</span></label><label class="chip"><input type="radio" name="fluido" value="vinhaca" /><span>Vinhaça (milho)</span></label><label class="chip"><input type="radio" name="fluido" value="oleo" /><span>Óleo térmico</span></label></div>
+            <p class="chips-grupo">Limpeza CIP e químicos</p>
+            <div class="chips"><label class="chip"><input type="radio" name="fluido" value="soda" /><span>Soda cáustica</span></label><label class="chip"><input type="radio" name="fluido" value="sulfamico" /><span>Ácido sulfâmico</span></label><label class="chip"><input type="radio" name="fluido" value="nitrico" /><span>Ácido nítrico</span></label><label class="chip"><input type="radio" name="fluido" value="cip" /><span>CIP ácido/soda</span></label></div>
+            <p class="chips-grupo">Condições especiais</p>
+            <div class="chips"><label class="chip"><input type="radio" name="fluido" value="abrasivo" /><span>Sólidos abrasivos</span></label><label class="chip"><input type="radio" name="fluido" value="firesafe" /><span>Fire-safe certificado</span></label></div>
           </fieldset>
           <div class="sim-range">
             <label for="sim-temp">Temperatura</label>
@@ -567,7 +485,7 @@
             <text class="pt-axis" x="64" y="404">Temperatura (°C)</text>
             <text class="pt-axis" x="12" y="18">kgf/cm²</text>
           </svg>
-          <button type="button" class="btn btn--dark" id="sim-orcar">Orçar esta aplicação</button>
+          <button type="button" class="btn" id="sim-orcar">Orçar esta aplicação</button>
         </div>
       </div>
     </section>
@@ -604,7 +522,7 @@
           </fieldset>
         </form>
         <aside class="cfg-card" aria-live="polite">
-          <picture class="cfg-img"><img id="cfg-img" src="img/produtos/bi-excentrica-new-mini.jpg" alt="" width="240" height="523" /></picture>
+          <picture class="cfg-img"><img id="cfg-img" src="img/estudio/bi-excentrica.jpg" alt="Válvula borboleta bi-excêntrica" width="600" height="750" /></picture>
           <h3 id="cfg-nome">Borboleta bi‑excêntrica</h3>
           <p id="cfg-resumo" class="cfg-resumo"></p>
           <button type="button" class="btn" id="cfg-orcar">Orçar esta configuração</button>
@@ -614,19 +532,12 @@
 
     <!-- Segmentos -->
     <section class="segments" id="segmentos">
-      <div class="segments-band" aria-hidden="true">
-        <div class="segments-track">
-          <span>Usina Caeté</span><i></i><span>Usina São Francisco</span><i></i><span>Usina Santa Isabel</span><i></i><span>Usina Santa Clotilde</span><i></i><span>Usina Santa Fé</span><i></i><span>Usina Branco Peres</span><i></i><span>Usina Caçu</span><i></i><span>Energética Serranópolis</span><i></i><span>ADM do Brasil</span><i></i><span>Ball</span><i></i><span>Usiminas</span><i></i><span>Fiber Citrus</span><i></i><span>Comigo</span><i></i><span>Icofort</span><i></i><span>Agimix</span><i></i><span>Agropecuária Terra Nobre</span><i></i><span>Ativineo</span><i></i><span>CT Consultoria</span><i></i>
-          <span>Usina Caeté</span><i></i><span>Usina São Francisco</span><i></i><span>Usina Santa Isabel</span><i></i><span>Usina Santa Clotilde</span><i></i><span>Usina Santa Fé</span><i></i><span>Usina Branco Peres</span><i></i><span>Usina Caçu</span><i></i><span>Energética Serranópolis</span><i></i><span>ADM do Brasil</span><i></i><span>Ball</span><i></i><span>Usiminas</span><i></i><span>Fiber Citrus</span><i></i><span>Comigo</span><i></i><span>Icofort</span><i></i><span>Agimix</span><i></i><span>Agropecuária Terra Nobre</span><i></i><span>Ativineo</span><i></i><span>CT Consultoria</span><i></i>
-        </div>
-      </div>
-      <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pausar animação</button>
       <div class="segments-copy reveal">
         <h2 class="section-title">Clientes e segmentos</h2>
         <div class="segments-cols">
           <div>
             <h3>Principais clientes</h3>
-            <ul class="clients-list">
+            <ul class="clients-grid">
           <li>Usina Caeté</li>
           <li>Usina São Francisco</li>
           <li>Usina Santa Isabel</li>
@@ -685,48 +596,37 @@
             </div>
             <div class="reveal">
               <h3>Logística</h3>
-              <p>Frota própria e transportadoras parceiras, com equipe treinada e uniformizada. Entregas na Grande São Paulo, Sertãozinho e Ribeirão Preto, São José do Rio Preto, Sul de Minas e Triângulo Mineiro.</p>
+              <p>Frota própria e transportadoras parceiras, com equipe treinada e uniformizada. Distâncias em linha reta a partir de Sertãozinho:</p>
+              <ul class="regioes">
+                <li><span>Ribeirão Preto</span><b>≈ 20 km</b></li>
+                <li><span>São José do Rio Preto</span><b>≈ 150 km</b></li>
+                <li><span>Triângulo Mineiro (Uberaba)</span><b>≈ 155 km</b></li>
+                <li><span>Sul de Minas (Varginha)</span><b>≈ 270 km</b></li>
+                <li><span>Grande São Paulo</span><b>≈ 300 km</b></li>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="slip reveal" role="group" aria-label="Etapas da manutenção">
-          <h3 class="slip-title">Ordem de serviço</h3>
-          <p class="slip-group">Na chegada</p>
-          <p class="slip-row"><span>Recebimento e conferência</span><b>listagem completa</b></p>
-          <p class="slip-group">Na bancada</p>
-          <p class="slip-row"><span>Desmontagem e avaliação</span><b>relatório técnico</b></p>
-          <p class="slip-row"><span>Registro de cada componente</span><b>laudo fotográfico</b></p>
-          <p class="slip-group">No reparo</p>
-          <p class="slip-row"><span>Recuperação e usinagem</span><b>especificação original</b></p>
-          <p class="slip-row"><span>Montagem final</span><b>barracão ou campo</b></p>
-          <p class="slip-total"><span>Válvula pronta para operar</span><b>com documentação</b></p>
+        <div class="etapas-box reveal">
+          <h3>Como funciona a manutenção</h3>
+          <ol class="etapas">
+            <li><b>Recebimento e conferência</b><span>listagem completa na chegada</span></li>
+            <li><b>Desmontagem e avaliação</b><span>relatório técnico</span></li>
+            <li><b>Registro de cada componente</b><span>laudo fotográfico antes, durante e depois</span></li>
+            <li><b>Recuperação e usinagem</b><span>conforme a especificação original</span></li>
+            <li><b>Montagem e entrega</b><span>no barracão ou em campo, com documentação</span></li>
+          </ol>
         </div>
       </div>
-    </section>
-
-    <!-- Logística -->
-    <section class="map" id="logistica">
-      <div class="map-copy reveal">
-        <h2 class="section-title">Logística própria</h2>
-        <p>Frota própria e transportadoras parceiras, com equipe treinada e uniformizada. Toque numa região para ver a distância da base.</p>
-        <div class="map-btns"><button type="button" class="map-btn is-active" data-lugar="sertaozinho" data-info="Base da NEW no Distrito Industrial de Sertãozinho: estoque, manutenção e expedição.">Sertãozinho</button><button type="button" class="map-btn" data-lugar="ribeirao" data-info="Ribeirão Preto: ≈20 km em linha reta de Sertãozinho. Região de Sertãozinho e Ribeirão Preto, com frota própria.">Ribeirão Preto</button><button type="button" class="map-btn" data-lugar="rio-preto" data-info="São José do Rio Preto: ≈150 km em linha reta de Sertãozinho. Usinas e indústrias da região de São José do Rio Preto.">São José do Rio Preto</button><button type="button" class="map-btn" data-lugar="triangulo" data-info="Triângulo Mineiro: ≈155 km em linha reta de Sertãozinho. Uberaba, Uberlândia e usinas do Triângulo Mineiro.">Triângulo Mineiro</button><button type="button" class="map-btn" data-lugar="sul-minas" data-info="Sul de Minas: ≈270 km em linha reta de Sertãozinho. Varginha, Poços de Caldas e o Sul de Minas.">Sul de Minas</button><button type="button" class="map-btn" data-lugar="sao-paulo" data-info="Grande São Paulo: ≈300 km em linha reta de Sertãozinho. Capital e região metropolitana, com transportadoras parceiras.">Grande São Paulo</button></div>
-        <p class="map-info" id="mapa-info" aria-live="polite">Base da NEW no Distrito Industrial de Sertãozinho: estoque, manutenção e expedição.</p>
-      </div>
-      <svg class="map-radar" viewBox="0 0 640 640" role="img" aria-label="Esquema das regiões de entrega ao redor de Sertãozinho, posicionadas pelas coordenadas reais">
-        <circle class="map-ring" cx="320" cy="320" r="85" /><text class="map-ring-label" x="386" y="394">100 km</text><circle class="map-ring" cx="320" cy="320" r="170" /><text class="map-ring-label" x="446" y="454">200 km</text><circle class="map-ring" cx="320" cy="320" r="255" /><text class="map-ring-label" x="506" y="514">300 km</text>
-        <line class="map-axis" x1="320" y1="40" x2="320" y2="600" /><line class="map-axis" x1="40" y1="320" x2="600" y2="320" />
-        <text class="map-n" x="320" y="30" text-anchor="middle">N</text>
-        <g class="map-place map-place--base"><circle cx="320" cy="320" r="11" /><text x="306" y="346" text-anchor="end">Sertãozinho · NEW</text></g><g class="map-place" data-lugar="ribeirao"><line class="map-ray" x1="320" y1="320" x2="336" y2="324" /><circle cx="336" cy="324" r="8" /><text x="346" y="353" text-anchor="start">Ribeirão Preto</text></g><g class="map-place" data-lugar="rio-preto"><line class="map-ray" x1="320" y1="320" x2="198" y2="289" /><circle cx="198" cy="289" r="8" /><text x="184" y="294" text-anchor="end">São José do Rio Preto</text></g><g class="map-place" data-lugar="triangulo"><line class="map-ray" x1="320" y1="320" x2="325" y2="189" /><circle cx="325" cy="189" r="8" /><text x="339" y="194" text-anchor="start">Triângulo Mineiro</text></g><g class="map-place" data-lugar="sul-minas"><line class="map-ray" x1="320" y1="320" x2="546" y2="359" /><circle cx="546" cy="359" r="8" /><text x="560" y="364" text-anchor="start">Sul de Minas</text></g><g class="map-place" data-lugar="sao-paulo"><line class="map-ray" x1="320" y1="320" x2="440" y2="547" /><circle cx="440" cy="547" r="8" /><text x="454" y="552" text-anchor="start">Grande São Paulo</text></g>
-      </svg>
     </section>
 
     <!-- Estrutura e estoque -->
     <section class="gallery" id="estrutura">
       <div class="gallery-head reveal">
-        <h2 class="section-title">Estrutura e estoque</h2>
-        <p>Estoque de válvulas prontas para entrega e bancada própria de manutenção e usinagem.</p>
+        <h2 class="section-title">Estrutura e manutenção</h2>
+        <p>Barracão próprio em Sertãozinho, com bancada de manutenção, solda e usinagem.</p>
       </div>
-      <div class="gallery-row" tabindex="0" role="region" aria-label="Fotos do barracão e do estoque">
+      <div class="gallery-grid">
         <figure class="frame frame--video">
           <video src="img/opt/estoque-video.mp4" poster="img/opt/estoque-video-poster.jpg" muted loop playsinline controls preload="none" width="478" height="850" aria-label="Vídeo: solda e válvulas borboleta no barracão"></video>
         </figure>
@@ -739,39 +639,23 @@
         <a class="frame js-lightbox" href="img/opt/borboletas-lote.jpg" data-alt="Lote de válvulas borboleta com protetores de flange magenta">
           <picture><source srcset="img/opt/borboletas-lote.webp" type="image/webp" /><img src="img/opt/borboletas-lote.jpg" alt="Lote de válvulas borboleta com protetores de flange magenta" width="1200" height="1600" loading="lazy" /></picture>
         </a>
-        <a class="frame js-lightbox" href="img/opt/gaveta-galpao.jpg" data-alt="Válvulas gaveta sobre palete diante das prateleiras de estoque">
-          <picture><source srcset="img/opt/gaveta-galpao.webp" type="image/webp" /><img src="img/opt/gaveta-galpao.jpg" alt="Válvulas gaveta sobre palete diante das prateleiras de estoque" width="1200" height="1600" loading="lazy" /></picture>
-        </a>
-        <a class="frame js-lightbox" href="img/opt/globo-volante.jpg" data-alt="Válvula globo com volante vermelho e flange protegida">
-          <picture><source srcset="img/opt/globo-volante.webp" type="image/webp" /><img src="img/opt/globo-volante.jpg" alt="Válvula globo com volante vermelho e flange protegida" width="960" height="1280" loading="lazy" /></picture>
-        </a>
-        <a class="frame js-lightbox" href="img/opt/estoque-mix.jpg" data-alt="Válvulas borboleta, gaveta e de controle no estoque">
-          <picture><source srcset="img/opt/estoque-mix.webp" type="image/webp" /><img src="img/opt/estoque-mix.jpg" alt="Válvulas borboleta, gaveta e de controle no estoque" width="1200" height="1600" loading="lazy" /></picture>
-        </a>
         <a class="frame js-lightbox" href="img/opt/redutores.jpg" data-alt="Caixas redutoras vermelhas com volantes alinhadas">
           <picture><source srcset="img/opt/redutores.webp" type="image/webp" /><img src="img/opt/redutores.jpg" alt="Caixas redutoras vermelhas com volantes alinhadas" width="1600" height="1200" loading="lazy" /></picture>
-        </a>
-        <a class="frame js-lightbox" href="img/opt/lote-gavetas.jpg" data-alt="Lote de válvulas gaveta e globo pronto para expedição">
-          <picture><source srcset="img/opt/lote-gavetas.webp" type="image/webp" /><img src="img/opt/lote-gavetas.jpg" alt="Lote de válvulas gaveta e globo pronto para expedição" width="1600" height="1200" loading="lazy" /></picture>
         </a>
       </div>
     </section>
 
     <!-- Contato -->
     <section class="contact" id="contato">
-      <h2 class="visually-hidden">Contato</h2>
-      <div class="contact-rows">
-        <p class="row">NEW Service Equipamentos</p>
-        <a class="row" href="https://maps.google.com/?q=Rua+Argentina+Grillo+Badia,+960,+Sertãozinho+SP" target="_blank" rel="noopener">Rua Argentina Grillo Badia, 960</a>
-        <p class="row">Sertãozinho/SP · 14176-113</p>
-        <a class="row" href="https://wa.me/5516997223976" target="_blank" rel="noopener">(16) 99722-3976</a>
-        <a class="row" href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a>
-      </div>
-
       <div class="quote">
         <div class="quote-copy">
-          <h3 class="section-title">Pedir orçamento</h3>
+          <h2 class="section-title">Fale com a NEW</h2>
           <p>Conte o que precisa. O pedido abre no WhatsApp da NEW, já preenchido, e você confere antes de enviar.</p>
+          <dl class="contato-card">
+            <div><dt>WhatsApp</dt><dd><a href="https://wa.me/5516997223976" target="_blank" rel="noopener">(16) 99722-3976</a></dd></div>
+            <div><dt>E-mail</dt><dd><a href="mailto:comercial@newequipamentos.ind.br">comercial@newequipamentos.ind.br</a></dd></div>
+            <div><dt>Endereço</dt><dd><a href="https://maps.google.com/?q=Rua+Argentina+Grillo+Badia,+960,+Sertãozinho+SP" target="_blank" rel="noopener">Rua Argentina Grillo Badia, 960<br />Distrito Industrial · Sertãozinho/SP · 14176-113</a></dd></div>
+          </dl>
         </div>
         <form class="quote-form" id="orcamentoForm" novalidate>
           <div class="field">
@@ -829,7 +713,7 @@
   <footer class="footer">
     <div class="footer-top">
       <p class="footer-invite">Sua linha parou?<br />Fale com a NEW.</p>
-      <a href="https://wa.me/5516997223976" class="btn btn--dark" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a href="https://wa.me/5516997223976" class="btn" target="_blank" rel="noopener">Chamar no WhatsApp</a>
       <ul class="footer-links">
         <li><a href="#linha">Válvulas</a></li>
         <li><a href="#bi-excentrica">Ficha técnica</a></li>
@@ -850,10 +734,10 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/engenharia.js?v=20261101a"></script>
-  <script src="js/whatsapp.js?v=20261101a"></script>
-  <script src="js/interativo.js?v=20261101a"></script>
-  <script src="js/vapor.js?v=20261101a"></script>
-  <script src="js/main.js?v=20261101a"></script>
+  <script src="js/engenharia.js?v=20261101c"></script>
+  <script src="js/whatsapp.js?v=20261101c"></script>
+  <script src="js/interativo.js?v=20261101c"></script>
+  <script src="js/vapor.js?v=20261101c"></script>
+  <script src="js/main.js?v=20261101c"></script>
 </body>
 </html>

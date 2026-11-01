@@ -1,4 +1,4 @@
-// Peças interativas: simulador de aplicação, configurador, linha de válvulas, mapa e números.
+// Peças interativas: simulador de aplicação, configurador e números.
 // Regras técnicas em js/engenharia.js; aqui só a interface.
 (function () {
   var E = window.NEW && window.NEW.engenharia;
@@ -74,13 +74,8 @@
   var cfg = $('#configurador');
   if (cfg && E) {
     var IMGS = {
-      bi: ['img/produtos/bi-excentrica-new-mini.jpg', 240, 523],
-      concentrica: ['img/produtos/borboleta-concentrica.jpg', 226, 350],
-      retencao: null, // sem foto própria de retenção: o cartão fica sem imagem
-      gaveta: ['img/produtos/gaveta.jpg', 133, 320],
-      pressureseal: ['img/produtos/pressure-seal.jpg', 308, 285],
-      esfera: ['img/produtos/esfera-segmentada.jpg', 330, 548],
-      guilhotina: ['img/produtos/guilhotina.jpg', 237, 558],
+      bi: 'bi-excentrica', concentrica: 'concentrica', retencao: null, gaveta: 'gaveta-globo',
+      pressureseal: 'pressure-seal', esfera: 'esfera', guilhotina: 'guilhotina',
     };
     var sel = {};
     var tipoAtual = function () { return E.TIPOS.filter(function (t) { return t.id === sel.tipo; })[0]; };
@@ -117,7 +112,7 @@
       var img = IMGS[id];
       var el = $('#cfg-img');
       el.parentElement.hidden = !img;
-      if (img) { el.src = img[0]; el.width = img[1]; el.height = img[2]; el.alt = 'Válvula ' + t.nome.toLowerCase(); }
+      if (img) { el.src = 'img/estudio/' + img + '.jpg'; el.alt = 'Válvula ' + t.nome.toLowerCase(); }
       $('#cfg-nome').textContent = t.nome;
       resumir();
     };
@@ -139,48 +134,14 @@
     montarTipo('bi');
   }
 
-  /* ---------- Linha de válvulas: desliza com a rolagem ---------- */
-  var rail = $('#linha');
-  if (rail) {
-    var viewport = $('.rail-viewport', rail), track = $('.rail-track', rail);
-    var curso = 0;
-    var medir = function () {
-      if (reduceMotion) return;
-      rail.classList.add('is-pinned');
-      curso = Math.max(0, track.scrollWidth - viewport.clientWidth);
-      rail.style.height = (curso + window.innerHeight) + 'px';
-      mover();
-    };
-    var mover = function () {
-      if (!curso) return;
-      var p = Math.min(1, Math.max(0, (window.scrollY - rail.offsetTop) / curso));
-      track.style.transform = 'translate3d(' + (-p * curso).toFixed(1) + 'px,0,0)';
-    };
-    window.addEventListener('scroll', function () { window.requestAnimationFrame(mover); }, { passive: true });
-    window.addEventListener('resize', medir);
-    window.addEventListener('load', medir);
-    medir();
-  }
-
-  // Links para itens do catálogo abrem a ficha correspondente.
+  // Links para produtos abrem a ficha dentro do cartão.
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#item-"]');
     if (!a) return;
     var item = document.getElementById(a.getAttribute('href').slice(1));
-    if (item && item.tagName === 'DETAILS') item.open = true;
+    var ficha = item && (item.tagName === 'DETAILS' ? item : item.querySelector('details'));
+    if (ficha) ficha.open = true;
   });
-
-  /* ---------- Mapa de logística ---------- */
-  var mapa = $('#logistica');
-  if (mapa) {
-    mapa.addEventListener('click', function (e) {
-      var btn = e.target.closest('.map-btn');
-      if (!btn) return;
-      $$('.map-btn', mapa).forEach(function (b) { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
-      $$('.map-place[data-lugar]', mapa).forEach(function (g) { g.classList.toggle('is-active', g.dataset.lugar === btn.dataset.lugar); });
-      $('#mapa-info').textContent = btn.dataset.info;
-    });
-  }
 
   /* ---------- Números que contam ---------- */
   var nums = $$('.stat-num[data-count]');

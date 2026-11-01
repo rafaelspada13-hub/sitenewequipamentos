@@ -96,8 +96,8 @@
     heroEl.style.setProperty('--sx', Math.max(0.02, Math.cos(angle * Math.PI / 180)).toFixed(3));
     // clarão curto: sobe até 90% do mergulho e se desfaz até o fim
     heroEl.style.setProperty('--flash', (suave(clamp01(1 - Math.abs(z - 0.9) / 0.1)) * 0.9).toFixed(3));
-    pctOut.textContent = Math.round(r * 100) + '%';
-    angOut.textContent = Math.round(angle) + '°';
+    if (pctOut) pctOut.textContent = Math.round(r * 100) + '%';
+    if (angOut) angOut.textContent = Math.round(angle) + '°';
     canvas.style.opacity = clamp01(r * 1.25 - 0.08).toFixed(3);
 
     if (z > 0) {

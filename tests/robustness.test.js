@@ -54,8 +54,7 @@ const tests = {
   'movimento pode ser pausado e o vídeo tem controles': async (browser) => {
     const page = await openPage(browser);
     await page.click('#motionToggle');
-    const states = await page.$$eval('.segments-track', (t) => t.map((x) => getComputedStyle(x).animationPlayState));
-    assert.ok(states.every((s) => s === 'paused'), states.join());
+    assert.ok(await page.evaluate(() => document.documentElement.classList.contains('motion-paused')), 'animação não pausou');
     assert.strictEqual(await page.getAttribute('#motionToggle', 'aria-pressed'), 'true');
     assert.ok(await page.$eval('.frame--video video', (v) => v.controls));
   },
@@ -82,9 +81,10 @@ const tests = {
     await page.waitForFunction(() => document.getElementById('formError').textContent.includes('e-mail válido'), null, { timeout: 2000 });
     assert.strictEqual(await page.getAttribute('#email', 'aria-describedby'), 'formError');
   },
-  'linha da galeria é uma região nomeada': async (browser) => {
+  'galeria é uma grade, sem rolagem lateral escondida': async (browser) => {
     const page = await openPage(browser);
-    assert.strictEqual(await page.getAttribute('.gallery-row', 'role'), 'region');
+    const [sw, cw] = await page.$eval('.gallery-grid', (g) => [g.scrollWidth, g.clientWidth]);
+    assert.ok(sw <= cw + 1, 'galeria rola na horizontal');
   },
 };
 

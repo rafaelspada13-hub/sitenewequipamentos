@@ -11,7 +11,6 @@ const discScale = (page) => page.$eval('#valvula-disco', (d) => {
   const m = new DOMMatrixReadOnly(getComputedStyle(d).transform);
   return Math.abs(m.a);
 });
-const counter = (page) => page.textContent('#valvula-abertura');
 
 async function scrollHeroTo(page, fraction) {
   await page.evaluate((f) => {
@@ -52,14 +51,11 @@ const tests = {
     await page.goto(URL);
     await page.waitForTimeout(200);
     assert.ok((await discScale(page)) > 0.95, 'disco deveria estar de frente');
-    assert.strictEqual((await counter(page)).trim(), '0%');
   },
   'na metade da rolagem a válvula está entreaberta': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
     await scrollHeroTo(page, 0.25);
-    const pct = parseInt(await counter(page), 10);
-    assert.ok(pct > 25 && pct < 90, `abertura ${pct}%`);
     const s = await discScale(page);
     assert.ok(s > 0.1 && s < 0.95, `escala ${s}`);
   },
@@ -67,7 +63,6 @@ const tests = {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);
     await scrollHeroTo(page, 1);
-    assert.strictEqual((await counter(page)).trim(), '100%');
     assert.ok((await discScale(page)) < 0.1, 'disco deveria estar de lado');
   },
   'aos 100% a câmera mergulha no furo e o texto sai de cena': async (browser) => {
@@ -96,7 +91,6 @@ const tests = {
     await page.goto(URL);
     await scrollHeroTo(page, 1);
     await scrollHeroTo(page, 0);
-    assert.strictEqual((await counter(page)).trim(), '0%');
     assert.ok((await discScale(page)) > 0.95);
     const scale = await page.$eval('#valvula', (v) => new DOMMatrixReadOnly(getComputedStyle(v).transform).a);
     assert.ok(scale < 1.2, `válvula continua ampliada (${scale})`);
@@ -107,7 +101,6 @@ const tests = {
     await page.goto(URL);
     await page.waitForTimeout(200);
     assert.ok((await discScale(page)) < 0.1);
-    assert.strictEqual((await counter(page)).trim(), '100%');
     const h = await page.$eval('.hero-pin', (p) => p.offsetHeight);
     assert.ok(h <= VIEW.height * 1.25, `abertura ocupa ${h}px`);
     await ctx.close();
