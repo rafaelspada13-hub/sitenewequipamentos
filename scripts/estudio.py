@@ -153,8 +153,11 @@ def main(midia, render):
     if all((pasta / a).exists() for a, _, _ in PAR_GAVETA_GLOBO):
         pecas = [recortar_render(pasta / a, c, limiar=l) for a, c, l in PAR_GAVETA_GLOBO]
         salvar(compor_par(*pecas), "gaveta-globo")
-    salvar(render_no_estudio(render, 600, 750), "bi-excentrica")
-    salvar(render_no_estudio(render, 720, 1080), "bi-excentrica-alta")
+    # bi-excêntrica: recortada da imagem da abertura, que tem o corpo inteiro (o render antigo
+    # cortava a base). Caixa: a válvula com o colar de baixo, sem o reflexo no chão.
+    bi = recortar_render(ROOT / "img" / "produtos" / "palco-estatico.jpg", (1250, 200, 2400, 1316), limiar=12)
+    salvar(compor(bi, 600, 750, altura=0.8), "bi-excentrica")
+    salvar(compor(bi, 720, 1080, altura=0.8), "bi-excentrica-alta")
 
 
 if __name__ == "__main__":
