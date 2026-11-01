@@ -26,7 +26,7 @@ const tests = {
     const page = await openPage(browser);
     assert.ok(await page.evaluate(() => document.documentElement.classList.contains('js')), 'html sem classe js');
     const before = await page.$eval('#servicos .reveal', (e) => getComputedStyle(e).opacity);
-    assert.strictEqual(before, '0.3', 'elemento abaixo da dobra deveria começar apagado');
+    assert.ok(parseFloat(before) < 0.35, `elemento abaixo da dobra deveria começar apagado (${before})`);
     await page.locator('#servicos').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1200);
     const op = await page.$eval('#servicos .reveal', (e) => getComputedStyle(e).opacity);

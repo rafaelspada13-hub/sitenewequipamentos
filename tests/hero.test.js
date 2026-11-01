@@ -17,6 +17,25 @@ const tests = {
     assert.ok(src && src.includes('palco-estatico'), `foto do palco ausente (${src})`);
     assert.ok(await page.isVisible('#inicio .hero-palco img'));
   },
+  'etiquetas técnicas apontam as peças e terminam visíveis': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.goto(URL);
+    assert.strictEqual(await page.locator('.anot-rotulo').count(), 5);
+    await page.waitForTimeout(4500);
+    const ops = await page.$$eval('.anot-rotulo > *', (els) => els.map((e) => getComputedStyle(e).opacity));
+    assert.ok(ops.every((o) => o === '1'), `etiquetas invisíveis: ${ops}`);
+    const fora = await page.$$eval('.anot-rotulo', (els) => els.filter((e) => e.getBoundingClientRect().right > innerWidth).length);
+    assert.strictEqual(fora, 0, 'etiqueta fora da tela');
+  },
+  'se a biblioteca de movimento falhar, tudo fica visível': async (browser) => {
+    const page = await browser.newPage({ viewport: VIEW });
+    await page.route((u) => u.pathname.includes('motion-14'), (r) => r.abort());
+    await page.goto(URL);
+    await page.waitForTimeout(3500);
+    assert.ok(!(await page.evaluate(() => document.documentElement.classList.contains('motion-on'))));
+    const ops = await page.$$eval('.anot-rotulo > *, .reveal', (els) => els.map((e) => getComputedStyle(e).opacity));
+    assert.ok(ops.every((o) => parseFloat(o) > 0.25), 'conteúdo escondido sem a biblioteca');
+  },
   'sem animação de rolagem: nada de canvas, vapor ou disco separado': async (browser) => {
     const page = await browser.newPage({ viewport: VIEW });
     await page.goto(URL);

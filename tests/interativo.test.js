@@ -29,7 +29,7 @@ const tests = {
     assert.strictEqual((await page.textContent('#sim-status')).trim(), 'Não recomendada');
     assert.ok((await page.textContent('#sim-motivos')).includes('250'));
     await setRange(page, '#sim-temp', 200);
-    await page.check('input[name="fluido"][value="oleo"]', { force: true });
+    await page.locator('label.chip:has(input[name=\"fluido\"][value=\"oleo\"])').click();
     assert.strictEqual((await page.textContent('#sim-status')).trim(), 'Com restrição');
   },
   'ponto se move sobre a curva P×T': async (b) => {
@@ -49,18 +49,18 @@ const tests = {
   },
   'configurador troca as bitolas conforme o tipo': async (b) => {
     const page = await open(b);
-    await page.check('input[name="cfg-tipo"][value="guilhotina"]', { force: true });
+    await page.locator('label.chip:has(input[name=\"cfg-tipo\"][value=\"guilhotina\"])').click();
     const ops = await page.$$eval('#cfg-bitola option', (o) => o.map((x) => x.textContent));
     assert.strictEqual(ops[ops.length - 1], '30"');
-    await page.check('input[name="cfg-tipo"][value="gaveta"]', { force: true });
+    await page.locator('label.chip:has(input[name=\"cfg-tipo\"][value=\"gaveta\"])').click();
     assert.ok(await page.isVisible('#cfg-bitola-livre'), 'gaveta deveria pedir a bitola por escrito');
     assert.ok(!(await page.isVisible('#cfg-bitola')));
   },
   'configurador monta o resumo e o pedido': async (b) => {
     const page = await open(b);
-    await page.check('input[name="cfg-tipo"][value="bi"]', { force: true });
+    await page.locator('label.chip:has(input[name=\"cfg-tipo\"][value=\"bi\"])').click();
     await page.selectOption('#cfg-bitola', '8"');
-    await page.check('input[name="cfg-material"][value="CF8M"]', { force: true });
+    await page.locator('label.chip:has(input[name=\"cfg-material\"][value=\"CF8M\"])').click();
     const resumo = await page.textContent('#cfg-resumo');
     assert.ok(resumo.includes('8"') && resumo.includes('CF8M'), resumo);
     await page.click('#cfg-orcar');

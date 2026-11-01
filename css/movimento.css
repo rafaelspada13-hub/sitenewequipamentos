@@ -7,7 +7,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   /* abertura: etiquetas começam escondidas */
-  .motion-on:not(.motion-pronto) .anot circle { transform: scale(0); }
+  .motion-on:not(.motion-pronto) .anot circle { opacity: 0; transform: scale(0.4); }
   .motion-on:not(.motion-pronto) .anot path { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .motion-on:not(.motion-pronto) .anot-rotulo > * { opacity: 0; }
 

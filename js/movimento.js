@@ -30,7 +30,7 @@
     }
     anots.forEach(function (g, i) {
       var atraso = 1.2 + i * 0.32;
-      M.animate(g.querySelector('circle'), { scale: [0, 1] }, Object.assign({ delay: atraso }, mola));
+      M.animate(g.querySelector('circle'), { scale: [0.4, 1], opacity: [0, 1] }, Object.assign({ delay: atraso }, mola));
       M.animate(g.querySelector('path'), { strokeDashoffset: [1, 0] }, { duration: 0.6, delay: atraso + 0.08, ease: SAIDA });
       var r = rotulos[i];
       if (r) M.animate(Array.prototype.slice.call(r.children), { opacity: [0, 1], x: [-12, 0] }, { duration: 0.5, delay: M.stagger(0.07, { startDelay: atraso + 0.35 }), ease: SAIDA });

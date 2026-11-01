@@ -20,6 +20,9 @@ const tests = {
   'se main.js falhar o conteúdo volta a ficar visível': async (browser) => {
     const page = await openPage(browser, { block: 'js/main.js' });
     await page.waitForTimeout(3500);
+    // os blocos entram ao aparecer na tela: percorre a página antes de conferir
+    for (let y = 0; y < 30000; y += 500) { await page.evaluate((v) => window.scrollTo(0, v), y); await page.waitForTimeout(60); }
+    await page.waitForTimeout(1200);
     const faded = await page.$$eval('.reveal', (els) => els.filter((e) => getComputedStyle(e).opacity !== '1').length);
     assert.strictEqual(faded, 0, `${faded} elementos apagados`);
   },

@@ -10,11 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261101d" />
+  <link rel="stylesheet" href="css/style.css?v=20261101e" />
+  <link rel="stylesheet" href="css/movimento.css?v=20261101e" />
   <script>
     // Se main.js não carregar em 3 s, devolve o conteúdo sem as entradas animadas.
     document.documentElement.classList.add("js");
     setTimeout(function () { if (!window.__newReady) document.documentElement.classList.remove("js"); }, 3000);
+    // camada de movimento (js/movimento.js): se a biblioteca não carregar, tudo fica visível e parado
+    document.documentElement.classList.add("motion-on");
+    setTimeout(function () { if (!window.__movimentoReady) document.documentElement.classList.remove("motion-on"); }, 3000);
   </script>
 </head>
 <body>
@@ -42,10 +46,19 @@
     <section class="hero" id="inicio">
       <div class="hero-pin">
         <div class="hero-stage">
-          <picture id="valvula" class="hero-palco">
-            <source srcset="img/produtos/palco-estatico.webp" type="image/webp" />
-            <img src="img/produtos/palco-estatico.jpg" alt="Válvula borboleta bi-excêntrica NEW em WCB, com a marca NEW fundida no corpo, sede magenta e caixa redutora vermelha com volante" width="3600" height="1400" fetchpriority="high" />
-          </picture>
+          <div id="valvula" class="hero-palco">
+            <picture>
+              <source srcset="img/produtos/palco-estatico.webp" type="image/webp" />
+              <img src="img/produtos/palco-estatico.jpg" alt="Válvula borboleta bi-excêntrica NEW em WCB, com a marca NEW fundida no corpo, sede magenta e caixa redutora vermelha com volante" width="3600" height="1400" fetchpriority="high" />
+            </picture>
+            <span class="hero-luz" aria-hidden="true"></span>
+            <svg class="anot-linhas" viewBox="0 0 3600 1400" preserveAspectRatio="none" aria-hidden="true">
+              <g class="anot" style="--i:0"><path d="M1868 390 L1950 230 L2180 230" pathLength="1" /><circle cx="1868" cy="390" r="11" /></g><g class="anot" style="--i:1"><path d="M1888 620 L2180 620" pathLength="1" /><circle cx="1888" cy="620" r="11" /></g><g class="anot" style="--i:2"><path d="M2023 870 L2180 870" pathLength="1" /><circle cx="2023" cy="870" r="11" /></g><g class="anot" style="--i:3"><path d="M1888 1010 L2180 1010" pathLength="1" /><circle cx="1888" cy="1010" r="11" /></g><g class="anot" style="--i:4"><path d="M1868 1185 L2180 1185" pathLength="1" /><circle cx="1868" cy="1185" r="11" /></g>
+            </svg>
+            <div class="anot-rotulos">
+              <p class="anot-rotulo" style="--i:0;top:16.429%;left:61.111%"><b>Caixa redutora</b><span>com volante · flange ISO 5211</span></p><p class="anot-rotulo" style="--i:1;top:44.286%;left:61.111%"><b>Corpo em WCB</b><span>fundido ASTM A216</span></p><p class="anot-rotulo" style="--i:2;top:62.143%;left:61.111%"><b>Sede RPTFE</b><span>PTFE com fibra de vidro · até 250 °C</span></p><p class="anot-rotulo" style="--i:3;top:72.143%;left:61.111%"><b>Disco bi‑excêntrico</b><span>dupla excentricidade, menos atrito</span></p><p class="anot-rotulo" style="--i:4;top:84.643%;left:61.111%"><b>Semi‑lug</b><span>furação ASME B16.5</span></p>
+            </div>
+          </div>
 
           <div class="hero-copy">
             <h1 class="hero-title">Válvulas industriais</h1>
@@ -725,9 +738,11 @@
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3a.4.4 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.2c-.1-.2-.3-.3-.6-.4Z"/></svg>
   </a>
 
-  <script src="js/engenharia.js?v=20261101d"></script>
-  <script src="js/whatsapp.js?v=20261101d"></script>
-  <script src="js/interativo.js?v=20261101d"></script>
-  <script src="js/main.js?v=20261101d"></script>
+  <script src="js/engenharia.js?v=20261101e"></script>
+  <script src="js/whatsapp.js?v=20261101e"></script>
+  <script src="js/interativo.js?v=20261101e"></script>
+  <script src="js/main.js?v=20261101e"></script>
+  <script src="js/vendor/motion-14.3.0.min.js"></script>
+  <script src="js/movimento.js?v=20261101e"></script>
 </body>
 </html>
