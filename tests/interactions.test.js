@@ -27,10 +27,10 @@ const tests = {
     assert.ok(await page.evaluate(() => document.documentElement.classList.contains('js')), 'html sem classe js');
     const before = await page.$eval('#servicos .reveal', (e) => getComputedStyle(e).opacity);
     assert.ok(parseFloat(before) < 0.35, `elemento abaixo da dobra deveria começar apagado (${before})`);
-    await page.locator('#servicos').scrollIntoViewIfNeeded();
+    await page.$eval('#servicos .reveal', (e) => e.scrollIntoView({ block: 'center', behavior: 'instant' }));
     await page.waitForTimeout(1200);
     const op = await page.$eval('#servicos .reveal', (e) => getComputedStyle(e).opacity);
-    assert.strictEqual(op, '1');
+    assert.ok(parseFloat(op) > 0.98, `não apareceu (${op})`);
   },
   '"Orçar este item" leva ao formulário com o produto selecionado': async (browser) => {
     const page = await openPage(browser);

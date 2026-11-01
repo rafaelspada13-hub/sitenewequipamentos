@@ -835,3 +835,12 @@ legend { padding: 0; margin-bottom: 12px; font-weight: 600; }
   .produto .btn { width: 100%; padding: 0 8px; font-size: 0.9375rem; }
   .produto details > p { font-size: var(--step-small); }
 }
+
+/* Válvulas automáticas: duas peças no estúdio dentro do bloco de destaque */
+.auto-pecas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 6px; }
+.auto-pecas figure { margin: 0; background: var(--paper); }
+.auto-pecas img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.auto-pecas figcaption { padding: 8px 12px 10px; background: var(--bg-2); font-size: var(--step-small); font-weight: 600; }
+/* Clientes e segmentos: foto da indústria sob o título */
+.segments-intro { display: grid; gap: 28px; align-content: start; }
+.segments-foto img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }

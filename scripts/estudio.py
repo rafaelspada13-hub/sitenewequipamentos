@@ -103,6 +103,8 @@ def render_no_estudio(render_path, w, h):
 # fotos reais já recortadas do fundo (PNG com transparência), por nome de saída
 FOTOS = {
     "retencao": "retencao.png",
+    "redutora": "redutora.png",      # renders do cliente em fundo branco, já recortados
+    "controle": "controle.png",
 }
 
 # renders feitos no ChatGPT no padrão da bi-excêntrica: arquivo -> (nome, caixa sem o reflexo)
