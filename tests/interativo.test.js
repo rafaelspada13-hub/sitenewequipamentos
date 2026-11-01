@@ -89,17 +89,15 @@ const tests = {
     for (const t of ['Ribeirão Preto', 'São José do Rio Preto', 'Triângulo Mineiro', 'Sul de Minas', 'Grande São Paulo', 'km']) assert.ok(txt.includes(t), t);
     await page.ctx.close();
   },
-  'números contam até o valor real': async (b) => {
+  'fatos da empresa aparecem como linha de texto': async (b) => {
     const page = await open(b);
-    await page.locator('.stats').scrollIntoViewIfNeeded();
-    await page.waitForTimeout(2200);
-    const vals = await page.$$eval('.stat-num', (s) => s.map((x) => x.textContent.trim()));
-    assert.deepStrictEqual(vals, ['24', '48"', '1.500#']);
+    const txt = await page.textContent('#sobre .fatos');
+    for (const t of ['24 anos', '48"', 'Classe 150', '1.500#']) assert.ok(txt.includes(t), t);
+    await page.ctx.close();
   },
-  'sem JavaScript os números e as peças aparecem prontos': async (b) => {
+  'sem JavaScript os fatos e as peças aparecem prontos': async (b) => {
     const page = await open(b, { javaScriptEnabled: false });
-    const vals = await page.$$eval('.stat-num', (s) => s.map((x) => x.textContent.trim()));
-    assert.deepStrictEqual(vals, ['24', '48"', '1.500#']);
+    assert.ok((await page.textContent('#sobre .fatos')).includes('24 anos'));
     assert.ok(await page.isVisible('#simulador .sim-fallback'));
     await page.ctx.close();
   },

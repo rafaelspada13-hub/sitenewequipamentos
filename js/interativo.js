@@ -1,4 +1,4 @@
-// Peças interativas: simulador de aplicação, configurador e números.
+// Peças interativas: simulador de aplicação e configurador.
 // Regras técnicas em js/engenharia.js; aqui só a interface.
 (function () {
   var E = window.NEW && window.NEW.engenharia;
@@ -143,29 +143,4 @@
     if (ficha) ficha.open = true;
   });
 
-  /* ---------- Números que contam ---------- */
-  var nums = $$('.stat-num[data-count]');
-  var escrever = function (el, v) {
-    el.textContent = String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (el.dataset.suffix || '');
-  };
-  // Com a camada de movimento (js/movimento.js) ativa, a contagem fica com ela.
-  var comMotion = window.Motion && document.documentElement.classList.contains('motion-on');
-  if (nums.length && !reduceMotion && !comMotion && 'IntersectionObserver' in window) {
-    nums.forEach(function (el) { escrever(el, 0); });
-    var contar = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        contar.unobserve(entry.target);
-        var el = entry.target, alvo = Number(el.dataset.count), inicio = null;
-        var passo = function (agora) {
-          if (inicio === null) inicio = agora;
-          var k = Math.min(1, (agora - inicio) / 1400);
-          escrever(el, alvo * (1 - Math.pow(1 - k, 3)));
-          if (k < 1) window.requestAnimationFrame(passo);
-        };
-        window.requestAnimationFrame(passo);
-      });
-    }, { threshold: 0.6 });
-    nums.forEach(function (el) { contar.observe(el); });
-  }
 })();

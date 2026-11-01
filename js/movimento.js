@@ -1,6 +1,6 @@
 // Camada de movimento com a biblioteca Motion (js/vendor/motion-14.3.0.min.js).
 // 1. Abertura: a válvula entra, a luz de estúdio passa e as etiquetas técnicas aparecem.
-// 2. Entradas: títulos sobem linha a linha; listas entram em cascata curta; números contam.
+// 2. Entradas: títulos sobem linha a linha; listas entram em cascata curta.
 // 3. Microinterações: cartões de produto inclinam com o mouse; botões e chips reagem ao toque.
 // Sem a biblioteca, o site fica como está: todo o conteúdo visível e parado.
 (function () {
@@ -86,19 +86,6 @@
     M.inView(el, function () {
       M.animate(el, { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, ease: SAIDA });
     }, { amount: 0.2 });
-  });
-
-  // Números: contam até o valor real com desaceleração no fim.
-  $$('.stat-num[data-count]').forEach(function (el) {
-    var alvo = Number(el.dataset.count);
-    var escrever = function (v) {
-      el.textContent = String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (el.dataset.suffix || '');
-    };
-    if (reduz) return escrever(alvo);
-    escrever(0);
-    M.inView(el, function () {
-      M.animate(0, alvo, { duration: 1.6, ease: [0.16, 1, 0.3, 1], onUpdate: escrever });
-    }, { amount: 0.6 });
   });
 
   /* ---------- 3. Microinterações ---------- */
