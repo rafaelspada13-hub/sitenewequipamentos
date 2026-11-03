@@ -59,8 +59,9 @@ const tests = {
     const tamanhos = await page.evaluate(() => { const s = new Set(); document.querySelectorAll('body *').forEach((e) => { if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && e.getBoundingClientRect().width) s.add(Math.round(parseFloat(getComputedStyle(e).fontSize))); }); return [...s].sort((a, c) => a - c); });
     assert.ok(tamanhos.length <= 7, `${tamanhos.length} tamanhos: ${tamanhos.join(' ')}`);
   },
-  'site com no máximo 13 telas no computador e 17 no celular': async (b) => {
-    for (const [w, h, max] of [[1440, 900, 13], [390, 844, 17]]) {
+  'site com no máximo 14 telas no computador e 19 no celular': async (b) => {
+    // orçamento subiu 1 tela no computador e 2 no celular com a seção de projetos (comportas), pedida pela NEW
+    for (const [w, h, max] of [[1440, 900, 14], [390, 844, 19]]) {
       const page = await b.newPage({ viewport: { width: w, height: h } });
       await page.goto(URL);
       const telas = await page.evaluate(() => document.body.scrollHeight / innerHeight);
