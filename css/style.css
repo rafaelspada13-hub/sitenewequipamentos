@@ -130,8 +130,14 @@ h3 { font-size: 1.375rem; font-weight: 700; line-height: 1.2; letter-spacing: -0
 
 /* Fotos */
 .fotos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.fotos { grid-auto-flow: dense; }
 .fotos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--raio); }
-@media (max-width: 600px) { .fotos { grid-template-columns: 1fr 1fr; gap: 8px; } }
+.fotos .foto-larga { grid-column: span 2; aspect-ratio: auto; height: 0; min-height: 100%; }
+@media (max-width: 600px) {
+  .fotos { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .fotos .foto-larga { height: auto; min-height: 0; aspect-ratio: 2 / 1; }
+  .fotos .foto-larga:last-child { grid-column: auto; aspect-ratio: 1; }
+}
 
 /* ---------- Contato ---------- */
 .contato { background: var(--verde); color: #e3eee7; padding: 80px 0; }
