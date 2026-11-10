@@ -33,55 +33,6 @@
   window.addEventListener('scroll', function () { if (!marcado) { marcado = true; requestAnimationFrame(rola); } }, { passive: true });
   rola();
 
-  // Volante do topo: girar abre e fecha a válvula
-  var porta = $('.porta'), volante = $('.volante');
-  if (porta && volante) {
-    var abertura = 1, animando = null;
-    var poe = function (v) {
-      abertura = Math.max(0, Math.min(1, v));
-      porta.style.setProperty('--abre', abertura);
-      volante.setAttribute('aria-valuenow', Math.round(abertura * 100));
-    };
-    var anima = function (de, ate, ms) {
-      var t0 = null;
-      cancelAnimationFrame(animando);
-      animando = requestAnimationFrame(function passo(t) {
-        if (t0 === null) t0 = t;
-        var k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 3);
-        poe(de + (ate - de) * e);
-        if (k < 1) animando = requestAnimationFrame(passo);
-      });
-    };
-    if (!calmo) { poe(0); setTimeout(function () { anima(0, 1, 1900); }, 500); }
-
-    var ang0 = null;
-    var angulo = function (e) {
-      var r = volante.getBoundingClientRect();
-      return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI;
-    };
-    volante.addEventListener('pointerdown', function (e) {
-      cancelAnimationFrame(animando);
-      ang0 = angulo(e); volante.setPointerCapture(e.pointerId); e.preventDefault();
-    });
-    volante.addEventListener('pointermove', function (e) {
-      if (ang0 === null) return;
-      var a = angulo(e), dif = a - ang0;
-      if (dif > 180) dif -= 360; if (dif < -180) dif += 360;
-      ang0 = a; poe(abertura + dif / 540);
-    });
-    var solta = function () { ang0 = null; };
-    volante.addEventListener('pointerup', solta);
-    volante.addEventListener('pointercancel', solta);
-    volante.addEventListener('keydown', function (e) {
-      var k = e.key;
-      if (k === 'ArrowRight' || k === 'ArrowUp') { e.preventDefault(); cancelAnimationFrame(animando); poe(abertura + 0.1); }
-      if (k === 'ArrowLeft' || k === 'ArrowDown') { e.preventDefault(); cancelAnimationFrame(animando); poe(abertura - 0.1); }
-      if (k === 'Home') { e.preventDefault(); poe(0); }
-      if (k === 'End') { e.preventDefault(); poe(1); }
-    });
-    volante.addEventListener('dblclick', function () { anima(abertura, abertura > 0.5 ? 0 : 1, 900); });
-  }
-
   // Cursor que acompanha o mouse
   var cursor = $('.cursor');
   if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !calmo) {
@@ -95,7 +46,7 @@
       if (e.pointerType !== 'mouse') return;
       tx = e.clientX; ty = e.clientY;
       if (!cursor.classList.contains('vivo')) { cx = tx; cy = ty; cursor.classList.add('vivo'); }
-      cursor.classList.toggle('sobre', !!e.target.closest('a, button, input, .volante, .compara'));
+      cursor.classList.toggle('sobre', !!e.target.closest('a, button, input, .compara'));
       if (!rodando) { rodando = true; requestAnimationFrame(segue); }
     }, { passive: true });
     d.addEventListener('mouseleave', function () { cursor.classList.remove('vivo'); });
