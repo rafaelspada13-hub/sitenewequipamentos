@@ -319,7 +319,12 @@
         <a class="btn reveal" href="https://wa.me/5516997223976?text=Ol%C3%A1%2C%20NEW%21%20Quero%20um%20projeto%20de%20controle%20de%20fluxo.%0AAplica%C3%A7%C3%A3o%20%28ETA%2C%20ETE%2C%20usina%2C%20ind%C3%BAstria%29%3A%20%0AFluido%3A%20%0AComporta%20%28largura%20x%20altura%20do%20canal%2C%20l%C3%A2mina%20d%27%C3%A1gua%29%20ou%20v%C3%A1lvula%20%28bitola%2C%20press%C3%A3o%2C%20temperatura%29%3A%20" target="_blank" rel="noopener">Enviar dados do projeto</a>
       </div>
       <figure class="projetos-desenho reveal" aria-labelledby="projetos-legenda">
-        <svg viewBox="0 0 680 650" role="img" aria-labelledby="projetos-legenda">
+        <div class="pj-abas" role="group" aria-label="Como ver a comporta" hidden>
+          <button type="button" class="pj-aba" data-vista="modelo" aria-pressed="true">Modelo 3D</button>
+          <button type="button" class="pj-aba" data-vista="desenho" aria-pressed="false">Desenho das partes</button>
+        </div>
+        <picture class="pj-vista" data-vista="modelo"><source srcset="img/estudio/comporta-300.webp 300w, img/estudio/comporta.webp 600w" sizes="(max-width: 1000px) 88vw, 36vw" type="image/webp" /><img src="img/estudio/comporta.jpg" alt="Comporta de canal com quadro, painel, haste roscada e volante de acionamento manual, em modelo 3D" width="600" height="750" loading="lazy" decoding="async" /></picture>
+        <svg class="pj-vista" data-vista="desenho" viewBox="0 0 680 650" role="img" aria-labelledby="projetos-legenda">
           <!-- paredes do canal (concreto) -->
           <path class="pj-parede" d="M20 300 V600 H80 V300 M380 300 V600 H440 V300 M80 600 H380" />
           <path class="pj-hachura" d="M20 330 L50 300 M20 370 L80 310 M20 410 L80 350 M20 450 L80 390 M20 490 L80 430 M20 530 L80 470 M20 570 L80 510 M30 600 L80 550 M70 600 L80 590 M380 330 L410 300 M380 370 L440 310 M380 410 L440 350 M380 450 L440 390 M380 490 L440 430 M380 530 L440 470 M380 570 L440 510 M390 600 L440 550 M430 600 L440 590" />
@@ -353,7 +358,7 @@
           <text class="pj-rotulo" x="470" y="474">Lâmina d'água</text>
           <text class="pj-rotulo" x="470" y="636">Vedação</text>
         </svg>
-        <figcaption id="projetos-legenda">Comporta de canal: guias, painel, vedação, haste e acionamento, dimensionados para cada vão. Desenho ilustrativo.</figcaption>
+        <figcaption id="projetos-legenda">Comporta de canal com acionamento por volante: guias, painel, vedação e haste dimensionados para cada vão. Modelo 3D de projeto; o desenho das partes é ilustrativo.</figcaption>
       </figure>
     </section>
 

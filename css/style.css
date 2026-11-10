@@ -1046,6 +1046,19 @@ details:not([open]) > :not(summary) { display: none; }
 .projetos .btn { justify-self: start; }
 .projetos-desenho { grid-column: 8 / 13; margin: 0; }
 .projetos-desenho svg { display: block; width: 100%; height: auto; max-height: 72vh; overflow: visible; }
+.projetos-desenho picture { display: block; }
+.projetos-desenho picture img { display: block; width: 100%; max-width: 460px; height: auto; }
+.projetos-desenho .pj-vista + .pj-vista { margin-top: 32px; }
+.pj-abas { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.pj-abas[hidden] { display: none; }
+.pj-aba { min-height: 44px; padding: 0 16px; border: 1px solid var(--muted); background: transparent; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
+.pj-aba:hover { border-color: var(--brand-bright); }
+.pj-aba[aria-pressed="true"] { background: var(--brand-bright); border-color: var(--brand-bright); color: var(--on-bright); }
+.pj-on .pj-vista { margin-top: 0 !important; }
+.pj-on .pj-vista:not(.is-ativa) { display: none; }
+.pj-on .pj-vista.is-ativa { animation: pj-entra 0.35s var(--ease); }
+@keyframes pj-entra { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .pj-on .pj-vista.is-ativa { animation: none; } }
 .projetos-desenho figcaption { margin-top: 12px; color: var(--muted); font-size: var(--step-small); max-width: 46ch; }
 .pj-parede, .pj-guia, .pj-painel, .pj-haste, .pj-volante { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .pj-hachura, .pj-reforco { fill: none; stroke: var(--muted); stroke-width: 1; opacity: 0.55; vector-effect: non-scaling-stroke; }
