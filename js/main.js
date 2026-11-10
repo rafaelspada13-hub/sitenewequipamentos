@@ -281,4 +281,23 @@
       }, { threshold: 0.4 }).observe(video);
     }
   }
+
+  // Comporta: alterna entre o modelo 3D e o desenho das partes
+  var pjFig = document.querySelector('.projetos-desenho');
+  var pjAbas = pjFig && pjFig.querySelector('.pj-abas');
+  if (pjAbas) {
+    var pjBotoes = pjAbas.querySelectorAll('.pj-aba');
+    var pjVistas = pjFig.querySelectorAll('.pj-vista');
+    var pjMostra = function (nome) {
+      pjBotoes.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-vista') === nome)); });
+      pjVistas.forEach(function (v) { v.classList.toggle('is-ativa', v.getAttribute('data-vista') === nome); });
+    };
+    pjAbas.hidden = false;
+    pjFig.classList.add('pj-on');
+    pjMostra('modelo');
+    pjAbas.addEventListener('click', function (e) {
+      var b = e.target.closest('.pj-aba');
+      if (b) pjMostra(b.getAttribute('data-vista'));
+    });
+  }
 })();
