@@ -58,9 +58,10 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   // um só estilo de botão principal e nenhum "quadrado" em volta das imagens de produto
   check(await page.locator('.btn--dark').count() === 0, 'ainda há botão .btn--dark');
   const imgsProduto = await page.$$eval('.produto img, .tech-render img', (i) => i.map((x) => x.getAttribute('src')));
-  // pressure seal e esfera: painel com o dado principal até chegarem os renders no padrão do estúdio
-  check(await page.locator('.produto .produto-ficha').count() === 2, 'painéis de ficha ausentes');
-  check(imgsProduto.length >= 6 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
+  // esfera: painel com o dado principal até chegar o render no padrão do estúdio
+  check(await page.locator('.produto .produto-ficha').count() === 1, 'painel de ficha da esfera ausente');
+  check(imgsProduto.some((src) => src.includes('pressure-seal')), 'imagem da pressure seal ausente');
+  check(imgsProduto.length >= 7 && imgsProduto.every((src) => src.startsWith('img/estudio/')), `imagens de produto fora do estúdio: ${imgsProduto}`);
   check(text.includes('24 anos'), 'tempo de experiência ausente');
   // a redutora do render é de saneamento: não ilustra o bloco de vapor e processo
   check(await page.locator('.servico-destaque img[src*="estudio/redutora"]').count() === 0, 'redutora de saneamento no bloco de vapor');
