@@ -85,9 +85,9 @@
   var cfg = $('#configurador');
   if (cfg && E) {
     var IMGS = {
-      // pressure seal e esfera: sem foto até chegarem os renders no padrão do estúdio
+      // esfera: sem foto até chegar o render no padrão do estúdio
       bi: 'bi-excentrica', concentrica: 'concentrica', retencao: 'retencao', gaveta: 'gaveta-globo',
-      guilhotina: 'guilhotina',
+      pressureseal: 'pressure-seal', guilhotina: 'guilhotina',
     };
     var sel = {};
     var tipoAtual = function () { return E.TIPOS.filter(function (t) { return t.id === sel.tipo; })[0]; };
