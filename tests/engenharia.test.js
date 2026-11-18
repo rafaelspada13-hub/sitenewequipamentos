@@ -27,7 +27,7 @@ const tests = {
   'ácido sulfâmico só em inox e até ≈60 °C': () => {
     const r = E.avaliarAplicacao({ fluido: 'sulfamico', temperatura: 50, pressao: 5 });
     assert.strictEqual(r.status, 'indicada');
-    assert.deepStrictEqual(r.materiais.sort(), ['CF3', 'CF8', 'CF8M']);
+    assert.deepStrictEqual(r.materiais.sort(), ['CF3', 'CF3M', 'CF8', 'CF8M']);
     assert.strictEqual(E.avaliarAplicacao({ fluido: 'sulfamico', temperatura: 70, pressao: 5 }).status, 'nao');
   },
   'soda cáustica acima de ≈90 °C não é recomendada': () => {
@@ -49,10 +49,39 @@ const tests = {
     assert.strictEqual(E.avaliarAplicacao({ fluido: 'firesafe', temperatura: 40, pressao: 3 }).status, 'nao');
   },
   'material só entra se a pressão couber na curva dele': () => {
-    // a 100 °C: WCB 18,0 · CF8M 16,5 · CF8/CF3 16,0
+    // a 100 °C: WCB 18,0 · CF8M/CF3M 16,5 · CF8/CF3 16,0
     const r = E.avaliarAplicacao({ fluido: 'etanol', temperatura: 100, pressao: 16.3 });
     assert.strictEqual(r.status, 'indicada');
-    assert.deepStrictEqual(r.materiais.sort(), ['CF8M', 'WCB']);
+    assert.deepStrictEqual(r.materiais.sort(), ['CF3M', 'CF8M', 'WCB']);
+  },
+  // correções de 18/11/2026 (CORRECOES_SIMULADOR_SITE.md, tabela de testes)
+  'CIP alternado tem o teto da soda (≈90 °C) e aceita CF3M': () => {
+    const av = (t) => E.avaliarAplicacao({ fluido: 'cip', temperatura: t, pressao: 10 });
+    assert.strictEqual(av(200).status, 'nao');
+    assert.strictEqual(av(80).status, 'indicada');
+    assert.deepStrictEqual(av(80).materiais.sort(), ['CF3', 'CF3M', 'CF8M']);
+  },
+  'ácido nítrico tem teto provisório de ≈90 °C': () => {
+    const av = (t) => E.avaliarAplicacao({ fluido: 'nitrico', temperatura: t, pressao: 10 });
+    assert.strictEqual(av(240).status, 'nao');
+    assert.strictEqual(av(60).status, 'indicada');
+    assert.deepStrictEqual(av(60).materiais.sort(), ['CF3', 'CF3M', 'CF8', 'CF8M']);
+  },
+  'vapor saturado avisa que temperatura e pressão andam juntas': () => {
+    const r = E.avaliarAplicacao({ fluido: 'vapor', temperatura: 180, pressao: 10 });
+    assert.strictEqual(r.status, 'indicada');
+    assert.ok(r.motivos.join(' ').includes('andam juntas'));
+    const topo = E.avaliarAplicacao({ fluido: 'vapor', temperatura: 195, pressao: 14 });
+    assert.strictEqual(topo.status, 'indicada');
+    assert.deepStrictEqual(topo.materiais.sort(), ['CF3M', 'CF8M', 'WCB']);
+  },
+  'demais casos da tabela: soda, vinhaça e óleo térmico': () => {
+    assert.strictEqual(E.avaliarAplicacao({ fluido: 'soda', temperatura: 95, pressao: 5 }).status, 'nao');
+    const v = E.avaliarAplicacao({ fluido: 'vinhaca', temperatura: 100, pressao: 10 });
+    assert.strictEqual(v.status, 'indicada');
+    assert.deepStrictEqual(v.materiais.sort(), ['CF3', 'CF3M', 'CF8', 'CF8M']);
+    assert.strictEqual(E.avaliarAplicacao({ fluido: 'oleo', temperatura: 250, pressao: 12.3 }).status, 'restricao');
+    assert.strictEqual(E.pressaoAdmissivel('CF3M', 100), E.pressaoAdmissivel('CF8M', 100));
   },
   'configurador lista as válvulas do catálogo': () => {
     const ids = E.TIPOS.map((t) => t.id);
