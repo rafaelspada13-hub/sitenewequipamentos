@@ -53,7 +53,7 @@
       avisar('sim-aviso', STATUS[r.status] + ', ' + t + ' graus, ' + fmt(p) + ' quilos.' +
         (r.materiais.length ? ' Atendem: ' + r.materiais.join(', ') + '.' : ''));
 
-      $('#sim-mats').innerHTML = ['WCB', 'CF8', 'CF8M', 'CF3'].map(function (m) {
+      $('#sim-mats').innerHTML = (E.MATERIAIS_SIM || ['WCB', 'CF8', 'CF8M', 'CF3', 'CF3M']).map(function (m) {
         var ok = r.materiais.indexOf(m) !== -1;
         return '<li class="' + (ok ? 'ok' : 'no') + '">' + m + '<span class="visually-hidden">' + (ok ? ' atende' : ' não atende') + '</span></li>';
       }).join('');

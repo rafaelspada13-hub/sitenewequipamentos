@@ -8,9 +8,12 @@
     CF8: [19.4, 16.0, 14.5, 13.5, 12.3, 10.4],
     CF3: [19.4, 16.0, 14.5, 13.5, 12.3, 10.4],
     CF8M: [19.4, 16.5, 15.1, 14.0, 12.3, 10.4],
+    // CF3M: mesmo grupo de material do CF8M na ASME B16.34 (2.2)
+    CF3M: [19.4, 16.5, 15.1, 14.0, 12.3, 10.4],
   };
-  var TODOS = ['WCB', 'CF8', 'CF8M', 'CF3'];
-  var INOX = ['CF8', 'CF8M', 'CF3'];
+  var TODOS = ['WCB', 'CF8', 'CF8M', 'CF3', 'CF3M'];
+  var INOX = ['CF8', 'CF8M', 'CF3', 'CF3M'];
+  var MATERIAIS_SIM = TODOS; // ordem exibida na tela do simulador
 
   function pressaoAdmissivel(material, t) {
     var curva = CURVAS[material];
@@ -28,7 +31,8 @@
   /* ---------- Fluidos (seções 6, 7 e 8 do boletim) ---------- */
   var FLUIDOS = {
     vapor: { nome: 'Vapor saturado', materiais: TODOS, maxT: 195, maxP: 14,
-      limite: 'Vapor saturado: o boletim indica até ≈13–14 kgf/cm² e 195 °C.' },
+      limite: 'Vapor saturado: o boletim indica até ≈13–14 kgf/cm² e 195 °C.',
+      nota: 'No vapor saturado, temperatura e pressão andam juntas: informe a pressão real de operação da linha.' },
     caldo: { nome: 'Caldo de cana', materiais: TODOS,
       nota: 'Prefira disco em inox (CF8, CF8M ou CF3) e evite pontos com areia.' },
     xarope: { nome: 'Xarope e mel final', materiais: TODOS },
@@ -41,10 +45,13 @@
     sulfamico: { nome: 'Ácido sulfâmico', materiais: INOX, maxT: 60,
       limite: 'Ácido sulfâmico: limitar a ≈60 °C; acima disso o produto se decompõe e fica mais agressivo.',
       nota: 'Somente inox: WCB e ferro nodular não podem ter contato com ácidos.' },
-    nitrico: { nome: 'Ácido nítrico (CIP ácido)', materiais: INOX,
+    // maxT 90 PROVISÓRIO: confirmar o limite no boletim DT-VB150-001
+    nitrico: { nome: 'Ácido nítrico (CIP ácido)', materiais: INOX, maxT: 90,
+      limite: 'Ácido nítrico (CIP ácido): indicado diluído até ≈90 °C.',
       nota: 'Somente inox: WCB e ferro nodular não podem ter contato com ácidos.' },
-    cip: { nome: 'CIP alternado ácido e soda', materiais: ['CF8M', 'CF3'],
-      nota: 'A mesma linha recebe os dois ciclos: somente CF8M ou CF3.' },
+    cip: { nome: 'CIP alternado ácido e soda', materiais: ['CF8M', 'CF3', 'CF3M'], maxT: 90,
+      limite: 'CIP alternado: mesmo limite da soda, até ≈90 °C.',
+      nota: 'A mesma linha recebe os dois ciclos: somente CF8M, CF3 ou CF3M.' },
     abrasivo: { nome: 'Fluido com sólidos abrasivos', materiais: [], status: 'nao',
       nota: 'Sólidos abrasivos aceleram o desgaste da sede RPTFE.' },
     firesafe: { nome: 'Serviço fire-safe certificado', materiais: [], status: 'nao',
@@ -128,6 +135,7 @@
   }
 
   var api = {
+    MATERIAIS_SIM: MATERIAIS_SIM,
     pressaoAdmissivel: pressaoAdmissivel,
     avaliarAplicacao: avaliarAplicacao,
     FLUIDOS: FLUIDOS,
