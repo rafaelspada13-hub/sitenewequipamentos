@@ -44,10 +44,9 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
     check(await page.locator(`#orcamentoForm [name="${f}"][required]`).count() === 1, `campo ${f} deveria ser obrigatório`);
   }
   check(await page.locator('video[poster]').count() === 1, 'vídeo com poster ausente');
-  // Conteúdo do catálogo de apresentação e da ficha cadastral.
-  for (const nome of ['Usina Caeté', 'Usina Santa Isabel', 'Usina Santa Fé', 'ADM do Brasil', 'Usiminas', 'Ball']) {
-    check(text.includes(nome), `cliente "${nome}" ausente`);
-  }
+  // a lista de clientes saiu do site a pedido da NEW; ficam os segmentos atendidos
+  check(await page.locator('.clients-grid').count() === 0 && !text.includes('Principais clientes') && !text.includes('Usina Caeté'), 'lista de clientes voltou');
+  check(await page.locator('.segments-list li').count() === 7, 'segmentos atendidos ausentes');
   for (const produto of ['Borboleta bi‑excêntrica', 'Borboleta concêntrica', 'Retenção dupla porta', 'Esfera segmentada', 'Guilhotina', 'Gaveta e globo', 'Pressure seal']) {
     check(await page.locator(`.produto h3:has-text("${produto}")`).count() === 1, `produto "${produto}" ausente da linha`);
   }
@@ -77,7 +76,6 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   check(await page.locator('header a.nav-whatsapp[href^="https://wa.me/5516997223976"]').count() === 1, 'ícone do WhatsApp ausente no menu');
   check(!text.includes('72"') && !/borboletas? de 150# a 300#/.test(text), 'borboleta só até 48" Classe 150');
   check(!/18\s*clientes/i.test(text) && !text.includes('clientes atendidos'), 'contagem de clientes não deve aparecer');
-  check(text.includes('Principais clientes'), 'título "Principais clientes" ausente');
   check(await page.locator('img[src*="fachada"]').count() === 1, 'foto da fachada ausente');
   check(await page.locator('#bi-excentrica img[src*="estudio/bi-excentrica"]').count() === 1, 'render da bi-excêntrica NEW ausente da ficha técnica');
   check(await page.locator('[data-produto*="Bi-excêntrica"] img[src*="estudio/bi-excentrica"]').count() === 1, 'render ausente do item do catálogo');

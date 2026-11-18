@@ -370,29 +370,20 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* no celular a faixa escura antes da ficha encolhe: deu lugar ao item de kit de reparo */
 @media (max-width: 600px) { .tech { margin-top: 40px; } }
 
-/* ---------- Clientes e segmentos ---------- */
+/* ---------- Segmentos atendidos ---------- */
 .segments-copy {
   display: grid; grid-template-columns: 4fr 8fr; gap: var(--gutter);
   padding: var(--section) var(--gutter);
 }
 .segments-copy .section-title { font-size: var(--step-head); }
-.segments-cols { display: grid; grid-template-columns: 2fr 1fr; gap: var(--gutter) clamp(32px, 5vw, 80px); }
-.segments-cols h3 { font-weight: 600; margin-bottom: 16px; color: var(--brand-bright); }
-.clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.clients-grid li {
-  display: flex; align-items: center; min-height: 64px; padding: 10px 16px;
-  background: var(--bg-2); font-family: var(--font-display); font-weight: 600; font-size: var(--step-lead); line-height: 1.1;
-}
-.segments-list { display: grid; gap: 6px; }
-.segments-list li { padding: 10px 14px; background: var(--bg-2); }
+.segments-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; align-content: start; }
+.segments-list li { display: flex; align-items: center; min-height: 64px; padding: 10px 16px; background: var(--bg-2); font-family: var(--font-display); font-weight: 600; font-size: var(--step-lead); line-height: 1.1; }
 @media (max-width: 1000px) {
-  .segments-copy, .segments-cols { grid-template-columns: 1fr; }
+  .segments-copy { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
-  .clients-grid { grid-template-columns: 1fr 1fr; }
-  .clients-grid li { font-size: var(--step-body); min-height: 48px; padding: 8px 12px; }
-  .segments-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .segments-list li { padding: 8px 12px; }
+  .segments-list { grid-template-columns: 1fr; }
+  .segments-list li { font-size: var(--step-body); min-height: 48px; padding: 8px 12px; }
 }
 
 /* ---------- Serviços ---------- */
