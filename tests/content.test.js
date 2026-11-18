@@ -14,6 +14,8 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   await page.goto(URL);
 
   check((await page.title()).includes('NEW'), 'título sem "NEW"');
+  // o registro no CREA saiu do site a pedido da NEW
+  check(!/CREA/i.test(await page.content()), 'menção ao CREA voltou');
   check(await page.locator('h1').count() === 1, 'precisa de exatamente um h1');
   for (const id of SECTIONS) check(await page.locator('#' + id).count() === 1, `seção #${id} ausente`);
 
@@ -22,7 +24,7 @@ const check = (ok, msg) => { if (!ok) { failures++; console.log('FAIL', msg); } 
   check(!/burger/i.test(html), 'menciona W.Burger');
   check(!html.includes('99709'), 'exibe o telefone 99709-4211');
   check(!/\p{Extended_Pictographic}/u.test(text), 'contém emoji');
-  for (const s of ['50.582.366/0001-94', 'CREA-SP 2619052', 'Rua Argentina Grillo Badia, 960', '14176-113', 'comercial@newequipamentos.ind.br']) {
+  for (const s of ['50.582.366/0001-94', 'Rua Argentina Grillo Badia, 960', '14176-113', 'comercial@newequipamentos.ind.br']) {
     check(text.includes(s), `rodapé/contato sem "${s}"`);
   }
   check(await page.locator('a[href^="https://wa.me/5516997223976"]').count() > 0, 'sem link de WhatsApp');
