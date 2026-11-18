@@ -98,7 +98,7 @@
     }, { amount: 0.1 });
   });
   // Listas de dados aparecem paradas, junto com o bloco em que estão.
-  $$('.clients-grid, .segments-list, .etapas, .gallery-grid, .contato-card, .regioes').forEach(function (lista) {
+  $$('.segments-list, .etapas, .gallery-grid, .contato-card, .regioes').forEach(function (lista) {
     Array.prototype.forEach.call(lista.children, function (el) { el.classList.remove('reveal'); });
   });
 
