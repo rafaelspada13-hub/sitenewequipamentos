@@ -331,7 +331,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   /* lista à esquerda, a nota de "sob consulta" ocupa a coluna da direita */
   .outros { max-width: none; display: grid; grid-template-columns: 7fr 5fr; column-gap: clamp(32px, 5vw, 80px); align-items: start; }
   .outros > * { grid-column: 1; }
-  .outros > .catalog-note { grid-column: 2; grid-row: 2 / span 4; margin-top: 0; max-width: 40ch; }
+  .outros > .catalog-note { grid-column: 2; grid-row: 2 / span 5; margin-top: 0; max-width: 40ch; }
 }
 .outros h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-sub); line-height: 1; margin-bottom: 20px; }
 .item { background: var(--bg-2); margin-top: 6px; }
@@ -367,6 +367,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--paper);
   color: var(--ink-dark);
 }
+/* no celular a faixa escura antes da ficha encolhe: deu lugar ao item de kit de reparo */
+@media (max-width: 600px) { .tech { margin-top: 40px; } }
 
 /* ---------- Clientes e segmentos ---------- */
 .segments-copy {
