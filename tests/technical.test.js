@@ -28,6 +28,8 @@ const tests = {
   'curva P×T tem as três séries de material': async (page) => {
     const series = await page.$$eval('#curva-pt [data-serie]', (s) => s.map((x) => x.getAttribute('data-serie')));
     assert.deepStrictEqual(series.sort(), ['CF8/CF3', 'CF8M', 'WCB']);
+    // a curva do CF8M vale para o CF3M (ASME B16.34, grupo 2.2): legenda e tabela dizem os dois
+    assert.ok((await page.$eval('.pt-label.pt-cf8m', (t) => t.textContent)).includes('CF3M'), 'legenda do gráfico sem CF3M');
     assert.strictEqual(await page.locator('#tabela-pt tbody tr').count(), 6);
   },
   'boletim em PDF disponível para download': async (page) => {
