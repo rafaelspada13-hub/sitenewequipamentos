@@ -41,7 +41,7 @@
       var fluido = $('input[name="fluido"]:checked', sim).value;
       var t = Number(temp.value), p = Number(pressao.value);
       var r = E.avaliarAplicacao({ fluido: fluido, temperatura: t, pressao: p });
-      ultimo = { fluido: E.FLUIDOS[fluido].nome, t: t, p: p, r: r };
+      ultimo = { chave: fluido, fluido: E.FLUIDOS[fluido].nome, t: t, p: p, r: r };
 
       $('#sim-temp-out').textContent = t + ' °C';
       $('#sim-pressao-out').textContent = fmt(p) + ' kgf/cm²';
@@ -60,6 +60,22 @@
       $('#sim-motivos').innerHTML = r.motivos.map(function (m) { return '<li>' + m + '</li>'; }).join('')
         || '<li>Dentro da curva P×T e das condições do boletim.</li>';
 
+      // celular: o resultado acompanha a pessoa enquanto ela mexe nos controles
+      var fixo = $('#sim-fixo');
+      if (fixo) fixo.textContent = STATUS[r.status] + (r.materiais.length ? ' · ' + r.materiais.join(', ') : '');
+      // "não recomendada" não termina em pedido da mesma válvula: aponta a saída
+      var alt = $('#sim-alt'), botao = $('#sim-orcar');
+      if (r.status === 'nao') {
+        alt.innerHTML = fluido === 'abrasivo'
+          ? 'Para sólidos em suspensão, pastas e pós, veja a <a href="#item-guilhotina">válvula guilhotina</a>.'
+          : 'Fora dos limites da bi-excêntrica Classe 150: mande a aplicação e a engenharia da NEW indica a alternativa.';
+        alt.hidden = false;
+        botao.textContent = 'Falar com a engenharia';
+      } else {
+        alt.hidden = true;
+        botao.textContent = 'Orçar esta aplicação';
+      }
+
       var cx = px(t), cy = py(p);
       $('#sim-ponto').setAttribute('cx', cx.toFixed(1));
       $('#sim-ponto').setAttribute('cy', cy.toFixed(1));
@@ -73,9 +89,15 @@
     sim.addEventListener('change', atualizarSim);
     $('#sim-orcar').addEventListener('click', function () {
       var u = ultimo;
+      var aplicacao = 'Aplicação: ' + u.fluido + ', ' + u.t + ' °C, ' + fmt(u.p) + ' kgf/cm². ';
+      if (u.r.status === 'nao') {
+        // fora dos limites: o pedido vai para a engenharia, não como orçamento da bi-excêntrica
+        levarAoOrcamento(u.chave === 'abrasivo' ? 'Válvula Guilhotina' : 'Outro',
+          aplicacao + 'O simulador não recomenda a bi-excêntrica Classe 150 para esta condição. Qual válvula a NEW indica?');
+        return;
+      }
       levarAoOrcamento('Válvula Borboleta Bi-excêntrica Classe 150',
-        'Aplicação: ' + u.fluido + ', ' + u.t + ' °C, ' + fmt(u.p) + ' kgf/cm². ' +
-        'Resultado do simulador: ' + STATUS[u.r.status] +
+        aplicacao + 'Resultado do simulador: ' + STATUS[u.r.status] +
         (u.r.materiais.length ? ' (materiais: ' + u.r.materiais.join(', ') + ')' : '') + '.');
     });
     atualizarSim();
@@ -102,8 +124,10 @@
       return '<label class="chip"><input type="radio" name="cfg-tipo" value="' + t.id + '" /><span>' + t.nome + '</span></label>';
     }).join('');
 
+    var cfgErroEl = function () { return $('#cfg-erro'); };
     var montarTipo = function (id) {
       sel = { tipo: id };
+      if (cfgErroEl()) { cfgErroEl().hidden = true; bitolaLivre.removeAttribute('aria-invalid'); }
       var t = tipoAtual();
       $('input[name="cfg-tipo"][value="' + id + '"]', cfg).checked = true;
       if (t.bitolas) {
@@ -143,8 +167,15 @@
       if (n === 'cfg-acionamento') sel.acionamento = e.target.value;
       resumir();
     });
-    bitolaLivre.addEventListener('input', function () { sel.bitola = bitolaLivre.value.trim(); resumir(); });
+    var cfgErro = $('#cfg-erro');
+    var semBitola = function (sim_) {
+      cfgErro.hidden = !sim_;
+      if (sim_) bitolaLivre.setAttribute('aria-invalid', 'true'); else bitolaLivre.removeAttribute('aria-invalid');
+    };
+    bitolaLivre.addEventListener('input', function () { sel.bitola = bitolaLivre.value.trim(); if (sel.bitola) semBitola(false); resumir(); });
     $('#cfg-orcar').addEventListener('click', function () {
+      // bitola por escrito: sem ela o pedido chegaria sem medida
+      if (!bitolaLivre.hidden && !sel.bitola) { semBitola(true); bitolaLivre.focus(); return; }
       levarAoOrcamento(tipoAtual().produto, E.resumoConfiguracao(sel) + '.');
     });
     montarTipo('bi');
