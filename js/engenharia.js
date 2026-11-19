@@ -102,7 +102,7 @@
   var TIPOS = [
     { id: 'bi', nome: 'Borboleta bi-excêntrica', produto: 'Válvula Borboleta Bi-excêntrica Classe 150',
       bitolas: BITOLAS.filter(function (b) { return b !== '16"'; }), classes: ['150#'],
-      materiais: ['WCB', 'Ferro nodular', 'CF8', 'CF8M', 'CF3'],
+      materiais: ['WCB', 'Ferro nodular', 'CF8', 'CF8M', 'CF3', 'CF3M'],
       acionamentos: ['Caixa redutora com volante', 'Atuador pneumático'] },
     { id: 'concentrica', nome: 'Borboleta concêntrica', produto: 'Válvula Borboleta Concêntrica',
       bitolas: ate('40"'), classes: ['150#'],
