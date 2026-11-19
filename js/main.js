@@ -92,10 +92,26 @@
   });
 
   var lastY = window.scrollY;
+  // No celular o botão flutuante fica sobre o canto direito: some enquanto cobriria
+  // um botão, um campo do formulário ou um dado alinhado à direita.
+  var ALVOS_FLUTUANTE = '.btn, .field, .form-ok, .regioes li, .catalog-note, .pj-aba, .video-toggle, .footer a, summary, .chip, .link-arrow, .sim-motivos li';
+  function recuarFlutuante() {
+    if (window.innerWidth > 900) { floatBtn.classList.remove('is-recuada'); return; }
+    var lado = floatBtn.offsetWidth || 52;
+    var caixa = { left: window.innerWidth - lado - 20, right: window.innerWidth, top: window.innerHeight - lado - 22, bottom: window.innerHeight };
+    var cobre = Array.prototype.some.call(document.querySelectorAll(ALVOS_FLUTUANTE), function (el) {
+      var r = el.getBoundingClientRect();
+      return r.width && r.height && r.right > caixa.left && r.left < caixa.right && r.bottom > caixa.top && r.top < caixa.bottom;
+    });
+    floatBtn.classList.toggle('is-recuada', cobre);
+  }
+  window.addEventListener('resize', recuarFlutuante);
+
   function onScroll() {
     var y = window.scrollY;
     var pastHero = y > hero.offsetHeight - window.innerHeight * 0.5;
     floatBtn.classList.toggle('is-visible', pastHero);
+    recuarFlutuante();
     var menuOpen = nav.classList.contains('is-open');
     header.classList.toggle('is-hidden', !menuOpen && y > lastY && y > 400);
     lastY = y;
@@ -121,22 +137,29 @@
     });
   });
 
+  var formOk = document.getElementById('formOk');
+  var emailBtn = document.getElementById('enviarEmail');
+  var erroDe = function (field) { return document.getElementById('erro-' + field.id); };
+  var marcarCampo = function (field, ok) {
+    var erro = erroDe(field);
+    if (ok) field.removeAttribute('aria-invalid'); else field.setAttribute('aria-invalid', 'true');
+    if (erro) erro.hidden = ok;
+  };
+
   form.addEventListener('input', function (e) {
-    if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity()) {
-      e.target.removeAttribute('aria-invalid');
-    }
+    if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity()) marcarCampo(e.target, true);
+    if (formOk && !formOk.hidden) formOk.hidden = true;
   });
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  // Valida e devolve os dados, ou null (com os erros na tela e o foco no primeiro campo).
+  var validar = function () {
     var invalid = [];
     form.querySelectorAll('[required], [type="email"]').forEach(function (field) {
       var empty = field.hasAttribute('required') && !field.value.trim();
       var ok = !empty && field.checkValidity();
-      if (ok) field.removeAttribute('aria-invalid');
-      else { field.setAttribute('aria-invalid', 'true'); invalid.push(field); }
+      marcarCampo(field, ok);
+      if (!ok) invalid.push(field);
     });
-
     if (invalid.length) {
       var message = 'Preencha nome, um e-mail válido e a mensagem para enviar.';
       if (formError.hidden) {
@@ -147,22 +170,76 @@
         formError.textContent = '';
         setTimeout(function () { formError.textContent = message; }, 50);
       }
+      if (formOk) formOk.hidden = true;
       invalid[0].focus();
-      return;
+      return null;
     }
-
     formError.hidden = true;
     var data = {};
     new FormData(form).forEach(function (value, key) { data[key] = String(value); });
-    var url = window.NEW && window.NEW.buildWhatsAppUrl
-      ? window.NEW.buildWhatsAppUrl(data)
-      : 'https://wa.me/5516997223976';
-    window.open(url, '_blank', 'noopener');
+    return data;
+  };
 
-    var label = submitBtn.textContent;
-    submitBtn.textContent = 'Abrindo o WhatsApp…';
-    setTimeout(function () { submitBtn.textContent = label; }, 3000);
+  // A confirmação fica na tela, com as duas vias à mão caso o aplicativo não abra.
+  var confirmar = function (texto, zapUrl, mailUrl) {
+    if (!formOk) return;
+    formOk.textContent = texto + ' Se não abriu, tente por ';
+    var a1 = document.createElement('a');
+    a1.href = zapUrl; a1.target = '_blank'; a1.rel = 'noopener'; a1.textContent = 'WhatsApp';
+    var a2 = document.createElement('a');
+    a2.href = mailUrl; a2.textContent = 'e-mail';
+    formOk.appendChild(a1);
+    formOk.appendChild(document.createTextNode(' ou '));
+    formOk.appendChild(a2);
+    formOk.appendChild(document.createTextNode('.'));
+    formOk.hidden = false;
+  };
+  var urls = function (data) {
+    var N = window.NEW || {};
+    return {
+      zap: N.buildWhatsAppUrl ? N.buildWhatsAppUrl(data) : 'https://wa.me/5516997223976',
+      mail: N.buildEmailUrl ? N.buildEmailUrl(data) : 'mailto:comercial@newequipamentos.ind.br',
+    };
+  };
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = validar();
+    if (!data) return;
+    var u = urls(data);
+    window.open(u.zap, '_blank', 'noopener');
+    confirmar('Pedido montado e aberto no WhatsApp: confira e toque em enviar por lá.', u.zap, u.mail);
   });
+
+  if (emailBtn) {
+    emailBtn.hidden = false;
+    emailBtn.addEventListener('click', function () {
+      var data = validar();
+      if (!data) return;
+      var u = urls(data);
+      window.location.href = u.mail;
+      confirmar('Pedido montado e aberto no seu programa de e-mail: confira e envie por lá.', u.zap, u.mail);
+    });
+  }
+
+  /* ---------- Tabelas largas: avisa que rolam para o lado ---------- */
+  var regioes = document.querySelectorAll('.table-scroll');
+  if (regioes.length && 'ResizeObserver' in window) {
+    var conferir = function (regiao) {
+      var dica = regiao.previousElementSibling;
+      if (!dica || !dica.classList.contains('table-dica')) return;
+      dica.classList.toggle('is-on', regiao.scrollWidth > regiao.clientWidth + 4);
+    };
+    var olho = new ResizeObserver(function (entradas) { entradas.forEach(function (en) { conferir(en.target); }); });
+    regioes.forEach(function (regiao) {
+      var dica = document.createElement('p');
+      dica.className = 'table-dica';
+      dica.setAttribute('aria-hidden', 'true');
+      dica.textContent = 'Arraste a tabela para o lado';
+      regiao.parentNode.insertBefore(dica, regiao);
+      olho.observe(regiao);
+    });
+  }
 
   /* ---------- Galeria ampliada ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll('a.js-lightbox'));

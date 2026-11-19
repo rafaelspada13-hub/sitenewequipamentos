@@ -482,9 +482,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none; border-color: var(--brand-bright); background: var(--bg-3);
 }
-.field [aria-invalid="true"] { border-color: var(--erro); }
+.field [aria-invalid="true"], .field [aria-invalid="true"]:focus { border-color: var(--erro); }
+.field-error { color: var(--erro-texto); font-size: var(--step-small); font-weight: 500; }
+.cfg .field-error { margin-top: 8px; }
+#cfg-bitola-livre[aria-invalid="true"] { border-color: var(--erro); }
 .form-error { grid-column: 1 / -1; color: var(--erro-texto); font-weight: 500; }
-.quote-form .btn { grid-column: 1 / -1; justify-self: start; }
+.form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; }
+.form-ok { grid-column: 1 / -1; padding: 14px 16px; background: var(--bg-3); border-left: 4px solid var(--brand-bright); }
+.form-ok a { color: var(--brand-bright); font-weight: 600; text-underline-offset: 4px; }
 
 @media (max-width: 900px) {
   .quote-copy, .quote-form { grid-column: 1 / -1; }
@@ -492,7 +497,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 @media (max-width: 560px) {
   .quote-form { grid-template-columns: 1fr; }
-  .quote-form .btn { justify-self: stretch; }
+  .form-actions .btn { flex: 1 1 100%; }
 }
 
 /* ---------- Rodapé ---------- */
@@ -1071,3 +1076,35 @@ details:not([open]) > :not(summary) { display: none; }
   .projetos-etapas { grid-template-columns: 1fr 1fr; row-gap: 12px; }
   .pj-rotulo { font-size: 27px; }
 }
+
+/* ---------- Simulador: saída para o "não recomendada" e resposta à vista no celular ---------- */
+.sim-alt { font-weight: 600; }
+.sim-alt a { color: var(--brand); text-underline-offset: 4px; }
+.sim-fixo { display: none; }
+@media (max-width: 900px) {
+  /* enquanto a pessoa mexe nos controles, o resultado fica preso abaixo do topo */
+  .sim-fixo {
+    display: block; position: sticky; top: var(--header-h); z-index: 5;
+    margin: 0 calc(var(--gutter) * -1); padding: 10px var(--gutter);
+    background: var(--brand); color: var(--white); font-weight: 600;
+  }
+  .sim[data-status="restricao"] .sim-fixo { background: var(--warn); }
+  .sim[data-status="nao"] .sim-fixo { background: var(--stop); }
+}
+
+/* ---------- Abas das ferramentas no celular: duas abas lado a lado, não dois títulos ---------- */
+@media (max-width: 600px) {
+  .abas-on .ferramentas-abas { flex-wrap: nowrap; gap: 6px; padding-top: 56px; }
+  .ferramentas-abas button {
+    flex: 1 1 0; font-size: var(--step-lead); line-height: 1.1; padding: 12px 10px; min-height: 56px;
+    background: var(--paper-2); border-bottom: 4px solid transparent;
+  }
+  .ferramentas[data-aba="configurador"] .ferramentas-abas button { background: var(--bg-3); }
+}
+
+/* ---------- Tabelas largas: aviso de que rolam para o lado ---------- */
+.table-dica { display: none; margin: 0 0 8px; font-size: var(--step-small); font-weight: 600; color: var(--muted-dark); }
+.table-dica.is-on { display: block; }
+
+/* ---------- WhatsApp flutuante recua quando ficaria em cima de um botão ou de um dado ---------- */
+.js .whatsapp-float.is-recuada { opacity: 0; pointer-events: none; transform: translateY(12px); }

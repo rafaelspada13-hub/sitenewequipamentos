@@ -61,9 +61,12 @@ const tests = {
     await btn.scrollIntoViewIfNeeded();
     assert.ok(await btn.isVisible(), 'botão de pausa ausente');
     await page.$eval('.frame--video video', (v) => v.play().catch(() => {}));
-    await page.waitForTimeout(300);
+    // espera o vídeo começar de fato: com tempo fixo, o clique às vezes chegava antes e dava play em vez de pausa
+    await page.waitForFunction(() => !document.querySelector('.frame--video video').paused, null, { timeout: 5000 }).catch(() => {});
     await btn.click();
     assert.ok(await page.$eval('.frame--video video', (v) => v.paused), 'botão não pausou');
+    // o rótulo muda no evento "pause", que chega um instante depois do clique
+    await page.waitForFunction(() => document.querySelector('.video-toggle').getAttribute('aria-label') === 'Tocar vídeo', null, { timeout: 3000 }).catch(() => {});
     assert.strictEqual(await btn.getAttribute('aria-label'), 'Tocar vídeo');
     const semJs = await openPage(browser, { javaScriptEnabled: false });
     assert.ok(await semJs.$eval('.frame--video video', (v) => v.controls), 'sem JS o vídeo precisa da barra do navegador');
@@ -89,7 +92,9 @@ const tests = {
     await page.fill('#mensagem', 'Orçamento');
     await page.locator('#orcamentoForm button[type=submit]').click();
     await page.waitForFunction(() => document.getElementById('formError').textContent.includes('e-mail válido'), null, { timeout: 2000 });
-    assert.strictEqual(await page.getAttribute('#email', 'aria-describedby'), 'formError');
+    // o campo aponta para o erro dele e para o aviso geral
+    assert.strictEqual(await page.getAttribute('#email', 'aria-describedby'), 'erro-email formError');
+    assert.ok(await page.isVisible('#erro-email'), 'erro do campo de e-mail não apareceu');
   },
   'galeria é uma grade, sem rolagem lateral escondida': async (browser) => {
     const page = await openPage(browser);
